@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateButacasReservadasTable extends Migration
+class CreateLineasVentasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateButacasReservadasTable extends Migration
      */
     public function up()
     {
-        Schema::create('butacas_reservadas', function (Blueprint $table) {
+        Schema::create('lineas_ventas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('estado', false, true); //0=Libre, 1=Seleccionada, 2=Reservada
+            $table->integer('cantidad',false, true);
 
-            //Clave foránea SESION.
-            $table->unsignedInteger('sesion_id');
-            $table->foreign('sesion_id')->references('id')->on('sesiones');
-
-            //Clave foránea BUTACA.
-            $table->unsignedInteger('butaca_id');
-            $table->foreign('butaca_id')->references('id')->on('butacas');
+            //Clave foránea PRODUCTO.
+            $table->unsignedInteger('producto_id');
+            $table->foreign('producto_id')->references('id')->on('productos');
 
             //Clave foránea FACTURA.
             $table->unsignedInteger('factura_id');
@@ -40,6 +36,6 @@ class CreateButacasReservadasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('butacas_reservadas');
+        Schema::dropIfExists('lineas_ventas');
     }
 }

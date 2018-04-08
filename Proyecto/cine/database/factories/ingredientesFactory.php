@@ -2,8 +2,9 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\ingredientes::class, function (Faker $faker) {
+$factory->define(App\Models\Ingrediente::class, function (Faker $faker) {
     return [
-        //
+        'nombre' => $faker->name,
+        'descripcion' => $faker->text(150),
     ];
 });

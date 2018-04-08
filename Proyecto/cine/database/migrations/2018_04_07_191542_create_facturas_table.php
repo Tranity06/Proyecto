@@ -15,6 +15,12 @@ class CreateFacturasTable extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('fecha');
+
+            //Clave foránea USUARIO.
+            $table->unsignedInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
+
             $table->timestamps();
         });
     }
