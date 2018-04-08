@@ -25,3 +25,7 @@ Route::get('/signup','AuthController@getSignup')->name('auth.signup');
 
 Route::post('/signup','AuthController@postSignup');
 
+
+Route::get('/login','AuthController@getLogin')->name('auth.login');
+
+Route::post('/login','AuthController@postLogin');

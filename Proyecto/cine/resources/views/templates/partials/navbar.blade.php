@@ -22,7 +22,7 @@
                   Acerca de 
                 </a>
                 <span class="navbar-item navbar-item-end">
-                  <a class="button is-primary" href="{{ route('auth.signup') }}">
+                  <a class="button is-primary" href="{{ route('auth.login') }}">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>

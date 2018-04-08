@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller{
 
@@ -27,6 +28,39 @@ class AuthController extends Controller{
         'clave' => bcrypt($request->input('clave'))
       ]);
 
-      redirect()->route(('home'));
+    return redirect()->route('home');
   }
+
+  public function getLogin(){
+    return view('auth.login');
+  }
+
+  public function postLogin(Request $request){
+      $this->validate($request,[
+        'email' => 'required',
+        'clave' => 'required'
+      ]);
+
+      $email= $request->input('email');
+      $clave= $request->input('clave');
+      $recordar = $request->has('recordar');
+
+      var_dump($email);
+      var_dump($clave);
+      var_dump($recordar);   
+
+     var_dump(Auth::attempt(['email' => $email, 'clave' => $clave]));
+
+     $success = Auth::attempt(['email' => $email, 'clave' => $clave],$recordar);    
+
+     var_dump($success);
+
+     if(!$success){
+
+       //return redirect()->back();
+     }
+
+     //return redirect()->route('home');
+  }
+
 }
