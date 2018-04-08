@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Calificacion_edades;
+use App\Models\CalificacionEdad;
 
 class CalificacionesEdadesSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class CalificacionesEdadesSeeder extends Seeder
      */
     public function run()
     {
-        factory(Calificacion_edades::class,5)->create();
+        factory(CalificacionEdad::class,5)->create();
     }
 }

@@ -26,7 +26,7 @@ class Pelicula extends Model
      * Devuelve la calificación de edad de la película.
      */
     public function calificacion_edad(){
-        return $this->belongsTo(Calificacion_edades::class);
+        return $this->belongsTo(CalificacionEdad::class);
     }
 
     /**

@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class Administrador extends Model
+class ClaveAdmin extends Model implements AuthenticatableContract
 {
+    use Authenticatable;
+
     /**
      * Tabla a la que hace referencia (no sigue el convenio Laravel).
      */
-    protected $table = 'administradores';
+    protected $table = 'clave_admin';
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +21,7 @@ class Administrador extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre', 'password',
+        'password',
     ];
 
     /**
@@ -26,6 +30,6 @@ class Administrador extends Model
      * @var array
      */
     protected $hidden = [
-        'clave',
+        'password',
     ];
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdministradoresTable extends Migration
+class CreateClaveAdminTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateAdministradoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('administradores', function (Blueprint $table) {
+        Schema::create('clave_admin', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->unique();
             $table->string('password');
             $table->timestamps();
         });
@@ -28,6 +27,6 @@ class CreateAdministradoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('administradores');
+        Schema::dropIfExists('clave_admin');
     }
 }
