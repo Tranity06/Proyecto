@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGenerosTable extends Migration
+class CreateProductosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateGenerosTable extends Migration
      */
     public function up()
     {
-        Schema::defaultStringLength(191);
-        Schema::create('generos', function (Blueprint $table) {
+        Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateGenerosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('generos');
+        Schema::dropIfExists('productos');
     }
 }
