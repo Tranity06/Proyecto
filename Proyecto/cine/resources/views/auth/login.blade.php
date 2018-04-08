@@ -35,7 +35,7 @@
                       <div class="field">
                         <div class="control">
                           <label class="checkbox">
-                            <input type="checkbox" name="recordar">
+                            <input type="checkbox" name="remember">
                                 Recordar usuario
                           </label>
                         </div>

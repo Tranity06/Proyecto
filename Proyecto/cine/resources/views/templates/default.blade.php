@@ -16,6 +16,23 @@
         span.navbar-item.navbar-item-end {
             left: 50%;
         }
+
+        .user-login {
+            height: 52px;
+            width: 150px;
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar {
+            border-radius: 35%;
+            display: block;
+            height: 48px;
+            width: 48px;
+            margin-right: 9px;
+            margin-left: 5px;
+        }
+
     </style>
 
 </head>

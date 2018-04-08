@@ -42,17 +42,22 @@ class AuthController extends Controller{
         'password' => 'required'
       ]);
 
-      $email= $request->input('email');
-      $password= $request->input('password');
-      $recordar = $request->has('recordar');
+     $email= $request->input('email');
+     $password= $request->input('password');
+     $remember = $request->has('remember');
 
-     $success = Auth::attempt(['email' => $email, 'password' => $password],$recordar);    
+     $success = Auth::attempt(['email' => $email, 'password' => $password],$remember);    
 
      if(!$success){
         return redirect()->back();
      }
 
      return redirect()->route('home');
+  }
+
+  public function getLogout(){
+    Auth::logout();
+    return redirect()->route('home');
   }
 
 }
