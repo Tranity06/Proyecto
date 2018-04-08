@@ -9,5 +9,6 @@ $factory->define(App\Models\Usuario::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'tlf' => $faker->numberBetween(000000000,999999999),
         'avatar' => $faker->domainName,
+        'activa' => rand(0, 1),
     ];
 });

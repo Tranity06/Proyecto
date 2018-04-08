@@ -28,6 +28,15 @@ class Usuario extends Model implements AuthenticatableContract
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'activa' => 'boolean',
+    ];
+
+    /**
      * Devuelve todas las reseñas del usuario
      */
     public function resenas(){
