@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\ButacaReservada;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,6 +32,7 @@ class DatabaseSeeder extends Seeder
             'menus',
             'administradores',
             'menu_producto',
+            'clave_admin',
         ]);
 
         //Ejecutar los siguientes Seeders
@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MenusSeeder::class);
         $this->call(AdministradoresSeeder::class);
         $this->call(ProductosMenusSeeder::class);
+        $this->call(ClaveAdminSeeder::class);
     }
 
     /**
