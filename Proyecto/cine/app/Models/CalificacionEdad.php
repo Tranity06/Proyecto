@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Calificacion_edades extends Model
+class CalificacionEdad extends Model
 {
 
     /**

@@ -3,11 +3,12 @@
 use Faker\Generator as Faker;
 use App\Models\Genero;
 use App\Models\Calificacion_edades;
+use App\Models\CalificacionEdad;
 
 $factory->define(App\Models\Pelicula::class, function (Faker $faker) {
     
     $generos = Genero::all();
-    $calificaciones_edades = Calificacion_edades::all();
+    $calificaciones_edades = CalificacionEdad::all();
 
     return [
         'titulo' => $faker->name,

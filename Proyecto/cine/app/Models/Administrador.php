@@ -17,7 +17,7 @@ class Administrador extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre', 'clave',
+        'nombre', 'password',
     ];
 
     /**
