@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductosMenusesTable extends Migration
+class CreateAdministradoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateProductosMenusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('productos_menuses', function (Blueprint $table) {
+        Schema::create('administradores', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre')->unique();
+            $table->string('clave');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateProductosMenusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('productos_menuses');
+        Schema::dropIfExists('administradores');
     }
 }

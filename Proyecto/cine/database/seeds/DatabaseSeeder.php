@@ -29,7 +29,10 @@ class DatabaseSeeder extends Seeder
             'productos',
             'lineas_ventas',
             'ingredientes',
-            'ingrediente_producto'
+            'ingrediente_producto',
+            'menus',
+            'administradores',
+            'menu_producto',
         ]);
 
         //Ejecutar los siguientes Seeders
@@ -48,6 +51,9 @@ class DatabaseSeeder extends Seeder
         $this->call(LineasVentasSeeder::class);
         $this->call(IngredientesSeeder::class);
         $this->call(ProductosIngredientesSeeder::class);
+        $this->call(MenusSeeder::class);
+        $this->call(AdministradoresSeeder::class);
+        $this->call(ProductosMenusSeeder::class);
     }
 
     /**
