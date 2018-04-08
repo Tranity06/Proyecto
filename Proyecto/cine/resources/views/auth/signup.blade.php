@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="column">
-                    <form method="post" action="#">
+                    <form method="post" action="{{ route('auth.signup') }}">
                       <div class="field">
                         <label class="label">Introduce tu nombre</label>
                         <div class="control has-icons-left has-icons-right">
@@ -129,6 +129,7 @@
                       <div class="control">
                           <button class="button is-primary">Submit</button>
                       </div>
+                      {{ csrf_field() }}
                     </form>
                 </div>
             </div>

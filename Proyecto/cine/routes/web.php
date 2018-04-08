@@ -23,3 +23,5 @@ Route::get('/','HomeController@index')->name('home');
 
 Route::get('/signup','AuthController@getSignup')->name('auth.signup');
 
+Route::post('/signup','AuthController@postSignup');
+
