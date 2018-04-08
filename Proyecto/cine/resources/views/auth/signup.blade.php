@@ -62,55 +62,62 @@
                       <div class="field">
                         <label class="label">Introduce tu nombre</label>
                         <div class="control has-icons-left has-icons-right">
-                          <input class="input is-success" type="text" placeholder="Text input" value="bulma">
+                          <input class="input{{ $errors->has('nombre') ? ' is-danger' : '' }}" type="text" placeholder="Escribe tu nombre" name="nombre"
+                                 value="{{ Request::old('nombre') ?:'' }}">
                           <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
                           </span>
-                          <span class="icon is-small is-right">
-                            <i class="fas fa-check"></i>
-                          </span>
                         </div>
-                        <p class="help is-success">This username is available</p>
+                        @if($errors->has('nombre'))
+                          <p class="help is-danger">{{ $errors ->first('nombre') }}</p>
+                        @endif
                       </div>
                       
                       <div class="field">
                         <label class="label">Email</label>
                         <div class="control has-icons-left has-icons-right">
-                          <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
+                          <input class="input{{ $errors->has('email') ? ' is-danger' : '' }}" type="email" placeholder="Escribe tu email" name="email"
+                                 value="{{ Request::old('email') ?:'' }}">
                           <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                           </span>
-                          <span class="icon is-small is-right">
-                            <i class="fas fa-exclamation-triangle"></i>
-                          </span>
                         </div>
-                        <p class="help is-danger">This email is invalid</p>
+                        @if($errors->has('email'))
+                          <p class="help is-danger">{{ $errors ->first('email') }}</p>
+                        @endif
                       </div>
 
                       <div class="field">
                         <label class="label">Teléfono</label>
                         <div class="control has-icons-left has-icons-right">
-                          <input class="input" type="text" placeholder="Email input" value="hello@">
+                          <input class="input{{ $errors->has('tlf') ? ' is-danger' : '' }}" type="text" placeholder="Escribe tu teléfono" name="tlf"
+                                 value="{{ Request::old('tlf') ?:'' }}">
                           <span class="icon is-small is-left">
                             <i class="fas fa-phone"></i>
                           </span>
                         </div>
+                        @if($errors->has('tlf'))
+                          <p class="help is-danger">{{ $errors ->first('tlf') }}</p>
+                        @endif
                       </div>
                       
                       <div class="field">
                         <label class="label">Contraseña</label>
                         <div class="control has-icons-left">
-                          <input class="input" type="password" placeholder="Password">
+                          <input class="input{{ $errors->has('clave') ? ' is-danger' : '' }}" type="password" placeholder="Password" name="clave">
                           <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
                           </span>
                         </div>
+                        @if($errors->has('clave'))
+                          <p class="help is-danger">{{ $errors ->first('clave') }}</p>
+                        @endif
                       </div>
 
                       <div class="field">
                           <label class="label">Repite la contraseña</label>
                           <div class="control has-icons-left">
-                            <input class="input" type="password" placeholder="Password">
+                            <input class="input{{ $errors->has('clave') ? ' is-danger' : '' }}" type="password" placeholder="Password" name="clave_confirmation">
                             <span class="icon is-small is-left">
                               <i class="fas fa-lock"></i>
                             </span>
