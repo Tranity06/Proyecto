@@ -15,7 +15,7 @@ class Usuario extends Model implements AuthenticatableContract
      * @var array
      */
     protected $fillable = [
-        'nombre', 'email', 'clave', 'tlf', 'avatar',
+        'nombre', 'email', 'password', 'tlf', 'avatar',
     ];
 
     /**
@@ -24,7 +24,7 @@ class Usuario extends Model implements AuthenticatableContract
      * @var array
      */
     protected $hidden = [
-        'clave','remember_token'
+        'password','remember_token'
     ];
 
     /**
@@ -40,4 +40,5 @@ class Usuario extends Model implements AuthenticatableContract
     public function facturas(){
         return $this->hasMany(Facturas::class);
     }
+
 }

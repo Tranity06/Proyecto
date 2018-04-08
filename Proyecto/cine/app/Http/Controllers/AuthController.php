@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller{
 
@@ -18,14 +19,14 @@ class AuthController extends Controller{
         'nombre' => 'required|unique:usuarios|alpha_dash|max:20',
         'email' => 'required|unique:usuarios|email|max:255',
         'tlf' => 'required|regex:/(6)[0-9]{8}/',
-        'clave' => 'required|min:6|confirmed'
+        'password' => 'required|min:6|confirmed'
       ]);
 
       Usuario::create([
         'nombre' => $request->input('nombre'),
         'email' => $request->input('email'),
         'tlf' => $request->input('tlf'),
-        'clave' => bcrypt($request->input('clave'))
+        'password' => bcrypt($request->input('password'))
       ]);
 
     return redirect()->route('home');
@@ -38,29 +39,20 @@ class AuthController extends Controller{
   public function postLogin(Request $request){
       $this->validate($request,[
         'email' => 'required',
-        'clave' => 'required'
+        'password' => 'required'
       ]);
 
       $email= $request->input('email');
-      $clave= $request->input('clave');
+      $password= $request->input('password');
       $recordar = $request->has('recordar');
 
-      var_dump($email);
-      var_dump($clave);
-      var_dump($recordar);   
-
-     var_dump(Auth::attempt(['email' => $email, 'clave' => $clave]));
-
-     $success = Auth::attempt(['email' => $email, 'clave' => $clave],$recordar);    
-
-     var_dump($success);
+     $success = Auth::attempt(['email' => $email, 'password' => $password],$recordar);    
 
      if(!$success){
-
-       //return redirect()->back();
+        return redirect()->back();
      }
 
-     //return redirect()->route('home');
+     return redirect()->route('home');
   }
 
 }

@@ -56,20 +56,20 @@
                       <div class="field">
                         <label class="label">Contraseña</label>
                         <div class="control has-icons-left">
-                          <input class="input{{ $errors->has('clave') ? ' is-danger' : '' }}" type="password" placeholder="Password" name="clave">
+                          <input class="input{{ $errors->has('clave') ? ' is-danger' : '' }}" type="password" placeholder="Password" name="password">
                           <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
                           </span>
                         </div>
-                        @if($errors->has('clave'))
-                          <p class="help is-danger">{{ $errors ->first('clave') }}</p>
+                        @if($errors->has('password'))
+                          <p class="help is-danger">{{ $errors ->first('password') }}</p>
                         @endif
                       </div>
 
                       <div class="field">
                           <label class="label">Repite la contraseña</label>
                           <div class="control has-icons-left">
-                            <input class="input{{ $errors->has('clave') ? ' is-danger' : '' }}" type="password" placeholder="Password" name="clave_confirmation">
+                            <input class="input{{ $errors->has('password') ? ' is-danger' : '' }}" type="password" placeholder="Password" name="password_confirmation">
                             <span class="icon is-small is-left">
                               <i class="fas fa-lock"></i>
                             </span>

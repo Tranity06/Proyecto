@@ -24,7 +24,7 @@
                       <div class="field">
                         <label class="label">Contraseña</label>
                         <div class="control has-icons-left has-icons-right">
-                          <input class="input" type="password" placeholder="Escribe tu contraseña" name="clave">
+                          <input class="input" type="password" placeholder="Escribe tu contraseña" name="password">
                           <span class="icon is-small is-left">
                               <i class="fas fa-lock"></i>
                             </span>

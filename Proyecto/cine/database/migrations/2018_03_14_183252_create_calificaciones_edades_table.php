@@ -28,6 +28,6 @@ class CreateCalificacionesEdadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('edades');
+        Schema::dropIfExists('calificaciones_edades');
     }
 }
