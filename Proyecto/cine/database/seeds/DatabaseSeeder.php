@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\ButacaReservada;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +21,15 @@ class DatabaseSeeder extends Seeder
             'peliculas',
             'resenas',
             'salas',
-            'butacas'
+            'butacas',
+            'sesiones',
+            'facturas',
+            'butacas_reservadas',
+            'categorias',
+            'productos',
+            'lineas_ventas',
+            'ingredientes',
+            'ingrediente_producto'
         ]);
 
         //Ejecutar los siguientes Seeders
@@ -31,12 +40,22 @@ class DatabaseSeeder extends Seeder
         $this->call(ResenasSeeder::class);
         $this->call(SalasSeeder::class);
         $this->call(ButacasSeeder::class);
+        $this->call(SesionesSeeder::class);
+        $this->call(FacturasSeeder::class);
+        $this->call(ButacasReservadasSeeder::class);
+        $this->call(CategoriasSeeder::class);
+        $this->call(ProductosSeeder::class);
+        $this->call(LineasVentasSeeder::class);
+        $this->call(IngredientesSeeder::class);
+        $this->call(ProductosIngredientesSeeder::class);
     }
 
     /**
      * Desactiva la restricción de claves foráneas.
      * Borra todos los datos de las tablas pasadas en el array.
      * Reactiva la restriccion de claves foráneas.
+     * 
+     * Esto permite reejecutar los seeders sin que afectes las restricciones de clave foránea
      */
     protected function truncateTables(array $tables){
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');

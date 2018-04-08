@@ -19,7 +19,8 @@ class CreateUsuariosTable extends Migration
             $table->string('nombre')->unique();
             $table->string('clave');
             $table->string('email')->unique();
-            $table->integer('tlf', false, true);            
+            $table->integer('tlf', false, true);
+            $table->string('avatar')->nullable();            
             $table->integer('puntos', false, true)->default('0');
             $table->rememberToken();
             $table->timestamps();

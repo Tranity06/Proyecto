@@ -15,6 +15,18 @@ class CreateSesionesTable extends Migration
     {
         Schema::create('sesiones', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('fecha');
+            $table->time('hora');
+            $table->integer('estado', false, true); //0=Inactiva, 1=Activa
+
+            //Clave foránea PELICULA.
+            $table->unsignedInteger('pelicula_id');
+            $table->foreign('pelicula_id')->references('id')->on('peliculas');
+
+            //Clave foránea SALA.
+            $table->unsignedInteger('sala_id');
+            $table->foreign('sala_id')->references('id')->on('salas');
+
             $table->timestamps();
         });
     }
