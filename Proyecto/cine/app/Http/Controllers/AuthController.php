@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller{
@@ -19,6 +20,13 @@ class AuthController extends Controller{
         'clave' => 'required|min:6|confirmed'
       ]);
 
-      dd('todo ok');
+      Usuario::create([
+        'nombre' => $request->input('nombre'),
+        'email' => $request->input('email'),
+        'tlf' => $request->input('tlf'),
+        'clave' => bcrypt($request->input('clave'))
+      ]);
+
+      redirect()->route(('home'));
   }
 }

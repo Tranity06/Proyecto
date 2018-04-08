@@ -22,7 +22,7 @@ class Usuario extends Model
      * @var array
      */
     protected $hidden = [
-        'clave',
+        'clave','remember_token'
     ];
 
     /**
