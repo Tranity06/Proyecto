@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\Home;
+use App\Http\Controllers\Admin\Home;  //Posible quitar parte Home?
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');*/
 
 Auth::routes();
 
-Route::get('/admin', 'Admin\Home@index')->name('admin');
-
-Route::post('/logout', 'Admin\Home@logout');
+Route::get('/admin', 'Admin\Home@index');
+  Route::prefix('admin')->group(function() {
+    Route::get('/login', 'Admin\Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Admin\Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/', 'Admin\Home@index')->name('admin.dashboard');
+    Route::post('/logout', 'Admin\Home@logout');
+  });
