@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Administrador extends Model
+class Administrador extends Authenticatable
 {
-    /**
-     * Tabla a la que hace referencia (no sigue el convenio Laravel).
-     */
-    protected $table = 'administradores';
+    use Notifiable;
+
+    protected $guard = 'admin';
+    protected $table = 'administradores';    
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +18,7 @@ class Administrador extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre', 'password',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -26,6 +27,6 @@ class Administrador extends Model
      * @var array
      */
     protected $hidden = [
-        'clave',
+        'password', 'remember_token',
     ];
 }

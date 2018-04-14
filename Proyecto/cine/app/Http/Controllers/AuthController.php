@@ -33,6 +33,7 @@ class AuthController extends Controller{
   }
 
   public function getLogin(){
+    dd("Aqui");
     return view('auth.login');
   }
 
