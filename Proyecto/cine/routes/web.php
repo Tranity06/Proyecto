@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Home;  //Posible quitar parte Home?
  * HOME
  */
 
+Auth::routes();
 Route::get('/','HomeController@index')->name('home');
 
 /**
@@ -39,7 +40,7 @@ Route::get('/logout','AuthController@getLogout')->name('auth.logout');
  * Authentication ADMIN
  */
 
-Auth::routes();
+
 
 Route::get('/admin', 'Admin\Home@index');
   Route::prefix('admin')->group(function() {
