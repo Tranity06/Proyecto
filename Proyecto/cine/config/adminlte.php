@@ -13,11 +13,11 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'PalomitasTime',
 
     'title_prefix' => '',
 
-    'title_postfix' => '',
+    'title_postfix' => ' - Admin panel',
 
     /*
     |--------------------------------------------------------------------------
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Palomitas</b>Time',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => '<b>P</b>Time',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        /*'MAIN NAVIGATION',
         [
             'text' => 'Blog',
             'url'  => 'admin/blog',
@@ -120,7 +120,7 @@ return [
             'icon'        => 'file',
             'label'       => 4,
             'label_color' => 'success',
-        ],
+        ],*/
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
