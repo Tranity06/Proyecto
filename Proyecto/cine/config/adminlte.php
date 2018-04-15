@@ -123,21 +123,25 @@ return [
         ],*/
         'ACCOUNT SETTINGS',
         [
-            'text' => 'Profile',
+            'text' => 'Perfil',
             'url'  => 'admin/settings',
             'icon' => 'user',
         ],
         [
-            'text' => 'Change Password',
+            'text' => 'Cambiar contraseña',
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
         [
-            'text'    => 'Multilevel',
+            'text'    => 'Gestionar administradores',
             'icon'    => 'share',
             'submenu' => [
                 [
-                    'text' => 'Level One',
+                    'text' => 'Crear nuevo administrador',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Ver todos los administradores',
                     'url'  => '#',
                 ],
                 [
