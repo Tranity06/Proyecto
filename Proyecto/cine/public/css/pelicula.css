@@ -1,0 +1,69 @@
+.es-posicionado {
+	justify-content: center !important;
+	position: relative;
+	bottom: -20px;
+}
+
+.pelicula-poster {
+	border-radius: 10px;
+}
+
+.cinema-filtrar {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: wheat;
+}
+
+.dropdown-menu {
+	width: 90%;
+	left: auto;
+}
+
+.dropdown-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.actor-item {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #cad0d2;
+	border-radius: 4px;
+	overflow: hidden;
+	max-width: 138px;
+}
+
+.actor-detalles {
+	padding: 5px 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.actor-nombre {
+	font-weight: bold;
+	color: #000;
+}
+
+.centeredIcon {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	background-color: white;
+	border: 1px solid #d7dbdd;
+	font-size: 20px;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05), 0 2px 3px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.sombra {
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}

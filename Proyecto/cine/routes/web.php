@@ -40,8 +40,6 @@ Route::get('/logout','AuthController@getLogout')->name('auth.logout');
  * Authentication ADMIN
  */
 
-
-
 Route::get('/admin', 'Admin\Home@index');
   Route::prefix('admin')->group(function() {
     Route::get('/login', 'Admin\Auth\AdminLoginController@showLoginForm')->name('admin.login');
