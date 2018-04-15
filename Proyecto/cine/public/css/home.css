@@ -49,6 +49,7 @@
 .control {
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     margin-top: -24px;
     z-index: 55;
 }
@@ -87,9 +88,7 @@
 .slider-informacion {
     position: absolute;
     top: 20%;
-    left: 25%;
-
-    width: 500px;
+    left: 18%;
     height: 400px;
 
     display: flex;
@@ -97,6 +96,13 @@
     justify-content: space-between;
 
     align-content: space-between;
+}
+
+@media only screen and (max-width: 539px) {
+    .slider-informacion{
+        left: 16%;
+        height: 300px;
+    }
 }
 
 .fecha {
