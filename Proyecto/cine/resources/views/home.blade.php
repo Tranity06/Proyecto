@@ -30,7 +30,7 @@
                 <img src="https://hdqwalls.com/download/4k-thor-ragnarok-cl-1600x900.jpg" alt="Thor Ragnarok" class="img-responsive">
             </div>
         </div>
-        <div class="controllers">
+        <div class="controllers is-hidden-mobile">
             <div class="next control">
                 <label>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -49,7 +49,7 @@
     </section>
 
     <section class="menu-pelicula">
-        <div class="box" style="max-width:550px;">
+        <div class="opciones" style="max-width:550px;">
             <div class="tabs is-centered">
                 <ul>
                     <li class="is-active is-size-7-mobile"><a>Cartelera</a></li>

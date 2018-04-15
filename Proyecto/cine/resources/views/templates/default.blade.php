@@ -16,7 +16,7 @@
         }
 
         span.navbar-item.navbar-item-end {
-            left: 50%;
+            left: 56%;
         }
 
         .user-login {

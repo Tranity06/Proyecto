@@ -36,6 +36,13 @@ Route::post('/login','AuthController@postLogin');
 
 Route::get('/logout','AuthController@getLogout')->name('auth.logout');
 
+
+/**
+ * Verificar cuenta
+ */
+
+Route::get('/verify/{token}','VerifyController@verify')->name('verify');
+
 /**
  * Authentication ADMIN
  */

@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
+use App\Notifications\VerifyEmail;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use \Illuminate\Notifications\Notifiable;
 
 class Usuario extends Model implements AuthenticatableContract
 {
     use Authenticatable;
+    use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nombre', 'email', 'password', 'tlf', 'avatar',
+        'nombre', 'email', 'password', 'tlf', 'avatar','token'
     ];
 
     /**
@@ -25,15 +29,6 @@ class Usuario extends Model implements AuthenticatableContract
      */
     protected $hidden = [
         'password','remember_token'
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'activa' => 'boolean',
     ];
 
     /**
@@ -48,6 +43,14 @@ class Usuario extends Model implements AuthenticatableContract
      */
     public function facturas(){
         return $this->hasMany(Facturas::class);
+    }
+
+    public function verified(){
+        return $this->token === null;
+    }
+
+    public function sendVerificationEmail(){
+        $this->notify(new VerifyEmail($this));
     }
 
 }

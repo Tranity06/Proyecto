@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Notifications\VerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller{
 
@@ -22,12 +22,15 @@ class AuthController extends Controller{
         'password' => 'required|min:6|confirmed'
       ]);
 
-      Usuario::create([
+     $usuario = Usuario::create([
         'nombre' => $request->input('nombre'),
         'email' => $request->input('email'),
         'tlf' => $request->input('tlf'),
-        'password' => bcrypt($request->input('password'))
+        'password' => bcrypt($request->input('password')),
+        'token' => str_random(25),
       ]);
+
+     $usuario->sendVerificationEmail();
 
     return redirect()->route('home');
   }
