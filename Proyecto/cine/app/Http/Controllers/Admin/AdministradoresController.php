@@ -42,6 +42,29 @@ class AdministradoresController extends Controller
         }
     }
 
+    public function modificarAdmin(Request $request){
+        $admin = $request->session()->get('nombre');
+        $administrador = Administrador::where('name', $admin)->first();
+        $nombre = trim($request['nombre']);
+        $email = trim($request['email']);
+        $pw = trim($request['pw']);
+        if ( $this->comprobarNombre($nombre) === "valido" && $this->comprobarEmail($email) === "valido" ){
+            if ( strlen($nombre) > 0 ){
+                $administrador->name = $nombre;
+                $request->session()->put('nombre', $nombre);
+            } 
+            if ( strlen($email) > 0 ){
+                $administrador->email = $email;
+            }
+            if ( strlen($pw) > 0 ){
+                $administrador->password = $pw;
+            }
+            $administrador->save();
+            dd("1", $administrador);
+        }
+        dd("Mal");
+    }
+
     /**
      * Comprueba que el nombre del administrador enviado no existe en la base de datos
      * return 'valido' -> el usuario no existe

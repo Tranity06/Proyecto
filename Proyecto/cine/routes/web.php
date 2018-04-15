@@ -55,3 +55,4 @@ Route::get('/admin', 'Admin\Home@index');
    */
   Route::get('admin/settings', 'Admin\AdministradoresController@mostrarDetalleCuenta')->name('admin.perfil');
   Route::post('admin/comprobar','Admin\AdministradoresController@comprobarDatos');
+  Route::post('admin/midificaradmin','Admin\AdministradoresController@modificarAdmin');

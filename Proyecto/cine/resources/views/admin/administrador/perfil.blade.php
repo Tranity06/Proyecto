@@ -39,10 +39,8 @@
                 var $cambio = $(this).parent().parent().parent().prev().children().first()
                 var $texto = ($input.val()).trim();
 
-                $input.next().text('');
                 $input.removeClass('errores');
                 
-
                 if ( $texto != '') {
                     $.ajaxSetup({
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
@@ -55,9 +53,12 @@
                             if ( e === 'existe'){
                                 $input.addClass('errores');
                                 $input.next().text("El valor introducido ya existe.");
+                                $input.next().slideDown("slow");
                             } else {
                                 $cambio.text($texto);
                                 $form.slideToggle("slow");
+                                $input.next().slideUp("slow");
+                                $input.next().text('');
                             }
                         },
                         async: true,
@@ -73,15 +74,17 @@
                 var $pw1 = $('#pw1');
                 var $pw2 = $('#pw2');
 
-                $('#errorpw').text('');
                 $pw2.removeClass('errores');
                 
                 if ( $pw1.val() == $pw2.val() ){
                     $(this).parent().parent().parent().prev().children().first().text('Contraseña modificada');
                     $(this).parent().parent().parent().slideToggle("slow");
+                    $('#errorpw').text('');
+                    $('#errorpw').slideUp("slow");
                 } else {
                     $pw2.addClass('errores');
                     $('#errorpw').text('Las contraseñas deben coincidir.');
+                    $('#errorpw').slideDown("slow");
                 }
             });
 
@@ -89,8 +92,7 @@
                 e.preventDefault();
                 $('#errguardar').text();
                 if ( $('#errorpw').text()=='' && $('#errornombre').text()=='' && $('#erroremail').text()=='' ){
-                    console.log("Todo ok");
-                    infoform.submit();
+                    infoform.submit(); //Falta action
                 } else {
                     $('#errguardar').text('Comprueba que todos los campos son correctos.');
                 }
@@ -112,14 +114,15 @@
             <h3 class="box-title">Datos de la cuenta</h3>
         </div>
         <div class="box-body">
-            <form name="infoform" action="#" method="POST">
+            <form name="infoform" action="/admin/midificaradmin" method="POST">
+                {{ csrf_field() }}
                 <div>
                     <p>Nombre: <span>{{$datos->name}}</span> <span class="glyphicon glyphicon-pencil mostrarForm"></span></p>
                     <div class="formularios" hidden>
                         <div>
                             <div class="col-xs-4">
                                 <input class="form-control input-sm" type="text" name="nombre"/>
-                                <span id="errornombre"></span>
+                                <div class="callout callout-danger" id="errornombre" hidden></div>
                             </div>
                             <div>
                                 <button class="btn btn-primary cambiar">Aceptar</button>
@@ -133,7 +136,7 @@
                         <div>
                             <div class="col-xs-4">
                                 <input class="form-control input-sm" type="text" name="email" />
-                                <span id="erroremail"></span>
+                                <div class="callout callout-danger" id="erroremail" hidden></div>
                             </div>
                             <div>
                                 <button class="btn btn-primary cambiar">Aceptar</button>
@@ -148,7 +151,7 @@
                             <div class="col-xs-4">
                                 <input id="pw1" class="form-control input-sm" type="password" name="pw" />
                                 <input id="pw2" class="form-control input-sm" type="password"/>
-                                <span id="errorpw"></span>
+                                <div class="callout callout-danger" id="errorpw" hidden></div>
                             </div>
                             <div>
                                 <button class="btn btn-primary cambiar-pw">Aceptar</button>
