@@ -7,7 +7,8 @@
     <title>Palomitas time</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-    <link href="{{ asset('css/pelicula.css') }}" media="all" rel="stylesheet" type="text/css" />
+
+    @yield('estilos');
 
     <style type="text/css">
         .navbar-end {

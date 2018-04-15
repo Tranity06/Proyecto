@@ -1,5 +1,9 @@
 @extends('templates.default')
 
+@section('estilos')
+    <link href="{{ asset('css/pelicula.css') }}" media="all" rel="stylesheet" type="text/css" />
+@stop
+
 @section('content')
         <section class="hero is-primary is-medium">
               
