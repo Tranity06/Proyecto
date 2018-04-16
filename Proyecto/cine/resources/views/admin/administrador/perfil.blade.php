@@ -24,7 +24,7 @@
 
             // Oculta los formularios abiertos y muestra el seleccionado
             $(".mostrarForm").on('click', function() {
-                $(".formularios").slideUp();
+                $(".formularios").not($this).slideUp();
                 $(this).parent().next().slideToggle("slow");
                 $(this).parent().next().children().first().children().first().children().first().focus();
             });
