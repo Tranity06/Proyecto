@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Models\Administrador;
 
 class AdminLoginController extends Controller
 {
@@ -46,6 +47,10 @@ class AdminLoginController extends Controller
       // Attempt to log the user in
       if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location 
+        $email = $request['email'];
+        $admin = Administrador::where('email', $email)->select('name')->first()->name; //Obtener el nombre del usuario logueado
+        $request->session()->put('nombre', $admin); //Añadir a la sesion el campo 'nombre' con el nombre del usuario
+
         return redirect()->intended(route('admin.login.submit'));
       }
 
