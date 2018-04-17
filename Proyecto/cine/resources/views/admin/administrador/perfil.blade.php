@@ -18,13 +18,13 @@
 @stop
 
 @section('js')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src={{ asset('js/jquery-3.3.1.js') }}></script>
     <script>
         $(document).ready(function(){
 
             // Oculta los formularios abiertos y muestra el seleccionado
             $(".mostrarForm").on('click', function() {
-                $(".formularios").not($this).slideUp();
+                $(".formularios").not($(this).parent().next()).slideUp();
                 $(this).parent().next().slideToggle("slow");
                 $(this).parent().next().children().first().children().first().children().first().focus();
             });
@@ -100,6 +100,8 @@
         });
     </script>
 @stop
+
+@section('admin', $admin )
 
 @section('migas')
     <ol class="breadcrumb">

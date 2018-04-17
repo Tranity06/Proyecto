@@ -44,23 +44,25 @@ class AdministradoresController extends Controller
 
     public function modificarAdmin(Request $request){
         $admin = $request->session()->get('nombre');
-        $administrador = Administrador::where('name', $admin)->first();
+        $datos = Administrador::where('name', $admin)->first();
         $nombre = trim($request['nombre']);
         $email = trim($request['email']);
         $pw = trim($request['pw']);
         if ( $this->comprobarNombre($nombre) === "valido" && $this->comprobarEmail($email) === "valido" ){
             if ( strlen($nombre) > 0 ){
-                $administrador->name = $nombre;
+                $datos->name = $nombre;
                 $request->session()->put('nombre', $nombre);
             } 
             if ( strlen($email) > 0 ){
-                $administrador->email = $email;
+                $datos->email = $email;
             }
             if ( strlen($pw) > 0 ){
-                $administrador->password = $pw;
+                $datos->password = bcrypt($pw);
             }
-            $administrador->save();
-            dd("1", $administrador);
+            $datos->save();
+            $admin = $nombre;
+            $correcto = 'S';
+            return view('admin.administrador.perfil', compact('datos', 'admin', 'correcto'));
         }
         dd("Mal");
     }

@@ -3,7 +3,11 @@
 @section('title', 'PalomitasT')
 
 @section('content_header')
-    <h1><small>Conectado como</small> {{$admin}}</h1>
+    <h1><small>Conectado como</small> 
+        @section('admin')
+            {{$admin}}
+        @show
+    </h1>
     
     @section('migas')
         <ol class="breadcrumb">
