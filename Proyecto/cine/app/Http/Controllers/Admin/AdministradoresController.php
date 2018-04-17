@@ -62,9 +62,54 @@ class AdministradoresController extends Controller
             $datos->save();
             $admin = $nombre;
             $correcto = 'S';
-            return view('admin.administrador.perfil', compact('datos', 'admin', 'correcto'));
+            
         }
-        dd("Mal");
+        return view('admin.administrador.perfil', compact('datos', 'admin', 'correcto'));
+    }
+
+    public function crearGet (Request $request){
+        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
+        
+        // Si no hay ningún usuario logueado regirige al login
+        if ($admin == null){
+            return redirect('/admin');
+        }
+
+        $administrador = Administrador::where('name', $admin)->first();
+        if ( $administrador->id == 1 ){
+            return view('admin.administrador.crearGet', compact('admin'));
+        }
+
+        return view('admin.administrador.crearErrorNoAdmin', compact('admin'));
+    }
+
+    public function crearPost(Request $request){
+        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
+        
+        // Si no hay ningún usuario logueado regirige al login
+        if ($admin == null){
+            return redirect('/admin');
+        }
+
+        $nuevo_admin = Administrador::create([
+            'name' => $request['nombre'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['pw'])
+        ]);
+
+        return view('admin.administrador.crearPost', compact('admin','nuevo_admin'));
+    }
+
+    public function mostrar(Request $request){
+        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
+        
+        // Si no hay ningún usuario logueado regirige al login
+        if ($admin == null){
+            return redirect('/admin');
+        }
+
+        $administradores = Administrador::all();
+        return view('admin.administrador.mostrar', compact('admin','administradores'));
     }
 
     /**
@@ -72,7 +117,7 @@ class AdministradoresController extends Controller
      * return 'valido' -> el usuario no existe
      *        'existe' ->el usuario existe
      */
-    private function comprobarNombre( $nombre ){
+    private static function comprobarNombre( $nombre ){
         $administrador = Administrador::where('name', $nombre)->first();
         if ( $administrador == null ){
             return "valido";
@@ -85,7 +130,7 @@ class AdministradoresController extends Controller
      * return 'valido' -> el usuario no existe
      *        'existe' ->el usuario existe
      */
-    static function comprobarEmail( $email ){
+    private static function comprobarEmail( $email ){
         $administrador = Administrador::where('email', $email)->first();
         if ( $administrador == null ){
             return "valido";

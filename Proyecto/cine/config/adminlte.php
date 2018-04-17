@@ -128,23 +128,18 @@ return [
             'icon' => 'user',
         ],
         [
-            'text' => 'Cambiar contraseña',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
-        [
             'text'    => 'Gestionar administradores',
             'icon'    => 'share',
             'submenu' => [
                 [
-                    'text' => 'Crear nuevo administrador',
-                    'url'  => '#',
+                    'text' => 'Crear',
+                    'url'  => 'admin/crearadministrador',
                 ],
                 [
-                    'text' => 'Ver todos los administradores',
-                    'url'  => '#',
+                    'text' => 'Ver todos',
+                    'url'  => 'admin/administradores',
                 ],
-                [
+                /*[
                     'text'    => 'Level One',
                     'url'     => '#',
                     'submenu' => [
@@ -171,7 +166,7 @@ return [
                 [
                     'text' => 'Level One',
                     'url'  => '#',
-                ],
+                ],*/
             ],
         ],
         'LABELS',

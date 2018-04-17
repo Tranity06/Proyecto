@@ -116,7 +116,7 @@
             <h3 class="box-title">Datos de la cuenta</h3>
         </div>
         <div class="box-body">
-            <form name="infoform" action="/admin/midificaradmin" method="POST">
+            <form name="infoform" action="/admin/modificaradmin" method="POST">
                 {{ csrf_field() }}
                 <div>
                     <p>Nombre: <span>{{$datos->name}}</span> <span class="glyphicon glyphicon-pencil mostrarForm"></span></p>
