@@ -22,18 +22,18 @@
 @section('migas')
     <ol class="breadcrumb">
         <li><a href="\admin"></i> Home</a></li>
-        <li class="active">Crear nuevo usuario</li>
+        <li class="active">Error</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="box box-default color-palette-box">
         <div class="box-header with-border">
-            <h3 class="box-title">Acceso denegado</h3>
+            <h3 class="box-title">{{$tipoError}}</h3>
         </div>
         <div class="box-body">
             <div>
-                <p>Sólo el administrador principal puede crear nuevas cuentas de administrador.</p>
+                <p>{{$mensajeError}}</p>
             </div>
         </div>
     </div>

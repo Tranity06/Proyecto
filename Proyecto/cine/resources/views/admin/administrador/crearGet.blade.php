@@ -32,7 +32,7 @@
             <h3 class="box-title">Crear nuevo usuario</h3>
         </div>
         <div class="box-body">
-            <form name="infoform" action="/admin/crearadministrador" method="POST">
+            <form name="infoform" action="admin.crearAdmin.post" method="POST">
                 {{ csrf_field() }}
                 <div>
                     <p>Nombre:</p>

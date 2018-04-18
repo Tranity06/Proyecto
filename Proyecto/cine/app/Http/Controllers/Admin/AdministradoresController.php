@@ -80,7 +80,9 @@ class AdministradoresController extends Controller
             return view('admin.administrador.crearGet', compact('admin'));
         }
 
-        return view('admin.administrador.crearErrorNoAdmin', compact('admin'));
+        $tipoError = "Permiso denegado";
+        $mensajeError = "Sólo el adminstrador principal puede crear nuevas cuentas de usuario.";
+        return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));
     }
 
     public function crearPost(Request $request){
