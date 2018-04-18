@@ -21,7 +21,7 @@
 
 @section('migas')
     <ol class="breadcrumb">
-        <li><a href="\admin"></i> Home</a></li>
+        <li><a href="{{ route('admin.dashboard') }}"></i> Home</a></li>
         <li class="active">Error</li>
     </ol>
 @endsection

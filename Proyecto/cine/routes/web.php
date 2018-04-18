@@ -59,8 +59,17 @@ Route::get('/admin', 'Admin\Home@index');
    * Gestion ADMINISTRADORES
    */
   Route::get('admin/settings', 'Admin\AdministradoresController@mostrarDetalleCuenta')->name('admin.perfil');
-  Route::post('admin/comprobar','Admin\AdministradoresController@comprobarDatos');
-  Route::post('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin');
-  Route::get('admin/crearadministrador', 'Admin\AdministradoresController@crearGet');
-  Route::post('admin/crearadministrador', 'Admin\AdministradoresController@crearPost');
-  Route::get('admin/administradores', 'Admin\AdministradoresController@mostrar');
+  
+  Route::post('admin/comprobar','Admin\AdministradoresController@comprobarDatos'); //AJAX
+  Route::get('admin/comprobar','Admin\AdministradoresController@comprobarDatos');
+  
+  Route::post('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin')->name('admin.modificarPerfil');
+  Route::get('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin');
+
+  Route::get('admin/crearadministrador', 'Admin\AdministradoresController@crearGet')->name('admin.crearAdmin.get');
+  Route::post('admin/crearadministrador', 'Admin\AdministradoresController@crearPost')->name('admin.crearAdmin.post');
+  
+  Route::get('admin/administradores', 'Admin\AdministradoresController@mostrar')->name('admin.listarAdmin');
+  
+  Route::post('admin/borrar', 'Admin\AdministradoresController@borrar')->name('admin.borrarAdmin');
+  Route::get('admin/borrar', 'Admin\AdministradoresController@borrar');
