@@ -64,6 +64,9 @@
 
     <section class="section">
         <div class="container">
+
+            <div class="filtro">Cambiar dia</div>
+
             <div class="columns is-multiline is-centered">
                 <div class="column is-3-desktop-only is-narrow">
                     <div class="pelicula-card centrar-imagen">
