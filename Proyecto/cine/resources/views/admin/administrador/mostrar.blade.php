@@ -36,30 +36,44 @@
             });
 
             $('.table').on('click', '.borrar', function(){
-                var $id= $(this).next().val();
                 var $boton = $(this);
-                $.ajax({
-                    url: '/admin/borrar',
-                    type: 'POST',
-                    data: 'id='+$id+'&token=0',
-                    success: function(e){
-                        if ( e === 'Borrado'){
-                            $boton.closest('tr')
-                            .children('td')
-                            .animate({ 
-                                padding: 0
-                            })
-                            .wrapInner('<div/>')
-                            .children().slideUp(function () {
-                                $(this).closest('tr').remove();
-                            });
-                        } else {
-                            console.log("Error");
-                        }
-                    },
-                    async: true,
-                });
+                var $id= $boton.next().val();
+                var $nombreAdmin = $boton.closest('tr').children('td').eq(1).text();
+                if (confirm("¿Seguro que quieres eliminar al administrador"+$nombreAdmin+"?")){
+                    $.ajax({
+                        url: '/admin/borrar',
+                        type: 'POST',
+                        data: 'id='+$id+'&token=0',
+                        success: function(e){
+                            if ( e === 'Borrado'){
+                                $boton.closest('tr')
+                                .children('td')
+                                .animate({ 
+                                    padding: 0
+                                })
+                                .wrapInner('<div/>')
+                                .children().slideUp(function () {
+                                    $(this).closest('tr').remove();
+                                });
+                            } else {
+                                console.log("Error");
+                            }
+                        },
+                        async: true,
+                    });
+                }
             });
+
+            $('.table').on('click','.mostrarForm', function(){
+                $filaFormulario = $('#form').clone();
+                $('.filaAnadida').each(function(){
+                    $(this).children().first().children().slideUp(function () {
+                        $(this).closest('tr').remove();
+                    });
+                })
+                $(this).closest('tr').after('<tr class="filaAnadida"><td colspan="5"></td></tr>').next().children().first().append($filaFormulario);
+                $filaFormulario.slideDown();
+            })
         });
     </script>
 @stop
@@ -74,6 +88,31 @@
 @endsection
 
 @section('content')
+    
+    <div id="form" hidden>
+        <form class="form" action="#" method="post">
+            {{ csrf_field() }}
+            <input type="hidden" name="token" value="1"/>
+            <p>Nombre:</p>
+            <div class="col-xs-4">
+                <input class="form-control input-sm" type="text" name="nombre"/>
+                <div class="callout callout-danger" id="errornombre" hidden></div>
+            </div>
+            <p>Email:</p>
+            <div class="col-xs-4">
+                <input class="form-control input-sm" type="text" name="email"/>
+                <div class="callout callout-danger" id="erroremail" hidden></div>
+            </div>
+            <p>Contraseña:</p>
+            <div class="col-xs-4">
+                <input id="pw1" class="form-control input-sm" type="password" name="pw" />
+                <input id="pw2" class="form-control input-sm" type="password"/>
+                <div class="callout callout-danger" id="errorpw" hidden></div>
+            </div>
+        </form>
+    </div>
+    
+
     <div class="box box-default color-palette-box">
         <div class="box-header with-border">
             <h3 class="box-title">Administradores registrados</h3>
@@ -105,7 +144,7 @@
                                 @if( isset($sumerAdmin) )
                                     @unless( $administrador->id == 1)
                                         <td>
-                                            <button name="mostrarForm"><i class="glyphicon glyphicon-pencil"></i></button>
+                                            <button class="mostrarForm"><i class="glyphicon glyphicon-pencil"></i></button>
                                         </td>
                                         <td>
                                             <button class="borrar"><i class="fa fa-fw fa-trash-o"></i></button>
