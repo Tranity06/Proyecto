@@ -4,6 +4,7 @@
     <link href="{{ asset('css/home.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/slick/slick.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/slick/slick-theme.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/efectos/texto.css') }}" media="all" rel="stylesheet" type="text/css" />
 @stop
 
 @section('content')
@@ -13,13 +14,13 @@
                 <img src="https://img2.goodfon.ru/original/1600x900/c/e7/justice-league-liga.jpg" alt="Liga de la justicia" class="img-responsive">
                 <div class="slider-informacion">
                     <div class="info-pelicula">
-                        <h1 class="is-size-1-desktop is-size-3-tablet is-size-4-mobile has-text-white has-text-weight-bold">LIGA DE LA JUSTICIA</h1>
-                        <h2 class="is-size-5-tablet is-size-6-mobile is-size-4-desktop has-text-white">CIENCIA FICCIÓN ACCIÓN </h2>
-                        <a class="trailer button is-link is-rounded is-large is-size-6-mobile">Ver Trailer</a>
+                        <h1 class="reveal-text titulo is-size-1-desktop is-size-3-tablet is-size-4-mobile has-text-white has-text-weight-bold">LIGA DE LA JUSTICIA</h1>
+                        <h2 class="fade fade-subtitulo is-size-5-tablet is-size-6-mobile is-size-4-desktop has-text-white">CIENCIA FICCIÓN ACCIÓN </h2>
+                        <a class="fade fade-boton trailer button is-link is-rounded is-large is-size-6-mobile">Ver Trailer</a>
                     </div>
                     <div class="fecha">
-                        <span class="is-size-4-tablet is-size-6-mobile is-size-3-desktop has-text-white has-text-weight-normal">Fecha de estreno</span>
-                        <span class="is-size-5-tablet is-size-6-mobile is-size-4-desktop has-text-info has-text-weight-light">15 Oct, 2015</span>
+                        <span class="fade fade-estreno is-size-4-tablet is-size-6-mobile is-size-3-desktop has-text-white has-text-weight-normal">Fecha de estreno</span>
+                        <span class="fade fade-estreno-fecha is-size-5-tablet is-size-6-mobile is-size-4-desktop has-text-info has-text-weight-light">15 Oct, 2015</span>
                     </div>
                 </div>
             </div>
@@ -63,6 +64,9 @@
 
     <section class="section">
         <div class="container">
+
+            <div class="filtro">Cambiar dia</div>
+
             <div class="columns is-multiline is-centered">
                 <div class="column is-3-desktop-only is-narrow">
                     <div class="pelicula-card centrar-imagen">
@@ -174,6 +178,22 @@
                 prevArrow: '.slider-container .prev',
                 nextArrow: '.slider-container .next',
             });
+            $('.slider').on('swipe', function(event, slick, direction){
+
+                    $('.titulo').removeClass('reveal-text');
+                    $('.fade-subtitulo').removeClass('fade');
+                    $('.fade-boton').removeClass('fade');
+                    $('.fade-estreno').removeClass('fade');
+                    $('.fade-estreno-fecha').removeClass('fade');
+
+                    setTimeout(function(){
+                        $('.titulo').addClass('reveal-text');
+                        $('.fade-subtitulo').addClass('fade');
+                        $('.fade-boton').addClass('fade');
+                        $('.fade-estreno').addClass('fade');
+                        $('.fade-estreno-fecha').addClass('fade');
+                    }, 50);
+                });
         });
     </script>
 @stop

@@ -177,3 +177,20 @@ body{
 .es-largo {
     width: 100%;
 }
+
+
+.filtro {
+    background: #fff;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 2px 10px 0 rgba(0,0,0,.05);
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,.05);
+    color: #434c5a;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 40px;
+    min-width: 130px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
