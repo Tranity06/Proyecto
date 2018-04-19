@@ -32,7 +32,7 @@ return [
 
     'logo' => '<b>Palomitas</b>Time',
 
-    'logo_mini' => '<b>P</b>Time',
+    'logo_mini' => '<b>P</b>Tm',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'admin/logout',
 
@@ -123,24 +123,23 @@ return [
         ],*/
         'ACCOUNT SETTINGS',
         [
-            'text' => 'Profile',
+            'text' => 'Perfil',
             'url'  => 'admin/settings',
             'icon' => 'user',
         ],
         [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
-        [
-            'text'    => 'Multilevel',
+            'text'    => 'Gestionar administradores',
             'icon'    => 'share',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Crear',
+                    'url'  => 'admin/crearadministrador',
                 ],
                 [
+                    'text' => 'Ver todos',
+                    'url'  => 'admin/administradores',
+                ],
+                /*[
                     'text'    => 'Level One',
                     'url'     => '#',
                     'submenu' => [
@@ -167,7 +166,7 @@ return [
                 [
                     'text' => 'Level One',
                     'url'  => '#',
-                ],
+                ],*/
             ],
         ],
         'LABELS',

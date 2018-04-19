@@ -54,3 +54,13 @@ Route::get('/admin', 'Admin\Home@index');
     Route::get('/', 'Admin\Home@index')->name('admin.dashboard');
     Route::post('/logout', 'Admin\Home@logout');
   });
+
+  /**
+   * Gestion ADMINISTRADORES
+   */
+  Route::get('admin/settings', 'Admin\AdministradoresController@mostrarDetalleCuenta')->name('admin.perfil');
+  Route::post('admin/comprobar','Admin\AdministradoresController@comprobarDatos');
+  Route::post('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin');
+  Route::get('admin/crearadministrador', 'Admin\AdministradoresController@crearGet');
+  Route::post('admin/crearadministrador', 'Admin\AdministradoresController@crearPost');
+  Route::get('admin/administradores', 'Admin\AdministradoresController@mostrar');

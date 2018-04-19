@@ -23,9 +23,10 @@ class Home extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     { 
-        return view('admin.home');
+        $admin = $request->session()->get('nombre');
+        return view('admin.home', compact('admin'));
     }
 
     public function logout(Request $request)
