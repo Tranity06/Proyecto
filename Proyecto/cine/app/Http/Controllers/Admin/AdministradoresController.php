@@ -60,8 +60,12 @@ class AdministradoresController extends Controller
             return redirect('/admin');
         }
 
-        //Extrae todos los datos del usuario logueado.
-        $datos = Administrador::where('name', $admin)->first();
+        //Extrae todos los datos del usuario que se va a modificar
+        if ( isset($request['id']) ){
+            $datos = Administrador::find($request['id']); //Si no es el administrador logueado
+        } else {
+            $datos = Administrador::where('name', $admin)->first(); // Si es el administrador logueado
+        }        
 
         //Quitar los posibles espacios en blanco que vengan en los datos
         $nombre = trim($request['nombre']);
@@ -73,7 +77,9 @@ class AdministradoresController extends Controller
             if ( strlen($nombre) > 0 ){
                 $datos->name = $nombre;
                 $admin = $nombre;
-                $request->session()->put('nombre', $nombre);
+                if ( !isset($request['id']) ){
+                    $request->session()->put('nombre', $nombre);
+                }
             } 
             if ( strlen($email) > 0 ){
                 $datos->email = $email;
@@ -84,6 +90,10 @@ class AdministradoresController extends Controller
             $datos->save();
             $correcto = 'S';
             
+        }
+
+        if ( isset($request['id']) ){
+            return redirect('admin/administradores') ;
         }
         return view('admin.administrador.perfil', compact('datos', 'admin', 'correcto'));
     }
