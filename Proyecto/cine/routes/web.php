@@ -73,3 +73,8 @@ Route::get('/admin', 'Admin\Home@index');
   
   Route::post('admin/borrar', 'Admin\AdministradoresController@borrar')->name('admin.borrarAdmin');
   Route::get('admin/borrar', 'Admin\AdministradoresController@borrar');
+
+  /**
+   * Gstión PELÍCULAS
+   */
+  Route::get('pelicula/crear', 'PeliculaController@crear');
