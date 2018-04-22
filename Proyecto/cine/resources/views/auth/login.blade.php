@@ -1,11 +1,16 @@
 @extends('templates.default')
 
+@section('estilos')
+    <link href="{{ asset('css/utilidades.css') }}" media="all" rel="stylesheet" type="text/css" />
+@stop
+
 @section('content')
-<section class="section">
+<section class="section" style="height: 100vh">
         <div class="container">
             <div class="columns">
                 <div class="column is-narrow">
-                <form method="post" action="{{ route('auth.login') }}">
+                <form method="post" action="{{ route('auth.login') }}" class="box-form">
+                    <h1 class="title has-text-weight-bold"><span>INICIAR SESIÓN</span></h1>
                       <div class="field">
                         <label class="label">Introduce tu email</label>
                         <div class="control has-icons-left has-icons-right">
@@ -43,16 +48,23 @@
                       
                       <div class="field is-grouped">
                         <div class="control">
-                          <button class="button is-link">Submit</button>
+                          <button class="button is-link">Entrar</button>
                         </div>
                       </div>
-                      {{ csrf_field() }}
+                    <a href="recuperar">¿Has olvidado tu contraseña?</a>
+                    {{ csrf_field() }}
                       </form>
                 </div>
-                <div class="column">
-                    <h1 class="is-size-3">No tienes Cuenta?</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia nostrum dignissimos obcaecati iusto! Ex quasi alias id, error nesciunt accusantium eum ipsum ut reprehenderit,</p>
-                    <a href="{{ route('auth.signup') }}">Registrarse</a>
+                <div class="column is-half">
+                    <h1 class="title has-text-weight-bold">CREAR UNA CUENTA</h1>
+                    <p>Crea tu cuenta de Palomitas time:</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Acumula puntos y consigue promociones, Si veis esto modificarlo ;D no estoy inspirado ahora</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Escribir reseñas y puntuar peliculas, Si veis esto modificarlo ;D no estoy inspirado ahora</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Recibir ofertas, Si veis esto modificarlo ;D no estoy inspirado ahora </p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Realiza tu pedido más rápido guardando tus datos de envío y tu forma de pago, Si veis esto modificarlo ;D no estoy inspirado ahora </p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Accede a tu historial de pedidos, Si veis esto modificarlo ;D no estoy inspirado ahora </p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Crea y guarda tus menus preferidos, menus lleva tilde verdad?. Si veis esto modificarlo ;D no estoy inspirado ahora ;D no estoy inspirado ahora </p>
+                    <a href="{{ route('auth.signup') }}" class="button is-info is-medium">Registrarse</a>
                 </div>
             </div>
         </div>

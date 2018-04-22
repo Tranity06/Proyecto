@@ -11,7 +11,7 @@
 @section('content')
     <section class="slider-container">
         <div class="slider">
-            <div class="color-overlay">
+            <div>
                 <img src="https://img2.goodfon.ru/original/1600x900/c/e7/justice-league-liga.jpg" alt="Liga de la justicia" class="img-responsive">
                 <div class="slider-informacion">
                     <div class="info-pelicula">
@@ -25,10 +25,10 @@
                     </div>
                 </div>
             </div>
-            <div class="color-overlay">
+            <div>
                 <img src="https://img4.goodfon.ru/original/1600x900/9/63/jumanji-welcome-to-the-jungle-jumanji-welcome-to-the-jumanji.jpg" alt="Jumanji" class="img-responsive">
             </div>
-            <div class="color-overlay">
+            <div>
                 <img src="https://hdqwalls.com/download/4k-thor-ragnarok-cl-1600x900.jpg" alt="Thor Ragnarok" class="img-responsive">
             </div>
         </div>
@@ -63,14 +63,10 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section-peliculas">
         <div class="container">
 
-            <div class="filtro">
-                Filtro:
-                <div class="filtro-button">Cambiar dia</div>
-                <div class="filtro-button"><span class="texto-filtro">Cambiar Horario</span></div>
-            </div>
+            <div class="button">Filtro</div>
 
 
             <div class="columns is-multiline is-centered">

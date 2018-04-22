@@ -1,8 +1,11 @@
-<nav class="navbar">
+<nav class="navbar is-fixed-top">
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item">
-                <img src="https://bulma.io/images/bulma-logo.png" alt="Logo">
+                <div class="logo-container">
+                    <img src="{{ asset('48px.png') }}" alt="Logo">
+                    <span>Palomitas time</span>
+                </div>
             </a>
             <span class="navbar-burger burger" data-target="navbarMenuHeroA">
                 <span></span>
@@ -50,7 +53,10 @@
                     @else
                         <a class="button is-primary" href="{{ route('auth.login') }}">
                     <span>Entrar</span>
-                  </a>
+                        </a>
+                        <a href="http://www.facebook.com" class="centeredIcon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
                     @endif
                 </span>
             </div>
