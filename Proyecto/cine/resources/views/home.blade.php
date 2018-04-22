@@ -5,12 +5,13 @@
     <link href="{{ asset('css/slick/slick.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/slick/slick-theme.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/efectos/texto.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/modal/lity.css') }}" media="all" rel="stylesheet" type="text/css" />
 @stop
 
 @section('content')
     <section class="slider-container">
         <div class="slider">
-            <div>
+            <div class="color-overlay">
                 <img src="https://img2.goodfon.ru/original/1600x900/c/e7/justice-league-liga.jpg" alt="Liga de la justicia" class="img-responsive">
                 <div class="slider-informacion">
                     <div class="info-pelicula">
@@ -24,10 +25,10 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="color-overlay">
                 <img src="https://img4.goodfon.ru/original/1600x900/9/63/jumanji-welcome-to-the-jungle-jumanji-welcome-to-the-jumanji.jpg" alt="Jumanji" class="img-responsive">
             </div>
-            <div>
+            <div class="color-overlay">
                 <img src="https://hdqwalls.com/download/4k-thor-ragnarok-cl-1600x900.jpg" alt="Thor Ragnarok" class="img-responsive">
             </div>
         </div>
@@ -65,13 +66,18 @@
     <section class="section">
         <div class="container">
 
-            <div class="filtro">Cambiar dia</div>
+            <div class="filtro">
+                Filtro:
+                <div class="filtro-button">Cambiar dia</div>
+                <div class="filtro-button"><span class="texto-filtro">Cambiar Horario</span></div>
+            </div>
+
 
             <div class="columns is-multiline is-centered">
                 <div class="column is-3-desktop-only is-narrow">
-                    <div class="pelicula-card centrar-imagen">
-                        <div class="pelicula-trailer">
-                            <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                    <div class="pelicula-card centrar-imagen" style="background: url(https://www.dvdsreleasedates.com/posters/300/J/Jumanji-Welcome-to-the-Jungle-2017.jpg) top center no-repeat;">
+                        <div class="pelicula-trailer grow">
+                            <a href="//www.youtube.com/watch?v=Nigeq7rKL9A" data-lity><i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-horario">
@@ -91,9 +97,9 @@
                     </div>
                 </div>
                 <div class="column is-3-desktop-only is-narrow">
-                    <div class="pelicula-card centrar-imagen">
-                        <div class="pelicula-trailer">
-                            <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                    <div class="pelicula-card centrar-imagen" style="background: url({{ asset('starwars.jpg') }}) top center no-repeat;">
+                        <div class="pelicula-trailer grow">
+                            <a href="//www.youtube.com/watch?v=FbvPuv6Amjg" data-lity><i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-horario">
@@ -113,9 +119,9 @@
                     </div>
                 </div>
                 <div class="column is-3-desktop-only is-narrow">
-                    <div class="pelicula-card centrar-imagen">
-                        <div class="pelicula-trailer">
-                            <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                    <div class="pelicula-card centrar-imagen" style="background: url({{ asset('avengers.jpg') }}) top center no-repeat;">
+                        <div class="pelicula-trailer grow">
+                            <a href="//www.youtube.com/watch?v=sRzFjMGDx1s" data-lity><i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-horario">
@@ -135,9 +141,9 @@
                     </div>
                 </div>
                 <div class="column is-3-desktop-only is-narrow">
-                    <div class="pelicula-card centrar-imagen">
-                        <div class="pelicula-trailer">
-                            <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                    <div class="pelicula-card centrar-imagen" style="background: url({{ asset('dead.jpg') }}) top center no-repeat;">
+                        <div class="pelicula-trailer grow">
+                            <a href="//www.youtube.com/watch?v=N9q1mmPMcY0" data-lity><i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-horario">
@@ -170,6 +176,7 @@
 @section('javascript')
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/slick/slick.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/modal/lity.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('.slider').slick({
