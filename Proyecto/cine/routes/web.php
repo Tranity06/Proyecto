@@ -36,6 +36,9 @@ Route::post('/login','AuthController@postLogin');
 
 Route::get('/logout','AuthController@getLogout')->name('auth.logout');
 
+Route::get('/profile', 'AuthController@profile')->name('auth.profile');
+
+Route::post('/profile', 'AuthController@update_avatar');
 
 /**
  * Verificar cuenta

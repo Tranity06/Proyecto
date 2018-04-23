@@ -42,10 +42,10 @@
         }
 
         .avatar {
-            border-radius: 35%;
+            border-radius: 50%;
             display: block;
-            height: 48px;
-            width: 48px;
+            width: 32px;
+            height: 32px;
             margin-right: 9px;
             margin-left: 5px;
         }
