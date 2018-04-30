@@ -46,6 +46,13 @@ Route::post('/profile', 'AuthController@update_avatar');
 
 Route::get('/verify/{token}','VerifyController@verify')->name('verify');
 
+
+/**
+ * Comprar entrada
+ */
+
+Route::get('/entrada','EntradaController@index');
+
 /**
  * Authentication ADMIN
  */

@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Devuelve todas las butacas de una sala.
+Route::get("/butaca/{id}", function ($id){
+    return App\Models\Butaca::all()->where('sala_id',$id);
+});
