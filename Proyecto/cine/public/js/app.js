@@ -14379,9 +14379,11 @@ window.Pusher = __webpack_require__(40);
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
   key: "718c5f0fe7343b0ea5c4",
-  cluster: "mt1",
+  cluster: 'eu',
   encrypted: true
 });
+
+console.log("eu");
 
 /***/ }),
 /* 17 */
@@ -52967,7 +52969,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* The container */\n.container[data-v-21aac05e] {\n    display: inline-block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 22px;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n\n/* Hide the browser's default checkbox */\n.container input[data-v-21aac05e] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-21aac05e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n}\n.libre[data-v-21aac05e] {\n    background-color: #eee;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: black;\n}\n.reservado[data-v-21aac05e] {\n    background-color: aqua;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n}\n\n/* On mouse-over, add a grey background color */\n.container:hover input ~ .checkmark[data-v-21aac05e] {\n    background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\n.container input:checked ~ .checkmark[data-v-21aac05e] {\n    background-color: #2196F3;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-21aac05e]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n\n/* Show the checkmark when checked */\n.container input:checked ~ .checkmark[data-v-21aac05e]:after {\n    display: block;\n}\n\n/* Style the checkmark/indicator */\n.container .checkmark[data-v-21aac05e]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* The container */\n.container[data-v-21aac05e] {\n    display: inline-block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 22px;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n\n/* Hide the browser's default checkbox */\n.container input[data-v-21aac05e] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-21aac05e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n}\n.libre[data-v-21aac05e] {\n    background-color: #eee;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: black;\n}\n.reservado[data-v-21aac05e] {\n    background-color: aqua;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n}\n\n/* On mouse-over, add a grey background color */\n.container:hover input ~ .checkmark[data-v-21aac05e] {\n    background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\n.container input:checked ~ .checkmark[data-v-21aac05e] {\n    background-color: #2196F3;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-21aac05e]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n\n/* Show the checkmark when checked */\n.container input:checked ~ .checkmark[data-v-21aac05e]:after {\n    display: block;\n}\n\n/* Style the checkmark/indicator */\n.container .checkmark[data-v-21aac05e]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n", ""]);
 
 // exports
 
@@ -52991,8 +52993,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            butacas: 0,
-            checkedButacas: []
+            butacas: []
         };
     },
 
@@ -53002,14 +53003,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('http://localhost:8000/api/butaca/' + id).then(function (response) {
                 _this.butacas = response.data;
-                console.log(_this.butacas);
             }).catch(function (e) {
                 console.log(e);
             });
         },
         postEstadoButaca: function postEstadoButaca(id, estado) {
-            console.log(estado);
-            axios.put('http://localhost:8000/api/butaca/' + id, {
+            //this.checkedButacas.message.push(estado);
+            axios.post('http://localhost:8000/api/butaca/' + id, {
                 estado: estado === 0 ? 2 : 0
             }).then(function (response) {}).catch(function (e) {
                 console.log(e);
@@ -53026,6 +53026,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'indisponible': estado === 3
             };
         }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        Echo.channel('butaca').listen('ButacaEvent', function (e) {
+            var targetButaca = _this2.butacas.findIndex(function (butaca) {
+                return butaca.id === 3;
+            });
+            console.log("Target:" + targetButaca + " || " + _this2.butacas[targetButaca].estado);
+            _this2.butacas[targetButaca].estado = e.estado.estado;
+            console.log("After:" + _this2.butacas[targetButaca].estado);
+        });
     }
 });
 

@@ -11,8 +11,7 @@
     export default {
         data() {
             return {
-               butacas: 0,
-               checkedButacas: []
+               butacas: []
             }
         },
         methods: {
@@ -20,15 +19,14 @@
                 axios.get(`http://localhost:8000/api/butaca/${id}`)
                     .then(response => {
                         this.butacas = response.data;
-                        console.log(this.butacas);
                     })
                     .catch(e => {
                         console.log(e);
                     })
             },
             postEstadoButaca: function(id,estado){
-                console.log(estado);
-                axios.put(`http://localhost:8000/api/butaca/${id}`, {
+                //this.checkedButacas.message.push(estado);
+                axios.post(`http://localhost:8000/api/butaca/${id}`, {
                     estado: ((estado ===  0) ? 2 : 0)
                     })
                     .then(response => {})
@@ -47,6 +45,15 @@
                     'indisponible': (estado === 3)
                 }
             }
+        },
+        created(){
+            Echo.channel('butaca')
+                .listen('ButacaEvent', (e) => {
+                   let targetButaca = this.butacas.findIndex(butaca => butaca.id === 3 );
+                   console.log("Target:"+targetButaca + " || "+ this.butacas[targetButaca].estado);
+                   this.butacas[targetButaca].estado = e.estado.estado;
+                    console.log("After:"+ this.butacas[targetButaca].estado);
+                });
         }
     }
 </script>
