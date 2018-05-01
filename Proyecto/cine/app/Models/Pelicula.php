@@ -12,22 +12,22 @@ class Pelicula extends Model
      * @var array
      */
     protected $fillable = [
-        'titulo', 'director', 'sinopsis', 'duracion', ' actores', 'cartel', 'genero_id', 'calificacion_edad_id',
+        'idtmdb', 'titulo', 'titulo_original', 'estreno', 'generos', 'director', 'actores', 'sinopsis', 'duracion', 'cartel'
     ];
 
     /**
      * Devuelve el género de la película.
      */
-    public function genero(){
+/*    public function genero(){
         return $this->belongsTo(Genero::class);
-    }
+    }*/
 
     /**
      * Devuelve la calificación de edad de la película.
      */
-    public function calificacion_edad(){
+/*    public function calificacion_edad(){
         return $this->belongsTo(CalificacionEdad::class);
-    }
+    }*/
 
     /**
      * Devuelve todas las reseñas de la película.

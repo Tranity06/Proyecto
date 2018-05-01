@@ -38,7 +38,8 @@
         $(document).ready(function(){
 
             $('.box-body').on('click','.buscar', function(){
-                var $titulo = $('#titulo').val().trim();
+                $('#err').slideUp();
+                var $titulo = $('#buscar_titulo').val().trim();
                 $('#resultado').children().remove();
 
                 var settings = {
@@ -93,6 +94,7 @@
             });
 
             $('#resultado').on('click', '.editar', function(){
+                $('#err').slideUp();
                 $idtmdb = $(this).next().val();
                 $('#resultado').children().remove();
 
@@ -128,6 +130,7 @@
                     actores = actores.join(', ');
 
                     var sinopsis = response['overview'];
+                    var duracion = response.runtime;
 
                     var $contenedor_datos = $('<dl id="datos-peli" class="dl-horizontal"></dl>');
                     var $titulo = $('<dt>Título</dt><dd id="titulo">'+titulo+'</dd>');
@@ -137,6 +140,7 @@
                     var $actores = $('<dt>Actores</dt><dd id="actores">'+actores+'</dd>');
                     var $sinopsis = $('<dt>Sinopsis</dt><dd id="sinopsis">'+sinopsis+'</dd>');
                     var $generos = $('<dt>Géneros</dt><dd id="generos">'+generos+'</dd>');
+                    var $duracion = $('<dt>Duración</dt><dd id="duracion">'+duracion+'</dd>');
                     var $idtmdb_hidden = $('<input type="hidden" name="idtmdb" id="idtmdb" value="'+$idtmdb+'"/>');
                     
                     $contenedor_datos.append($titulo);
@@ -146,6 +150,7 @@
                     $contenedor_datos.append($director);
                     $contenedor_datos.append($actores);
                     $contenedor_datos.append($sinopsis);
+                    $contenedor_datos.append($duracion);
                     $contenedor_datos.append($idtmdb_hidden);
 
                     var poster = response.poster_path;
@@ -162,17 +167,40 @@
             });
 
             $('#resultado').on('click', '.guardar', function(){
-                var $formulario = $('#formulario');
-                $formulario.append('<input type="text" name="idtmdb" value="'+$('#idtmdb').val()+'"/>');
-                $formulario.append('<input type="text" name="titulo" value="'+$('#titulo').val()+'"/>');
-                $formulario.append('<input type="text" name="titulo_original" value="'+$('#titulo_original').val()+'"/>');
-                $formulario.append('<input type="text" name="estreno" value="'+$('#estreno').val()+'"/>');
-                $formulario.append('<input type="text" name="generos" value="'+$('#generos').val()+'"/>');
-                $formulario.append('<input type="text" name="director" value="'+$('#director').val()+'"/>');
-                $formulario.append('<input type="text" name="actores" value="'+$('#actores').val()+'"/>');
-                $formulario.append('<input type="text" name="sinopsis" value="'+$('#sinopsis').val()+'"/>');
-                $formulario.submit();
-            })
+                $('#err').slideUp();
+                var $pelicula = $('#idtmdb').val();
+
+                $.ajaxSetup({
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                    });
+                $.ajax({
+                    url: '/pelicula/comprobar',
+                    type: 'POST',
+                    data: 'valor='+$pelicula,
+                    success: function(e){
+                        if ( e === 'existe'){
+                            $('#err').text("Esta película ya está registrada.");
+                            $('#err').slideDown();
+                        } else {
+                            var $formulario = $('#formulario');
+                            $('#form_idtmdb').val( $pelicula );
+                            $('#form_titulo').val( $('#titulo').text());
+                            $('#form_titulo_original').val( $('#titulo_original').text());
+                            $('#form_estreno').val( $('#estreno').text());
+                            $('#form_generos').val( $('#generos').text());
+                            $('#form_director').val( $('#director').text());
+                            $('#form_actores').val( $('#actores').text());
+                            $('#form_sinopsis').val( $('#sinopsis').text());
+                            $('#form_duracion').val( $('#duracion').text());
+                            $('#form_poster').val($('#poster').attr('src'));
+                            $formulario.submit();
+                        }
+                    },
+                    async: true,
+                });
+
+                
+            });
         });
     </script>
 @stop
@@ -192,14 +220,31 @@
             <h3 class="box-title">Registrar nueva película</h3>
         </div>
         <div class="box-body">
+            @if ( isset($pelicula) )
+                <div class="callout callout-success">
+                    <p>Pelicula registrada.</p>
+                </div>
+            @endif
             <p>Título de la película:</p>
             <div class="col-xs-4" id="buscar">
-                <input type="text" class="form-control input-sm" id="titulo"/>
+                <input type="text" class="form-control input-sm" id="buscar_titulo"/>
                 <input type="button" class="buscar sub btn btn-primary" value="Buscar"/>
             </div>
             <div id="resultado">
             </div>
+            <div id="err" class="callout callout-danger" hidden></div>
         </div>
     </div>
-    <form action="#" id="formulario" method="POST" hidden>{{ csrf_field() }}</form>
+    <form action=""{{ route('pelicula.crear') }}"" id="formulario" method="POST" hidden>{{ csrf_field() }}
+        <input type="text" id="form_idtmdb" name="idtmdb"/>
+        <input type="text" id="form_titulo" name="titulo"/>
+        <input type="text" id="form_titulo_original" name="titulo_original"/>
+        <input type="text" id="form_estreno" name="estreno"/>
+        <input type="text" id="form_generos" name="generos"/>
+        <input type="text" id="form_director" name="director"/>
+        <input type="text" id="form_actores" name="actores"/>
+        <input type="text" id="form_sinopsis" name="sinopsis"/>
+        <input type="text" id="form_duracion" name="duracion"/>
+        <input type="text" id="form_poster" name="poster"/>
+    </form>
 @stop

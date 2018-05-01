@@ -78,3 +78,6 @@ Route::get('/admin', 'Admin\Home@index');
    * Gstión PELÍCULAS
    */
   Route::get('pelicula/crear', 'PeliculaController@crear');
+  Route::post('pelicula/crear', 'PeliculaController@crearPost')->name('pelicula.crear');
+  Route::get('peliculas/mostrar', 'PeliculaController@mostrar');
+  Route::post('pelicula/comprobar', 'PeliculaController@comprobar');
