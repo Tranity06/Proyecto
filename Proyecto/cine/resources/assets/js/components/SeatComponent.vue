@@ -17,11 +17,14 @@
         <div class="screen"></div>
         <div class="seats-component">
             <div class="seat" v-for="butaca in butacas"
-                              @click="postEstadoButaca(butaca.id,butaca.estado)"
-                              :disabled="isDisabled(butaca.estado)"
-                              :class="getClass(butaca.estado)"></div>
+                 @click="postEstadoButaca(butaca.id,butaca.estado)"
+                 :class="getClass(butaca.estado)">
+            </div>
         </div>
-        <div class="buttons"></div>
+        <span class="has-text-centered is-size-3" v-if="total > 0">TOTAL: {{ total }}€</span>
+        <div class="buttons-component">
+            <a class="button is-warning is-rounded is-medium">PAGAR</a>
+        </div>
     </div>
 </template>
 
@@ -29,7 +32,8 @@
     export default {
         data() {
             return {
-               butacas: []
+               butacas: [],
+               total: 0
             }
         },
         methods: {
@@ -42,7 +46,16 @@
                         console.log(e);
                     })
             },
+            sumTotal: function (estado) {
+                if(estado == 0){
+                   this.total += 7;
+                }else {
+                   this.total -= 7;
+                }
+            },
             postEstadoButaca: function(id,estado){
+
+                this.sumTotal(estado);
 
                 let targetButaca= this.butacas.find(butaca => butaca.id == id);
                 targetButaca.estado = ((estado ===  0) ? 2 : 0);
@@ -54,9 +67,6 @@
                     .catch(e => {
                         console.log(e);
                     })
-            },
-            isDisabled(estado) {
-                return estado === 1 || estado === 3;
             },
             getClass(estado){
                 return {
@@ -109,6 +119,7 @@
 
     .ocupado {
         background-color: #4B4B5B;
+        pointer-events: none;
     }
 
     .reservado {
@@ -117,8 +128,8 @@
 
     .indisponible{
         background-color: red;
+        pointer-events: none;
     }
-
 
     .screen {
         margin: .8rem auto;
@@ -130,7 +141,22 @@
     }
 
     .seats-component {
+        width: 280px;
+        height: 270px;
         margin: 0 auto;
+    }
+
+    .buttons-component{
+        display: flex;
+        justify-content: center;
+    }
+
+    .button.is-rounded{
+        padding-left: 3em;
+        padding-right: 3em;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
     }
 
     /* The container */

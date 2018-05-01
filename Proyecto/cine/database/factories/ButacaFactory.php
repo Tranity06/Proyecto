@@ -11,7 +11,8 @@ $factory->define(App\Models\Butaca::class, function (Faker $faker) {
     return [
         'fila' => 1,
         'numero' => $number++,
-        'estado' => $faker->numberBetween(0,3),
-        'sala_id' => $salas[rand(0,(sizeof($salas)-1))],
+        'estado' => $faker->numberBetween(0,1),
+/*        'sala_id' => $salas[rand(0,(sizeof($salas)-1))],*/
+        'sala_id' => 1,
     ];
 });

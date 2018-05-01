@@ -12,6 +12,6 @@ class ButacaSeeder extends Seeder
      */
     public function run()
     {
-        factory(Butaca::class,100)->create();
+        factory(Butaca::class,63)->create();
     }
 }

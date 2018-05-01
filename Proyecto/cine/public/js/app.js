@@ -53014,7 +53014,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e]{\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n}\n.indisponible[data-v-21aac05e]{\n    background-color: red;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height:50px;\n    width:90%;\n    border: solid 5px #fadf98;\n    border-color:#fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    margin: 0 auto;\n}\n\n/* The container */\n.container[data-v-21aac05e] {\n    display: inline-block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 22px;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n\n/* Hide the browser's default checkbox */\n.container input[data-v-21aac05e] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-21aac05e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n}\n\n/* On mouse-over, add a grey background color */\n.container:hover input ~ .checkmark[data-v-21aac05e] {\n    background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\n.container input:checked ~ .checkmark[data-v-21aac05e] {\n    background-color: #2196F3;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-21aac05e]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n\n/* Show the checkmark when checked */\n.container input:checked ~ .checkmark[data-v-21aac05e]:after {\n    display: block;\n}\n\n/* Style the checkmark/indicator */\n.container .checkmark[data-v-21aac05e]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n", ""]);
+exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e]{\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n}\n.indisponible[data-v-21aac05e]{\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height:50px;\n    width:90%;\n    border: solid 5px #fadf98;\n    border-color:#fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n.buttons-component[data-v-21aac05e]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.button.is-rounded[data-v-21aac05e]{\n    padding-left: 3em;\n    padding-right: 3em;\n    color: white;\n    font-weight: bold;\n    font-size: 1.5rem;\n}\n\n/* The container */\n.container[data-v-21aac05e] {\n    display: inline-block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 22px;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n\n/* Hide the browser's default checkbox */\n.container input[data-v-21aac05e] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-21aac05e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n}\n\n/* On mouse-over, add a grey background color */\n.container:hover input ~ .checkmark[data-v-21aac05e] {\n    background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\n.container input:checked ~ .checkmark[data-v-21aac05e] {\n    background-color: #2196F3;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-21aac05e]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n\n/* Show the checkmark when checked */\n.container input:checked ~ .checkmark[data-v-21aac05e]:after {\n    display: block;\n}\n\n/* Style the checkmark/indicator */\n.container .checkmark[data-v-21aac05e]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n", ""]);
 
 // exports
 
@@ -53052,11 +53052,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            butacas: []
+            butacas: [],
+            total: 0
         };
     },
 
@@ -53070,7 +53074,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(e);
             });
         },
+        sumTotal: function sumTotal(estado) {
+            if (estado == 0) {
+                this.total += 7;
+            } else {
+                this.total -= 7;
+            }
+        },
         postEstadoButaca: function postEstadoButaca(id, estado) {
+
+            this.sumTotal(estado);
 
             var targetButaca = this.butacas.find(function (butaca) {
                 return butaca.id == id;
@@ -53082,9 +53095,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {}).catch(function (e) {
                 console.log(e);
             });
-        },
-        isDisabled: function isDisabled(estado) {
-            return estado === 1 || estado === 3;
         },
         getClass: function getClass(estado) {
             return {
@@ -53127,7 +53137,6 @@ var render = function() {
         return _c("div", {
           staticClass: "seat",
           class: _vm.getClass(butaca.estado),
-          attrs: { disabled: _vm.isDisabled(butaca.estado) },
           on: {
             click: function($event) {
               _vm.postEstadoButaca(butaca.id, butaca.estado)
@@ -53137,7 +53146,13 @@ var render = function() {
       })
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "buttons" })
+    _vm.total > 0
+      ? _c("span", { staticClass: "has-text-centered is-size-3" }, [
+          _vm._v("TOTAL: " + _vm._s(_vm.total) + "€")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
@@ -53162,6 +53177,16 @@ var staticRenderFns = [
         _c("div", { staticClass: "seat reservado" }),
         _vm._v(" "),
         _c("span", [_vm._v("Tus butacas")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "buttons-component" }, [
+      _c("a", { staticClass: "button is-warning is-rounded is-medium" }, [
+        _vm._v("PAGAR")
       ])
     ])
   }
