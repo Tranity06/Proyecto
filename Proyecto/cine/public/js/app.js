@@ -52765,7 +52765,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.showtime-form[data-v-0507cf9d]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    margin-top: 1rem;\n}\n", ""]);
 
 // exports
 
@@ -52820,6 +52820,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52856,16 +52870,22 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "select" }, [
-        _c(
-          "select",
-          { on: { change: _vm.mostrarAsientos } },
-          _vm._l(_vm.salas, function(sala) {
-            return _c("option", { domProps: { value: sala.id } }, [
-              _vm._v("Sala " + _vm._s(sala.id))
-            ])
-          })
-        )
+      _c("div", { staticClass: "showtime-form" }, [
+        _c("div", { staticClass: "select" }, [
+          _c(
+            "select",
+            { on: { change: _vm.mostrarAsientos } },
+            _vm._l(_vm.salas, function(sala) {
+              return _c("option", { domProps: { value: sala.id } }, [
+                _vm._v("Sala " + _vm._s(sala.id))
+              ])
+            })
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1)
       ]),
       _vm._v(" "),
       _c("seat-component", { ref: "butaca" })
@@ -52873,7 +52893,32 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "select" }, [
+      _c("select", [
+        _c("option", [_vm._v("25 Lunes")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("26 Martes")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "select" }, [
+      _c("select", [
+        _c("option", [_vm._v("13:21")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("15:22")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -52969,7 +53014,7 @@ exports = module.exports = __webpack_require__(12)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* The container */\n.container[data-v-21aac05e] {\n    display: inline-block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 22px;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n\n/* Hide the browser's default checkbox */\n.container input[data-v-21aac05e] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-21aac05e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n}\n.libre[data-v-21aac05e] {\n    background-color: #eee;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: black;\n}\n.reservado[data-v-21aac05e] {\n    background-color: aqua;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n}\n\n/* On mouse-over, add a grey background color */\n.container:hover input ~ .checkmark[data-v-21aac05e] {\n    background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\n.container input:checked ~ .checkmark[data-v-21aac05e] {\n    background-color: #2196F3;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-21aac05e]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n\n/* Show the checkmark when checked */\n.container input:checked ~ .checkmark[data-v-21aac05e]:after {\n    display: block;\n}\n\n/* Style the checkmark/indicator */\n.container .checkmark[data-v-21aac05e]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n", ""]);
+exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e]{\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n}\n.indisponible[data-v-21aac05e]{\n    background-color: red;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height:50px;\n    width:90%;\n    border: solid 5px #fadf98;\n    border-color:#fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    margin: 0 auto;\n}\n\n/* The container */\n.container[data-v-21aac05e] {\n    display: inline-block;\n    position: relative;\n    padding-left: 35px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 22px;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n\n/* Hide the browser's default checkbox */\n.container input[data-v-21aac05e] {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n}\n\n/* Create a custom checkbox */\n.checkmark[data-v-21aac05e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n}\n\n/* On mouse-over, add a grey background color */\n.container:hover input ~ .checkmark[data-v-21aac05e] {\n    background-color: #ccc;\n}\n\n/* When the checkbox is checked, add a blue background */\n.container input:checked ~ .checkmark[data-v-21aac05e] {\n    background-color: #2196F3;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark[data-v-21aac05e]:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n}\n\n/* Show the checkmark when checked */\n.container input:checked ~ .checkmark[data-v-21aac05e]:after {\n    display: block;\n}\n\n/* Style the checkmark/indicator */\n.container .checkmark[data-v-21aac05e]:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    transform: rotate(45deg);\n}\n", ""]);
 
 // exports
 
@@ -52980,6 +53025,24 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53008,7 +53071,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         postEstadoButaca: function postEstadoButaca(id, estado) {
-            //this.checkedButacas.message.push(estado);
+
+            var targetButaca = this.butacas.find(function (butaca) {
+                return butaca.id == id;
+            });
+            targetButaca.estado = estado === 0 ? 2 : 0;
+
             axios.post('http://localhost:8000/api/butaca/' + id, {
                 estado: estado === 0 ? 2 : 0
             }).then(function (response) {}).catch(function (e) {
@@ -53027,16 +53095,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
         }
     },
-    created: function created() {
+    mounted: function mounted() {
         var _this2 = this;
 
         Echo.channel('butaca').listen('ButacaEvent', function (e) {
-            var targetButaca = _this2.butacas.findIndex(function (butaca) {
-                return butaca.id === 3;
+            var targetButaca = _this2.butacas.find(function (butaca) {
+                return butaca.id == e.butacaId;
             });
-            console.log("Target:" + targetButaca + " || " + _this2.butacas[targetButaca].estado);
-            _this2.butacas[targetButaca].estado = e.estado.estado;
-            console.log("After:" + _this2.butacas[targetButaca].estado);
+            targetButaca.estado = e.estado.estado;
         });
     }
 });
@@ -53049,28 +53115,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.butacas, function(butaca) {
-      return _c("label", { staticClass: "container" }, [
-        _c("input", {
-          attrs: { type: "checkbox", disabled: _vm.isDisabled(butaca.estado) },
+  return _c("div", { staticClass: "bookingseats-form" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "screen" }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "seats-component" },
+      _vm._l(_vm.butacas, function(butaca) {
+        return _c("div", {
+          staticClass: "seat",
+          class: _vm.getClass(butaca.estado),
+          attrs: { disabled: _vm.isDisabled(butaca.estado) },
           on: {
             click: function($event) {
               _vm.postEstadoButaca(butaca.id, butaca.estado)
             }
           }
-        }),
-        _vm._v(" "),
-        _c("span", {
-          staticClass: "checkmark",
-          class: _vm.getClass(butaca.estado)
         })
-      ])
-    })
-  )
+      })
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "buttons" })
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "tipo" }, [
+        _c("div", { staticClass: "seat libre" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("Libres")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "tipo" }, [
+        _c("div", { staticClass: "seat ocupado" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("Ocupadas")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "tipo" }, [
+        _c("div", { staticClass: "seat reservado" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("Tus butacas")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

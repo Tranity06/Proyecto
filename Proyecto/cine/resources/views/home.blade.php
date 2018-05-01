@@ -1,6 +1,6 @@
 @extends('templates.default')
 
-@section('estilos')
+@section('header')
     <link href="{{ asset('css/home.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/slick/slick.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/slick/slick-theme.css') }}" media="all" rel="stylesheet" type="text/css" />

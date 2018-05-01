@@ -1,9 +1,27 @@
 <template>
-    <div>
-        <label class="container" v-for="butaca in butacas">
-            <input type="checkbox" @click="postEstadoButaca(butaca.id,butaca.estado)" :disabled="isDisabled(butaca.estado)">
-            <span class="checkmark" :class="getClass(butaca.estado)"></span>
-        </label>
+    <div class="bookingseats-form">
+        <div class="info">
+            <div class="tipo">
+                <div class="seat libre"></div>
+                <span>Libres</span>
+            </div>
+            <div class="tipo">
+                <div class="seat ocupado"></div>
+                <span>Ocupadas</span>
+            </div>
+            <div class="tipo">
+                <div class="seat reservado"></div>
+                <span>Tus butacas</span>
+            </div>
+        </div>
+        <div class="screen"></div>
+        <div class="seats-component">
+            <div class="seat" v-for="butaca in butacas"
+                              @click="postEstadoButaca(butaca.id,butaca.estado)"
+                              :disabled="isDisabled(butaca.estado)"
+                              :class="getClass(butaca.estado)"></div>
+        </div>
+        <div class="buttons"></div>
     </div>
 </template>
 
@@ -25,7 +43,10 @@
                     })
             },
             postEstadoButaca: function(id,estado){
-                //this.checkedButacas.message.push(estado);
+
+                let targetButaca= this.butacas.find(butaca => butaca.id == id);
+                targetButaca.estado = ((estado ===  0) ? 2 : 0);
+
                 axios.post(`http://localhost:8000/api/butaca/${id}`, {
                     estado: ((estado ===  0) ? 2 : 0)
                     })
@@ -44,21 +65,74 @@
                     'reservado': (estado === 2),
                     'indisponible': (estado === 3)
                 }
-            }
+            },
         },
-        created(){
+        mounted(){
             Echo.channel('butaca')
                 .listen('ButacaEvent', (e) => {
-                   let targetButaca = this.butacas.findIndex(butaca => butaca.id === 3 );
-                   console.log("Target:"+targetButaca + " || "+ this.butacas[targetButaca].estado);
-                   this.butacas[targetButaca].estado = e.estado.estado;
-                    console.log("After:"+ this.butacas[targetButaca].estado);
+                   let targetButaca= this.butacas.find(butaca => butaca.id == e.butacaId);
+                   targetButaca.estado = e.estado.estado;
                 });
         }
     }
 </script>
 
 <style scoped>
+
+    .bookingseats-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bookingseats-form > .info{
+        margin-top: .8rem;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .tipo {
+        display: flex;
+        align-items: center;
+    }
+
+    .seat {
+        display: inline-block;
+        height: 25px;
+        width: 25px;
+        border-radius: 20%;
+        margin: 0 .3rem;
+    }
+
+    .libre {
+        background-color: #E8E9EA;
+    }
+
+    .ocupado {
+        background-color: #4B4B5B;
+    }
+
+    .reservado {
+        background-color: #fadf98;
+    }
+
+    .indisponible{
+        background-color: red;
+    }
+
+
+    .screen {
+        margin: .8rem auto;
+        height:50px;
+        width:90%;
+        border: solid 5px #fadf98;
+        border-color:#fadf98 transparent transparent transparent;
+        border-radius: 50%/45px 45px 0 0;
+    }
+
+    .seats-component {
+        margin: 0 auto;
+    }
+
     /* The container */
     .container {
         display: inline-block;
@@ -87,22 +161,6 @@
         left: 0;
         height: 25px;
         width: 25px;
-    }
-
-    .libre {
-        background-color: #eee;
-    }
-
-    .ocupado {
-        background-color: black;
-    }
-
-    .reservado {
-        background-color: aqua;
-    }
-
-    .indisponible {
-        background-color: red;
     }
 
     /* On mouse-over, add a grey background color */

@@ -25,7 +25,7 @@ Route::get("/sala", function (){
 
 // Devuelve todas las butacas de una sala.
 Route::get("/butaca/{id}", function ($id){
-    return App\Models\Butaca::all()->where('sala_id',$id);
+    return App\Models\Butaca::all()->where('sala_id',$id)->values();
 });
 
 Route::post("/butaca/{id}", function (Request $request, $id){

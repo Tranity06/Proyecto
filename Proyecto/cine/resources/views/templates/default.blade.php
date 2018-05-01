@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="has-navbar-fixed-top">
-<body>
-    @include('templates.partials.navbar')
-    @yield('content')
-    @yield('javascript')
-    @include('templates.partials.footer')
-</body>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,9 +66,16 @@
             background-color: dodgerblue;
         }
 
+        .prueba {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+
 
     </style>
-    @yield('estilos')
+    @yield('header')
 
 
     <script>
@@ -104,6 +105,13 @@
 
         });
     </script>
-
 </head>
+<body>
+    @include('templates.partials.navbar')
+    <div class="prueba">
+        @yield('content')
+    </div>
+    @yield('javascript')
+    @include('templates.partials.footer')
+</body>
 </html>

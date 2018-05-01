@@ -1,9 +1,23 @@
 <template>
     <div>
-        <div class="select">
-            <select @change="mostrarAsientos">
-                <option v-for="sala in salas" :value="sala.id" >Sala {{ sala.id }}</option>
-            </select>
+        <div class="showtime-form">
+            <div class="select">
+                <select @change="mostrarAsientos">
+                    <option v-for="sala in salas" :value="sala.id" >Sala {{ sala.id }}</option>
+                </select>
+            </div>
+            <div class="select">
+                <select>
+                    <option>25 Lunes</option>
+                    <option>26 Martes</option>
+                </select>
+            </div>
+            <div class="select">
+                <select>
+                    <option>13:21</option>
+                    <option>15:22</option>
+                </select>
+            </div>
         </div>
         <seat-component ref="butaca"></seat-component>
     </div>
@@ -35,5 +49,9 @@
 </script>
 
 <style scoped>
-
+    .showtime-form{
+        display: flex;
+        justify-content: space-around;
+        margin-top: 1rem;
+    }
 </style>
