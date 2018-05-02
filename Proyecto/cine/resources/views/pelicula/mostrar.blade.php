@@ -1,7 +1,7 @@
 @extends('admin.home')
 
 @section('css')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link href="{{ asset('css/theme.blue.css') }}" rel="stylesheet">
     <style>
         p, .sub, .cambiar-pw {
@@ -33,6 +33,37 @@
                     theme: 'blue',
                     widgets: ['zebra']
                 });
+            });
+
+            $('.table').on('click', '.borrar', function(){
+                var $boton = $(this);
+                var $id= $boton.next().val();
+               // if (confirm("¿Seguro que quieres eliminar esta película?")){
+                    $.ajaxSetup({
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                    });
+                    $.ajax({
+                        url: '/peliculas/borrar',
+                        type: 'POST',
+                        data: 'id='+$id,
+                        success: function(e){
+                            if ( e === 'Borrado'){
+                                $boton.closest('tr')
+                                .children('td')
+                                .animate({ 
+                                    padding: 0
+                                })
+                                .wrapInner('<div/>')
+                                .children().slideUp(function () {
+                                    $(this).closest('tr').remove();
+                                });
+                            } else {
+                                console.log("Error");
+                            }
+                        },
+                        async: true,
+                    });
+               // }
             });
         });
     </script>
@@ -71,9 +102,6 @@
                                 <td> {{ $pelicula->estreno}} </td>
                                 <td> {{ $pelicula->duracion}} </td>
                                 <td> TODO </td>
-                            <!--    <td>
-                                    <button class="mostrarForm"><i class="glyphicon glyphicon-pencil"></i></button>
-                                </td> -->
                                 <td>
                                     <button class="borrar"><i class="fa fa-fw fa-trash-o"></i></button>
                                     <input type="hidden" name="id" value="{{ $pelicula->id }}"/>
@@ -84,57 +112,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="formDiv" hidden>
-        <form class="form" action="{{ route('admin.modificarPerfil') }}" method="post">
-            <input type="hidden" name="token" value="1"/>
-            <input type="hidden" name="id" id="id"/>
-                <div>
-                    <p>Nombre:</p>
-                    <div class="formularios">
-                        <div>
-                            <div class="col-xs-4">
-                                <input class="form-control input-sm" type="text" name="nombre"/>
-                                <div class="callout callout-danger" id="errornombre" hidden></div>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary cambiar">Aceptar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p>Email:</p>
-                    <div class="formularios">
-                        <div>
-                            <div class="col-xs-4">
-                                <input class="form-control input-sm" type="text" name="email" />
-                                <div class="callout callout-danger" id="erroremail" hidden></div>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary cambiar">Aceptar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p>Contraseña:</p>
-                    <div class="formularios">
-                        <div>
-                            <div class="col-xs-4">
-                                <input id="pw1" class="form-control input-sm" type="password" name="pw" />
-                                <input id="pw2" class="form-control input-sm" type="password"/>
-                                <div class="callout callout-danger" id="errorpw" hidden></div>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary cambiar-pw">Aceptar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="guardar sub btn btn-primary">Guardar cambios</button>
-                <span id="errguardar"></span>
-            {{ csrf_field() }}
-        </form>
     </div>
 @stop

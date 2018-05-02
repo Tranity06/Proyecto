@@ -25,6 +25,11 @@ class PeliculaController extends Controller
             return redirect('/admin');
         }
 
+        if ( $this->existe($request['idtmdb'])){
+            $repetida = true;
+            return view('pelicula.crear', compact('admin', 'repetida'));
+        }
+
         $pelicula = Pelicula::create([
             'idtmdb' => $request['idtmdb'],
             'titulo' => $request['titulo'],
@@ -52,7 +57,7 @@ class PeliculaController extends Controller
         return view('pelicula.mostrar', compact('admin', 'peliculas'));
     }
 
-    public function comprobar( Request $request){
+    public function borrar(Request $request){
         $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
 
         // Si no hay ningún usuario logueado regirige al login
@@ -60,10 +65,19 @@ class PeliculaController extends Controller
             return redirect('/admin');
         }
 
-        $pelicula = Pelicula::where('idtmdb', $request['valor'])->first();
-        if ( $pelicula == null ){
-            return "valido";
+        $pelicula = Pelicula::find($request['id']);
+        if( $pelicula == null ){
+            return "no borrado";
         }
-        return "existe";
+        $pelicula->delete();
+        return "Borrado";
+    }
+
+    private static function existe( $idtmdb ){
+        $pelicula = Pelicula::where('idtmdb', $idtmdb)->first();
+        if ( $pelicula == null ){
+            return false;
+        }
+        return true;
     }
 }

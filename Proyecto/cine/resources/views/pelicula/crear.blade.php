@@ -167,39 +167,18 @@
             });
 
             $('#resultado').on('click', '.guardar', function(){
-                $('#err').slideUp();
-                var $pelicula = $('#idtmdb').val();
-
-                $.ajaxSetup({
-                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-                    });
-                $.ajax({
-                    url: '/pelicula/comprobar',
-                    type: 'POST',
-                    data: 'valor='+$pelicula,
-                    success: function(e){
-                        if ( e === 'existe'){
-                            $('#err').text("Esta película ya está registrada.");
-                            $('#err').slideDown();
-                        } else {
-                            var $formulario = $('#formulario');
-                            $('#form_idtmdb').val( $pelicula );
-                            $('#form_titulo').val( $('#titulo').text());
-                            $('#form_titulo_original').val( $('#titulo_original').text());
-                            $('#form_estreno').val( $('#estreno').text());
-                            $('#form_generos').val( $('#generos').text());
-                            $('#form_director').val( $('#director').text());
-                            $('#form_actores').val( $('#actores').text());
-                            $('#form_sinopsis').val( $('#sinopsis').text());
-                            $('#form_duracion').val( $('#duracion').text());
-                            $('#form_poster').val($('#poster').attr('src'));
-                            $formulario.submit();
-                        }
-                    },
-                    async: true,
-                });
-
-                
+                var $formulario = $('#formulario');
+                $('#form_idtmdb').val( $('#idtmdb').val() );
+                $('#form_titulo').val( $('#titulo').text());
+                $('#form_titulo_original').val( $('#titulo_original').text());
+                $('#form_estreno').val( $('#estreno').text());
+                $('#form_generos').val( $('#generos').text());
+                $('#form_director').val( $('#director').text());
+                $('#form_actores').val( $('#actores').text());
+                $('#form_sinopsis').val( $('#sinopsis').text());
+                $('#form_duracion').val( $('#duracion').text());
+                $('#form_poster').val($('#poster').attr('src'));
+                $formulario.submit();
             });
         });
     </script>
@@ -222,7 +201,12 @@
         <div class="box-body">
             @if ( isset($pelicula) )
                 <div class="callout callout-success">
-                    <p>Pelicula registrada.</p>
+                    <p>Pelicula nueva registrada.</p>
+                </div>
+            @endif
+            @if ( isset($repetida) )
+                <div class="callout callout-danger">
+                    <p>La película ya estaba registrada en la base de datos.</p>
                 </div>
             @endif
             <p>Título de la película:</p>
@@ -231,8 +215,6 @@
                 <input type="button" class="buscar sub btn btn-primary" value="Buscar"/>
             </div>
             <div id="resultado">
-            </div>
-            <div id="err" class="callout callout-danger" hidden></div>
         </div>
     </div>
     <form action=""{{ route('pelicula.crear') }}"" id="formulario" method="POST" hidden>{{ csrf_field() }}

@@ -75,9 +75,9 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('admin/borrar', 'Admin\AdministradoresController@borrar');
 
   /**
-   * Gstión PELÍCULAS
+   * Gestión PELÍCULAS
    */
   Route::get('pelicula/crear', 'PeliculaController@crear');
   Route::post('pelicula/crear', 'PeliculaController@crearPost')->name('pelicula.crear');
   Route::get('peliculas/mostrar', 'PeliculaController@mostrar');
-  Route::post('pelicula/comprobar', 'PeliculaController@comprobar');
+  Route::post('peliculas/borrar', 'PeliculaController@borrar');

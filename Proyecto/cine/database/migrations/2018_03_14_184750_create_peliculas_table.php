@@ -23,8 +23,8 @@ class CreatePeliculasTable extends Migration
             $table->string('generos');
             $table->string('director');
             $table->string('actores');
-            $table->string('sinopsis', 800 );
-            $table->time('duracion');
+            $table->string('sinopsis', 800 )->nullable();
+            $table->unsignedInteger('duracion');
             $table->string('cartel');
             
             /*
