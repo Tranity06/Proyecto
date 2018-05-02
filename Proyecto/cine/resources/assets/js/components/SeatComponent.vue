@@ -32,6 +32,7 @@
             return {
                 butacas: [],
                 total: 0,
+                butacasNum: 0,
                 registration: {
                     sala: null,
                     dia: null,
@@ -50,10 +51,18 @@
                         console.log(e);
                     })
             },
+            getTotal: function(){
+              return this.total;
+            },
+            getButacas: function(){
+                return this.butacasNum;
+            },
             sumTotal: function (estado) {
                 if (estado == 0) {
+                    this.butacasNum += 1;
                     this.total += 7;
                 } else {
+                    this.butacasNum -= 1;
                     this.total -= 7;
                 }
             },

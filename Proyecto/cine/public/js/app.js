@@ -55543,20 +55543,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             salas: 0,
             salaTarget: 1,
-            fecha: '',
-            hora: '',
-            step: 1
+            dia: "25 Lunes",
+            hora: "15:22",
+            step: 1,
+            butacas: {
+                total: 0,
+                num: 0
+            }
         };
     },
 
     components: {
         PaymentComponent: __WEBPACK_IMPORTED_MODULE_0__PaymentComponent___default.a
     },
-    mounted: function mounted() {
+    created: function created() {
         var _this = this;
 
         axios.get('http://localhost:8000/api/sala').then(function (response) {
             _this.salas = response.data;
+
+            // Al obtener las salas tambien muestra por defecto las butacas de la primera sala
+            _this.mostrarAsientos(_this.salas[0].id);
         }).catch(function (e) {
             console.log(e);
         });
@@ -55568,11 +55575,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.step--;
         },
         next: function next() {
-            this.step++;
-        },
 
-        mostrarAsientos: function mostrarAsientos(event) {
-            this.$refs.butaca.getAllButacas(event.target.value);
+            var Validacion = this.$refs.butaca.getTotal() > 0;
+
+            if (Validacion) {
+                this.butacas.total = this.$refs.butaca.getTotal();
+                this.butacas.num = this.$refs.butaca.getButacas();
+                this.step++;
+            } else {
+                alert("JAJAJA NO :D");
+            }
+        },
+        mostrarAsientos: function mostrarAsientos(id) {
+            this.$refs.butaca.getAllButacas(id);
         }
     }
 });
@@ -55603,7 +55618,36 @@ var render = function() {
           _c("div", { staticClass: "select" }, [
             _c(
               "select",
-              { on: { change: _vm.mostrarAsientos } },
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.salaTarget,
+                    expression: "salaTarget"
+                  }
+                ],
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.salaTarget = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      _vm.mostrarAsientos(_vm.salaTarget)
+                    }
+                  ]
+                }
+              },
               _vm._l(_vm.salas, function(sala) {
                 return _c("option", { domProps: { value: sala.id } }, [
                   _vm._v("Sala " + _vm._s(sala.id))
@@ -55612,9 +55656,81 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "select" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.dia,
+                    expression: "dia"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.dia = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "25 Lunes" } }, [
+                  _vm._v("25 Lunes")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "26 Martes" } }, [
+                  _vm._v("26 Martes")
+                ])
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "select" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.hora,
+                    expression: "hora"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.hora = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "13:21" } }, [_vm._v("13:21")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "15:22" } }, [_vm._v("15:22")])
+              ]
+            )
+          ])
         ]),
         _vm._v(" "),
         _c("seat-component", { ref: "butaca" }),
@@ -55654,7 +55770,7 @@ var render = function() {
         _c("div", { staticClass: "columns" }, [
           _c("div", { staticClass: "column" }, [
             _c("section", { staticClass: "panel-moderno" }, [
-              _vm._m(2),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "cuerpo" }, [
                 _c("img", {
@@ -55675,27 +55791,27 @@ var render = function() {
                   _vm._v(" "),
                   _c("span", { staticClass: "has-text-grey-light is-size-7" }, [
                     _vm._v(
-                      _vm._s(_vm.fecha) +
-                        ", " +
-                        _vm._s(_vm.hora) +
-                        " Sala " +
-                        _vm._s(_vm.salaTarget)
+                      _vm._s(
+                        _vm.dia + "," + _vm.hora + " Sala " + _vm.salaTarget
+                      )
                     )
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "has-text-grey-light is-size-7" }, [
-                    _vm._v(" entradas")
+                    _vm._v(" " + _vm._s(_vm.butacas.num) + " entradas")
                   ])
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "precio has-text-weight-bold" }, [
-                  _vm._v("€")
+                  _vm._v(_vm._s(_vm.butacas.total) + "€")
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "abajo has-text-weight-bold" }, [
                 _vm._v(
-                  "\n                        Total: 13€\n                    "
+                  "\n                        Total: " +
+                    _vm._s(_vm.butacas.total) +
+                    "€\n                    "
                 )
               ])
             ])
@@ -55744,30 +55860,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "select" }, [
-      _c("select", [
-        _c("option", { attrs: { value: "25 Lunes" } }, [_vm._v("25 Lunes")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "26 Martes" } }, [_vm._v("26 Martes")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "select" }, [
-      _c("select", [
-        _c("option", { attrs: { value: "13:21" } }, [_vm._v("13:21")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "15:22" } }, [_vm._v("15:22")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -55919,6 +56011,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             butacas: [],
             total: 0,
+            butacasNum: 0,
             registration: {
                 sala: null,
                 dia: null,
@@ -55938,10 +56031,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(e);
             });
         },
+        getTotal: function getTotal() {
+            return this.total;
+        },
+        getButacas: function getButacas() {
+            return this.butacasNum;
+        },
         sumTotal: function sumTotal(estado) {
             if (estado == 0) {
+                this.butacasNum += 1;
                 this.total += 7;
             } else {
+                this.butacasNum -= 1;
                 this.total -= 7;
             }
         },

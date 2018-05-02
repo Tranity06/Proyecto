@@ -3,18 +3,18 @@
         <div v-show="step === 1">
             <div class="showtime-form">
                 <div class="select">
-                    <select @change="mostrarAsientos">
+                    <select @change="mostrarAsientos(salaTarget)" v-model="salaTarget">
                         <option v-for="sala in salas" :value="sala.id">Sala {{ sala.id }}</option>
                     </select>
                 </div>
                 <div class="select">
-                    <select>
+                    <select v-model="dia">
                         <option value="25 Lunes">25 Lunes</option>
                         <option value="26 Martes">26 Martes</option>
                     </select>
                 </div>
                 <div class="select">
-                    <select>
+                    <select v-model="hora">
                         <option value="13:21">13:21</option>
                         <option value="15:22">15:22</option>
                     </select>
@@ -37,13 +37,13 @@
                             <img src="avengers.jpg" alt="" width="55" height="74">
                             <div class="informacion">
                                 <span class="has-text-weight-bold is-size-6">Vengadores: Infinity War</span>
-                                <span class="has-text-grey-light is-size-7">{{fecha}}, {{hora}} Sala {{salaTarget}}</span>
-                                <span class="has-text-grey-light is-size-7"> entradas</span>
+                                <span class="has-text-grey-light is-size-7">{{ dia + "," + hora + " Sala " + salaTarget}}</span>
+                                <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
                             </div>
-                            <span class="precio has-text-weight-bold">€</span>
+                            <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
                         </div>
                         <div class="abajo has-text-weight-bold">
-                            Total: 13€
+                            Total: {{ butacas.total }}€
                         </div>
                     </section>
                 </div>
@@ -71,18 +71,25 @@
             return {
                 salas: 0,
                 salaTarget: 1,
-                fecha: '',
-                hora: '',
+                dia: "25 Lunes",
+                hora: "15:22",
                 step: 1,
+                butacas: {
+                    total: 0,
+                    num: 0
+                }
             }
         },
         components: {
             PaymentComponent
         },
-        mounted() {
+        created() {
             axios.get('http://localhost:8000/api/sala')
                 .then(response => {
                     this.salas = response.data;
+
+                    // Al obtener las salas tambien muestra por defecto las butacas de la primera sala
+                    this.mostrarAsientos(this.salas[0].id);
                 })
                 .catch(e => {
                     console.log(e);
@@ -94,10 +101,21 @@
                 this.step--;
             },
             next() {
-                this.step++;
+
+                let Validacion = this.$refs.butaca.getTotal() > 0;
+
+                if (Validacion) {
+                    this.butacas.total = this.$refs.butaca.getTotal();
+                    this.butacas.num = this.$refs.butaca.getButacas();
+                    this.step++;
+                }else{
+                    alert("JAJAJA NO :D");
+                }
+
+
             },
-            mostrarAsientos: function (event) {
-                this.$refs.butaca.getAllButacas(event.target.value);
+            mostrarAsientos(id) {
+                this.$refs.butaca.getAllButacas(id);
             }
         }
     }

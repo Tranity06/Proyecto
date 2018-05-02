@@ -86,7 +86,7 @@
                             <div class="pelicula-opciones">
                                 <div class="buttons">
                                     <a class="button is-link">Más</a>
-                                    <a class="button is-link">Comprar entrada</a>
+                                    <a href="{{ route('comprarentrada') }}" class="button is-link">Comprar entrada</a>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                             <div class="pelicula-opciones">
                                 <div class="buttons">
                                     <a class="button is-link">Más</a>
-                                    <a class="button is-link">Comprar entrada</a>
+                                    <a href="{{ route('comprarentrada') }}" class="button is-link">Comprar entrada</a>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                             <div class="pelicula-opciones">
                                 <div class="buttons">
                                     <a class="button is-link">Más</a>
-                                    <a class="button is-link">Comprar entrada</a>
+                                    <a href="{{ route('comprarentrada') }}" class="button is-link">Comprar entrada</a>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                             <div class="pelicula-opciones">
                                 <div class="buttons">
                                     <a class="button is-link">Más</a>
-                                    <a class="button is-link">Comprar entrada</a>
+                                    <a href="{{ route('comprarentrada') }}" class="button is-link">Comprar entrada</a>
                                 </div>
                             </div>
                         </div>

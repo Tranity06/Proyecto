@@ -51,7 +51,7 @@ Route::get('/verify/{token}','VerifyController@verify')->name('verify');
  * Comprar entrada
  */
 
-Route::get('/entrada','EntradaController@index');
+Route::get('/entrada','EntradaController@index')->name('comprarentrada');
 
 /**
  * SPA
