@@ -1,42 +1,92 @@
 <template>
-    <div class="bookingseats-form">
-        <div class="info">
-            <div class="tipo">
-                <div class="seat libre"></div>
-                <span>Libres</span>
-            </div>
-            <div class="tipo">
-                <div class="seat ocupado"></div>
-                <span>Ocupadas</span>
-            </div>
-            <div class="tipo">
-                <div class="seat reservado"></div>
-                <span>Tus butacas</span>
+    <form action="" method="post">
+        <div v-show="step === 1">
+            <div class="bookingseats-form">
+                <div class="info">
+                    <div class="tipo">
+                        <div class="seat libre"></div>
+                        <span>Libres</span>
+                    </div>
+                    <div class="tipo">
+                        <div class="seat ocupado"></div>
+                        <span>Ocupadas</span>
+                    </div>
+                    <div class="tipo">
+                        <div class="seat reservado"></div>
+                        <span>Tus butacas</span>
+                    </div>
+                </div>
+                <div class="screen"></div>
+                <div class="seats-component">
+                    <div class="seat" v-for="butaca in butacas"
+                         @click="postEstadoButaca(butaca.id,butaca.estado)"
+                         :class="getClass(butaca.estado)">
+                    </div>
+                </div>
+                <span class="has-text-centered is-size-3" v-if="total > 0">TOTAL: {{ total }}€</span>
+                <div class="buttons-component">
+                    <button @click.prevent="next()" class="button is-rounded is-warning">Pagar</button>
+                </div>
             </div>
         </div>
-        <div class="screen"></div>
-        <div class="seats-component">
-            <div class="seat" v-for="butaca in butacas"
-                 @click="postEstadoButaca(butaca.id,butaca.estado)"
-                 :class="getClass(butaca.estado)">
+        <div v-show="step === 2">
+                <span class="title">Completa tu compra</span>
+                <section class="panel-moderno">
+                    <div class="encabezado">
+                        <span>Producto</span>
+                        <span>Precio</span>
+                    </div>
+                    <div class="cuerpo">
+                        <img src="avengers.jpg" alt="" width="55" height="74">
+                        <div class="informacion">
+                            <span class="has-text-weight-bold is-size-6">Vengadores: Infinity War</span>
+                            <span class="has-text-grey-light is-size-7">21 Mayo, 19:50 Sala 2</span>
+                            <span class="has-text-grey-light is-size-7">4 entradas</span>
+                        </div>
+                        <span class="precio has-text-weight-bold">14.00€</span>
+                    </div>
+                    <div class="abajo has-text-weight-bold">
+                        Total: 13€
+                    </div>
+                </section>
+
+                <payment-component></payment-component>
             </div>
-        </div>
-        <span class="has-text-centered is-size-3" v-if="total > 0">TOTAL: {{ total }}€</span>
-        <div class="buttons-component">
-            <a class="button is-warning is-rounded is-medium">PAGAR</a>
-        </div>
-    </div>
+            <button @click.prevent="prev()" class="button is-rounded is-warning">Volver</button>
+    </form>
 </template>
 
 <script>
+
+    import PaymentComponent from './PaymentComponent';
+
     export default {
         data() {
             return {
                butacas: [],
-               total: 0
+               total: 0,
+               step:1,
+                registration:{
+                    name:null,
+                    email:null,
+                    street:null,
+                    city:null,
+                    state:null,
+                    numtickets:0,
+                    shirtsize:'XL'
+                }
             }
         },
+        components: {
+          PaymentComponent
+        },
         methods: {
+            prev() {
+                this.step--;
+            },
+            next() {
+                this.step++;
+            },
             getAllButacas: function (id) {
                 axios.get(`http://localhost:8000/api/butaca/${id}`)
                     .then(response => {
@@ -88,6 +138,51 @@
 </script>
 
 <style scoped>
+
+    .precio{
+        justify-self: end;
+        margin-left: auto;
+    }
+
+    .panel-moderno {
+        display: flex;
+        flex-direction: column;
+        max-width: 350px;
+        margin: 1rem 0;
+
+        border-radius: 2%;
+        background-color: white;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        overflow: hidden;
+    }
+
+    .panel-moderno > .encabezado {
+        display: flex;
+        justify-content: space-between;
+        background-color: #F6F5F3;
+        padding: .5rem;
+    }
+
+    .panel-moderno > .cuerpo {
+        display: flex;
+        align-items: center;
+        margin: .5rem .5rem;
+    }
+
+    .cuerpo > .informacion {
+        margin-left: .5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .panel-moderno > .abajo {
+        margin: 0 .5rem;
+        padding: .5rem;
+        display: flex;
+        justify-content: flex-end;
+        border-top: 2px solid #F6F5F3;
+    }
+
 
     .bookingseats-form {
         display: flex;

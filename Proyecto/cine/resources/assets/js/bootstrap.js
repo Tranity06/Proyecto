@@ -54,5 +54,3 @@ window.Echo = new Echo({
     cluster: 'eu',
     encrypted: true
 });
-
-console.log(process.env.MIX_PUSHER_APP_CLUSTER);

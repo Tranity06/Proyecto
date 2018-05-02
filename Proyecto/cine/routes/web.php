@@ -54,6 +54,14 @@ Route::get('/verify/{token}','VerifyController@verify')->name('verify');
 Route::get('/entrada','EntradaController@index');
 
 /**
+ * SPA
+ */
+
+Route::get('/spa',function (){
+    return view('spa');
+});
+
+/**
  * Authentication ADMIN
  */
 
