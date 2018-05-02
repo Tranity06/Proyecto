@@ -1,37 +1,85 @@
 <template>
     <div>
-        <div class="showtime-form">
-            <div class="select">
-                <select @change="mostrarAsientos">
-                    <option v-for="sala in salas" :value="sala.id" >Sala {{ sala.id }}</option>
-                </select>
+        <div v-show="step === 1">
+            <div class="showtime-form">
+                <div class="select">
+                    <select @change="mostrarAsientos">
+                        <option v-for="sala in salas" :value="sala.id">Sala {{ sala.id }}</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select>
+                        <option value="25 Lunes">25 Lunes</option>
+                        <option value="26 Martes">26 Martes</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select>
+                        <option value="13:21">13:21</option>
+                        <option value="15:22">15:22</option>
+                    </select>
+                </div>
             </div>
-            <div class="select">
-                <select>
-                    <option>25 Lunes</option>
-                    <option>26 Martes</option>
-                </select>
-            </div>
-            <div class="select">
-                <select>
-                    <option>13:21</option>
-                    <option>15:22</option>
-                </select>
+            <seat-component ref="butaca"></seat-component>
+            <div class="buttons-component">
+                <button @click.prevent="next()" class="button is-rounded is-warning grande">Pagar</button>
             </div>
         </div>
-        <seat-component ref="butaca"></seat-component>
+        <div v-show="step === 2">
+            <div class="columns">
+                <div class="column">
+                    <section class="panel-moderno">
+                        <div class="encabezado">
+                            <span>Producto</span>
+                            <span>Precio</span>
+                        </div>
+                        <div class="cuerpo">
+                            <img src="avengers.jpg" alt="" width="55" height="74">
+                            <div class="informacion">
+                                <span class="has-text-weight-bold is-size-6">Vengadores: Infinity War</span>
+                                <span class="has-text-grey-light is-size-7">{{fecha}}, {{hora}} Sala {{salaTarget}}</span>
+                                <span class="has-text-grey-light is-size-7"> entradas</span>
+                            </div>
+                            <span class="precio has-text-weight-bold">€</span>
+                        </div>
+                        <div class="abajo has-text-weight-bold">
+                            Total: 13€
+                        </div>
+                    </section>
+                </div>
+                <div class="column">
+                    <payment-component></payment-component>
+                </div>
+            </div>
+            <div class="buttons-component">
+                <button @click.prevent="prev()" class="button is-rounded is-warning normal">Volver</button>
+                <button @click.prevent="confirmarPago()" class="button is-rounded is-warning normal"><i
+                        class="fas fa-lock" style="margin-right: .5rem"></i> Confirmar y pagar
+                </button>
+            </div>
+
+        </div>
+
     </div>
 </template>
 
 <script>
 
+    import PaymentComponent from './PaymentComponent';
     export default {
         data() {
             return {
-                salas: 0
+                salas: 0,
+                salaTarget: 1,
+                fecha: '',
+                hora: '',
+                step: 1,
             }
         },
-        created() {
+        components: {
+            PaymentComponent
+        },
+        mounted() {
             axios.get('http://localhost:8000/api/sala')
                 .then(response => {
                     this.salas = response.data;
@@ -40,7 +88,14 @@
                     console.log(e);
                 })
         },
+
         methods: {
+            prev() {
+                this.step--;
+            },
+            next() {
+                this.step++;
+            },
             mostrarAsientos: function (event) {
                 this.$refs.butaca.getAllButacas(event.target.value);
             }
@@ -49,9 +104,81 @@
 </script>
 
 <style scoped>
-    .showtime-form{
+    .showtime-form {
         display: flex;
         justify-content: space-around;
         margin-top: 1rem;
     }
+
+/* Panel Moderno */
+    .precio {
+        justify-self: end;
+        margin-left: auto;
+    }
+
+    .panel-moderno {
+        display: flex;
+        flex-direction: column;
+        max-width: 350px;
+        margin: 1rem 0;
+
+        border-radius: 2%;
+        background-color: white;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        overflow: hidden;
+    }
+
+    .panel-moderno > .encabezado {
+        display: flex;
+        justify-content: space-between;
+        background-color: #F6F5F3;
+        padding: .5rem;
+    }
+
+    .panel-moderno > .cuerpo {
+        display: flex;
+        align-items: center;
+        margin: .5rem .5rem;
+    }
+
+    .cuerpo > .informacion {
+        margin-left: .5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .panel-moderno > .abajo {
+        margin: 0 .5rem;
+        padding: .5rem;
+        display: flex;
+        justify-content: flex-end;
+        border-top: 2px solid #F6F5F3;
+    }
+
+    /* Buttons component */
+
+    .buttons-component {
+        display: flex;
+        justify-content: center;
+        margin-bottom: .5rem;
+    }
+
+    .grande {
+        padding-left: 3em;
+        padding-right: 3em;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .normal {
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+        color: white;
+        font-weight: bold;
+        font-size: 1em;
+        margin-left: .5rem;
+    }
+
+
 </style>

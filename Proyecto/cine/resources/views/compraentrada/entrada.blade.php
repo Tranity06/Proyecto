@@ -5,11 +5,13 @@
 @stop
 
 @section('content')
-    <div id="app">
-        <entrada-component></entrada-component>
+    <div class="container">
+        <div id="app">
+            <entrada-component></entrada-component>
+        </div>
     </div>
 @stop
 
 @section('javascript')
-    <script src="js/app.js"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 @stop
