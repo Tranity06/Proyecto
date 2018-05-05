@@ -12,7 +12,7 @@ class Pelicula extends Model
      * @var array
      */
     protected $fillable = [
-        'idtmdb', 'titulo', 'titulo_original', 'estreno', 'generos', 'director', 'actores', 'sinopsis', 'duracion', 'cartel'
+        'idtmdb', 'titulo', 'titulo_original', 'estreno', 'generos', 'director', 'actores', 'sinopsis', 'duracion', 'cartel', 'trailer'
     ];
 
     /**

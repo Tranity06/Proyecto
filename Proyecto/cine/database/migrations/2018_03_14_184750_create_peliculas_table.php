@@ -19,13 +19,14 @@ class CreatePeliculasTable extends Migration
             $table->unsignedInteger('idtmdb');
             $table->string('titulo');
             $table->string('titulo_original');
-            $table->date('estreno');
-            $table->string('generos');
-            $table->string('director');
-            $table->string('actores');
+            $table->date('estreno')->nullable();
+            $table->string('generos')->nullable();
+            $table->string('director')->nullable();
+            $table->string('actores')->nullable();
             $table->string('sinopsis', 800 )->nullable();
             $table->unsignedInteger('duracion');
-            $table->string('cartel');
+            $table->string('cartel')->nullable();
+            $table->string('trailer')->nullable();
             
             /*
             //Clave foránea GENEROS.

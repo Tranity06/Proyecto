@@ -101,7 +101,7 @@
                 var settings = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "https://api.themoviedb.org/3/movie/"+$idtmdb+"?language=es&api_key=0e46a63ca778de097560700378c1c185&append_to_response=credits",
+                    "url": "https://api.themoviedb.org/3/movie/"+$idtmdb+"?language=es&api_key=0e46a63ca778de097560700378c1c185&append_to_response=credits,videos",
                     "method": "GET",
                     "headers": {},
                     "data": "{}"
@@ -156,6 +156,9 @@
                     var poster = response.poster_path;
                     var $poster = $('<img id="poster" src="https://image.tmdb.org/t/p/w500'+poster+'" alt="Póster de la película película" width="200">');
 
+                    var trailer = response.poster_path;
+                    var $poster = $('<img id="poster" src="https://image.tmdb.org/t/p/w500'+poster+'" alt="Póster de la película película" width="200">');
+
                     var $atras = $('<input type="button" class="buscar sub btn btn-primary" value="Volver a la lista"/>');
                     var $guardar = $('<input type="button" class="guardar sub btn btn-primary" id="guardar" value="Guardar"/>');
 
@@ -163,6 +166,8 @@
                     $('#resultado').append($contenedor_datos);
                     $('#resultado').append($atras);
                     $('#resultado').append($guardar);
+
+                    $('#form_trailer').val( 'https://www.youtube.com/watch?v='+response.videos.results[0]['key'] );
                 });
             });
 
@@ -175,7 +180,7 @@
                 $('#form_generos').val( $('#generos').text());
                 $('#form_director').val( $('#director').text());
                 $('#form_actores').val( $('#actores').text());
-                $('#form_sinopsis').val( $('#sinopsis').text());
+                $('#form_sinopsis').val( $('#sinopsis').text());form_trailer
                 $('#form_duracion').val( $('#duracion').text());
                 $('#form_poster').val($('#poster').attr('src'));
                 $formulario.submit();
@@ -227,6 +232,7 @@
         <input type="text" id="form_actores" name="actores"/>
         <input type="text" id="form_sinopsis" name="sinopsis"/>
         <input type="text" id="form_duracion" name="duracion"/>
+        <input type="text" id="form_trailer" name="trailer"/>
         <input type="text" id="form_poster" name="poster"/>
     </form>
 @stop

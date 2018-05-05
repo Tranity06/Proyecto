@@ -40,7 +40,8 @@ class PeliculaController extends Controller
             'actores' => $request['actores'],
             'sinopsis' => $request['sinopsis'],
             'duracion' => $request['duracion'],
-            'cartel' => $request['poster']
+            'cartel' => $request['poster'],
+            'trailer' => $request['trailer']
         ]);
         return view('pelicula.crear', compact('admin', 'pelicula'));
     }
