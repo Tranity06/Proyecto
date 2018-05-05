@@ -143,7 +143,7 @@ return [
             ]
         ],
         [
-            'text'       => 'Salas',
+            'text'       => 'Sala',
             'url'  => '#',
         ],
         [
