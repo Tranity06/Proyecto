@@ -81,4 +81,27 @@ class PeliculaController extends Controller
         }
         return true;
     }
+
+
+    /**
+     * API
+     */
+
+    public function getAll(){
+        $peliculas = Pelicula::all();
+
+        foreach ( $peliculas as $pelicula ){
+            $pelicula['resenas'] = $pelicula->resenas();
+            $pelicula['sesiones'] = $pelicula->sesiones();
+        }
+
+        return $peliculas;
+    }
+
+    public function getOne($idPelicula){
+        $pelicula = Pelicula::find($idPelicula);
+        $pelicula['resenas'] = $pelicula->resenas();
+        $pelicula['sesiones'] = $pelicula->sesiones();
+        return $pelicula;
+    }
 }
