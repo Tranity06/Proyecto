@@ -17,11 +17,15 @@ class CreatePeliculasTable extends Migration
         Schema::create('peliculas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo');
-            $table->string('director'); //FK si se crea tabla directores
-            $table->string('sinopsis');
-            $table->time('duracion');
-            $table->string('actores'); //FK si se crea tabla actores
-            $table->string('cartel');
+            $table->string('titulo_original');
+            $table->date('estreno')->nullable();
+            $table->string('generos')->nullable();
+            $table->string('director')->nullable();
+            $table->string('actores')->nullable();
+            $table->string('sinopsis', 800 )->nullable();
+            $table->unsignedInteger('duracion');
+            $table->string('cartel')->nullable();
+            $table->string('trailer')->nullable();
             
             //Clave foránea GENEROS.
             $table->unsignedInteger('genero_id');
