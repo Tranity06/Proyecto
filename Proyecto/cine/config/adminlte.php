@@ -164,10 +164,18 @@ return [
                     ],
                 ],
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],*/
-            ],
+                    'text' => 'Ver todas',
+                    'url'  => 'peliculas/mostrar',
+                ],
+            ]
+        ],
+        [
+            'text'       => 'Sala',
+            'url'  => '#',
+        ],
+        [
+            'text'       => 'Sesiones',
+            'url'  => '#',
         ],
         'LABELS',
         [
