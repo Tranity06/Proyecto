@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
+//https://medium.com/@mosesesan/tutorial-5-how-to-build-a-laravel-5-4-jwt-authentication-api-with-e-mail-verification-61d3f356f823
+
 use JWTAuth;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Validator, DB, Hash, Mail;
 use Illuminate\Support\Facades\Password;
@@ -114,8 +117,11 @@ class APIAuthController extends Controller
             // something went wrong whilst attempting to encode the token
             return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
         }
-        // all good so return the token
-        return response()->json(['success' => true, 'data' => ['token' => $token]]);
+        $response = compact('token');
+        $response['success'] = true;
+        $response['user']= Auth::user();
+        //return response()->json(['success' => true, 'data' => ['token' => $token]]);
+        return response()->json($response);
     }
 
     /**

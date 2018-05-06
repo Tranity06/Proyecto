@@ -1,0 +1,98 @@
+<template>
+    <nav class="navbar is-fixed-top">
+        <div class="container">
+            <div class="navbar-brand">
+                <router-link class="navbar-item" :to="{ name: 'home' }">
+                    <div class="logo-container">
+                        <img src="48px.png" alt="Logo">
+                        <span>Palomitas time</span>
+                    </div>
+                </router-link>
+                <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroA" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item is-active">
+                        Películas
+                    </a>
+                    <a class="navbar-item">
+                        Restaurante
+                    </a>
+                    <a class="navbar-item">
+                        Acerca de
+                    </a>
+                    <span class="navbar-item navbar-item-end">
+                        <div class="user-login" v-if="StoreStateEnabled">
+                          <i class="fas fa-shopping-cart fa-sm carta"></i>
+                          <div class="dropdown is-hoverable">
+                              <div class="dropdown-trigger">
+                                  <img class="avatar"
+                                       :src="'uploads/avatars/'+avatar"
+                                       aria-haspopup="true" aria-controls="dropdown-menu">
+                              </div>
+                              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <router-link class="dropdown-item" :to="{ name: 'profile' }">
+                                        Perfil
+                                    </router-link>
+                                  <a class="dropdown-item">No se que mas</a>
+                                  <hr class="dropdown-divider">
+                                  <a class="dropdown-item is-link" @click="Logout">
+                                     Salir
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div v-if="!StoreStateEnabled">
+                            <router-link class="button is-primary" :to="{ name: 'login' }">
+                                <div class="logo-container">
+                                    <span>Entrar</span>
+                                </div>
+                            </router-link>
+                            <a href="http://www.facebook.com" class="centeredIcon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</template>
+
+<script>
+    import store from '../store';
+
+    export default {
+        name: "navbar-component",
+        data() {
+            return {
+                avatar: ''
+            }
+        },
+        computed: {
+            StoreStateEnabled() {
+                return store.state.isLoggedIn;
+            }
+        },
+        mounted() {
+            this.avatar = JSON.parse(localStorage.getItem('user')).avatar;
+        },
+        methods: {
+            Logout() {
+                localStorage.removeItem('token');
+                store.commit('logoutUser');
+                this.$router.push({ name: 'home' });
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

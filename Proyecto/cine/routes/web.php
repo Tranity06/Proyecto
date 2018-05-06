@@ -17,19 +17,15 @@ use App\Http\Controllers\Admin\Home;  //Posible quitar parte Home?
 /**
  * HOME
  */
-
-Auth::routes();
-Route::get('/','HomeController@index')->name('home');
+Route::get('/',function (){
+    return view('vuehome');
+})->name('home');
 
 Route::get('user/verify/{verification_code}', 'APIAuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
-/**
- * Authentication USER
- */
-
-Route::get('/signup','AuthController@getSignup')->name('auth.signup');
+/*Route::get('/signup','AuthController@getSignup')->name('auth.signup');
 
 Route::post('/signup','AuthController@postSignup');
 
@@ -42,7 +38,7 @@ Route::get('/logout','AuthController@getLogout')->name('auth.logout');
 
 Route::get('/profile', 'AuthController@profile')->name('auth.profile');
 
-Route::post('/profile', 'AuthController@update_avatar');
+Route::post('/profile', 'AuthController@update_avatar');*/
 
 /**
  * Verificar cuenta

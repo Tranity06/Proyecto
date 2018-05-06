@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('register', 'APIAuthController@register');
-Route::post('login', 'APIAuthController@login');
-Route::post('recover', 'APIAuthController@recover');
+Route::post('/register', 'APIAuthController@register');
+Route::post('/login', 'APIAuthController@login');
+Route::post('/recover', 'APIAuthController@recover');
 
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('logout', 'APIAuthController@logout');
