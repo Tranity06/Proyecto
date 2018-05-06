@@ -2,6 +2,7 @@
 
 use App\Models\Butaca;
 use Illuminate\Database\Seeder;
+use App\Models\Sala;
 
 class ButacaSeeder extends Seeder
 {
@@ -12,6 +13,19 @@ class ButacaSeeder extends Seeder
      */
     public function run()
     {
-        factory(Butaca::class,63)->create();
+        $salas = Sala::all();
+
+        foreach ($salas as $sala){
+            for ( $fila=1 ; $fila<=6 ; $fila++ ){
+                for ( $butaca=1 ; $butaca<=10 ; $butaca++ ){
+                    Butaca::create([
+                        'fila' => $fila,
+                        'numero' => $butaca,
+                        'estado' => rand(0, 1),
+                        'sala_id' => $sala->id,
+                    ]);
+                }
+            }
+        }
     }
 }
