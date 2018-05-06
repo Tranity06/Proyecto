@@ -35,6 +35,8 @@ const routes = [
 
 const router = new VueRouter({
     mode: 'history',
+    history: true,
+    base: '/',
     routes
 });
 

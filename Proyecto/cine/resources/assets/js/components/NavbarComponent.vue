@@ -48,7 +48,7 @@
                               </div>
                             </div>
                         </div>
-                        <div v-if="!StoreStateEnabled">
+                        <div v-if="!StoreStateEnabled" style="display: flex;">
                             <router-link class="button is-primary" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span>Entrar</span>
@@ -94,5 +94,34 @@
 </script>
 
 <style scoped>
+    .centeredIcon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        color: dodgerblue;
+        background-color: ghostwhite;
+        border-radius: 100%;
+        margin-left: .5rem;
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        transition: all .5s;
+    }
 
+    .centeredIcon:hover {
+        color: white;
+        background-color: dodgerblue;
+    }
+
+    .avatar {
+        border-radius: 50%;
+        display: block;
+        width: 32px;
+        height: 32px;
+        margin-right: 9px;
+        margin-left: 5px;
+    }
 </style>

@@ -1,6 +1,7 @@
 <template>
     <div>
         <navbar-component></navbar-component>
+        <slider-component></slider-component>
 
         <p>
             <router-link :to="{ name: 'home' }">Home</router-link> |
@@ -14,8 +15,10 @@
 </template>
 <script>
     import NavbarComponent from '../components/NavbarComponent';
+    import SliderComponent from "../components/SliderComponent";
     export default {
         components: {
+            SliderComponent,
             NavbarComponent
         }
     }
