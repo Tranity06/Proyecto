@@ -15,7 +15,6 @@ class CreateResenasTable extends Migration
     {
         Schema::create('resenas', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('fecha');
             $table->string('valoracion');
             $table->string('comentario');
 

@@ -18,16 +18,16 @@ class Pelicula extends Model
     /**
      * Devuelve el género de la película.
      */
-    public function genero(){
+ /*   public function genero(){
         return $this->belongsTo(Genero::class);
-    }
+    }*/
 
     /**
      * Devuelve la calificación de edad de la película.
      */
-    public function calificacion_edad(){
+ /*   public function calificacion_edad(){
         return $this->belongsTo(CalificacionEdad::class);
-    }
+    }*/
 
     /**
      * Devuelve todas las reseñas de la película.

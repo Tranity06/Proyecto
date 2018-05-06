@@ -37,3 +37,22 @@ Route::post("/butaca/{id}", function (Request $request, $id){
 
     return '';
 });
+
+/**
+ * PELICULAS
+ */
+Route::get('peliculas', 'PeliculaController@getAll')->name('pelicula.getAll');
+Route::get('pelicula/{idPelicula}','PeliculaController@getOne')->name('pelicula.getOne');
+
+/**
+ * Reseñas
+ */
+Route::get('/resena/{idUsuario}/{idPelicula}','ResenaController@getAllFromUser')->name('resena.get');
+Route::post('/resena/{idUsuario}/{idPelicula}','ResenaController@create')->name('resena.create');
+Route::put('/resena/{idResena}','ResenaController@update')->name('resena.update');
+Route::delete('/resena/{idResena}','ResenaController@detele')->name('resena.delete');
+
+/**
+ * SLIDER
+ */
+Route::get('/slider','SliderController@get')->name('slider.get');
