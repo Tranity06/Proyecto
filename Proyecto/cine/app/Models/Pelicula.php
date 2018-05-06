@@ -15,6 +15,10 @@ class Pelicula extends Model
         'idtmdb', 'titulo', 'titulo_original', 'estreno', 'generos', 'director', 'actores', 'sinopsis', 'duracion', 'cartel', 'trailer'
     ];
 
+    protected $casts = [
+        'slider' => 'boolean',
+    ];
+
     /**
      * Devuelve el género de la película.
      */
