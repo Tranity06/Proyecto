@@ -153,6 +153,7 @@
         margin: .8rem auto;
         height: 50px;
         width: 90%;
+        max-width: 320px;
         border: solid 5px #fadf98;
         border-color: #fadf98 transparent transparent transparent;
         border-radius: 50%/45px 45px 0 0;

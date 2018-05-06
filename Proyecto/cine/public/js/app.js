@@ -55424,7 +55424,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.showtime-form[data-v-0507cf9d] {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -ms-flex-pack: distribute;\n            justify-content: space-around;\n        margin-top: 1rem;\n}\n\n/* Panel Moderno */\n.precio[data-v-0507cf9d] {\n        justify-self: end;\n        margin-left: auto;\n}\n.panel-moderno[data-v-0507cf9d] {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: column;\n                flex-direction: column;\n        max-width: 350px;\n        margin: 1rem 0;\n\n        border-radius: 2%;\n        background-color: white;\n        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n        overflow: hidden;\n}\n.panel-moderno > .encabezado[data-v-0507cf9d] {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-pack: justify;\n            -ms-flex-pack: justify;\n                justify-content: space-between;\n        background-color: #F6F5F3;\n        padding: .5rem;\n}\n.panel-moderno > .cuerpo[data-v-0507cf9d] {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-align: center;\n            -ms-flex-align: center;\n                align-items: center;\n        margin: .5rem .5rem;\n}\n.cuerpo > .informacion[data-v-0507cf9d] {\n        margin-left: .5rem;\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: column;\n                flex-direction: column;\n}\n.panel-moderno > .abajo[data-v-0507cf9d] {\n        margin: 0 .5rem;\n        padding: .5rem;\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-pack: end;\n            -ms-flex-pack: end;\n                justify-content: flex-end;\n        border-top: 2px solid #F6F5F3;\n}\n\n    /* Buttons component */\n.buttons-component[data-v-0507cf9d] {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-pack: center;\n            -ms-flex-pack: center;\n                justify-content: center;\n        margin-bottom: .5rem;\n}\n.grande[data-v-0507cf9d] {\n        padding-left: 3em;\n        padding-right: 3em;\n        color: white;\n        font-weight: bold;\n        font-size: 1.5rem;\n}\n.normal[data-v-0507cf9d] {\n        padding-left: 1.5em;\n        padding-right: 1.5em;\n        color: white;\n        font-weight: bold;\n        font-size: 1em;\n        margin-left: .5rem;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.showtime-form[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    margin-top: 1rem;\n}\n\n/* Panel Moderno */\n.precio[data-v-0507cf9d] {\n    justify-self: end;\n    margin-left: auto;\n}\n.panel-moderno[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    max-width: 350px;\n    margin: 1rem 0;\n\n    border-radius: 2%;\n    background-color: white;\n    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n    overflow: hidden;\n}\n.panel-moderno > .encabezado[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #F6F5F3;\n    padding: .5rem;\n}\n.panel-moderno > .cuerpo[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin: .5rem .5rem;\n}\n.cuerpo > .informacion[data-v-0507cf9d] {\n    margin-left: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.panel-moderno > .abajo[data-v-0507cf9d] {\n    margin: 0 .5rem;\n    padding: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n    border-top: 2px solid #F6F5F3;\n}\n\n/* Buttons component */\n.buttons-component[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    margin-bottom: .5rem;\n}\n.grande[data-v-0507cf9d] {\n    padding-left: 3em;\n    padding-right: 3em;\n    color: white;\n    font-weight: bold;\n    font-size: 1.5rem;\n}\n.normal[data-v-0507cf9d] {\n    padding-left: 1.5em;\n    padding-right: 1.5em;\n    color: white;\n    font-weight: bold;\n    font-size: 1em;\n    margin-left: .5rem;\n}\n\n\n", ""]);
 
 // exports
 
@@ -55535,6 +55535,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -55575,7 +55607,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.step--;
         },
         next: function next() {
-
             var Validacion = this.$refs.butaca.getTotal() > 0;
 
             if (Validacion) {
@@ -55614,144 +55645,158 @@ var render = function() {
         ]
       },
       [
-        _c("div", { staticClass: "showtime-form" }, [
-          _c("div", { staticClass: "select" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.salaTarget,
-                    expression: "salaTarget"
-                  }
-                ],
-                on: {
-                  change: [
-                    function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.salaTarget = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
+        _c("div", { staticClass: "columns" }, [
+          _c(
+            "div",
+            { staticClass: "column" },
+            [
+              _c("div", { staticClass: "showtime-form" }, [
+                _c("div", { staticClass: "select" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.salaTarget,
+                          expression: "salaTarget"
+                        }
+                      ],
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.salaTarget = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          function($event) {
+                            _vm.mostrarAsientos(_vm.salaTarget)
+                          }
+                        ]
+                      }
                     },
-                    function($event) {
-                      _vm.mostrarAsientos(_vm.salaTarget)
-                    }
-                  ]
-                }
-              },
-              _vm._l(_vm.salas, function(sala) {
-                return _c("option", { domProps: { value: sala.id } }, [
-                  _vm._v("Sala " + _vm._s(sala.id))
-                ])
-              })
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "select" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.dia,
-                    expression: "dia"
-                  }
-                ],
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.dia = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "25 Lunes" } }, [
-                  _vm._v("25 Lunes")
+                    _vm._l(_vm.salas, function(sala) {
+                      return _c("option", { domProps: { value: sala.id } }, [
+                        _vm._v("Sala " + _vm._s(sala.id))
+                      ])
+                    })
+                  )
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "26 Martes" } }, [
-                  _vm._v("26 Martes")
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "select" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.hora,
-                    expression: "hora"
-                  }
-                ],
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.hora = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "13:21" } }, [_vm._v("13:21")]),
+                _c("div", { staticClass: "select" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.dia,
+                          expression: "dia"
+                        }
+                      ],
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.dia = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "25 Lunes" } }, [
+                        _vm._v("25 Lunes")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "26 Martes" } }, [
+                        _vm._v("26 Martes")
+                      ])
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "15:22" } }, [_vm._v("15:22")])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("seat-component", { ref: "butaca" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "buttons-component" }, [
-          _c(
-            "button",
-            {
-              staticClass: "button is-rounded is-warning grande",
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  _vm.next()
-                }
-              }
-            },
-            [_vm._v("Pagar")]
-          )
+                _c("div", { staticClass: "select" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.hora,
+                          expression: "hora"
+                        }
+                      ],
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.hora = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "13:21" } }, [
+                        _vm._v("13:21")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "15:22" } }, [
+                        _vm._v("15:22")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("seat-component", { ref: "butaca" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "buttons-component" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-rounded is-warning grande",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.next()
+                      }
+                    }
+                  },
+                  [_vm._v("Pagar")]
+                )
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._m(0)
         ])
-      ],
-      1
+      ]
     ),
     _vm._v(" "),
     _c(
@@ -55770,7 +55815,7 @@ var render = function() {
         _c("div", { staticClass: "columns" }, [
           _c("div", { staticClass: "column" }, [
             _c("section", { staticClass: "panel-moderno" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "cuerpo" }, [
                 _c("img", {
@@ -55860,6 +55905,53 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c("article", [
+        _vm._v(
+          "\n                    imagen,\n                    trailer\n                    calificacion edad\n                    genero\n                "
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content" }, [
+        _c("blockquote", [
+          _vm._v(
+            "Ut venenatis, nisl scelerisque sollicitudin fermentum, quam libero hendrerit ipsum, ut\n                        blandit est tellus sit amet turpis.\n                    "
+          )
+        ]),
+        _vm._v(" "),
+        _c("blockquote", [
+          _vm._v(
+            "Ut venenatis, nisl scelerisque sollicitudin fermentum, quam libero hendrerit ipsum, ut\n                        blandit est tellus sit amet turpis.\n                    "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("article", { staticClass: "message is-link" }, [
+        _c("div", { staticClass: "message-body" }, [
+          _c("h1", { staticClass: "title" }, [_vm._v("Sabias Que??")]),
+          _vm._v(
+            "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+          ),
+          _c("strong", [
+            _vm._v("Pellentesque risus\n                        mi")
+          ]),
+          _vm._v(
+            ", tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet\n                        fringilla. Nullam gravida purus diam, et dictum "
+          ),
+          _c("a", [_vm._v("felis venenatis")]),
+          _vm._v(" efficitur. Aenean ac\n                        "),
+          _c("em", [_vm._v("eleifend lacus")]),
+          _vm._v(
+            ", in mollis lectus. Donec sodales, arcu et sollicitudin porttitor,\n                        tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem\n                        eget, facilisis sodales sem.\n                    "
+          )
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -55966,7 +56058,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e] {\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height: 50px;\n    width: 90%;\n    border: solid 5px #fadf98;\n    border-color: #fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n\n", ""]);
+exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e] {\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height: 50px;\n    width: 90%;\n    max-width: 320px;\n    border: solid 5px #fadf98;\n    border-color: #fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n\n", ""]);
 
 // exports
 

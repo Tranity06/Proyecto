@@ -1,28 +1,59 @@
 <template>
     <div>
         <div v-show="step === 1">
-            <div class="showtime-form">
-                <div class="select">
-                    <select @change="mostrarAsientos(salaTarget)" v-model="salaTarget">
-                        <option v-for="sala in salas" :value="sala.id">Sala {{ sala.id }}</option>
-                    </select>
+            <div class="columns">
+                <div class="column">
+                    <div class="showtime-form">
+                        <div class="select">
+                            <select @change="mostrarAsientos(salaTarget)" v-model="salaTarget">
+                                <option v-for="sala in salas" :value="sala.id">Sala {{ sala.id }}</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select v-model="dia">
+                                <option value="25 Lunes">25 Lunes</option>
+                                <option value="26 Martes">26 Martes</option>
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select v-model="hora">
+                                <option value="13:21">13:21</option>
+                                <option value="15:22">15:22</option>
+                            </select>
+                        </div>
+                    </div>
+                    <seat-component ref="butaca"></seat-component>
+                    <div class="buttons-component">
+                        <button @click.prevent="next()" class="button is-rounded is-warning grande">Pagar</button>
+                    </div>
                 </div>
-                <div class="select">
-                    <select v-model="dia">
-                        <option value="25 Lunes">25 Lunes</option>
-                        <option value="26 Martes">26 Martes</option>
-                    </select>
+                <div class="column">
+                    <article>
+                        imagen,
+                        trailer
+                        calificacion edad
+                        genero
+                    </article>
+                    <div class="content">
+                        <blockquote>Ut venenatis, nisl scelerisque sollicitudin fermentum, quam libero hendrerit ipsum, ut
+                            blandit est tellus sit amet turpis.
+                        </blockquote>
+                        <blockquote>Ut venenatis, nisl scelerisque sollicitudin fermentum, quam libero hendrerit ipsum, ut
+                            blandit est tellus sit amet turpis.
+                        </blockquote>
+                    </div>
+                    <article class="message is-link">
+                        <div class="message-body">
+                            <h1 class="title">Sabias Que??</h1>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus
+                            mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
+                            fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac
+                            <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor,
+                            tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem
+                            eget, facilisis sodales sem.
+                        </div>
+                    </article>
                 </div>
-                <div class="select">
-                    <select v-model="hora">
-                        <option value="13:21">13:21</option>
-                        <option value="15:22">15:22</option>
-                    </select>
-                </div>
-            </div>
-            <seat-component ref="butaca"></seat-component>
-            <div class="buttons-component">
-                <button @click.prevent="next()" class="button is-rounded is-warning grande">Pagar</button>
             </div>
         </div>
         <div v-show="step === 2">
@@ -66,6 +97,7 @@
 <script>
 
     import PaymentComponent from './PaymentComponent';
+
     export default {
         data() {
             return {
@@ -101,14 +133,13 @@
                 this.step--;
             },
             next() {
-
                 let Validacion = this.$refs.butaca.getTotal() > 0;
 
                 if (Validacion) {
                     this.butacas.total = this.$refs.butaca.getTotal();
                     this.butacas.num = this.$refs.butaca.getButacas();
                     this.step++;
-                }else{
+                } else {
                     alert("JAJAJA NO :D");
                 }
 
@@ -128,7 +159,7 @@
         margin-top: 1rem;
     }
 
-/* Panel Moderno */
+    /* Panel Moderno */
     .precio {
         justify-self: end;
         margin-left: auto;
