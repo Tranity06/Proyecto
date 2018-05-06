@@ -20,7 +20,7 @@ class CreateResenasTable extends Migration
 
             //Clave foránea USUARIO.
             $table->unsignedInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('usuario_id')->references('id')->on('users');
 
             //Clave foránea PELICULA.
             $table->unsignedInteger('pelicula_id');

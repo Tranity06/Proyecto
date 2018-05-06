@@ -21,6 +21,10 @@ use App\Http\Controllers\Admin\Home;  //Posible quitar parte Home?
 Auth::routes();
 Route::get('/','HomeController@index')->name('home');
 
+Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
+Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
+
 /**
  * Authentication USER
  */

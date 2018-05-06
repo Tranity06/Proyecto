@@ -13,7 +13,6 @@ class CreateGenerosTable extends Migration
      */
     public function up()
     {
-        Schema::defaultStringLength(191);
         Schema::create('generos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
