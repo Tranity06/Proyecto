@@ -40,7 +40,7 @@
                     currentPage: 0,
                     thresholdDistance: 500,
                     thresholdTime: 100,
-                    autoplay:5000,
+                    autoplay:10000,
                     loop:true,
                     direction:'horizontal',
                     infinite:1,

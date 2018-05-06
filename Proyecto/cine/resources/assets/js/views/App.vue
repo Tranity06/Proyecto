@@ -1,25 +1,23 @@
 <template>
     <div>
         <navbar-component></navbar-component>
-        <slider-component></slider-component>
 
-        <p>
-            <router-link :to="{ name: 'home' }">Home</router-link> |
-            <router-link :to="{ name: 'hello' }">Hello World</router-link>
-        </p>
+        <router-view></router-view>
 
-        <div class="container">
-            <router-view></router-view>
-        </div>
+
+        <footer-component></footer-component>
     </div>
 </template>
 <script>
     import NavbarComponent from '../components/NavbarComponent';
-    import SliderComponent from "../components/SliderComponent";
+    import FooterComponent from "../components/FooterComponent";
     export default {
         components: {
-            SliderComponent,
+            FooterComponent,
             NavbarComponent
         }
     }
 </script>
+<style scoped>
+
+</style>
