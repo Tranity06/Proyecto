@@ -12,6 +12,10 @@ class SalaSeeder extends Seeder
      */
     public function run()
     {
-        factory(Sala::class,2)->create();
+        for ( $i=1; $i<=5 ; $i++){
+            Sala::create([
+                'numero' => $i
+            ]);
+        }
     }
 }
