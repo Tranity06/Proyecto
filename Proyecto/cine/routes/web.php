@@ -99,3 +99,10 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('pelicula/crear', 'PeliculaController@crearPost')->name('pelicula.crear');
   Route::get('peliculas/mostrar', 'PeliculaController@mostrar');
   Route::post('peliculas/borrar', 'PeliculaController@borrar');
+
+  /**
+   * Gestión SLIDER
+   */
+  Route::get('slider', 'PeliculaController@mostrarSlider');
+  Route::post('slider/borrar', 'PeliculaController@borrarSlider');
+  Route::post('/slider/anadir', 'PeliculaController@anadirSlider');

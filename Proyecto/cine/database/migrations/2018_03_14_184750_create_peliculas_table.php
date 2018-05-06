@@ -16,6 +16,7 @@ class CreatePeliculasTable extends Migration
         Schema::defaultStringLength(191);
         Schema::create('peliculas', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('idtmdb');
             $table->string('titulo');
             $table->string('titulo_original');
             $table->date('estreno')->nullable();
@@ -23,17 +24,15 @@ class CreatePeliculasTable extends Migration
             $table->string('director')->nullable();
             $table->string('actores')->nullable();
             $table->string('sinopsis', 800 )->nullable();
-            $table->unsignedInteger('duracion');
+            $table->unsignedInteger('duracion')->nullable();
             $table->string('cartel')->nullable();
             $table->string('trailer')->nullable();
+            $table->boolean('slider')->default(0);
             
-            //Clave foránea GENEROS.
-            $table->unsignedInteger('genero_id');
-            $table->foreign('genero_id')->references('id')->on('generos');
-
+            /*
             //Clave foráneas CALIFICACION_EDAD.
             $table->unsignedInteger('calificacion_edad_id');
-            $table->foreign('calificacion_edad_id')->references('id')->on('calificaciones_edades');
+            $table->foreign('calificacion_edad_id')->references('id')->on('calificaciones_edades');*/
 
             $table->timestamps();
         });

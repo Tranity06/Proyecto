@@ -39,6 +39,7 @@
 
             $('.box-body').on('click','.buscar', function(){
                 $('#err').slideUp();
+                $('.callout').slideUp();
                 var $titulo = $('#buscar_titulo').val().trim();
                 $('#resultado').children().remove();
 
@@ -141,6 +142,7 @@
                     var $sinopsis = $('<dt>Sinopsis</dt><dd id="sinopsis">'+sinopsis+'</dd>');
                     var $generos = $('<dt>Géneros</dt><dd id="generos">'+generos+'</dd>');
                     var $duracion = $('<dt>Duración</dt><dd id="duracion">'+duracion+'</dd>');
+                    var $slider = $('<dt>Añadir al slider</dt><dd id="duracion"><input type="checkbox" id="slider"/></dd>');
                     var $idtmdb_hidden = $('<input type="hidden" name="idtmdb" id="idtmdb" value="'+$idtmdb+'"/>');
                     
                     $contenedor_datos.append($titulo);
@@ -151,6 +153,7 @@
                     $contenedor_datos.append($actores);
                     $contenedor_datos.append($sinopsis);
                     $contenedor_datos.append($duracion);
+                    $contenedor_datos.append($slider);
                     $contenedor_datos.append($idtmdb_hidden);
 
                     var poster = response.poster_path;
@@ -171,7 +174,7 @@
                 });
             });
 
-            $('#resultado').on('click', '.guardar', function(){
+            $('#resultado').on('click', '.guardar', function(e){
                 var $formulario = $('#formulario');
                 $('#form_idtmdb').val( $('#idtmdb').val() );
                 $('#form_titulo').val( $('#titulo').text());
@@ -183,6 +186,8 @@
                 $('#form_sinopsis').val( $('#sinopsis').text());form_trailer
                 $('#form_duracion').val( $('#duracion').text());
                 $('#form_poster').val($('#poster').attr('src'));
+                $( $('#form_slider').attr('checked', $('#slider').is(':checked') ))
+                
                 $formulario.submit();
             });
         });
@@ -204,6 +209,11 @@
             <h3 class="box-title">Registrar nueva película</h3>
         </div>
         <div class="box-body">
+            @if ( isset($noslider) )
+                <div class="callout callout-warning">
+                    <p>La película se ha registrado con éxito pero no se pueden añadir más de tres películas al slider. Puedes modificar el contenido del slider en el menú Slider.</p>
+                </div>
+            @endif
             @if ( isset($pelicula) )
                 <div class="callout callout-success">
                     <p>Pelicula nueva registrada.</p>
@@ -234,5 +244,6 @@
         <input type="text" id="form_duracion" name="duracion"/>
         <input type="text" id="form_trailer" name="trailer"/>
         <input type="text" id="form_poster" name="poster"/>
+        <input type="checkbox" id="form_slider" name="slider"/>
     </form>
 @stop

@@ -150,6 +150,10 @@ return [
             'text'       => 'Sesiones',
             'url'  => '#',
         ],
+        [
+            'text'       => 'Slider',
+            'url'  => 'slider',
+        ],
         'TIENDA',
         [
             'text'    => 'Productos',
