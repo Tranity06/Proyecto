@@ -39,7 +39,6 @@
                                     <router-link class="dropdown-item" :to="{ name: 'profile' }">
                                         Perfil
                                     </router-link>
-                                  <a class="dropdown-item">No se que mas</a>
                                   <hr class="dropdown-divider">
                                   <a class="dropdown-item is-link" @click="Logout">
                                      Salir
