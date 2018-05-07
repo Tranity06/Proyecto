@@ -11,6 +11,12 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Jua|Lato:400,700" rel="stylesheet">
     <link href="{{ asset('css/utilidades.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <style>
+        .vue-notification{
+            margin-top: .5rem !important;
+            font-size: 1rem !important;
+        }
+    </style>
 </head>
 <body>
 

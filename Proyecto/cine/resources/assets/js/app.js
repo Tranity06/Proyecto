@@ -7,12 +7,14 @@
 
 require('./bootstrap');
 import router from './routes.js';
+import Notifications from 'vue-notification';
 import VeeValidate from 'vee-validate';
 import { Validator } from 'vee-validate';
 
 window.Vue = require('vue');
 
 Vue.use(VeeValidate);
+Vue.use(Notifications);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
