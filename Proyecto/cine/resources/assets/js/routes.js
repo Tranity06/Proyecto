@@ -7,6 +7,7 @@ Vue.use(VueRouter);
 import Hello from './views/Hello';
 import Home from './views/Home';
 import Login from './views/Login';
+import Register from './views/Register';
 import Profile from './views/Profile';
 
 const routes = [
@@ -26,11 +27,17 @@ const routes = [
             component: Login,
         },
         {
+            path: '/register',
+            name: 'register',
+            component: Register
+        },
+        {
             path: '/profile',
             name: 'profile',
             component: Profile,
             meta: { requiresAuth: true }
         },
+
     ];
 
 const router = new VueRouter({

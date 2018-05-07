@@ -73,7 +73,9 @@
                     <p><i class="fas fa-check" style="color: green;"></i> Crea y guarda tus menus preferidos, menus
                         lleva tilde verdad?. Si veis esto modificarlo ;D no estoy inspirado ahora ;D no estoy inspirado
                         ahora </p>
-                    <!--         <a href="{{ route('auth.signup') }}" class="button is-info is-medium">Registrarse</a>-->
+                    <router-link class="button is-info is-medium" :to="{ name: 'register' }">
+                            Registrarse
+                    </router-link>
                 </div>
             </div>
         </div>
