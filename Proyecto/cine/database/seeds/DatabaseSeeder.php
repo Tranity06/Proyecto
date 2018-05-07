@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             'menu_producto',
             'clave_admin',*/
             'administradores',
+            'peliculas'
         ]);
 
         //Ejecutar los siguientes Seeders
@@ -43,8 +44,10 @@ class DatabaseSeeder extends Seeder
 //        $this->call(PeliculasSeeder::class);
 //        $this->call(ResenasSeeder::class);
         $this->call([
+            AdministradorSeeder::class,
             SalaSeeder::class,
             ButacaSeeder::class,
+            PeliculasSeeder::class,
         ]);
 //        $this->call(SesionesSeeder::class);
 //        $this->call(FacturasSeeder::class);
@@ -58,7 +61,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(AdministradoresSeeder::class);
 //        $this->call(ProductosMenusSeeder::class);
 //        $this->call(ClaveAdminSeeder::class);
-        $this->call(AdministradorSeeder::class);
     }
 
     /**

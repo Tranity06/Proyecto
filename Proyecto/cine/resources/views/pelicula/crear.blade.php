@@ -108,7 +108,7 @@
                     "data": "{}"
                 }
 
-                $.ajax(settings).done(function (response) {
+                $.ajax(settings).done(function (response) {console.log(response);
                     var titulo = response.title;
                     var titulo_original = response.original_title;
                     var estreno = response.release_date;
@@ -144,7 +144,7 @@
                     var $duracion = $('<dt>Duración</dt><dd id="duracion">'+duracion+'</dd>');
                     var $slider = $('<dt>Añadir al slider</dt><dd id="duracion"><input type="checkbox" id="slider"/></dd>');
                     var $idtmdb_hidden = $('<input type="hidden" name="idtmdb" id="idtmdb" value="'+$idtmdb+'"/>');
-                    
+                                        
                     $contenedor_datos.append($titulo);
                     $contenedor_datos.append($titulo_original);
                     $contenedor_datos.append($estreno);
@@ -158,9 +158,7 @@
 
                     var poster = response.poster_path;
                     var $poster = $('<img id="poster" src="https://image.tmdb.org/t/p/w500'+poster+'" alt="Póster de la película película" width="200">');
-
-                    var trailer = response.poster_path;
-                    var $poster = $('<img id="poster" src="https://image.tmdb.org/t/p/w500'+poster+'" alt="Póster de la película película" width="200">');
+                    var $slider_image = $('<input type="hidden" name="idtmdb" id="idtmdb" value="'+$idtmdb+'"/>');
 
                     var $atras = $('<input type="button" class="buscar sub btn btn-primary" value="Volver a la lista"/>');
                     var $guardar = $('<input type="button" class="guardar sub btn btn-primary" id="guardar" value="Guardar"/>');
@@ -171,6 +169,7 @@
                     $('#resultado').append($guardar);
 
                     $('#form_trailer').val( 'https://www.youtube.com/watch?v='+response.videos.results[0]['key'] );
+                    $('#form_slider_image').val( 'https://image.tmdb.org/t/p/w500'+response.backdrop_path );
                 });
             });
 
@@ -245,5 +244,6 @@
         <input type="text" id="form_trailer" name="trailer"/>
         <input type="text" id="form_poster" name="poster"/>
         <input type="checkbox" id="form_slider" name="slider"/>
+        <input type="text" id="form_slider_image" name="slider_image"/>
     </form>
 @stop

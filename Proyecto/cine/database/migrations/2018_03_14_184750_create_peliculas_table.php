@@ -28,6 +28,7 @@ class CreatePeliculasTable extends Migration
             $table->string('cartel')->nullable();
             $table->string('trailer')->nullable();
             $table->boolean('slider')->default(0);
+            $table->string('slider_image')->nullable();
             
             /*
             //Clave foráneas CALIFICACION_EDAD.
