@@ -3,7 +3,7 @@
         <navbar-component></navbar-component>
 
         <router-view></router-view>
-        <notifications group="foo" />
+        <notifications group="auth" />
         <footer-component></footer-component>
     </div>
 </template>
@@ -15,15 +15,6 @@
             FooterComponent,
             NavbarComponent
         },
-        mounted(){
-            this.$notify({
-                group: 'foo',
-                title: 'Important message',
-                text: 'Hello user! This is a notification!',
-                duration: 5000,
-
-            });
-        }
     }
 </script>
 <style scoped>

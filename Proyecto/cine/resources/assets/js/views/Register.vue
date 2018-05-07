@@ -118,9 +118,13 @@
 
                 })
                     .then(response => {
-                        console.log(response.data);
                         if (response.data.success){
-                            console.log('yupii :D');
+                            this.$notify({
+                                group: 'auth',
+                                title: 'Activa tu cuenta',
+                                text: '¡Comprueba tu email para completar el registro!',
+                                duration: 5000,
+                            });
                         }else{
                             this.registerError = true;
                             this.password = '';

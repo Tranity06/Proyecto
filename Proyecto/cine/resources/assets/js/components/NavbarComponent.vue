@@ -87,7 +87,11 @@
             Logout() {
                 localStorage.removeItem('token');
                 store.commit('logoutUser');
-
+                this.$notify({
+                    group: 'auth',
+                    text: '¡Has cerrado la sesión con exito!',
+                    duration: 5000,
+                });
                 this.$router.push({ name: 'home' });
             }
         }

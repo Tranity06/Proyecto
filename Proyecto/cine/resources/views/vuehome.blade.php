@@ -14,7 +14,7 @@
     <style>
         .vue-notification{
             margin-top: .5rem !important;
-            font-size: 1rem !important;
+            font-size: .8rem !important;
         }
     </style>
 </head>
