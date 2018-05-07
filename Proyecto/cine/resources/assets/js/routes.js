@@ -39,7 +39,7 @@ const router = new VueRouter({
     base: '/',
     routes
 });
-
+/*
 router.beforeEach((to, from, next) => {
 
     // check if the route requires authentication and user is not logged in
@@ -56,6 +56,6 @@ router.beforeEach((to, from, next) => {
     }
 
     next()
-});
+});*/
 
 export default router

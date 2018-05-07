@@ -26,7 +26,7 @@
                         Acerca de
                     </a>
                     <span class="navbar-item navbar-item-end">
-                        <div class="user-login" v-if="StoreStateEnabled">
+                        <div class="user-login" v-show="StoreStateEnabled">
                           <i class="fas fa-shopping-cart fa-sm carta"></i>
                           <div class="dropdown is-hoverable">
                               <div class="dropdown-trigger">
@@ -48,7 +48,7 @@
                               </div>
                             </div>
                         </div>
-                        <div v-if="!StoreStateEnabled" style="display: flex;">
+                        <div v-show="!StoreStateEnabled" style="display: flex;">
                             <router-link class="button is-primary" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span>Entrar</span>
@@ -87,6 +87,7 @@
             Logout() {
                 localStorage.removeItem('token');
                 store.commit('logoutUser');
+
                 this.$router.push({ name: 'home' });
             }
         }
