@@ -42,6 +42,7 @@ class PeliculaController extends Controller
             'duracion' => $request['duracion'],
             'cartel' => $request['poster'],
             'trailer' => $request['trailer'],
+            'slider_image' => $request['slider_image']
         ]);
 
         if (isset($request['slider'])){
