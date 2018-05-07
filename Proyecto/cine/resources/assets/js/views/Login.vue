@@ -15,11 +15,12 @@
                         <div class="field">
                             <label class="label">Introduce tu email</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="text" placeholder="Escribe tu email" required
+                                <input class="input" :class="{'is-danger': errors.has('email')}" type="email" placeholder="Escribe tu email" name="email"  v-validate="'required|email'"
                                        v-model.trim="email">
                                 <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                          </span>
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <p v-if="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</p>
                             </div>
                         </div>
                         <!-- Username -->
@@ -27,12 +28,13 @@
                         <div class="field">
                             <label class="label">Contraseña</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="password" placeholder="Escribe tu contraseña"
-                                       required v-model.trim="password">
+                                <input class="input" :class="{'is-danger': errors.has('password')}" type="password" placeholder="Escribe tu contraseña" name="password" v-validate="'required|min:6'"
+                                       v-model.trim="password">
                                 <span class="icon is-small is-left">
                               <i class="fas fa-lock"></i>
                             </span>
                             </div>
+                            <p v-if="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</p>
                         </div>
                         <!-- Password -->
 
@@ -95,7 +97,7 @@
             submitLogin() {
                 this.loginError = false;
                 console.log("Entro al metodo");
-                axios.post(`http://localhost:8000/api/login`, {
+                axios.post(`/api/login`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
