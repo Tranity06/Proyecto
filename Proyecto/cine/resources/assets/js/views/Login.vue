@@ -113,6 +113,13 @@
                             localStorage.setItem('token', response.data.token);
                             localStorage.setItem('user',JSON.stringify(response.data.user));
                             this.$router.push({ name: 'home' })
+
+                            this.$notify({
+                                group: 'auth',
+                                text: '¡Bienvenido '+response.data.user.name+'!',
+                                duration: 5000,
+                            });
+
                         }else{
                             this.loginError = true;
                             this.password = '';

@@ -31,7 +31,7 @@
                           <div class="dropdown is-hoverable">
                               <div class="dropdown-trigger">
                                   <img class="avatar"
-                                       :src="'uploads/avatars/'+avatar"
+                                       :src="'uploads/avatars/'+getAvatar"
                                        aria-haspopup="true" aria-controls="dropdown-menu">
                               </div>
                               <div class="dropdown-menu" id="dropdown-menu" role="menu">
@@ -69,18 +69,13 @@
 
     export default {
         name: "navbar-component",
-        data() {
-            return {
-                avatar: ''
-            }
-        },
         computed: {
             StoreStateEnabled() {
                 return store.state.isLoggedIn;
+            },
+            getAvatar(){
+                return JSON.parse(localStorage.getItem('user')).avatar;
             }
-        },
-        mounted() {
-            this.avatar = JSON.parse(localStorage.getItem('user')).avatar;
         },
         methods: {
             Logout() {
