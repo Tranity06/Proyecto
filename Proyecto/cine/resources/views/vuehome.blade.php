@@ -11,6 +11,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Jua|Lato:400,700" rel="stylesheet">
     <link href="{{ asset('css/utilidades.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/modal/lity.css') }}" media="all" rel="stylesheet" type="text/css" />
+    
     <style>
         .vue-notification{
             margin-top: .5rem !important;
@@ -25,5 +27,6 @@
     </div>
 
     <script src="{{ mix('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/modal/lity.js') }}"></script>
 </body>
 </html>
