@@ -43,11 +43,13 @@ Route::post("/butaca/{id}", function (Request $request, $id){
  */
 Route::get('peliculas', 'PeliculaController@getAll')->name('pelicula.getAll');
 Route::get('pelicula/{idPelicula}','PeliculaController@getOne')->name('pelicula.getOne');
+Route::get('pelicula/{idPelicula}/resenas','PeliculaController@getResenas')->name('pelicula.getResenas');
+Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('pelicula.getSesiones');
 
 /**
  * Reseñas
  */
-Route::get('/resena/{idUsuario}/{idPelicula}','ResenaController@getAllFromUser')->name('resena.get');
+Route::get('/resena/{idUsuario}','ResenaController@getAllFromUser')->name('resena.get');
 Route::post('/resena/{idUsuario}/{idPelicula}','ResenaController@create')->name('resena.create');
 Route::put('/resena/{idResena}','ResenaController@update')->name('resena.update');
 Route::delete('/resena/{idResena}','ResenaController@detele')->name('resena.delete');
