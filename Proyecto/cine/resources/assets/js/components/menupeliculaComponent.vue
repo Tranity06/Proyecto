@@ -25,11 +25,11 @@
         bottom: 40px;
         display: flex;
         justify-content: center;
-        z-index: 900;
+        z-index: 2;
     }
 
     .menu-pelicula > .opciones {
-        background-color: #f9f9f9;
+        background-color: white;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         padding: 1.25rem;

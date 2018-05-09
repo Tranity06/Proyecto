@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Jua|Lato:400,700" rel="stylesheet">
     <link href="{{ asset('css/utilidades.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/modal/lity.css') }}" media="all" rel="stylesheet" type="text/css" />
-    
+
     <style>
         .vue-notification{
             margin-top: .5rem !important;

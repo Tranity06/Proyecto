@@ -9,7 +9,7 @@
                     <div class="pelicula-card centrar-imagen">
                         <img :src="peliculas[key].cartel">
                         <div class="pelicula-trailer grow">
-                            <a href="//www.youtube.com/watch?v=Nigeq7rKL9A" data-lity><img src="icons/play-button.svg"></a>
+                            <a :href="peliculas[key].trailer" data-lity><img src="icons/play-button.svg"></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-opciones">

@@ -61879,7 +61879,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.menu-pelicula[data-v-2097cade] {\n    position: relative;\n    bottom: 40px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    z-index: 900;\n}\n.menu-pelicula > .opciones[data-v-2097cade] {\n    background-color: #f9f9f9;\n    border-top-left-radius: 4px;\n    border-top-right-radius: 4px;\n    padding: 1.25rem;\n}\n", ""]);
+exports.push([module.i, "\n.menu-pelicula[data-v-2097cade] {\n    position: relative;\n    bottom: 40px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    z-index: 2;\n}\n.menu-pelicula > .opciones[data-v-2097cade] {\n    background-color: white;\n    border-top-left-radius: 4px;\n    border-top-right-radius: 4px;\n    padding: 1.25rem;\n}\n", ""]);
 
 // exports
 
@@ -62142,7 +62142,18 @@ var render = function() {
               _c("div", { staticClass: "pelicula-card centrar-imagen" }, [
                 _c("img", { attrs: { src: _vm.peliculas[key].cartel } }),
                 _vm._v(" "),
-                _vm._m(0, true),
+                _c("div", { staticClass: "pelicula-trailer grow" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: _vm.peliculas[key].trailer,
+                        "data-lity": ""
+                      }
+                    },
+                    [_c("img", { attrs: { src: "icons/play-button.svg" } })]
+                  )
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "pelicula-body" }, [
                   _c("div", { staticClass: "pelicula-opciones" }, [
@@ -62150,7 +62161,7 @@ var render = function() {
                       "div",
                       { staticClass: "buttons" },
                       [
-                        _vm._m(1, true),
+                        _vm._m(0, true),
                         _vm._v(" "),
                         _c(
                           "router-link",
@@ -62169,7 +62180,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2, true)
+                  _vm._m(1, true)
                 ])
               ])
             ]
@@ -62180,23 +62191,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pelicula-trailer grow" }, [
-      _c(
-        "a",
-        {
-          attrs: {
-            href: "//www.youtube.com/watch?v=Nigeq7rKL9A",
-            "data-lity": ""
-          }
-        },
-        [_c("img", { attrs: { src: "icons/play-button.svg" } })]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
