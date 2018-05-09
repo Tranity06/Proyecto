@@ -26,7 +26,8 @@ class PeliculasSeeder extends Seeder
             'cartel' => 'https://image.tmdb.org/t/p/w342/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg',
             'trailer' => 'https://www.youtube.com/watch?v=wJbudwIF0cE',
             'slider' => 1,
-            'slider_image' => 'https://image.tmdb.org/t/p/w500/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg'
+            'slider_image' => 'https://image.tmdb.org/t/p/w500/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
+            'popularidad' => 604.520984
         ]);
 
         Pelicula::create([
@@ -42,7 +43,8 @@ class PeliculasSeeder extends Seeder
             'cartel' => 'https://image.tmdb.org/t/p/w342/s7hV8HFh7w2EZ4GK5EiltRVvWJA.jpg',
             'trailer' => 'https://www.youtube.com/watch?v=rwPvpkfozCE',
             'slider' => 1,
-            'slider_image' => 'https://image.tmdb.org/t/p/w500/kaIfm5ryEOwYg8mLbq8HkPuM1Fo.jpg'
+            'slider_image' => 'https://image.tmdb.org/t/p/w500/kaIfm5ryEOwYg8mLbq8HkPuM1Fo.jpg',
+            'popularidad' => 174.148284
         ]);
 
         Pelicula::create([
@@ -58,7 +60,8 @@ class PeliculasSeeder extends Seeder
             'cartel' => 'https://image.tmdb.org/t/p/w342/thmLO2GWf6NcuNOoYtv2gOomE4x.jpg',
             'trailer' => 'https://www.youtube.com/watch?v=leIrosWRbYQ',
             'slider' => 1,
-            'slider_image' => 'https://image.tmdb.org/t/p/w500/rz3TAyd5kmiJmozp3GUbYeB5Kep.jpg'
+            'slider_image' => 'https://image.tmdb.org/t/p/w500/rz3TAyd5kmiJmozp3GUbYeB5Kep.jpg',
+            'popularidad' => 54.184919
         ]);
 
         Pelicula::create([
@@ -73,7 +76,8 @@ class PeliculasSeeder extends Seeder
             'duracion' => 108,
             'cartel' => 'https://image.tmdb.org/t/p/w342/mMlZ9Sgznja3vCaOOu2yfXlvCZH.jpg',
             'trailer' => 'https://www.youtube.com/watch?v=1-fubC9JN50',
-            'slider_image' => 'https://image.tmdb.org/t/p/w500/xVW8REyVqKwxAtUYY07UGlZH43L.jpg'
+            'slider_image' => 'https://image.tmdb.org/t/p/w500/xVW8REyVqKwxAtUYY07UGlZH43L.jpg',
+            'popularidad' => 10.935435
         ]);
 
         Pelicula::create([
@@ -88,7 +92,8 @@ class PeliculasSeeder extends Seeder
             'duracion' => 130,
             'cartel' => 'https://image.tmdb.org/t/p/w342/8YcjGJtW4AEHyNH8yrs8FAaPBM.jpg',
             'trailer' => 'https://www.youtube.com/watch?v=8I3piz5dFzA',
-            'slider_image' => 'https://image.tmdb.org/t/p/w500/wacEk5YSNE41QeKseilyytksXmv.jpg'
+            'slider_image' => 'https://image.tmdb.org/t/p/w500/wacEk5YSNE41QeKseilyytksXmv.jpg',
+            'popularidad' => 28.814109
         ]);
 
         Pelicula::create([
@@ -103,7 +108,8 @@ class PeliculasSeeder extends Seeder
             'duracion' => 140,
             'cartel' => 'https://image.tmdb.org/t/p/w342/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg',
             'trailer' => 'https://www.youtube.com/watch?v=J0ZKannF6l4',
-            'slider_image' => 'https://image.tmdb.org/t/p/w500/q7fXcrDPJcf6t3rzutaNwTzuKP1.jpg'
+            'slider_image' => 'https://image.tmdb.org/t/p/w500/q7fXcrDPJcf6t3rzutaNwTzuKP1.jpg',
+            'popularidad' => 64.510558
         ]);
 
         Pelicula::create([
@@ -118,7 +124,8 @@ class PeliculasSeeder extends Seeder
             'duracion' => 139,
             'cartel' => 'https://image.tmdb.org/t/p/w342/wt6wL8ZnzqSsg2xUBRdfJn3ELVa.jpg',
             'trailer' => 'https://www.youtube.com/watch?v=271Ap7cCZ4E',
-            'slider_image' => 'https://image.tmdb.org/t/p/w500/uBw0QSBWamSWXWl5ttwhxq4h09s.jpg'
+            'slider_image' => 'https://image.tmdb.org/t/p/w500/uBw0QSBWamSWXWl5ttwhxq4h09s.jpg',
+            'popularidad' => 30.097552
         ]);
 
         Pelicula::create([
@@ -133,7 +140,8 @@ class PeliculasSeeder extends Seeder
             'duracion' => 143,
             'cartel' => 'https://image.tmdb.org/t/p/w342/4oD6VEccFkorEBTEDXtpLAaz0Rl.jpg',
             'trailer' => 'https://www.youtube.com/watch?v=lFmNk0nd5es',
-            'slider_image' => 'https://image.tmdb.org/t/p/w500/96B1qMN9RxrAFu6uikwFhQ6N6J9.jpg'
+            'slider_image' => 'https://image.tmdb.org/t/p/w500/96B1qMN9RxrAFu6uikwFhQ6N6J9.jpg',
+            'popularidad' => 31.896665
         ]);
     }
 }

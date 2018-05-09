@@ -48,7 +48,8 @@ class PeliculaController extends Controller
             'duracion' => $request['duracion'],
             'cartel' => $poster,
             'trailer' => $request['trailer'],
-            'slider_image' => $request['slider_image']
+            'slider_image' => $request['slider_image'],
+            'popularidad' => $request['popularidad']
         ]);
 
         if (isset($request['slider'])){
@@ -143,7 +144,7 @@ class PeliculaController extends Controller
      */
 
     public function getAll(){
-        $peliculas = Pelicula::all();
+        $peliculas = Pelicula::orderBy('estreno', 'desc')->get();
 
         foreach ( $peliculas as $pelicula ){
             $pelicula['sesiones'] = $pelicula->sesiones();
