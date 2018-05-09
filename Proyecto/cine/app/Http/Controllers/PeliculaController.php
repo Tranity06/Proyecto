@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pelicula;
+use App\Models\Resena;
+use App\Models\Sesion;
 
 class PeliculaController extends Controller
 {
@@ -140,7 +142,6 @@ class PeliculaController extends Controller
         $peliculas = Pelicula::all();
 
         foreach ( $peliculas as $pelicula ){
-            $pelicula['resenas'] = $pelicula->resenas();
             $pelicula['sesiones'] = $pelicula->sesiones();
         }
 
@@ -149,8 +150,15 @@ class PeliculaController extends Controller
 
     public function getOne($idPelicula){
         $pelicula = Pelicula::find($idPelicula);
-        $pelicula['resenas'] = $pelicula->resenas();
         $pelicula['sesiones'] = $pelicula->sesiones();
         return $pelicula;
+    }
+
+    public function getResenas($idPelicula){
+        return Resena::where('pelicula_id', $idPelicula)->get();
+    }
+
+    public function getSesiones($fecha){
+        return Sesion::where('fecha', $fecha)->get();
     }
 }
