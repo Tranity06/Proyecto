@@ -39,7 +39,6 @@ const dict = {
 Validator.localize('es', dict);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('entrada-component', require('./components/EntradaComponent.vue'));
 Vue.component('seat-component', require('./components/SeatComponent.vue'));
 
 import App from './views/App';

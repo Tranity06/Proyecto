@@ -9,6 +9,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import Register from './views/Register';
 import Profile from './views/Profile';
+import Entrada  from './components/EntradaComponent';
 
 const routes = [
         {
@@ -35,6 +36,12 @@ const routes = [
             path: '/profile',
             name: 'profile',
             component: Profile,
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/entrada',
+            name: 'entrada',
+            component: Entrada,
             meta: { requiresAuth: true }
         },
 
