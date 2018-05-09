@@ -24,13 +24,13 @@ class ProductoIngrediente extends Model
      * Devuelve el producto.
      */
     public function producto(){
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Producto::class)->get();
     }
 
     /**
      * Devuelve el ingrediente.
      */
     public function ingrediente(){
-        return $this->belongsTo(Ingrediente::class);
+        return $this->belongsTo(Ingrediente::class)->get();
     }
 }

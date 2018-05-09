@@ -26,6 +26,6 @@ class Resena extends Model
      * Devuelve el usuario al que pertenece.
      */
     public function usuario(){
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Usuario::class)->get();
     }
 }

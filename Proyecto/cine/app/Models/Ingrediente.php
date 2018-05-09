@@ -19,6 +19,6 @@ class Ingrediente extends Model
      * Devuelve los productos que contienen este ingrediente.
      */
     public function productos(){
-        return $this->belongsToMany(Producto::class)->withTimestamps();
+        return $this->belongsToMany(Producto::class)->get();
     }
 }
