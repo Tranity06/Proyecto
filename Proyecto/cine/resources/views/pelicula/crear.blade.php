@@ -108,7 +108,7 @@
                     "data": "{}"
                 }
 
-                $.ajax(settings).done(function (response) {console.log(response);
+                $.ajax(settings).done(function (response) { console.log(response);
                     var titulo = response.title;
                     var titulo_original = response.original_title;
                     var estreno = response.release_date;
@@ -170,6 +170,7 @@
 
                     $('#form_trailer').val( 'https://www.youtube.com/watch?v='+response.videos.results[0]['key'] );
                     $('#form_slider_image').val( 'https://image.tmdb.org/t/p/w500'+response.backdrop_path );
+                    $('#form_popularidad').val( response.popularity );
                 });
             });
 
@@ -245,5 +246,6 @@
         <input type="text" id="form_poster" name="poster"/>
         <input type="checkbox" id="form_slider" name="slider"/>
         <input type="text" id="form_slider_image" name="slider_image"/>
+        <input type="hidden" id="form_popularidad" name="popularidad"/>
     </form>
 @stop

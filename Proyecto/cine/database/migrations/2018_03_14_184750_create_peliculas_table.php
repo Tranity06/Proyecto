@@ -23,12 +23,13 @@ class CreatePeliculasTable extends Migration
             $table->string('generos')->nullable();
             $table->string('director')->nullable();
             $table->string('actores')->nullable();
-            $table->string('sinopsis', 800 )->nullable();
+            $table->string('sinopsis', 1500 )->nullable();
             $table->unsignedInteger('duracion')->nullable();
             $table->string('cartel')->nullable();
             $table->string('trailer')->nullable();
             $table->boolean('slider')->default(0);
             $table->string('slider_image')->nullable();
+            $table->decimal('popularidad', 10, 6);
             
             /*
             //Clave foráneas CALIFICACION_EDAD.
