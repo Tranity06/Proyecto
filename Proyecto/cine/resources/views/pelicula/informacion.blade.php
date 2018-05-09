@@ -1,6 +1,6 @@
 @extends('templates.default')
 
-@section('estilos')
+@section('header')
     <link href="{{ asset('css/pelicula.css') }}" media="all" rel="stylesheet" type="text/css" />
 @stop
 

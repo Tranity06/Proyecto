@@ -21,7 +21,7 @@
 
 @section('migas')
     <ol class="breadcrumb">
-        <li><a href="\admin"></i> Home</a></li>
+        <li><a href="{{ route('admin.dashboard') }}"></i> Home</a></li>
         <li class="active">Crear nuevo usuario</li>
     </ol>
 @endsection
@@ -38,6 +38,8 @@
             <div>
                 <p>Email: {{$nuevo_admin->email}} </p>
             </div>
+            <a href="{{ route('admin.crearAdmin.get') }}"><button class="btn btn-primary">Crear otro usuario</button></a>
+            <a href="{{ route('admin.listarAdmin') }}"><button class="btn btn-primary">Ver usuarios registrados</button></a>
         </div>
     </div>
 @stop

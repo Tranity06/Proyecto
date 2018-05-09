@@ -1,16 +1,11 @@
 @extends('templates.default')
 
 @section('content')
-<section class="section">
+<section class="section" style="height: 100vh">
         <div class="container">
             <div class="columns">
-                <div class="column">
-                    <h1 class="is-size-3">No tienes Cuenta?</h1>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia nostrum dignissimos obcaecati iusto! Ex quasi alias id, error nesciunt accusantium eum ipsum ut reprehenderit, voluptatibus exercitationem dolorem doloremque aperiam.
-                </div>
-
-                <div class="column">
-                    <form method="post" action="{{ route('auth.signup') }}">
+                <div class="column is-narrow">
+                    <form method="post" action="{{ route('auth.signup') }}" class="box-form">
                       <div class="field">
                         <label class="label">Introduce tu nombre</label>
                         <div class="control has-icons-left has-icons-right">
@@ -86,10 +81,14 @@
                       </div>
                       
                       <div class="control">
-                          <button class="button is-primary">Submit</button>
+                          <button class="button is-primary">Registrarme</button>
                       </div>
                       {{ csrf_field() }}
                     </form>
+                </div>
+                <div class="column is-half">
+                    <h1 class="is-size-3">No tienes Cuenta?</h1>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia nostrum dignissimos obcaecati iusto! Ex quasi alias id, error nesciunt accusantium eum ipsum ut reprehenderit, voluptatibus exercitationem dolorem doloremque aperiam.
                 </div>
             </div>
         </div>

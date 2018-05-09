@@ -108,20 +108,7 @@ return [
     */
 
     'menu' => [
-        /*'MAIN NAVIGATION',
-        [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],*/
-        'ACCOUNT SETTINGS',
+        'ADMINISTRADORES',
         [
             'text' => 'Perfil',
             'url'  => 'admin/settings',
@@ -139,48 +126,55 @@ return [
                     'text' => 'Ver todos',
                     'url'  => 'admin/administradores',
                 ],
-                /*[
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],*/
             ],
         ],
-        'LABELS',
+        'CINE',
         [
-            'text'       => 'Important',
-            'icon_color' => 'red',
+            'text'       => 'Películas',
+            'submenu' => [
+                [
+                    'text' => 'Registrar nueva',
+                    'url'  => 'pelicula/crear',
+                ],
+                [
+                    'text' => 'Ver todas',
+                    'url'  => 'peliculas/mostrar',
+                ],
+            ]
         ],
         [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
+            'text'       => 'Sala',
+            'url'  => '#',
         ],
         [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
+            'text'       => 'Sesiones',
+            'url'  => '#',
+        ],
+        [
+            'text'       => 'Slider',
+            'url'  => 'slider',
+        ],
+        'TIENDA',
+        [
+            'text'    => 'Productos',
+            'submenu' => [
+                [
+                    'text' => 'Crear',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Ver todos',
+                    'url'  => '#',
+                ],
+            ]
+        ],
+        [
+            'text'       => 'Menús',
+            'url'  => '#',
+        ],
+        [
+            'text'       => 'Sesiones',
+            'url'  => '#',
         ],
     ],
 

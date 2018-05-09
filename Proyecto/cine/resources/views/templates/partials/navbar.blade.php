@@ -1,8 +1,11 @@
-<nav class="navbar">
+<nav class="navbar is-fixed-top">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item">
-                <img src="https://bulma.io/images/bulma-logo.png" alt="Logo">
+            <a class="navbar-item" href="{{ route('home') }}">
+                <div class="logo-container">
+                    <img src="{{ asset('48px.png') }}" alt="Logo">
+                    <span>Palomitas time</span>
+                </div>
             </a>
             <span class="navbar-burger burger" data-target="navbarMenuHeroA">
                 <span></span>
@@ -28,17 +31,13 @@
                       <div class="dropdown is-hoverable">
                           <div class="dropdown-trigger">
                               <img class="avatar"
-                                   src="https://pbs.twimg.com/profile_images/842007472101552130/H2PXe1J6_normal.jpg"
+                                   src="/uploads/avatars/{{ Auth::user()->avatar }}"
                                    aria-haspopup="true" aria-controls="dropdown-menu">
                           </div>
                           <div class="dropdown-menu" id="dropdown-menu" role="menu">
                             <div class="dropdown-content">
-                              <a href="#" class="dropdown-item">
-                                Perfil
-                              </a>
-                              <a class="dropdown-item">
-                                No se que mas
-                              </a>
+                              <a href="{{ url('/profile') }}" class="dropdown-item">Perfil</a>
+                              <a class="dropdown-item">No se que mas</a>
                               <hr class="dropdown-divider">
                               <a href="{{ route('auth.logout') }}" class="dropdown-item">
                                  Salir
@@ -50,7 +49,10 @@
                     @else
                         <a class="button is-primary" href="{{ route('auth.login') }}">
                     <span>Entrar</span>
-                  </a>
+                        </a>
+                        <a href="http://www.facebook.com" class="centeredIcon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
                     @endif
                 </span>
             </div>

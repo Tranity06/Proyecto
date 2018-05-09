@@ -1,9 +1,11 @@
 @extends('templates.default')
 
-@section('estilos')
+@section('header')
     <link href="{{ asset('css/home.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/slick/slick.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/slick/slick-theme.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/efectos/texto.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/modal/lity.css') }}" media="all" rel="stylesheet" type="text/css" />
 @stop
 
 @section('content')
@@ -13,13 +15,13 @@
                 <img src="https://img2.goodfon.ru/original/1600x900/c/e7/justice-league-liga.jpg" alt="Liga de la justicia" class="img-responsive">
                 <div class="slider-informacion">
                     <div class="info-pelicula">
-                        <h1 class="is-size-1-desktop is-size-3-tablet is-size-4-mobile has-text-white has-text-weight-bold">LIGA DE LA JUSTICIA</h1>
-                        <h2 class="is-size-5-tablet is-size-6-mobile is-size-4-desktop has-text-white">CIENCIA FICCIÓN ACCIÓN </h2>
-                        <a class="trailer button is-link is-rounded is-large is-size-6-mobile">Ver Trailer</a>
+                        <h1 class="reveal-text titulo is-size-1-desktop is-size-3-tablet is-size-4-mobile has-text-white has-text-weight-bold">LIGA DE LA JUSTICIA</h1>
+                        <h2 class="fade fade-subtitulo is-size-5-tablet is-size-6-mobile is-size-4-desktop has-text-white">CIENCIA FICCIÓN ACCIÓN </h2>
+                        <a class="fade fade-boton trailer button is-link is-rounded is-large is-size-6-mobile">Ver Trailer</a>
                     </div>
                     <div class="fecha">
-                        <span class="is-size-4-tablet is-size-6-mobile is-size-3-desktop has-text-white has-text-weight-normal">Fecha de estreno</span>
-                        <span class="is-size-5-tablet is-size-6-mobile is-size-4-desktop has-text-info has-text-weight-light">15 Oct, 2015</span>
+                        <span class="fade fade-estreno is-size-4-tablet is-size-6-mobile is-size-3-desktop has-text-white has-text-weight-normal">Fecha de estreno</span>
+                        <span class="fade fade-estreno-fecha is-size-5-tablet is-size-6-mobile is-size-4-desktop has-text-info has-text-weight-light">15 Oct, 2015</span>
                     </div>
                 </div>
             </div>
@@ -61,13 +63,17 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section-peliculas">
         <div class="container">
+
+            <div class="button">Filtro</div>
+
+
             <div class="columns is-multiline is-centered">
                 <div class="column is-3-desktop-only is-narrow">
-                    <div class="pelicula-card centrar-imagen">
-                        <div class="pelicula-trailer">
-                            <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                    <div class="pelicula-card centrar-imagen" style="background: url(https://www.dvdsreleasedates.com/posters/300/J/Jumanji-Welcome-to-the-Jungle-2017.jpg) top center no-repeat;">
+                        <div class="pelicula-trailer grow">
+                            <a href="//www.youtube.com/watch?v=Nigeq7rKL9A" data-lity><i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-horario">
@@ -80,16 +86,16 @@
                             <div class="pelicula-opciones">
                                 <div class="buttons">
                                     <a class="button is-link">Más</a>
-                                    <a class="button is-link">Comprar entrada</a>
+                                    <a href="{{ route('comprarentrada') }}" class="button is-link">Comprar entrada</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="column is-3-desktop-only is-narrow">
-                    <div class="pelicula-card centrar-imagen">
-                        <div class="pelicula-trailer">
-                            <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                    <div class="pelicula-card centrar-imagen" style="background: url({{ asset('starwars.jpg') }}) top center no-repeat;">
+                        <div class="pelicula-trailer grow">
+                            <a href="//www.youtube.com/watch?v=FbvPuv6Amjg" data-lity><i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-horario">
@@ -102,16 +108,16 @@
                             <div class="pelicula-opciones">
                                 <div class="buttons">
                                     <a class="button is-link">Más</a>
-                                    <a class="button is-link">Comprar entrada</a>
+                                    <a href="{{ route('comprarentrada') }}" class="button is-link">Comprar entrada</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="column is-3-desktop-only is-narrow">
-                    <div class="pelicula-card centrar-imagen">
-                        <div class="pelicula-trailer">
-                            <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                    <div class="pelicula-card centrar-imagen" style="background: url({{ asset('avengers.jpg') }}) top center no-repeat;">
+                        <div class="pelicula-trailer grow">
+                            <a href="//www.youtube.com/watch?v=sRzFjMGDx1s" data-lity><i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-horario">
@@ -124,16 +130,16 @@
                             <div class="pelicula-opciones">
                                 <div class="buttons">
                                     <a class="button is-link">Más</a>
-                                    <a class="button is-link">Comprar entrada</a>
+                                    <a href="{{ route('comprarentrada') }}" class="button is-link">Comprar entrada</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="column is-3-desktop-only is-narrow">
-                    <div class="pelicula-card centrar-imagen">
-                        <div class="pelicula-trailer">
-                            <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                    <div class="pelicula-card centrar-imagen" style="background: url({{ asset('dead.jpg') }}) top center no-repeat;">
+                        <div class="pelicula-trailer grow">
+                            <a href="//www.youtube.com/watch?v=N9q1mmPMcY0" data-lity><i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-horario">
@@ -146,7 +152,7 @@
                             <div class="pelicula-opciones">
                                 <div class="buttons">
                                     <a class="button is-link">Más</a>
-                                    <a class="button is-link">Comprar entrada</a>
+                                    <a href="{{ route('comprarentrada') }}" class="button is-link">Comprar entrada</a>
                                 </div>
                             </div>
                         </div>
@@ -166,6 +172,7 @@
 @section('javascript')
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/slick/slick.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/modal/lity.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('.slider').slick({
@@ -174,6 +181,22 @@
                 prevArrow: '.slider-container .prev',
                 nextArrow: '.slider-container .next',
             });
+            $('.slider').on('swipe', function(event, slick, direction){
+
+                    $('.titulo').removeClass('reveal-text');
+                    $('.fade-subtitulo').removeClass('fade');
+                    $('.fade-boton').removeClass('fade');
+                    $('.fade-estreno').removeClass('fade');
+                    $('.fade-estreno-fecha').removeClass('fade');
+
+                    setTimeout(function(){
+                        $('.titulo').addClass('reveal-text');
+                        $('.fade-subtitulo').addClass('fade');
+                        $('.fade-boton').addClass('fade');
+                        $('.fade-estreno').addClass('fade');
+                        $('.fade-estreno-fecha').addClass('fade');
+                    }, 50);
+                });
         });
     </script>
 @stop

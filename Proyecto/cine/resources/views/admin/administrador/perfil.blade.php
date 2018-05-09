@@ -14,6 +14,14 @@
         .errores{
             border-color: red;
         }
+
+        .ok {
+            color: green;
+        }
+
+        .no-ok {
+            color: red;
+        }
     </style>
 @stop
 
@@ -37,9 +45,11 @@
                 var $input = $(this).parent().prev().children().first();
                 var $form = $(this).parent().parent().parent()
                 var $cambio = $(this).parent().parent().parent().prev().children().first()
-                var $texto = ($input.val()).trim();
+                var $texto = $input.val().trim();
 
                 $input.removeClass('errores');
+                $cambio.removeClass('ok');
+                $cambio.removeClass('no-ok')
                 
                 if ( $texto != '') {
                     $.ajaxSetup({
@@ -48,14 +58,16 @@
                     $.ajax({
                         url: '/admin/comprobar',
                         type: 'POST',
-                        data: 'valor='+$texto,
+                        data: 'valor='+$texto+'&token=0',
                         success: function(e){
                             if ( e === 'existe'){
                                 $input.addClass('errores');
+                                $cambio.addClass('no-ok')
                                 $input.next().text("El valor introducido ya existe.");
                                 $input.next().slideDown("slow");
                             } else {
                                 $cambio.text($texto);
+                                $cambio.addClass('ok');
                                 $form.slideToggle("slow");
                                 $input.next().slideUp("slow");
                                 $input.next().text('');
@@ -92,7 +104,7 @@
                 e.preventDefault();
                 $('#errguardar').text();
                 if ( $('#errorpw').text()=='' && $('#errornombre').text()=='' && $('#erroremail').text()=='' ){
-                    infoform.submit(); //Falta action
+                    infoform.submit();
                 } else {
                     $('#errguardar').text('Comprueba que todos los campos son correctos.');
                 }
@@ -105,7 +117,7 @@
 
 @section('migas')
     <ol class="breadcrumb">
-        <li><a href="\admin"></i> Home</a></li>
+        <li><a href="{{ route('admin.dashboard') }}"></i> Home</a></li>
         <li class="active">Perfil</li>
     </ol>
 @endsection
@@ -116,8 +128,16 @@
             <h3 class="box-title">Datos de la cuenta</h3>
         </div>
         <div class="box-body">
-            <form name="infoform" action="/admin/modificaradmin" method="POST">
+
+            @if ( isset($correcto) )
+                <div class="callout callout-success">
+                    <p>Tus datos se han modificado correctamente.</p>
+                </div>
+            @endif
+
+            <form name="infoform" action="{{ route('admin.modificarPerfil') }}" method="POST">
                 {{ csrf_field() }}
+                <input type="hidden" name="token" value="1"/>
                 <div>
                     <p>Nombre: <span>{{$datos->name}}</span> <span class="glyphicon glyphicon-pencil mostrarForm"></span></p>
                     <div class="formularios" hidden>

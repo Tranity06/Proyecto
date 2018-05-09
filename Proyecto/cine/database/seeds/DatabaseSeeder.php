@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
             'calificaciones_edades',
             'generos',
             'peliculas',
-            'resenas',
+            'resenas',*/
             'salas',
             'butacas',
-            'sesiones',
+            /*'sesiones',
             'facturas',
             'butacas_reservadas',
             'categorias',
@@ -34,29 +34,33 @@ class DatabaseSeeder extends Seeder
             'menu_producto',
             'clave_admin',*/
             'administradores',
+            'peliculas'
         ]);
 
         //Ejecutar los siguientes Seeders
-        /*$this->call(UsuariosSeeder::class);
-        $this->call(CalificacionesEdadesSeeder::class);
-        $this->call(GenerosSeeder::class);
-        $this->call(PeliculasSeeder::class);
-        $this->call(ResenasSeeder::class);
-        $this->call(SalasSeeder::class);
-        $this->call(ButacasSeeder::class);
-        $this->call(SesionesSeeder::class);
-        $this->call(FacturasSeeder::class);
-        $this->call(ButacasReservadasSeeder::class);
-        $this->call(CategoriasSeeder::class);
-        $this->call(ProductosSeeder::class);
-        $this->call(LineasVentasSeeder::class);
-        $this->call(IngredientesSeeder::class);
-        $this->call(ProductosIngredientesSeeder::class);
-        $this->call(MenusSeeder::class);
-        $this->call(AdministradoresSeeder::class);
-        $this->call(ProductosMenusSeeder::class);
-        $this->call(ClaveAdminSeeder::class);*/
-        $this->call(AdministradorSeeder::class);
+//        $this->call(UsuariosSeeder::class);
+//        $this->call(CalificacionesEdadesSeeder::class);
+//        $this->call(GenerosSeeder::class);
+//        $this->call(PeliculasSeeder::class);
+//        $this->call(ResenasSeeder::class);
+        $this->call([
+            AdministradorSeeder::class,
+            SalaSeeder::class,
+            ButacaSeeder::class,
+            PeliculasSeeder::class,
+        ]);
+//        $this->call(SesionesSeeder::class);
+//        $this->call(FacturasSeeder::class);
+//        $this->call(ButacasReservadasSeeder::class);
+//        $this->call(CategoriasSeeder::class);
+//        $this->call(ProductosSeeder::class);
+//        $this->call(LineasVentasSeeder::class);
+//        $this->call(IngredientesSeeder::class);
+//        $this->call(ProductosIngredientesSeeder::class);
+//        $this->call(MenusSeeder::class);
+//        $this->call(AdministradoresSeeder::class);
+//        $this->call(ProductosMenusSeeder::class);
+//        $this->call(ClaveAdminSeeder::class);
     }
 
     /**

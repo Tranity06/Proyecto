@@ -36,12 +36,30 @@ Route::post('/login','AuthController@postLogin');
 
 Route::get('/logout','AuthController@getLogout')->name('auth.logout');
 
+Route::get('/profile', 'AuthController@profile')->name('auth.profile');
+
+Route::post('/profile', 'AuthController@update_avatar');
 
 /**
  * Verificar cuenta
  */
 
 Route::get('/verify/{token}','VerifyController@verify')->name('verify');
+
+
+/**
+ * Comprar entrada
+ */
+
+Route::get('/entrada','EntradaController@index')->name('comprarentrada');
+
+/**
+ * SPA
+ */
+
+Route::get('/spa',function (){
+    return view('spa');
+});
 
 /**
  * Authentication ADMIN
@@ -59,8 +77,32 @@ Route::get('/admin', 'Admin\Home@index');
    * Gestion ADMINISTRADORES
    */
   Route::get('admin/settings', 'Admin\AdministradoresController@mostrarDetalleCuenta')->name('admin.perfil');
-  Route::post('admin/comprobar','Admin\AdministradoresController@comprobarDatos');
-  Route::post('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin');
-  Route::get('admin/crearadministrador', 'Admin\AdministradoresController@crearGet');
-  Route::post('admin/crearadministrador', 'Admin\AdministradoresController@crearPost');
-  Route::get('admin/administradores', 'Admin\AdministradoresController@mostrar');
+  
+  Route::post('admin/comprobar','Admin\AdministradoresController@comprobarDatos'); //AJAX
+  Route::get('admin/comprobar','Admin\AdministradoresController@comprobarDatos');
+  
+  Route::post('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin')->name('admin.modificarPerfil');
+  Route::get('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin');
+
+  Route::get('admin/crearadministrador', 'Admin\AdministradoresController@crearGet')->name('admin.crearAdmin.get');
+  Route::post('admin/crearadministrador', 'Admin\AdministradoresController@crearPost')->name('admin.crearAdmin.post');
+  
+  Route::get('admin/administradores', 'Admin\AdministradoresController@mostrar')->name('admin.listarAdmin');
+  
+  Route::post('admin/borrar', 'Admin\AdministradoresController@borrar')->name('admin.borrarAdmin');
+  Route::get('admin/borrar', 'Admin\AdministradoresController@borrar');
+
+  /**
+   * Gestión PELÍCULAS
+   */
+  Route::get('pelicula/crear', 'PeliculaController@crear');
+  Route::post('pelicula/crear', 'PeliculaController@crearPost')->name('pelicula.crear');
+  Route::get('peliculas/mostrar', 'PeliculaController@mostrar');
+  Route::post('peliculas/borrar', 'PeliculaController@borrar');
+
+  /**
+   * Gestión SLIDER
+   */
+  Route::get('slider', 'PeliculaController@mostrarSlider');
+  Route::post('slider/borrar', 'PeliculaController@borrarSlider');
+  Route::post('/slider/anadir', 'PeliculaController@anadirSlider');

@@ -20,7 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->integer('tlf', false, true)->unique();
-            $table->string('avatar')->nullable();            
+            $table->string('avatar')->default('default.jpg');
             $table->integer('puntos', false, true)->default('0');
             $table->string('token')->nullable();
             $table->rememberToken();
