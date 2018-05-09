@@ -24,13 +24,13 @@ class ProductoMenu extends Model
      * Devuelve el producto.
      */
     public function producto(){
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Producto::class)->get();
     }
 
     /**
      * Devuelve el menu.
      */
     public function menu(){
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Menu::class)->get();
     }
 }

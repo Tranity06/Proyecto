@@ -25,6 +25,6 @@ class CalificacionEdad extends Model
      * Devuelve todas las películas que tienen esta calificación por edad.
      */
     public function peliculas(){
-        return $this->hasMany(pelicula::class);
+        return $this->hasMany(pelicula::class)->get();
     }
 }

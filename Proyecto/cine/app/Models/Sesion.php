@@ -24,13 +24,13 @@ class Sesion extends Model
      * Devuelve la película que se proyecta en la sesión.
      */
     public function pelicula(){
-        return $this->belongsTo(Pelicula::class);
+        return $this->belongsTo(Pelicula::class)->get();
     }
 
     /**
      * Devuelve la sala en la que se da la sesión.
      */
     public function sala(){
-        return $this->belongsTo(Sala::class);
+        return $this->belongsTo(Sala::class)->get();
     }
 }

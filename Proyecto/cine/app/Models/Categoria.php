@@ -19,6 +19,6 @@ class Categoria extends Model
      * Devuelve los productos que pertenecen a esta categoría.
      */
     public function productos(){
-        return $this->hasMany(Producto::class);
+        return $this->hasMany(Producto::class)->get();
     }
 }

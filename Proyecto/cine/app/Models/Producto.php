@@ -19,20 +19,20 @@ class Producto extends Model
      * Devuelve la categoría del producto.
      */
     public function categoria(){
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class)->get();
     }
 
     /**
      * Devuelve todas los ingredientes del producto
      */
     public function ingredientes(){
-        return $this->belongsToMany(Ingrediente::class)->withTimestamps();
+        return $this->belongsToMany(Ingrediente::class)->get();
     }
 
     /**
      * Devuelve los menús en los que se incluye este producto
      */
     public function menus(){
-        return $this->belongsToMany(Menu::class)->withTimestamps();
+        return $this->belongsToMany(Menu::class)->get();
     }
 }

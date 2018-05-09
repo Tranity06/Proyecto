@@ -24,13 +24,13 @@ class LineaVenta extends Model
      * Devuelve el producto al que hace referencia.
      */
     public function producto(){
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Producto::class)->get();
     }
 
     /**
      * Devuelve la factura a la que pertenece.
      */
     public function butaca(){
-        return $this->belongsTo(Factura::class);
+        return $this->belongsTo(Factura::class)->get();
     }
 }

@@ -37,13 +37,13 @@ class Pelicula extends Model
      * Devuelve todas las reseñas de la película.
      */
     public function resenas(){
-        return $this->hasMany(Resena::class);
+        return $this->hasMany(Resena::class)->get();
     }
 
     /**
      * Devuelve todas las sesiones de la película.
      */
     public function sesiones(){
-        return $this->hasMany(Sesion::class);
+        return $this->hasMany(Sesion::class)->get();
     }
 }

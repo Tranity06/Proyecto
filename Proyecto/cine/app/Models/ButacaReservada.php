@@ -24,20 +24,20 @@ class ButacaReservada extends Model
      * Devuelve la sesión de la película reservada.
      */
     public function sesion(){
-        return $this->belongsTo(Sesion::class);
+        return $this->belongsTo(Sesion::class)->get();
     }
 
     /**
      * Devuelve la butaca a la que hace referencia.
      */
     public function butaca(){
-        return $this->belongsTo(Butaca::class);
+        return $this->belongsTo(Butaca::class)->get();
     }
 
     /**
      * Devuelve la factura a la que pertenece la reserva.
      */
     public function factura(){
-        return $this->belongsTo(Factura::class);
+        return $this->belongsTo(Factura::class)->get();
     }
 }

@@ -19,13 +19,13 @@ class Factura extends Model
      * Devuelve las butacas reservadas que pertenecen a la factura.
      */
     public function butacas_reservadas(){
-        return $this->belongsTo(Butaca_reservada::class);
+        return $this->belongsTo(Butaca_reservada::class)->get();
     }
 
     /**
      * Devuelve todas las líneas de venta de la factura.
      */
     public function lineas_venta(){
-        return $this->hasMany(LineaVenta::class);
+        return $this->hasMany(LineaVenta::class)->get();
     }
 }
