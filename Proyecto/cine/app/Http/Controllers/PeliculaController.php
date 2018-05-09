@@ -32,6 +32,8 @@ class PeliculaController extends Controller
             return view('pelicula.crear', compact('admin', 'repetida'));
         }
 
+        $poster = str_replace('w500', 'w342', $request['poster']);
+
         $pelicula = Pelicula::create([
             'idtmdb' => $request['idtmdb'],
             'titulo' => $request['titulo'],
@@ -42,7 +44,7 @@ class PeliculaController extends Controller
             'actores' => $request['actores'],
             'sinopsis' => $request['sinopsis'],
             'duracion' => $request['duracion'],
-            'cartel' => $request['poster'],
+            'cartel' => $poster,
             'trailer' => $request['trailer'],
             'slider_image' => $request['slider_image']
         ]);
