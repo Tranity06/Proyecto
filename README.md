@@ -7,3 +7,5 @@ crear tablas (ejecutar migraciones):
   
 Aplicacion clientes (/)
 Aplicacion administradores (/admin)
+
+Bug Seeders: composer dump-autoload
