@@ -9,6 +9,8 @@ use App\Models\Sesion;
 
 class PeliculaController extends Controller
 {
+    const TAM_CARTEL = 'w342';
+
     public function crear(Request $request){
         $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
         
@@ -32,7 +34,7 @@ class PeliculaController extends Controller
             return view('pelicula.crear', compact('admin', 'repetida'));
         }
 
-        $poster = str_replace('w500', 'w342', $request['poster']);
+        $poster = str_replace('w500', self::TAM_CARTEL, $request['poster']);
 
         $pelicula = Pelicula::create([
             'idtmdb' => $request['idtmdb'],
