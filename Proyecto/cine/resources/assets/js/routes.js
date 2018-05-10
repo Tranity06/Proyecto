@@ -4,7 +4,7 @@ import store from './store';
 
 Vue.use(VueRouter);
 
-import Hello from './views/Hello';
+import Pelicula from './views/Pelicula';
 import Home from './views/Home';
 import Login from './views/Login';
 import Register from './views/Register';
@@ -18,9 +18,9 @@ const routes = [
             component: Home
         },
         {
-            path: '/hello',
-            name: 'hello',
-            component: Hello,
+            path: '/pelicula/:id',
+            name: 'pelicula',
+            component: Pelicula,
         },
         {
             path: '/login',

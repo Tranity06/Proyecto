@@ -14,7 +14,9 @@
                         <div class="pelicula-body">
                             <div class="pelicula-opciones">
                                 <div class="buttons">
-                                    <a class="button is-rounded"><img src="icons/arrow-pointing-to-right.svg"></a>
+                                    <router-link class="button is-rounded" :to="'/pelicula/'+peliculas[key].id">
+                                        <img src="icons/arrow-pointing-to-right.svg">
+                                    </router-link>
                                     <router-link class="button is-rounded" :to="{ name: 'entrada' }">
                                         Comprar entrada
                                     </router-link>
@@ -60,6 +62,10 @@
 
 <style scoped>
     /* Pelicula Card */
+
+    .section-peliculas{
+        margin-bottom: 1.5rem;
+    }
 
     .pelicula-card {
         width: 250px;
