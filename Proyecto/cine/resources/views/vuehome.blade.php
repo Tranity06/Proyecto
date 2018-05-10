@@ -18,6 +18,19 @@
             margin-top: .5rem !important;
             font-size: .8rem !important;
         }
+
+        .img-responsive {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        @media only screen and (max-width: 1024px) {
+            .img-responsive {
+                height: 70vh;
+            }
+        }
     </style>
 </head>
 <body>

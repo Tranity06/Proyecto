@@ -5,7 +5,7 @@
     <link href="{{ asset('css/slick/slick.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/slick/slick-theme.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/efectos/texto.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/modal/lity.css') }}" media="all" rel="stylesheet" type="text/css" />
+
 @stop
 
 @section('content')
