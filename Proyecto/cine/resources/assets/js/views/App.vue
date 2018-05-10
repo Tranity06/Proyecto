@@ -1,17 +1,22 @@
 <template>
     <div>
-        <h1>Vue Router Demo App</h1>
+        <navbar-component></navbar-component>
 
-        <p>
-            <router-link :to="{ name: 'home' }">Home</router-link> |
-            <router-link :to="{ name: 'hello' }">Hello World</router-link>
-        </p>
-
-        <div class="container">
-            <router-view></router-view>
-        </div>
+        <router-view></router-view>
+        <notifications group="auth" />
+        <footer-component></footer-component>
     </div>
 </template>
 <script>
-    export default {}
+    import NavbarComponent from '../components/NavbarComponent';
+    import FooterComponent from "../components/FooterComponent";
+    export default {
+        components: {
+            FooterComponent,
+            NavbarComponent
+        },
+    }
 </script>
+<style scoped>
+
+</style>
