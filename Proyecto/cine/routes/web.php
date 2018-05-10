@@ -103,6 +103,6 @@ Route::get('/admin', 'Admin\Home@index');
   /**
    * Gestión SLIDER
    */
-  Route::get('slider', 'PeliculaController@mostrarSlider');
-  Route::post('slider/borrar', 'PeliculaController@borrarSlider');
-  Route::post('/slider/anadir', 'PeliculaController@anadirSlider');
+  Route::get('slider', 'SliderController@mostrar');
+  Route::post('slider/borrar', 'SliderController@borrar');
+  Route::post('/slider/anadir', 'SliderController@anadir');
