@@ -13,7 +13,6 @@ class CreatePeliculasTable extends Migration
      */
     public function up()
     {
-        Schema::defaultStringLength(191);
         Schema::create('peliculas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('idtmdb');
