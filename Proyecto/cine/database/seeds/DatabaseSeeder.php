@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
             'generos',
             'peliculas',
             'resenas',*/
-     //       'salas',
-     //       'butacas',
-     //       'sesiones',
+            'salas',
+            'butacas',
+            'sesiones',
             /*'facturas',
             'butacas_reservadas',
             'categorias',
@@ -44,11 +44,11 @@ class DatabaseSeeder extends Seeder
 //        $this->call(PeliculasSeeder::class);
 //        $this->call(ResenasSeeder::class);
         $this->call([
-      //      AdministradorSeeder::class,
-     //       SalaSeeder::class,
-     //       ButacaSeeder::class,
+            AdministradorSeeder::class,
+            SalaSeeder::class,
+            ButacaSeeder::class,
             PeliculasSeeder::class,
-     //       SesionesSeeder::class
+            SesionesSeeder::class
         ]);
 //        $this->call(FacturasSeeder::class);
 //        $this->call(ButacasReservadasSeeder::class);

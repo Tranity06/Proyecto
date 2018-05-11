@@ -31,7 +31,7 @@
                           <div class="dropdown is-hoverable">
                               <div class="dropdown-trigger">
                                   <img class="avatar"
-                                       :src="'uploads/avatars/'+getAvatar"
+                                       src="uploads/avatars/default.jpg"
                                        aria-haspopup="true" aria-controls="dropdown-menu">
                               </div>
                               <div class="dropdown-menu" id="dropdown-menu" role="menu">
@@ -73,9 +73,10 @@
             StoreStateEnabled() {
                 return store.state.isLoggedIn;
             },
-            getAvatar(){
-                return JSON.parse(localStorage.getItem('user')).avatar;
-            }
+            // getAvatar(){
+            //     let avatar =  JSON.parse(localStorage.getItem('user')).avatar==null;
+            //     return avatar != null ? avatar : 'default.jpg' ;
+            // }
         },
         methods: {
             Logout() {
