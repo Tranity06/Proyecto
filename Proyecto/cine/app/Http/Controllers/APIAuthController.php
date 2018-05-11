@@ -53,7 +53,7 @@ class APIAuthController extends Controller
         $subject = "Please verify your email address.";
         Mail::send('verify', ['name' => $name, 'verification_code' => $verification_code],
             function ($mail) use ($email, $name, $subject) {
-                $mail->from(getenv('MAIL_CORREO'), "Palomitas Time");
+                $mail->from(getenv('MAIL_USERNAME'), "Palomitas Time");
                 $mail->to($email, $name);
                 $mail->subject($subject);
             });
