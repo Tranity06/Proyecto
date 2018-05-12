@@ -12,71 +12,81 @@ class AdministradoresController extends Controller
      * Muestra la información del usuario logueado
      */
     public function mostrarDetalleCuenta(Request $request){
-        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
-        
-        // Si no hay ningún usuario logueado regirige al login
+            // Redirigir al login si no hay admin logueado
+        $admin = $request->session()->get('nombre');
         if ($admin == null){
             return redirect('/admin');
         }
-        
-        //Si hay un usuario logueado muestra sus datos
-        $datos = Administrador::where('name', $admin)->first(); //Extraer los datos del usuario
-        //Es necesrio pasar el parámetro 'admin' con el nombre del admin
+            //Extraer los datos del administrador logueado
+        $datos = Administrador::where('name', $admin)->first();
+            //Es necesrio pasar el parámetro 'admin' con el nombre del admin
         return view('admin.administrador.perfil', compact('datos', 'admin'));          
     }
 
     /**
      * AJAX - Comprueba que el dato del administrador enviado no existe en la base de datos
-     * return 'valido' -> el usuario no existe
+     * @return 'valido' -> el usuario no existe
      *        'existe' ->el usuario existe
      */
     public function comprobarDatos(Request $request){
-        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
-        
-        // Si no hay ningún usuario logueado o si no recibe un token del formulario regirige al login
-        if ( $admin == null || !isset($request['token']) ){
+            // Redirigir al login si no hay admin logueado
+        $admin = $request->session()->get('nombre');
+        if ($admin == null){
             return redirect('/admin');
         }
-
+            // Redirigir si la petidicón es de tipo GET
+        if ( $request->isMethod('get')){
+            return redirect('admin/settings');
+        }
+            //Comprobar si el dato recibido corresponde a un email o a un nombre
+            //Comprobar que no existe en la bbdd
         $recibido = $request['valor'];
-        //Comprobar si el dato recibido corresponde a un email o no
         if ( strpos($recibido, '@') == null ){
             $sol = $this->comprobarNombre($recibido);
-            return $sol;
+            return response('nombre', $sol);
         }
         $sol = $this->comprobarEmail( $recibido );
-        return $sol;            
+        return response('email', $sol);;            
     }
 
     /**
-     * Guarda los datos que el usuario ha modificado en un formulario sobre el
-     * administrador logueado.
+     * Guarda los datos del administrador que se han modificado.
+     * Comprueba si son datos propios del usuario logueado o de otro usuario.
+     * Sólo permite modificar datos agenos al super usuario.
      */
     public function modificarAdmin(Request $request){
+            // Redirigir al login si no hay admin logueado
         $admin = $request->session()->get('nombre');
-
-        // Si no hay ningún usuario logueado regirige al login
-        if ( $admin == null || !isset($request['token'])  ){
+        if ($admin == null){
             return redirect('/admin');
         }
-
-        //Extrae todos los datos del usuario que se va a modificar
+            // Redirigir si la petidicón es de tipo GET
+        if ( $request->isMethod('get')){
+            return redirect('admin/settings');
+        }
+        
+        //Si se modifica datos de otro administrador distindo al logueado
         if ( isset($request['id']) ){
-            $datos = Administrador::find($request['id']); //Si no es el administrador logueado
+            //Solo el superadmin puede hacerlo
+            if ( Administrador::select('id')->where('name', $admin) != 1 ){
+                return redirect('admin/administradores');
+            }
+            $datos = Administrador::find($request['id']);
         } else {
-            $datos = Administrador::where('name', $admin)->first(); // Si es el administrador logueado
+            // Si es el administrador logueado
+            $datos = Administrador::where('name', $admin)->first();
         }        
-
-        //Quitar los posibles espacios en blanco que vengan en los datos
+            //Quitar los espacios en blanco que vengan en los datos
         $nombre = trim($request['nombre']);
         $email = trim($request['email']);
         $pw = trim($request['pw']);
 
-        //Comprueba que no se repiten los datos y si son válidos los actualiza en los datos del usuario
-        if ( $this->comprobarNombre($nombre) === "valido" && $this->comprobarEmail($email) === "valido" ){
+        //Compruebar que los datos no existen en la bbdd
+        if ( $this->comprobarNombre($nombre) === 201 && $this->comprobarEmail($email) === 201 ){
             if ( strlen($nombre) > 0 ){
                 $datos->name = $nombre;
                 $admin = $nombre;
+                //Modificar la sesión si se modifica el admin logueado
                 if ( !isset($request['id']) ){
                     $request->session()->put('nombre', $nombre);
                 }
@@ -89,24 +99,24 @@ class AdministradoresController extends Controller
             }
             $datos->save();
             $correcto = 'S';
-            
         }
 
+        //Volver a la lista de administradores.
         if ( isset($request['id']) ){
             return redirect('admin/administradores') ;
         }
+        //Volver al perfil si se modifican datos de perfil.
         return view('admin.administrador.perfil', compact('datos', 'admin', 'correcto'));
     }
-
+    
     /**
      * Si el usuario logueado es el usuario principal devuelve la vista del formulario para crear 
      * un nuevo administrador.
      * Si no lo es devuelve un mensaje de error.
      */
     public function crearGet (Request $request){
-        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
-        
-        // Si no hay ningún usuario logueado regirige al login
+        // Redirigir al login si no hay admin logueado
+        $admin = $request->session()->get('nombre');
         if ($admin == null){
             return redirect('/admin');
         }
@@ -122,7 +132,7 @@ class AdministradoresController extends Controller
         $mensajeError = "Sólo el adminstrador principal puede crear nuevas cuentas de usuario.";
         return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));
     }
-
+    
     /**
      * Guarda en la base de datos un nuevo administrador si los datos son correctos.
      */
@@ -135,15 +145,41 @@ class AdministradoresController extends Controller
             return redirect('/admin');
         }
 
-        $nuevo_admin = Administrador::create([
-            'name' => $request['nombre'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['pw'])
-        ]);
+        $administrador = Administrador::where('name', $admin)->first();
+        if ( $administrador->id == 1 ){
+            $nuevo_admin = Administrador::create([
+                'name' => $request['nombre'],
+                'email' => $request['email'],
+                'password' => bcrypt($request['pw'])
+            ]);
 
-        return view('admin.administrador.crearPost', compact('admin','nuevo_admin'));
+            return view('admin.administrador.crearPost', compact('admin','nuevo_admin'));
+        }
+
+        //Si no es el administrador principal devuelve un mensaje de error.
+        $tipoError = "Permiso denegado";
+        $mensajeError = "Sólo el adminstrador principal puede crear nuevas cuentas de usuario.";
+        return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     /**
      * Muestra la lista de los administradores registrados en la base de datos.
      */
@@ -194,9 +230,9 @@ class AdministradoresController extends Controller
     private static function comprobarNombre( $nombre ){
         $administrador = Administrador::where('name', $nombre)->first();
         if ( $administrador == null ){
-            return "valido";
+            return 201;
         }
-        return "existe";
+        return 204;
     }
 
     /**
@@ -207,8 +243,8 @@ class AdministradoresController extends Controller
     private static function comprobarEmail( $email ){
         $administrador = Administrador::where('email', $email)->first();
         if ( $administrador == null ){
-            return "valido";
+            return 201;
         }
-        return "existe";
+        return 204;
     }
 }

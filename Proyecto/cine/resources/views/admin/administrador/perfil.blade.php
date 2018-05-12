@@ -59,18 +59,19 @@
                         url: '/admin/comprobar',
                         type: 'POST',
                         data: 'valor='+$texto+'&token=0',
-                        success: function(e){
-                            if ( e === 'existe'){
-                                $input.addClass('errores');
-                                $cambio.addClass('no-ok')
-                                $input.next().text("El valor introducido ya existe.");
-                                $input.next().slideDown("slow");
-                            } else {
+                        statusCode:{
+                            201: function (){
                                 $cambio.text($texto);
                                 $cambio.addClass('ok');
                                 $form.slideToggle("slow");
                                 $input.next().slideUp("slow");
                                 $input.next().text('');
+                            },
+                            204: function (){
+                                $input.addClass('errores');
+                                $cambio.addClass('no-ok')
+                                $input.next().text("El valor introducido ya existe.");
+                                $input.next().slideDown("slow");
                             }
                         },
                         async: true,
