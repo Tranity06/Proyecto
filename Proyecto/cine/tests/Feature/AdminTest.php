@@ -173,13 +173,13 @@ class AdminTest extends TestCase
     }
 
     /** @test */
-    /* public function ruta_modificaradmin_post_no_superadmin_otroadmin_con_sesion(){
+    public function ruta_modificaradmin_post_con_sesion_no_superadmin_otroadmin(){
         $superadmin = Administrador::create([
             'id' => 1,
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456')
-        ]); dd(Administrador::find(1));
+        ]);
         $admin = Administrador::create([
             'id' => 2,
             'name' => 'John',
@@ -198,10 +198,10 @@ class AdminTest extends TestCase
             ->post('admin/modificaradmin', $datos, $headers)
             ->assertStatus(302)
             ->assertRedirect('/admin/administradores');
-    } */
+    }
 
     /** @test */
-    /* public function ruta_modificaradmin_post_superadmin_otroadmin_con_sesion(){
+    public function ruta_modificaradmin_post_con_sesion_superadmin_otroadmin_nombre_correcto(){
         $superadmin = Administrador::create([
             'id' => 1,
             'name' => 'Admin',
@@ -226,7 +226,89 @@ class AdminTest extends TestCase
             ->post('admin/modificaradmin', $datos, $headers)
             ->assertStatus(302)
             ->assertRedirect('/admin/administradores');
-    } */
+    }
+
+    /** @test */
+    public function ruta_modificaradmin_post_con_sesion_superadmin_otroadmin_nombre_incorrecto(){
+        $superadmin = Administrador::create([
+            'id' => 1,
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('123456')
+        ]);
+        $admin = Administrador::create([
+            'id' => 2,
+            'name' => 'John',
+            'email' => 'john@admin.com',
+            'password' => bcrypt('123456')
+        ]);
+        $datos = [
+            'id' => 2,
+            'nombre' => 'Admin',
+            'email' => '',
+            'pw' => ''
+        ];
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($superadmin)
+            ->withSession(['nombre' => 'Admin'] )
+            ->post('admin/modificaradmin', $datos, $headers)
+            ->assertStatus(302);
+    }
+
+    /** @test */
+    public function ruta_modificaradmin_post_con_sesion_superadmin_otroadmin_email_correcto(){
+        $superadmin = Administrador::create([
+            'id' => 1,
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('123456')
+        ]);
+        $admin = Administrador::create([
+            'id' => 2,
+            'name' => 'John',
+            'email' => 'john@admin.com',
+            'password' => bcrypt('123456')
+        ]);
+        $datos = [
+            'id' => 2,
+            'nombre' => '',
+            'email' => 'nuevo@mail.com',
+            'pw' => ''
+        ];
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($superadmin)
+            ->withSession(['nombre' => 'Admin'] )
+            ->post('admin/modificaradmin', $datos, $headers)
+            ->assertStatus(302)
+            ->assertRedirect('/admin/administradores');
+    }
+
+    /** @test */
+    public function ruta_modificaradmin_post_con_sesion_superadmin_otroadmin_email_incorrecto(){
+        $superadmin = Administrador::create([
+            'id' => 1,
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('123456')
+        ]);
+        $admin = Administrador::create([
+            'id' => 2,
+            'name' => 'John',
+            'email' => 'john@admin.com',
+            'password' => bcrypt('123456')
+        ]);
+        $datos = [
+            'id' => 2,
+            'nombre' => '',
+            'email' => 'admin@admin.com',
+            'pw' => ''
+        ];
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($superadmin)
+            ->withSession(['nombre' => 'Admin'] )
+            ->post('admin/modificaradmin', $datos, $headers)
+            ->assertStatus(302);
+    }
 
     /**********************************************************
      *          RUTA - '/admin/crearadministrador'
@@ -338,4 +420,73 @@ class AdminTest extends TestCase
     /**********************************************************
      *          RUTA - '/admin/borrar'
      **********************************************************/
+        /** @test */
+        public function ruta_borrar_get_sin_sesion(){
+            $this->get('admin/borrar')
+                ->assertStatus(302)
+                ->assertRedirect('/admin');
+        }
+    
+        /** @test */
+        public function ruta_borrar_get_con_sesion(){
+            $admin = Administrador::create([
+                'id' => 1,
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
+                'password' => bcrypt('123456')
+            ]);
+            $this->actingAs($admin)
+                ->withSession(['nombre' => 'Admin'] )
+                ->get('admin/borrar')
+                ->assertStatus(302)
+                ->assertRedirect('/admin');
+        }
+    
+        /** @test */
+        public function ruta_borrar_post_con_sesion_superadm(){
+            $admin1 = Administrador::create([
+                'id' => 1,
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
+                'password' => bcrypt('123456')
+            ]);
+            $admin2 = Administrador::create([
+                'id' => 5,
+                'name' => 'John',
+                'email' => 'john@admin.com',
+                'password' => bcrypt('123456')
+            ]);
+            $datos = [
+                'id' => 5
+            ];
+            $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+            $this->actingAs($admin1)
+                ->withSession(['nombre' => 'Admin'] )
+                ->post('admin/borrar', $datos, $headers)
+                ->assertStatus(204);
+        }
+    
+        /** @test */
+        public function ruta_borrar_post_con_sesion_no_superadm(){
+            $admin1 = Administrador::create([
+                'id' => 1,
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
+                'password' => bcrypt('123456')
+            ]);
+            $admin2 = Administrador::create([
+                'id' => 5,
+                'name' => 'John',
+                'email' => 'john@admin.com',
+                'password' => bcrypt('123456')
+            ]);
+            $datos = [
+                'id' => 1
+            ];
+            $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+            $this->actingAs($admin2)
+                ->withSession(['nombre' => 'John'] )
+                ->post('admin/borrar', $datos, $headers)
+                ->assertStatus(403);
+        }
 }

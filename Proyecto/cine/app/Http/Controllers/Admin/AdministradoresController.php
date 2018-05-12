@@ -46,7 +46,7 @@ class AdministradoresController extends Controller
             return response('nombre', $sol);
         }
         $sol = $this->comprobarEmail( $recibido );
-        return response('email', $sol);;            
+        return response('email', $sol);          
     }
 
     /**
@@ -68,7 +68,7 @@ class AdministradoresController extends Controller
         //Si se modifica datos de otro administrador distindo al logueado
         if ( isset($request['id']) ){
             //Solo el superadmin puede hacerlo
-            if ( Administrador::select('id')->where('name', $admin) != 1 ){
+            if ( Administrador::select('id')->where('name', $admin)->first() !== 1 ){
                 return redirect('admin/administradores');
             }
             $datos = Administrador::find($request['id']);
@@ -99,14 +99,17 @@ class AdministradoresController extends Controller
             }
             $datos->save();
             $correcto = 'S';
-        }
 
-        //Volver a la lista de administradores.
-        if ( isset($request['id']) ){
-            return redirect('admin/administradores') ;
+                //Volver a la lista de administradores.
+            if ( isset($request['id']) ){
+                return redirect('admin/administradores') ;
+            }
+            //Volver al perfil si se modifican datos de perfil.
+            return view('admin.administrador.perfil', compact('datos', 'admin', 'correcto'));
         }
-        //Volver al perfil si se modifican datos de perfil.
-        return view('admin.administrador.perfil', compact('datos', 'admin', 'correcto'));
+        $tipoError = 'Error al intentar modificar los datos.';
+        $mensajeError = 'Es posible que los datos introducidos sean erróneos o ya existan en la base de datos.';
+        return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));        
     }
     
     /**
@@ -161,32 +164,13 @@ class AdministradoresController extends Controller
         $mensajeError = "Sólo el adminstrador principal puede crear nuevas cuentas de usuario.";
         return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     /**
      * Muestra la lista de los administradores registrados en la base de datos.
      */
     public function mostrar(Request $request){
-        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
-        
-        // Si no hay ningún usuario logueado regirige al login
+        // Redirigir al login si no hay admin logueado
+        $admin = $request->session()->get('nombre');
         if ($admin == null){
             return redirect('/admin');
         }
@@ -209,25 +193,34 @@ class AdministradoresController extends Controller
      * Borra el usuario seleccionado por el usuario.
      */
     public function borrar(Request $request){
-        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
-        
-        $administrador = Administrador::find($request['id']);
-
-        // Si no hay ningún usuario logueado regirige al login
-        if ($admin == null || !isset($request['token']) || !$administrador ){ //Añadir posible duplicado de borrado
+        // Redirigir al login si no hay admin logueado
+        $admin = $request->session()->get('nombre');
+        if ($admin == null){
             return redirect('/admin');
         }
+        
+        //Redirigir si la petición es get
+        if ( $request->isMethod('get')){
+            return redirect('admin');
+        }
+        
+        $supAdmin = Administrador::where('name', $admin)->first(); //Recoger los datos del administrador logueado
 
-        $administrador->delete();
-        return "Borrado";
+        
+        if ( $supAdmin->id == 1 ){
+            $administrador = Administrador::find($request['id']);
+            $administrador->delete();
+            return response('Borrado', 204);
+        }
+        return response('Permiso denegado', 403);;        
     }
-
+    
     /**
      * Comprueba que el nombre del administrador enviado no existe en la base de datos
      * return 'valido' -> el usuario no existe
      *        'existe' ->el usuario existe
      */
-    private static function comprobarNombre( $nombre ){
+    protected static function comprobarNombre( $nombre ){
         $administrador = Administrador::where('name', $nombre)->first();
         if ( $administrador == null ){
             return 201;
@@ -240,7 +233,7 @@ class AdministradoresController extends Controller
      * return 'valido' -> el usuario no existe
      *        'existe' ->el usuario existe
      */
-    private static function comprobarEmail( $email ){
+    protected static function comprobarEmail( $email ){
         $administrador = Administrador::where('email', $email)->first();
         if ( $administrador == null ){
             return 201;
