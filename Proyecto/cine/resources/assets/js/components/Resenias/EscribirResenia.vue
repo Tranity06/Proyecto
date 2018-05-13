@@ -77,9 +77,7 @@
                     pelicula_id: this.idPelicula
                 })
                     .then(response => {
-                        console.log('COMENTARIO RECIBIDO'+response.data.id);
                         this.resena = response.data;
-                        console.log('COMENTARIO RECIBIDO'+response.data.id);
                         this.$emit('publicar', response.data);
                         this.$notify({
                             group: 'auth',
@@ -88,7 +86,6 @@
                             text: 'Tu comentario se ha publicado',
                             duration: 5000,
                         });
-                        console.log('COMENTARIO RECIBIDO'+response.data.id);
                     })
                     .catch(error => {
                         console.log(error);

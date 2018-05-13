@@ -61728,7 +61728,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -61765,7 +61765,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             resenas: [],
-            idUsuario: JSON.parse(localStorage.getItem('user')).id,
+            idUsuario: JSON.parse(localStorage.getItem('user')) != null ? JSON.parse(localStorage.getItem('user')).id : null,
             idPelicula: this.$route.params.id,
             comento: '',
             idResena: 0,
@@ -61776,10 +61776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         axios.get("/api/pelicula/" + this.idPelicula + "/resenas").then(function (response) {
-            console.log(_this.idUsuario);
-            console.log(response.data);
             _this.resenas = _this.usuarioCommented(response.data);
-            console.log(_this.resenas);
         }).catch(function (error) {
             console.log(error);
         });
@@ -61810,7 +61807,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     components: {
         ListarResenia: __WEBPACK_IMPORTED_MODULE_1__ListarResenia___default.a,
-        EscribirResenia: __WEBPACK_IMPORTED_MODULE_0__EscribirResenia___default.a }
+        EscribirResenia: __WEBPACK_IMPORTED_MODULE_0__EscribirResenia___default.a },
+
+    mounted: function mounted() {
+        var _this3 = this;
+
+        Echo.channel('resena').listen('ResenaEvent', function (e) {
+            console.log(e);
+            console.log('he llegado');
+            _this3.resenas.push(e.datos);
+        });
+    }
 });
 
 /***/ }),
@@ -61992,9 +61999,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 comentario: this.comento,
                 pelicula_id: this.idPelicula
             }).then(function (response) {
-                console.log('COMENTARIO RECIBIDO' + response.data.id);
                 _this.resena = response.data;
-                console.log('COMENTARIO RECIBIDO' + response.data.id);
                 _this.$emit('publicar', response.data);
                 _this.$notify({
                     group: 'auth',
@@ -62003,7 +62008,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     text: 'Tu comentario se ha publicado',
                     duration: 5000
                 });
-                console.log('COMENTARIO RECIBIDO' + response.data.id);
             }).catch(function (error) {
                 console.log(error);
             });

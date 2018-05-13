@@ -20,7 +20,7 @@
         data(){
             return {
                 resenas: [],
-                idUsuario: JSON.parse(localStorage.getItem('user')).id,
+                idUsuario: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).id : null,
                 idPelicula: this.$route.params.id,
                 comento: '',
                 idResena: 0,
@@ -30,10 +30,7 @@
         created(){
             axios.get(`/api/pelicula/${this.idPelicula}/resenas`)
                 .then(response => {
-                    console.log(this.idUsuario);
-                    console.log(response.data);
                     this.resenas = this.usuarioCommented(response.data);
-                    console.log(this.resenas)
                 })
                 .catch(error => {
                     console.log(error);
@@ -61,6 +58,16 @@
         components: {
             ListarResenia,
             EscribirResenia},
+
+        mounted(){
+            Echo.channel('resena')
+                .listen('ResenaEvent', (e) => {
+                    console.log(e);
+                    console.log('he llegado');
+                    this.resenas.push(e.datos);
+                });
+        }
+
     }
 </script>
 

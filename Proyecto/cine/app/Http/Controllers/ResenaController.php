@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ResenaEvent;
 use Illuminate\Http\Request;
 use App\Models\Resena;
 use App\Models\User;
@@ -31,6 +32,8 @@ class ResenaController extends Controller
         $user = $resena->user();
         $resena['imagen_usuario'] = $user->avatar;
         $resena['nombre_usuario'] = $user->name;
+
+        broadcast(new ResenaEvent($resena))->toOthers();
 
         return $resena;
     }

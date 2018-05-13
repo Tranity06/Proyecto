@@ -8,22 +8,20 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ButacaEvent implements ShouldBroadcast
+class ResenaEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $butacaId;
-    public $estado;
+    public $datos;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($butacaId,$estado)
+    public function __construct($datos)
     {
-        $this->butacaId = $butacaId;
-        $this->estado = $estado;
+        $this->datos = $datos;
     }
 
     /**
@@ -33,6 +31,13 @@ class ButacaEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('butaca');
+        return new Channel('resena');
     }
+
+/*    public function broadcastWith(){
+        return [
+          'id' => $this->datos['id'],
+          'comentario' => $this->datos['comentario'],
+        ];
+    }*/
 }
