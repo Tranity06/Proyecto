@@ -61934,8 +61934,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             comentario: '',
             caracteres: 0,
-            ocultarOpciones: false,
-            idPelicula: this.$route.params.id
+            idPelicula: this.$route.params.id,
+            ocultarOpciones: false
         };
     },
 
