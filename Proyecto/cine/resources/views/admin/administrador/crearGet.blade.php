@@ -41,12 +41,13 @@
                         url: '/admin/comprobar',
                         type: 'POST',
                         data: 'valor='+$texto,
-                        success: function(e){
-                            if ( e === 'existe'){
+                        statusCode:{
+                            204: function (){
                                 $input.addClass('errores');
                                 $input.next().text("El valor introducido ya existe.");
                                 $input.next().slideDown("slow");
-                            } else {
+                            },
+                            201: function (){
                                 $input.addClass('ok');
                                 $input.next().slideUp("slow");
                                 $input.next().text('');
@@ -108,7 +109,7 @@
 @endsection
 
 @section('content')
-    <div class="box box-default color-palette-box">
+    <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Crear nuevo usuario</h3>
         </div>

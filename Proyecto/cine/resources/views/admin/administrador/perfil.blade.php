@@ -58,7 +58,7 @@
                     $.ajax({
                         url: '/admin/comprobar',
                         type: 'POST',
-                        data: 'valor='+$texto+'&token=0',
+                        data: 'valor='+$texto,
                         statusCode:{
                             201: function (){
                                 $cambio.text($texto);
@@ -124,7 +124,7 @@
 @endsection
 
 @section('content')
-    <div class="box box-default color-palette-box">
+    <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Datos de la cuenta</h3>
         </div>

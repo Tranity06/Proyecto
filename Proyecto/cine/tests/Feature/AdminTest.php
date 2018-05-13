@@ -63,8 +63,7 @@ class AdminTest extends TestCase
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456')
         ]);
-        $this->actingAs($admin)
-            ->withSession(['nombre' => $admin->name] )
+        $this->actingAs($admin, 'admin')
             ->get('/admin/settings')
             ->assertStatus(200)
             ->assertSee($admin->name)
@@ -88,7 +87,7 @@ class AdminTest extends TestCase
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456')
         ]);
-        $this->actingAs($admin)
+        $this->actingAs($admin, 'admin')
             ->withSession(['nombre' => $admin->name] )
             ->get('admin/comprobar')
             ->assertStatus(302)
@@ -113,7 +112,7 @@ class AdminTest extends TestCase
         ]);
         $datos = ['valor' => 'John'];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-        $this->actingAs($admin)
+        $this->actingAs($admin, 'admin')
             ->withSession(['nombre' => $admin->name] )
             ->post('admin/comprobar', $datos, $headers)
             ->assertStatus(201);
@@ -136,7 +135,7 @@ class AdminTest extends TestCase
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456')
         ]);
-        $this->actingAs($admin)
+        $this->actingAs($admin, 'admin')
             ->withSession(['nombre' => $admin->name] )
             ->get('admin/modificaradmin')
             ->assertStatus(302)
@@ -165,8 +164,7 @@ class AdminTest extends TestCase
             'password' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-        $this->actingAs($admin)
-            ->withSession(['nombre' => 'Admin'] )
+        $this->actingAs($admin, 'admin')
             ->post('admin/modificaradmin', $datos, $headers)
             ->assertStatus(200)
             ->assertSee('Datos de la cuenta');
@@ -193,11 +191,10 @@ class AdminTest extends TestCase
             'pw' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-        $this->actingAs($admin)
-            ->withSession(['nombre' => 'John'] )
+        $this->actingAs($admin, 'admin')
             ->post('admin/modificaradmin', $datos, $headers)
-            ->assertStatus(302)
-            ->assertRedirect('/admin/administradores');
+            ->assertStatus(200)
+            ->assertSee('Permiso denegado.');
     }
 
     /** @test */
@@ -221,7 +218,7 @@ class AdminTest extends TestCase
             'pw' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-        $this->actingAs($superadmin)
+        $this->actingAs($superadmin, 'admin')
             ->withSession(['nombre' => 'Admin'] )
             ->post('admin/modificaradmin', $datos, $headers)
             ->assertStatus(302)
@@ -276,7 +273,7 @@ class AdminTest extends TestCase
             'pw' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-        $this->actingAs($superadmin)
+        $this->actingAs($superadmin, 'admin')
             ->withSession(['nombre' => 'Admin'] )
             ->post('admin/modificaradmin', $datos, $headers)
             ->assertStatus(302)
@@ -328,7 +325,7 @@ class AdminTest extends TestCase
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456')
         ]);
-        $this->actingAs($admin)
+        $this->actingAs($admin, 'admin')
             ->withSession(['nombre' => 'Admin'] )
             ->get('admin/crearadministrador')
             ->assertStatus(200)
@@ -343,7 +340,7 @@ class AdminTest extends TestCase
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456')
         ]);
-        $this->actingAs($admin)
+        $this->actingAs($admin, 'admin')
             ->withSession(['nombre' => 'Admin'] )
             ->get('admin/crearadministrador')
             ->assertStatus(200)
@@ -364,7 +361,7 @@ class AdminTest extends TestCase
             'pw' => bcrypt('123456')
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-        $this->actingAs($admin)
+        $this->actingAs($admin, 'admin')
             ->withSession(['nombre' => 'Admin'] )
             ->post('admin/crearadministrador', $datos, $headers)
             ->assertStatus(200)
@@ -385,8 +382,7 @@ class AdminTest extends TestCase
             'pw' => bcrypt('123456')
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-        $this->actingAs($admin)
-            ->withSession(['nombre' => 'Admin'] )
+        $this->actingAs($admin, 'admin')
             ->post('admin/crearadministrador', $datos, $headers)
             ->assertStatus(200)
             ->assertSee('Permiso denegado');
@@ -410,7 +406,7 @@ class AdminTest extends TestCase
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456')
         ]);
-        $this->actingAs($admin)
+        $this->actingAs($admin, 'admin')
             ->withSession(['nombre' => 'Admin'] )
             ->get('admin/administradores')
             ->assertStatus(200)
@@ -460,7 +456,7 @@ class AdminTest extends TestCase
                 'id' => 5
             ];
             $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-            $this->actingAs($admin1)
+            $this->actingAs($admin1, 'admin')
                 ->withSession(['nombre' => 'Admin'] )
                 ->post('admin/borrar', $datos, $headers)
                 ->assertStatus(204);
@@ -484,8 +480,7 @@ class AdminTest extends TestCase
                 'id' => 1
             ];
             $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-            $this->actingAs($admin2)
-                ->withSession(['nombre' => 'John'] )
+            $this->actingAs($admin2, 'admin')
                 ->post('admin/borrar', $datos, $headers)
                 ->assertStatus(403);
         }

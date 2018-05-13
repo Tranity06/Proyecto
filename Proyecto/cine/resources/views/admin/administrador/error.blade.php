@@ -24,10 +24,10 @@
         <li><a href="{{ route('admin.dashboard') }}"></i> Home</a></li>
         <li class="active">Error</li>
     </ol>
-@endsection
+@stop
 
 @section('content')
-    <div class="box box-default color-palette-box">
+    <div class="box box-danger">
         <div class="box-header with-border">
             <h3 class="box-title">{{$tipoError}}</h3>
         </div>

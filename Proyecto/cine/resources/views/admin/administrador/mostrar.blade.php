@@ -47,9 +47,9 @@
                     $.ajax({
                         url: '/admin/borrar',
                         type: 'POST',
-                        data: 'id='+$id+'&token=0',
-                        success: function(e){
-                            if ( e === 'Borrado'){
+                        data: 'id='+$id,
+                        statusCode:{
+                            204: function (){
                                 $boton.closest('tr')
                                 .children('td')
                                 .animate({ 
@@ -59,8 +59,9 @@
                                 .children().slideUp(function () {
                                     $(this).closest('tr').remove();
                                 });
-                            } else {
-                                console.log("Error");
+                            },
+                            403: function (){
+                                //console.log("Error");
                             }
                         },
                         async: true,
@@ -101,13 +102,14 @@
                     $.ajax({
                         url: '/admin/comprobar',
                         type: 'POST',
-                        data: 'valor='+$texto+'&token=0',
-                        success: function(e){
-                            if ( e === 'existe'){
+                        data: 'valor='+$texto,
+                        statusCode:{
+                            204: function (){
                                 $input.addClass('errores');
                                 $input.next().text("El valor introducido ya existe.");
                                 $input.next().slideDown("slow");
-                            } else {
+                            },
+                            201: function (){
                                 $input.addClass('ok');
                                 $input.next().slideUp("slow");
                                 $input.next().text('');
@@ -168,7 +170,7 @@
 @endsection
 
 @section('content')
-    <div class="box box-default color-palette-box">
+    <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Administradores registrados</h3>
         </div>
