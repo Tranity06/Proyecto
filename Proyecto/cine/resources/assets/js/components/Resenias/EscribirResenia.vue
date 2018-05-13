@@ -14,7 +14,7 @@
             <nav class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <a class="button is-warning" :disabled="caracteres > 140">Publicar</a>
+                        <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario">Publicar</a>
                     </div>
                 </div>
                 <div class="level-right">
@@ -32,6 +32,7 @@
     import store from '../../store';
 
     export default {
+        props: ['idPelicula'],
         name: "escribir-resenia",
         data(){
             return {
@@ -50,6 +51,22 @@
         methods: {
             contarCaracteres(){
                 this.caracteres = this.comentario.length;
+            },
+            publicarComentario(){
+                let idUsuario = JSON.parse(localStorage.getItem('user')).id;
+                axios.post(`/api/resena/${idUsuario}/${this.idPelicula}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    valoracion: 0,
+                    comentario: this.comentario,
+                })
+                    .then(response => {
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             }
         }
     }

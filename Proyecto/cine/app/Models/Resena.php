@@ -12,7 +12,7 @@ class Resena extends Model
      * @var array
      */
     protected $fillable = [
-        'valoracion', 'comentario', 'usuario_id', 'pelicula_id'
+        'valoracion', 'comentario', 'user_id', 'pelicula_id'
     ];
 
     /**
@@ -25,7 +25,7 @@ class Resena extends Model
     /**
      * Devuelve el usuario al que pertenece.
      */
-    public function usuario(){
-        return $this->belongsTo(Usuario::class)->get();
+    public function user(){
+        return $this->belongsTo(User::class)->get();
     }
 }

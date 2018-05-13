@@ -11,12 +11,12 @@ class ResenaController extends Controller
         return User::find($idUsuario)->resenas();
     }
 
-    public function create(Request $request, $idUsuario, $idPelicula){
+    public function crearResenia($idUsuario,Request $request){
         $resena = Resena::create([
-            'valoracion' => $request['valoracion'], 
+            'valoracion' => $request['valoracion'],
             'comentario' => $request['comentario'], 
-            'usuario_id' => $idUsuario, 
-            'pelicula_id ' => $idPelicula
+            'user_id' => $idUsuario,
+            'pelicula_id ' => $request['pelicula_id']
         ]);
         return $resena;
     }

@@ -80,7 +80,7 @@
         </div>
         <section class="section">
             <div class="container">
-                <escribir-resenia></escribir-resenia>
+                <escribir-resenia :idPelicula="id"></escribir-resenia>
                 <resenia-component></resenia-component>
                 <!-- Reseñas de otros -->
             </div>

@@ -64,7 +64,7 @@ Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('
  * Reseñas
  */
 Route::get('/resena/{idUsuario}','ResenaController@getAllFromUser')->name('resena.get');
-Route::post('/resena/{idUsuario}/{idPelicula}','ResenaController@create')->name('resena.create');
+Route::post('/resena/{idUsuario}','ResenaController@crearResenia')->name('resena.crearResenia');
 Route::put('/resena/{idResena}','ResenaController@update')->name('resena.update');
 Route::delete('/resena/{idResena}','ResenaController@detele')->name('resena.delete');
 
