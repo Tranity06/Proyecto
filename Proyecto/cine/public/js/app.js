@@ -62016,6 +62016,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        eliminarComentario: function eliminarComentario() {
+            var _this3 = this;
+
+            axios.delete('/api/resena/' + this.idResena).then(function (response) {
+                _this3.$emit('update:comento', '');
+                _this3.$emit('update:ocultarOpciones', false);
+                _this3.$notify({
+                    group: 'auth',
+                    title: 'El comentario ha sido eliminado',
+                    text: 'Tu comentario ha sido eliminado',
+                    duration: 5000
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
     }
 });
@@ -62071,7 +62087,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "button is-link",
+                          staticClass: "button",
                           attrs: { disabled: _vm.caracteres > 140 },
                           on: { click: _vm.actualizarComentario }
                         },
@@ -62084,7 +62100,20 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c(
+                        "a",
+                        {
+                          staticClass: "button is-danger",
+                          on: { click: _vm.eliminarComentario }
+                        },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "\n                             Eliminar\n                            "
+                            )
+                          ])
+                        ]
+                      )
                     ])
               ])
             ]),
@@ -62104,20 +62133,7 @@ var render = function() {
         _c("span", [_vm._v("Identifícate para escribir un comentario.")])
       ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "button" }, [
-      _c("span", [
-        _vm._v(
-          "\n                             Eliminar\n                            "
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -62352,6 +62368,9 @@ var render = function() {
             },
             "update:comento": function($event) {
               _vm.comento = $event
+            },
+            "update:ocultarOpciones": function($event) {
+              _vm.ocultarOpciones = $event
             }
           }
         }),

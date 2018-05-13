@@ -3,7 +3,7 @@
         <div class="container">
             <escribir-resenia @publicar="crearComentario($event)"
                               :comento.sync="comento"
-                              :ocultarOpciones="ocultarOpciones"
+                              :ocultarOpciones.sync="ocultarOpciones"
                               :idResena="idResena">
             </escribir-resenia>
             <listar-resenia v-for="resena in resenas" :key="resena.id" :resena="resena"></listar-resenia>

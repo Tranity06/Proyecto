@@ -18,12 +18,12 @@
                     <div class="level-item">
                         <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario" v-if="!this.ocultarOpciones">Publicar</a>
                         <p class="buttons" v-else>
-                            <a class="button is-link" :disabled="caracteres > 140" @click="actualizarComentario">
+                            <a class="button" :disabled="caracteres > 140" @click="actualizarComentario">
                                 <span>
                                  Actualizar
                                 </span>
                             </a>
-                            <a class="button">
+                            <a class="button is-danger" @click="eliminarComentario">
                                 <span>
                                  Eliminar
                                 </span>
@@ -97,6 +97,22 @@
                             group: 'auth',
                             title: 'Comentario Actualizado',
                             text: 'Tu comentario ha sido actualizado',
+                            duration: 5000,
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
+            eliminarComentario(){
+                axios.delete(`/api/resena/${this.idResena}`)
+                    .then(response => {
+                        this.$emit('update:comento', '');
+                        this.$emit('update:ocultarOpciones', false);
+                        this.$notify({
+                            group: 'auth',
+                            title: 'El comentario ha sido eliminado',
+                            text: 'Tu comentario ha sido eliminado',
                             duration: 5000,
                         });
                     })
