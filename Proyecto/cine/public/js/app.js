@@ -61934,8 +61934,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             comentario: '',
             caracteres: 0,
-            ocultarOpciones: false,
-            idPelicula: this.$route.params.id
+            idPelicula: this.$route.params.id,
+            ocultarOpciones: false
         };
     },
 
@@ -62217,7 +62217,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resena'],
-    name: "listar-resenia"
+    name: "listar-resenia",
+    data: function data() {
+        return {
+            resenas: [],
+            idPelicula: this.$route.params.id
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get("/api/pelicula/" + this.idPelicula + "/resenas").then(function (response) {
+            _this.resenas = response.data;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 });
 
 /***/ }),

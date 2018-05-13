@@ -14,7 +14,6 @@
             <nav class="level">
                 <div class="level-left">
                     <div class="level-item">
-<<<<<<< HEAD
                         <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario" v-if="!ocultarOpciones">Publicar</a>
                         <p class="buttons" v-else>
                             <a class="button is-link">
@@ -28,9 +27,6 @@
                                 </span>
                             </a>
                         </p>
-=======
-                        <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario">Publicar</a>
->>>>>>> f99b804ef39fe692009d9eb154b6f722cd66bf5f
                     </div>
                 </div>
                 <div class="level-right">
@@ -53,8 +49,8 @@
             return {
                 comentario: '',
                 caracteres: 0,
+                idPelicula: this.$route.params.id,
                 ocultarOpciones: false,
-                idPelicula: this.$route.params.id
             }
         },
         computed: {
@@ -82,7 +78,6 @@
                     .then(response => {
                         this.$emit('publicar', response.data)
                         this.ocultarOpciones = true;
-
                     })
                     .catch(error => {
                         console.log(error);

@@ -67,6 +67,7 @@
             slider
         },
         methods: {
+
             mountSlider(data){
                 for (let i=0; i<=3;i++){
                     this.pages[i].style.background = 'url('+data[i].slider_image+')';
