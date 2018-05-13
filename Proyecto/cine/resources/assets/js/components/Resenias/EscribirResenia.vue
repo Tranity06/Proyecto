@@ -8,24 +8,24 @@
         <div class="media-content">
             <div class="field">
                 <p class="control">
-                    <textarea class="textarea" placeholder="Escribe un comentario..."></textarea>
+                    <textarea class="textarea" :class="{'is-danger': caracteres > 140}" placeholder="Escribe un comentario..." v-model="comentario" @keyup="contarCaracteres"></textarea>
                 </p>
             </div>
             <nav class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <a class="button is-info">Publicar</a>
+                        <a class="button is-warning" :disabled="caracteres > 140">Publicar</a>
                     </div>
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <span>130/240</span>
+                        <span>{{ caracteres }}/<b>140</b></span>
                     </div>
                 </div>
             </nav>
         </div>
     </article>
-    <div v-else class="critica"><span>Identifícate para escribir una crítica.</span></div>
+    <div v-else class="critica"><span>Identifícate para escribir un comentario.</span></div>
 </template>
 
 <script>
@@ -33,6 +33,12 @@
 
     export default {
         name: "escribir-resenia",
+        data(){
+            return {
+                comentario: '',
+                caracteres: 0
+            }
+        },
         computed: {
             isLogged() {
                 return store.state.isLoggedIn;
@@ -41,6 +47,11 @@
                 return store.getters.avatar;
             }
         },
+        methods: {
+            contarCaracteres(){
+                this.caracteres = this.comentario.length;
+            }
+        }
     }
 </script>
 
@@ -56,6 +67,9 @@
         border-radius: 5px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         margin-bottom: 1rem;
+    }
 
+    .image img{
+        border-radius: 50%;
     }
 </style>

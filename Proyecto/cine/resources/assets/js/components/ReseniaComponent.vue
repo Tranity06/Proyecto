@@ -34,5 +34,7 @@
 </script>
 
 <style scoped>
-
+    .image img{
+        border-radius: 50%;
+    }
 </style>
