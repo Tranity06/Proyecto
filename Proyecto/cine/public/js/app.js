@@ -62217,22 +62217,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resena'],
-    name: "listar-resenia",
-    data: function data() {
-        return {
-            resenas: [],
-            idPelicula: this.$route.params.id
-        };
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        axios.get("/api/pelicula/" + this.idPelicula + "/resenas").then(function (response) {
-            _this.resenas = response.data;
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }
+    name: "listar-resenia"
 });
 
 /***/ }),

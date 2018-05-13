@@ -16,12 +16,12 @@ class ResenaController extends Controller
         $resena = Resena::create([
             'valoracion' => $request['valoracion'], 
             'comentario' => $request['comentario'], 
-            'usuario_id' => $idUsuario, 
+            'user_id' => $idUsuario,
             'pelicula_id' => $request['pelicula_id']
         ]);
 
         $resena['imagen_usuario'] = User::find($idUsuario)->avatar;
-        $resena['nombre_usuario'] = User::find($idUsuario)->nombre;
+        $resena['nombre_usuario'] = User::find($idUsuario)->name;
 
         return $resena;
     }
