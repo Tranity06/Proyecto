@@ -28,7 +28,7 @@ class ProfileController extends Controller
             $user->avatar = $fileName;
             $user->save();
 
-            return response()->json(['success'=>true]);
+            return response()->json(['success'=>true,'avatar_name'=>$fileName]);
         }
     }
 }

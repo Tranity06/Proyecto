@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="hero is-medium fondo" :style="{background: 'linear-gradient( rgba(67, 67, 67, 0.7), rgba(0, 0, 0, 0.7) ), url('+info.slider_image+')'}">
+        <section class="hero is-medium fondo" :style="{background: 'linear-gradient( rgba(67, 67, 67, 0.8), rgba(0, 0, 0, 0.8) ), url('+info.slider_image+')'}">
             <!-- Hero content: will be in the middle -->
             <div class="hero-body">
                 <div class="container">
