@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="hero is-medium fondo" :style="{background: 'url('+info.slider_image+') top no-repeat'}">
+        <section class="hero is-medium fondo" :style="{background: 'linear-gradient( rgba(67, 67, 67, 0.7), rgba(0, 0, 0, 0.7) ), url('+info.slider_image+')'}">
             <!-- Hero content: will be in the middle -->
             <div class="hero-body">
                 <div class="container">
@@ -14,17 +14,17 @@
                         </div>
                         <div class="column">
                             <div class="pelicula-header">
-                                <h1 class="title">
+                                <h1 class="title has-text-white">
                                     {{ info.titulo }}
-                                    <span class="tag is-light">PE-7</span>
+                                    <span class="tag is-danger">PE-7</span>
                                 </h1>
-                                <h2 class="subtitle">
+                                <h2 class="subtitle has-text-white">
                                     {{ info.generos + ' '+info.duracion+'min' }}
                                 </h2>
-                                <h1 class="is-size-4">
+                                <h1 class="is-size-4 has-text-white">
                                     Sinopsis
                                 </h1>
-                                <p>
+                                <p class="has-text-white">
                                     {{ info.sinopsis }}
                                 </p>
 
@@ -34,11 +34,11 @@
                     </div>
                     <div class="is-hidden-tablet has-text-centered">
                         <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
-                        <h1 class="title">
+                        <h1 class="title has-text-white">
                             {{ info.titulo }}
-                            <span class="tag is-light">PE-7</span>
+                            <span class="tag is-danger">PE-7</span>
                         </h1>
-                        <h2 class="subtitle">
+                        <h2 class="subtitle has-text-white">
                             {{ info.generos + ' '+info.duracion+'min' }}
                         </h2>
                     </div>
@@ -156,6 +156,8 @@
 
     .fondo{
         background-size: cover !important;
+        background-position: center top !important;
+/*        box-shadow: inset 0 0 0 1000px rgba(0,0,0,.8);*/
     }
 
 /*    .fondo::before{

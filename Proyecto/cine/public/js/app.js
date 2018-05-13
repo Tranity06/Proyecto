@@ -61478,7 +61478,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.pelicula-poster[data-v-36264aec] {\n    border-radius: 10px;\n}\n.es-posicionado[data-v-36264aec] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important;\n    position: relative;\n    bottom: -20px;\n}\n.sombra[data-v-36264aec] {\n    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);\n            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);\n}\n", ""]);
+exports.push([module.i, "\n.pelicula-poster[data-v-36264aec] {\n        border-radius: 10px;\n}\n.es-posicionado[data-v-36264aec] {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-pack: center !important;\n            -ms-flex-pack: center !important;\n                justify-content: center !important;\n        position: relative;\n        bottom: -20px;\n}\n.sombra[data-v-36264aec] {\n        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);\n                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);\n}\n.fondo[data-v-36264aec]{\n        background-size: cover !important;\n        -webkit-box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);\n                box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);\n}\n\n/*    .fondo::before{\n        content: \"\";\n        width: 100%;\n        height: 40vh;\n        display: inline-block;\n        position: relative;\n        background: linear-gradient(137deg, rgba(67,67,67,0.7035189075630253) 42%, rgba(0,0,0,0.7) 100%) !important;\n        z-index: 2;\n    }*/\n\n", ""]);
 
 // exports
 
@@ -61524,7 +61524,6 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ReseniaComponent__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ReseniaComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_ReseniaComponent__);
-//
 //
 //
 //
@@ -61875,7 +61874,7 @@ var render = function() {
     _c(
       "section",
       {
-        staticClass: "hero is-medium",
+        staticClass: "hero is-medium fondo",
         style: {
           background: "url(" + _vm.info.slider_image + ") top no-repeat"
         }
