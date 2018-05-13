@@ -77,8 +77,18 @@
                     pelicula_id: this.idPelicula
                 })
                     .then(response => {
+                        console.log('COMENTARIO RECIBIDO'+response.data.id);
                         this.resena = response.data;
+                        console.log('COMENTARIO RECIBIDO'+response.data.id);
                         this.$emit('publicar', response.data);
+                        this.$notify({
+                            group: 'auth',
+                            type: 'success',
+                            title: 'Comentario Publicado',
+                            text: 'Tu comentario se ha publicado',
+                            duration: 5000,
+                        });
+                        console.log('COMENTARIO RECIBIDO'+response.data.id);
                     })
                     .catch(error => {
                         console.log(error);
@@ -95,6 +105,7 @@
                     .then(response => {
                         this.$notify({
                             group: 'auth',
+                            type: 'success',
                             title: 'Comentario Actualizado',
                             text: 'Tu comentario ha sido actualizado',
                             duration: 5000,
@@ -111,6 +122,7 @@
                         this.$emit('update:ocultarOpciones', false);
                         this.$notify({
                             group: 'auth',
+                            type: 'error',
                             title: 'El comentario ha sido eliminado',
                             text: 'Tu comentario ha sido eliminado',
                             duration: 5000,

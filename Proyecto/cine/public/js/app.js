@@ -61728,7 +61728,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -61788,7 +61788,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         crearComentario: function crearComentario(mensaje) {
             this.ocultarOpciones = true;
-            this.resenas.push(mensaje);
+            this.idResena = mensaje.id;
+            this.comento = mensaje.comentario;
         },
         usuarioCommented: function usuarioCommented(array) {
             var _this2 = this;
@@ -61991,8 +61992,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 comentario: this.comento,
                 pelicula_id: this.idPelicula
             }).then(function (response) {
+                console.log('COMENTARIO RECIBIDO' + response.data.id);
                 _this.resena = response.data;
+                console.log('COMENTARIO RECIBIDO' + response.data.id);
                 _this.$emit('publicar', response.data);
+                _this.$notify({
+                    group: 'auth',
+                    type: 'success',
+                    title: 'Comentario Publicado',
+                    text: 'Tu comentario se ha publicado',
+                    duration: 5000
+                });
+                console.log('COMENTARIO RECIBIDO' + response.data.id);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -62009,6 +62020,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 _this2.$notify({
                     group: 'auth',
+                    type: 'success',
                     title: 'Comentario Actualizado',
                     text: 'Tu comentario ha sido actualizado',
                     duration: 5000
@@ -62025,6 +62037,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this3.$emit('update:ocultarOpciones', false);
                 _this3.$notify({
                     group: 'auth',
+                    type: 'error',
                     title: 'El comentario ha sido eliminado',
                     text: 'Tu comentario ha sido eliminado',
                     duration: 5000

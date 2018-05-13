@@ -42,7 +42,8 @@
         methods: {
             crearComentario(mensaje){
                 this.ocultarOpciones = true;
-                this.resenas.push(mensaje);
+                this.idResena = mensaje.id;
+                this.comento = mensaje.comentario;
             },
             usuarioCommented(array){
                 const index = array.findIndex(resena => resena.user_id == this.idUsuario);
