@@ -61728,7 +61728,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -61762,7 +61762,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             resenas: [],
             idUsuario: JSON.parse(localStorage.getItem('user')).id,
-            idPelicula: this.$route.params.id
+            idPelicula: this.$route.params.id,
+            comento: '',
+            ocultarOpciones: false
         };
     },
     created: function created() {
@@ -61771,9 +61773,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get("/api/pelicula/" + this.idPelicula + "/resenas").then(function (response) {
             console.log(_this.idUsuario);
             console.log(response.data);
-            _this.resenas = response.data.filter(function (e) {
-                return e.user_id != _this.idUsuario;
-            });
+            _this.resenas = _this.usuarioCommented(response.data);
             console.log(_this.resenas);
         }).catch(function (error) {
             console.log(error);
@@ -61782,7 +61782,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         crearComentario: function crearComentario(mensaje) {
+            this.ocultarOpciones = true;
             this.resenas.push(mensaje);
+        },
+        usuarioCommented: function usuarioCommented(array) {
+            var _this2 = this;
+
+            var index = array.findIndex(function (resena) {
+                return resena.user_id == _this2.idUsuario;
+            });
+
+            if (index !== -1) {
+                this.comento = array[index].comentario;
+                console.log(this.comento);
+                this.ocultarOpciones = true;
+                array.splice(index, 1);
+            }
+
+            return array;
         }
     },
     components: {
@@ -61930,17 +61947,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['comento', 'ocultarOpciones'],
     name: "escribir-resenia",
     data: function data() {
         return {
-            comentario: '',
             caracteres: 0,
-            idPelicula: this.$route.params.id,
-            ocultarOpciones: false
+            idPelicula: this.$route.params.id
         };
     },
 
@@ -61954,7 +61972,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         contarCaracteres: function contarCaracteres() {
-            this.caracteres = this.comentario.length;
+            this.caracteres = this.comento.length;
         },
         publicarComentario: function publicarComentario() {
             var _this = this;
@@ -61965,11 +61983,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'Content-Type': 'application/json'
                 },
                 valoracion: 0,
-                comentario: this.comentario,
+                comentario: this.comento,
                 pelicula_id: this.idPelicula
             }).then(function (response) {
                 _this.$emit('publicar', response.data);
-                _this.ocultarOpciones = true;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -61997,25 +62014,14 @@ var render = function() {
           _c("div", { staticClass: "field" }, [
             _c("p", { staticClass: "control" }, [
               _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.comentario,
-                    expression: "comentario"
-                  }
-                ],
                 staticClass: "textarea",
                 class: { "is-danger": _vm.caracteres > 140 },
                 attrs: { placeholder: "Escribe un comentario..." },
-                domProps: { value: _vm.comentario },
+                domProps: { value: this.comento },
                 on: {
                   keyup: _vm.contarCaracteres,
                   input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.comentario = $event.target.value
+                    _vm.$emit("update:comento", $event.target.value)
                   }
                 }
               })
@@ -62025,7 +62031,7 @@ var render = function() {
           _c("nav", { staticClass: "level" }, [
             _c("div", { staticClass: "level-left" }, [
               _c("div", { staticClass: "level-item" }, [
-                !_vm.ocultarOpciones
+                !this.ocultarOpciones
                   ? _c(
                       "a",
                       {
@@ -62036,9 +62042,22 @@ var render = function() {
                       [_vm._v("Publicar")]
                     )
                   : _c("p", { staticClass: "buttons" }, [
-                      _vm._m(0),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "button is-link",
+                          attrs: { disabled: _vm.caracteres > 140 }
+                        },
+                        [
+                          _c("span", [
+                            _vm._v(
+                              "\n                             Actualizar\n                            "
+                            )
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _vm._m(0)
                     ])
               ])
             ]),
@@ -62059,18 +62078,6 @@ var render = function() {
       ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "button is-link" }, [
-      _c("span", [
-        _vm._v(
-          "\n                             Actualizar\n                            "
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -62307,9 +62314,13 @@ var render = function() {
       { staticClass: "container" },
       [
         _c("escribir-resenia", {
+          attrs: { comento: _vm.comento, ocultarOpciones: _vm.ocultarOpciones },
           on: {
             publicar: function($event) {
               _vm.crearComentario($event)
+            },
+            "update:comento": function($event) {
+              _vm.comento = $event
             }
           }
         }),

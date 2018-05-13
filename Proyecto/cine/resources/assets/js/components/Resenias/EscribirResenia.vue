@@ -8,15 +8,17 @@
         <div class="media-content">
             <div class="field">
                 <p class="control">
-                    <textarea class="textarea" :class="{'is-danger': caracteres > 140}" placeholder="Escribe un comentario..." v-model="comentario" @keyup="contarCaracteres"></textarea>
+                    <textarea class="textarea" :class="{'is-danger': caracteres > 140}" placeholder="Escribe un comentario..." @keyup="contarCaracteres"
+                              :value="this.comento" @input="$emit('update:comento', $event.target.value)">
+                    </textarea>
                 </p>
             </div>
             <nav class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario" v-if="!ocultarOpciones">Publicar</a>
+                        <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario" v-if="!this.ocultarOpciones">Publicar</a>
                         <p class="buttons" v-else>
-                            <a class="button is-link">
+                            <a class="button is-link" :disabled="caracteres > 140">
                                 <span>
                                  Actualizar
                                 </span>
@@ -44,13 +46,12 @@
     import store from '../../store';
 
     export default {
+        props: ['comento','ocultarOpciones'],
         name: "escribir-resenia",
         data(){
             return {
-                comentario: '',
                 caracteres: 0,
                 idPelicula: this.$route.params.id,
-                ocultarOpciones: false,
             }
         },
         computed: {
@@ -63,7 +64,7 @@
         },
         methods: {
             contarCaracteres(){
-                this.caracteres = this.comentario.length;
+                this.caracteres = this.comento.length;
             },
             publicarComentario(){
                 let idUsuario = JSON.parse(localStorage.getItem('user')).id;
@@ -72,12 +73,11 @@
                         'Content-Type': 'application/json',
                     },
                     valoracion: 0,
-                    comentario: this.comentario,
+                    comentario: this.comento,
                     pelicula_id: this.idPelicula
                 })
                     .then(response => {
-                        this.$emit('publicar', response.data)
-                        this.ocultarOpciones = true;
+                        this.$emit('publicar', response.data);
                     })
                     .catch(error => {
                         console.log(error);

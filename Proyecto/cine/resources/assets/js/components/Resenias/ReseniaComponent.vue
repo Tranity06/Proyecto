@@ -1,7 +1,7 @@
 <template>
     <section class="section">
         <div class="container">
-            <escribir-resenia @publicar="crearComentario($event)"></escribir-resenia>
+            <escribir-resenia @publicar="crearComentario($event)" :comento.sync="comento" :ocultarOpciones="ocultarOpciones"></escribir-resenia>
             <listar-resenia v-for="resena in resenas" :key="resena.id" :resena="resena"></listar-resenia>
         </div>
     </section>
@@ -17,7 +17,9 @@
             return {
                 resenas: [],
                 idUsuario: JSON.parse(localStorage.getItem('user')).id,
-                idPelicula: this.$route.params.id
+                idPelicula: this.$route.params.id,
+                comento: '',
+                ocultarOpciones: false
             }
         },
         created(){
@@ -25,7 +27,7 @@
                 .then(response => {
                     console.log(this.idUsuario);
                     console.log(response.data);
-                    this.resenas = response.data.filter(e => e.user_id != this.idUsuario);
+                    this.resenas = this.usuarioCommented(response.data);
                     console.log(this.resenas)
                 })
                 .catch(error => {
@@ -34,7 +36,20 @@
         },
         methods: {
             crearComentario(mensaje){
+                this.ocultarOpciones = true;
                 this.resenas.push(mensaje);
+            },
+            usuarioCommented(array){
+                const index = array.findIndex(resena => resena.user_id == this.idUsuario);
+
+                if (index !== -1) {
+                    this.comento = array[index].comentario;
+                    console.log(this.comento);
+                    this.ocultarOpciones = true;
+                    array.splice(index, 1);
+                }
+
+                return array;
             }
         },
         components: {
