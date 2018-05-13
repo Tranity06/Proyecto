@@ -31,21 +31,6 @@
     export default {
         props: ['resena'],
         name: "listar-resenia",
-        data(){
-            return {
-                resenas: [],
-                idPelicula: this.$route.params.id
-            }
-        },
-        mounted(){
-            axios.get(`/api/pelicula/${this.idPelicula}/resenas`)
-                .then(response => {
-                    this.resenas = response.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        }
     }
 </script>
 
