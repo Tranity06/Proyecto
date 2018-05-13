@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Resena;
 use App\Models\User;
+use JWTAuth;
 
 class ResenaController extends Controller
 {
@@ -13,12 +14,16 @@ class ResenaController extends Controller
     }
 
     public function crearResenia(Request $request, $idUsuario){
+        if (!JWTAuth::check()){
+            return response('¡Registrate para dejar tu reseña!', 403);
+        }
+
         $user_resenas = Resena::where([
             ['user_id',$idUsuario],
             ['pelicula_id',$request['pelicula_id']]
         ])->get();
         if ( sizeof($user_resenas) > 0 ){
-            return 403;
+            return response('¡Ya has comentado sobre esta película! Puedes editar tu reseña desde tu perfil.', 403);
         }
 
         $resena = Resena::create([
