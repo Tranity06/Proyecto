@@ -3,6 +3,8 @@
         <div class="container">
             <escribir-resenia @publicar="actualizarLista($event)"></escribir-resenia>
             <listar-resenia v-for="resena in resenas" :key="resena.id" :resena="resena"></listar-resenia>
+            <escribir-resenia></escribir-resenia>
+            <listar-resenia></listar-resenia>
         </div>
     </section>
 </template>
