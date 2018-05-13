@@ -61728,7 +61728,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -61761,6 +61761,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             resenas: [],
+            idUsuario: JSON.parse(localStorage.getItem('user')).id,
             idPelicula: this.$route.params.id
         };
     },
@@ -61768,15 +61769,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         axios.get("/api/pelicula/" + this.idPelicula + "/resenas").then(function (response) {
+            console.log(_this.idUsuario);
             console.log(response.data);
-            _this.resenas = response.data;
+            _this.resenas = response.data.filter(function (e) {
+                return e.user_id != _this.idUsuario;
+            });
+            console.log(_this.resenas);
         }).catch(function (error) {
             console.log(error);
         });
     },
 
     methods: {
-        actualizarLista: function actualizarLista(mensaje) {
+        crearComentario: function crearComentario(mensaje) {
             this.resenas.push(mensaje);
         }
     },
@@ -62304,7 +62309,7 @@ var render = function() {
         _c("escribir-resenia", {
           on: {
             publicar: function($event) {
-              _vm.actualizarLista($event)
+              _vm.crearComentario($event)
             }
           }
         }),
