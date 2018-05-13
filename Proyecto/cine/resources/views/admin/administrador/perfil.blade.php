@@ -124,6 +124,9 @@
 @endsection
 
 @section('content')
+    @if( isset($errors) && sizeof($errors)>0 )
+        <div class="callout callout-danger">El formato del valor introducido no es correcto, no se han guardado los cambios.</div>
+    @endif
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Datos de la cuenta</h3>
@@ -144,7 +147,7 @@
                     <div class="formularios" hidden>
                         <div>
                             <div class="col-xs-4">
-                                <input class="form-control input-sm" type="text" name="nombre"/>
+                                <input class="form-control input-sm" type="text" name="name"/>
                                 <div class="callout callout-danger" id="errornombre" hidden></div>
                             </div>
                             <div>
@@ -172,7 +175,7 @@
                     <div class="formularios" hidden>
                         <div>
                             <div class="col-xs-4">
-                                <input id="pw1" class="form-control input-sm" type="password" name="pw" />
+                                <input id="pw1" class="form-control input-sm" type="password" name="password" />
                                 <input id="pw2" class="form-control input-sm" type="password"/>
                                 <div class="callout callout-danger" id="errorpw" hidden></div>
                             </div>

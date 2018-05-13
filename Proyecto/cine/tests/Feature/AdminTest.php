@@ -88,7 +88,6 @@ class AdminTest extends TestCase
             'password' => bcrypt('123456')
         ]);
         $this->actingAs($admin, 'admin')
-            ->withSession(['nombre' => $admin->name] )
             ->get('admin/comprobar')
             ->assertStatus(302)
             ->assertRedirect('admin/settings');
@@ -113,7 +112,6 @@ class AdminTest extends TestCase
         $datos = ['valor' => 'John'];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($admin, 'admin')
-            ->withSession(['nombre' => $admin->name] )
             ->post('admin/comprobar', $datos, $headers)
             ->assertStatus(201);
     }
@@ -136,7 +134,6 @@ class AdminTest extends TestCase
             'password' => bcrypt('123456')
         ]);
         $this->actingAs($admin, 'admin')
-            ->withSession(['nombre' => $admin->name] )
             ->get('admin/modificaradmin')
             ->assertStatus(302)
             ->assertRedirect('admin/settings');
@@ -186,9 +183,9 @@ class AdminTest extends TestCase
         ]);
         $datos = [
             'id' => 1,
-            'nombre' => 'Ann',
+            'name' => 'Ann',
             'email' => '',
-            'pw' => ''
+            'password' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($admin, 'admin')
@@ -213,16 +210,15 @@ class AdminTest extends TestCase
         ]);
         $datos = [
             'id' => 2,
-            'nombre' => 'Ann',
+            'name' => 'Ann',
             'email' => '',
-            'pw' => ''
+            'password' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($superadmin, 'admin')
-            ->withSession(['nombre' => 'Admin'] )
             ->post('admin/modificaradmin', $datos, $headers)
-            ->assertStatus(302)
-            ->assertRedirect('/admin/administradores');
+            ->assertStatus(200)
+            ->assertSee('Administradores registrados');
     }
 
     /** @test */
@@ -241,13 +237,12 @@ class AdminTest extends TestCase
         ]);
         $datos = [
             'id' => 2,
-            'nombre' => 'Admin',
+            'name' => 'Admin',
             'email' => '',
-            'pw' => ''
+            'password' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($superadmin)
-            ->withSession(['nombre' => 'Admin'] )
             ->post('admin/modificaradmin', $datos, $headers)
             ->assertStatus(302);
     }
@@ -268,16 +263,15 @@ class AdminTest extends TestCase
         ]);
         $datos = [
             'id' => 2,
-            'nombre' => '',
+            'name' => '',
             'email' => 'nuevo@mail.com',
-            'pw' => ''
+            'password' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($superadmin, 'admin')
-            ->withSession(['nombre' => 'Admin'] )
             ->post('admin/modificaradmin', $datos, $headers)
-            ->assertStatus(302)
-            ->assertRedirect('/admin/administradores');
+            ->assertStatus(200)
+            ->assertSee('Administradores registrados');
     }
 
     /** @test */
@@ -296,13 +290,12 @@ class AdminTest extends TestCase
         ]);
         $datos = [
             'id' => 2,
-            'nombre' => '',
+            'name' => '',
             'email' => 'admin@admin.com',
-            'pw' => ''
+            'password' => ''
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($superadmin)
-            ->withSession(['nombre' => 'Admin'] )
             ->post('admin/modificaradmin', $datos, $headers)
             ->assertStatus(302);
     }
@@ -326,7 +319,6 @@ class AdminTest extends TestCase
             'password' => bcrypt('123456')
         ]);
         $this->actingAs($admin, 'admin')
-            ->withSession(['nombre' => 'Admin'] )
             ->get('admin/crearadministrador')
             ->assertStatus(200)
             ->assertSee('Crear nuevo usuario');
@@ -341,7 +333,6 @@ class AdminTest extends TestCase
             'password' => bcrypt('123456')
         ]);
         $this->actingAs($admin, 'admin')
-            ->withSession(['nombre' => 'Admin'] )
             ->get('admin/crearadministrador')
             ->assertStatus(200)
             ->assertSee('Permiso denegado');
@@ -356,13 +347,12 @@ class AdminTest extends TestCase
             'password' => bcrypt('123456')
         ]);
         $datos = [
-            'nombre' => 'John',
+            'name' => 'John',
             'email' => 'john@admin.com',
-            'pw' => bcrypt('123456')
+            'password' => 'MMnn12-'
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($admin, 'admin')
-            ->withSession(['nombre' => 'Admin'] )
             ->post('admin/crearadministrador', $datos, $headers)
             ->assertStatus(200)
             ->assertSee('Usuario creado');
@@ -377,9 +367,9 @@ class AdminTest extends TestCase
             'password' => bcrypt('123456')
         ]);
         $datos = [
-            'nombre' => 'John',
+            'name' => 'John',
             'email' => 'john@admin.com',
-            'pw' => bcrypt('123456')
+            'password' => bcrypt('123456')
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($admin, 'admin')
@@ -407,7 +397,6 @@ class AdminTest extends TestCase
             'password' => bcrypt('123456')
         ]);
         $this->actingAs($admin, 'admin')
-            ->withSession(['nombre' => 'Admin'] )
             ->get('admin/administradores')
             ->assertStatus(200)
             ->assertSee('Administradores registrados');
@@ -432,7 +421,6 @@ class AdminTest extends TestCase
                 'password' => bcrypt('123456')
             ]);
             $this->actingAs($admin)
-                ->withSession(['nombre' => 'Admin'] )
                 ->get('admin/borrar')
                 ->assertStatus(302)
                 ->assertRedirect('/admin');
@@ -457,7 +445,6 @@ class AdminTest extends TestCase
             ];
             $headers = ['X-CSRF-TOKEN' => csrf_token() ];
             $this->actingAs($admin1, 'admin')
-                ->withSession(['nombre' => 'Admin'] )
                 ->post('admin/borrar', $datos, $headers)
                 ->assertStatus(204);
         }
