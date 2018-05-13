@@ -124,8 +124,8 @@ class PeliculaController extends Controller
         $resenas = Resena::where('pelicula_id', $idPelicula)->get();
          foreach ($resenas as $resena ){
             $user = $resena->user();
-            $resena['user'] = $user->name;
-            $resena['avatar'] = $user->avatar;
+            $resena['nombre_usuario'] = $user->name;
+            $resena['imagen_usuario'] = $user->avatar;
         } 
         return $resenas;
     }

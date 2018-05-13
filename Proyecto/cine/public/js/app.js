@@ -62030,7 +62030,7 @@ var render = function() {
                       },
                       [_vm._v("Publicar")]
                     )
-                  : _c("div", { staticClass: "field is-grouped" }, [
+                  : _c("p", { staticClass: "buttons" }, [
                       _vm._m(0),
                       _vm._v(" "),
                       _vm._m(1)
@@ -62058,10 +62058,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "control" }, [
-      _c("a", { staticClass: "button is-link" }, [
+    return _c("a", { staticClass: "button is-link" }, [
+      _c("span", [
         _vm._v(
-          "\n                                Actualizar\n                            "
+          "\n                             Actualizar\n                            "
         )
       ])
     ])
@@ -62070,10 +62070,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "control" }, [
-      _c("a", { staticClass: "button is-danger" }, [
+    return _c("a", { staticClass: "button" }, [
+      _c("span", [
         _vm._v(
-          "\n                                Eliminar comentario\n                            "
+          "\n                             Eliminar\n                            "
         )
       ])
     ])

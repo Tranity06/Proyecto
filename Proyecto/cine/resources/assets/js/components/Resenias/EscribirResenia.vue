@@ -15,18 +15,18 @@
                 <div class="level-left">
                     <div class="level-item">
                         <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario" v-if="!ocultarOpciones">Publicar</a>
-                        <div class="field is-grouped" v-else>
-                            <p class="control">
-                                <a class="button is-link">
-                                    Actualizar
-                                </a>
-                            </p>
-                            <p class="control">
-                                <a class="button is-danger">
-                                    Eliminar comentario
-                                </a>
-                            </p>
-                        </div>
+                        <p class="buttons" v-else>
+                            <a class="button is-link">
+                                <span>
+                                 Actualizar
+                                </span>
+                            </a>
+                            <a class="button">
+                                <span>
+                                 Eliminar
+                                </span>
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="level-right">
