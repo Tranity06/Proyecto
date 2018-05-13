@@ -78,25 +78,17 @@
                 </div>
             </div>
         </div>
-        <section class="section">
-            <div class="container">
-                <escribir-resenia :idPelicula="id"></escribir-resenia>
-                <resenia-component></resenia-component>
-                <!-- Reseñas de otros -->
-            </div>
-        </section>
-        <!-- Reseñas -->
+
+        <resenia-component></resenia-component>
+
     </div>
 </template>
 
 <script>
-    import ReseniaComponent from "../components/ReseniaComponent";
-    import EscribirResenia from "../components/Resenias/EscribirResenia";
+    import ReseniaComponent from "../components/Resenias/ReseniaComponent";
 
     export default {
-        components: {
-            EscribirResenia,
-            ReseniaComponent},
+        components: {ReseniaComponent},
         name: 'pelicula',
         data() {
             return {

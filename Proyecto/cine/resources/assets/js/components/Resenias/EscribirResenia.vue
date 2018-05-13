@@ -32,12 +32,12 @@
     import store from '../../store';
 
     export default {
-        props: ['idPelicula'],
         name: "escribir-resenia",
         data(){
             return {
                 comentario: '',
-                caracteres: 0
+                caracteres: 0,
+                idPelicula: this.$route.params.id
             }
         },
         computed: {
