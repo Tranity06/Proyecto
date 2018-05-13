@@ -16,7 +16,7 @@ class ResenaController extends Controller
             'valoracion' => $request['valoracion'], 
             'comentario' => $request['comentario'], 
             'usuario_id' => $idUsuario, 
-            'pelicula_id ' => $idPelicula
+            'pelicula_id' => $idPelicula
         ]);
         return $resena;
     }
