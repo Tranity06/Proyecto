@@ -122,11 +122,11 @@ class PeliculaController extends Controller
 
     public function getResenas($idPelicula){
         $resenas = Resena::where('pelicula_id', $idPelicula)->get();
-        foreach ($resenas as $resena ){
+         foreach ($resenas as $resena ){
             $user = $resena->user();
             $resena['user'] = $user->name;
             $resena['avatar'] = $user->avatar;
-        }
+        } 
         return $resenas;
     }
 

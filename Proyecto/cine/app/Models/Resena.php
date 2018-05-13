@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pelicula;
+use App\Models\User;
 
 class Resena extends Model
 {
@@ -19,13 +21,13 @@ class Resena extends Model
      * Devuelve la película a la que pertenece.
      */
     public function pelicula(){
-        return $this->belongsTo(Pelicula::class)->get();
+        return $this->belongsTo(Pelicula::class)->first();
     }
 
     /**
      * Devuelve el usuario al que pertenece.
      */
     public function user(){
-        return $this->belongsTo(User::class)->get();
+        return $this->belongsTo(User::class)->first();
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Resena;
+use App\Models\User;
 
 class ResenaController extends Controller
 {
@@ -12,18 +12,13 @@ class ResenaController extends Controller
         return User::find($idUsuario)->resenas();
     }
 
-    public function crearResenia($idUsuario,Request $request){
-
+    public function create(Request $request, $idUsuario, $idPelicula){
         $resena = Resena::create([
-            'valoracion' => $request['valoracion'],
-            'comentario' => $request['comentario'],
-            'user_id' => $idUsuario,
-            'pelicula_id' => $request['pelicula_id']
+            'valoracion' => $request['valoracion'], 
+            'comentario' => $request['comentario'], 
+            'usuario_id' => $idUsuario, 
+            'pelicula_id ' => $idPelicula
         ]);
-
-        $resena['imagen_usuario'] = User::find($idUsuario)->avatar;
-        $resena['nombre_usuario'] = User::find($idUsuario)->name;
-
         return $resena;
     }
 
@@ -35,7 +30,7 @@ class ResenaController extends Controller
         return $resena;
     }
 
-    public function delete($idResena){
+    public function detele($idResena){
         $resena = Resena::find($idResena);
         $resena->delete();
         return 204;
