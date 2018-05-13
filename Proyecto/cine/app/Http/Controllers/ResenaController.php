@@ -48,7 +48,7 @@ class ResenaController extends Controller
         return $resena;
     }
 
-    public function detele($idResena){
+    public function delete($idResena){
         $resena = Resena::find($idResena);
         $resena->delete();
         return 204;

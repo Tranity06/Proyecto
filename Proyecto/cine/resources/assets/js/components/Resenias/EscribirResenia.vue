@@ -8,20 +8,22 @@
         <div class="media-content">
             <div class="field">
                 <p class="control">
-                    <textarea class="textarea" :class="{'is-danger': caracteres > 140}" placeholder="Escribe un comentario..." v-model="comentario" @keyup="contarCaracteres"></textarea>
+                    <textarea class="textarea" :class="{'is-danger': caracteres > 140}" placeholder="Escribe un comentario..." @keyup="contarCaracteres"
+                              :value="this.comento" @input="$emit('update:comento', $event.target.value)">
+                    </textarea>
                 </p>
             </div>
             <nav class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario" v-if="!ocultarOpciones">Publicar</a>
+                        <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario" v-if="!this.ocultarOpciones">Publicar</a>
                         <p class="buttons" v-else>
-                            <a class="button is-link">
+                            <a class="button" :disabled="caracteres > 140" @click="actualizarComentario">
                                 <span>
                                  Actualizar
                                 </span>
                             </a>
-                            <a class="button">
+                            <a class="button is-danger" @click="eliminarComentario">
                                 <span>
                                  Eliminar
                                 </span>
@@ -44,13 +46,12 @@
     import store from '../../store';
 
     export default {
+        props: ['comento','idResena','ocultarOpciones'],
         name: "escribir-resenia",
         data(){
             return {
-                comentario: '',
                 caracteres: 0,
                 idPelicula: this.$route.params.id,
-                ocultarOpciones: false,
             }
         },
         computed: {
@@ -63,7 +64,7 @@
         },
         methods: {
             contarCaracteres(){
-                this.caracteres = this.comentario.length;
+                this.caracteres = this.comento.length;
             },
             publicarComentario(){
                 let idUsuario = JSON.parse(localStorage.getItem('user')).id;
@@ -72,12 +73,60 @@
                         'Content-Type': 'application/json',
                     },
                     valoracion: 0,
-                    comentario: this.comentario,
+                    comentario: this.comento,
                     pelicula_id: this.idPelicula
                 })
                     .then(response => {
-                        this.$emit('publicar', response.data)
-                        this.ocultarOpciones = true;
+                        console.log('COMENTARIO RECIBIDO'+response.data.id);
+                        this.resena = response.data;
+                        console.log('COMENTARIO RECIBIDO'+response.data.id);
+                        this.$emit('publicar', response.data);
+                        this.$notify({
+                            group: 'auth',
+                            type: 'success',
+                            title: 'Comentario Publicado',
+                            text: 'Tu comentario se ha publicado',
+                            duration: 5000,
+                        });
+                        console.log('COMENTARIO RECIBIDO'+response.data.id);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
+            actualizarComentario(){
+                axios.put(`/api/resena/${this.idResena}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    valoracion: 0,
+                    comentario: this.comento
+                })
+                    .then(response => {
+                        this.$notify({
+                            group: 'auth',
+                            type: 'success',
+                            title: 'Comentario Actualizado',
+                            text: 'Tu comentario ha sido actualizado',
+                            duration: 5000,
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
+            eliminarComentario(){
+                axios.delete(`/api/resena/${this.idResena}`)
+                    .then(response => {
+                        this.$emit('update:comento', '');
+                        this.$emit('update:ocultarOpciones', false);
+                        this.$notify({
+                            group: 'auth',
+                            type: 'error',
+                            title: 'El comentario ha sido eliminado',
+                            text: 'Tu comentario ha sido eliminado',
+                            duration: 5000,
+                        });
                     })
                     .catch(error => {
                         console.log(error);

@@ -1,7 +1,11 @@
 <template>
     <section class="section">
         <div class="container">
-            <escribir-resenia @publicar="crearComentario($event)"></escribir-resenia>
+            <escribir-resenia @publicar="crearComentario($event)"
+                              :comento.sync="comento"
+                              :ocultarOpciones.sync="ocultarOpciones"
+                              :idResena="idResena">
+            </escribir-resenia>
             <listar-resenia v-for="resena in resenas" :key="resena.id" :resena="resena"></listar-resenia>
         </div>
     </section>
@@ -17,7 +21,10 @@
             return {
                 resenas: [],
                 idUsuario: JSON.parse(localStorage.getItem('user')).id,
-                idPelicula: this.$route.params.id
+                idPelicula: this.$route.params.id,
+                comento: '',
+                idResena: 0,
+                ocultarOpciones: false
             }
         },
         created(){
@@ -25,7 +32,7 @@
                 .then(response => {
                     console.log(this.idUsuario);
                     console.log(response.data);
-                    this.resenas = response.data.filter(e => e.user_id != this.idUsuario);
+                    this.resenas = this.usuarioCommented(response.data);
                     console.log(this.resenas)
                 })
                 .catch(error => {
@@ -34,7 +41,21 @@
         },
         methods: {
             crearComentario(mensaje){
-                this.resenas.push(mensaje);
+                this.ocultarOpciones = true;
+                this.idResena = mensaje.id;
+                this.comento = mensaje.comentario;
+            },
+            usuarioCommented(array){
+                const index = array.findIndex(resena => resena.user_id == this.idUsuario);
+
+                if (index !== -1) {
+                    this.comento = array[index].comentario;
+                    this.idResena = array[index].id;
+                    this.ocultarOpciones = true;
+                    array.splice(index, 1);
+                }
+
+                return array;
             }
         },
         components: {
