@@ -19,7 +19,7 @@ class Resena extends Model
      * Devuelve la película a la que pertenece.
      */
     public function pelicula(){
-        return $this->belongsTo(Pelicula::class);
+        return $this->belongsTo(Pelicula::class)->get();
     }
 
     /**

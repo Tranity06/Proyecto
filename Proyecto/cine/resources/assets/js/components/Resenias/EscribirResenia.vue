@@ -54,12 +54,13 @@
             },
             publicarComentario(){
                 let idUsuario = JSON.parse(localStorage.getItem('user')).id;
-                axios.post(`/api/resena/${idUsuario}/${this.idPelicula}`, {
+                axios.post(`/api/resena/${idUsuario}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     valoracion: 0,
                     comentario: this.comentario,
+                    pelicula_id: this.idPelicula
                 })
                     .then(response => {
 

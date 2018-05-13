@@ -56,7 +56,6 @@
                         image: this.image
                     }
                 ).then(response => {
-                    alert('mira la consola');
                     console.log(response.data);
                     store.commit('changeAvatar',response.data.avatar_name);
                 });

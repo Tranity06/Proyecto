@@ -15,7 +15,7 @@ class CreateResenasTable extends Migration
     {
         Schema::create('resenas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('valoracion');
+            $table->integer('valoracion');
             $table->string('comentario');
 
             //Clave foránea USUARIO.
