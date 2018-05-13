@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pelicula;
+use App\Models\User;
 
 class Resena extends Model
 {
@@ -12,20 +14,20 @@ class Resena extends Model
      * @var array
      */
     protected $fillable = [
-        'valoracion', 'comentario', 'usuario_id', 'pelicula_id'
+        'valoracion', 'comentario', 'user_id', 'pelicula_id'
     ];
 
     /**
      * Devuelve la película a la que pertenece.
      */
     public function pelicula(){
-        return $this->belongsTo(Pelicula::class);
+        return $this->belongsTo(Pelicula::class)->first();
     }
 
     /**
      * Devuelve el usuario al que pertenece.
      */
-    public function usuario(){
-        return $this->belongsTo(Usuario::class)->get();
+    public function user(){
+        return $this->belongsTo(User::class)->first();
     }
 }

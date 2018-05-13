@@ -5,7 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        isLoggedIn: !!localStorage.getItem('token')
+        isLoggedIn: !!localStorage.getItem('token'),
+        avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
+    },
+    getters: {
+        avatar: state => state.avatar
     },
     mutations: {
         loginUser (state) {
@@ -14,5 +18,8 @@ export default new Vuex.Store({
         logoutUser (state) {
             state.isLoggedIn = false
         },
+        changeAvatar(state, avatar){
+            state.avatar = avatar;
+        }
     }
 })

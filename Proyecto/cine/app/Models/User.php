@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Models\Resena;
+use App\Models\Factura;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -53,14 +55,14 @@ class User extends Authenticatable implements JWTSubject
      * Devuelve todas las reseñas del usuario
      */
     public function resenas(){
-        return $this->hasMany(Resenas::class);
+        return $this->hasMany(Resena::class)->get();
     }
 
     /**
      * Devuelve todas las facturas del usuario
      */
     public function facturas(){
-        return $this->hasMany(Facturas::class);
+        return $this->hasMany(Factura::class)->get();
     }
 
 }

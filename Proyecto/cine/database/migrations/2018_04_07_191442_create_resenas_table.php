@@ -15,12 +15,12 @@ class CreateResenasTable extends Migration
     {
         Schema::create('resenas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('valoracion');
+            $table->integer('valoracion');
             $table->string('comentario');
 
             //Clave foránea USUARIO.
-            $table->unsignedInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             //Clave foránea PELICULA.
             $table->unsignedInteger('pelicula_id');

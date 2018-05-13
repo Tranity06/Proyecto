@@ -2,11 +2,19 @@
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
-                <p>
-                    <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-                    <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-                    is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-                </p>
+                <span class="marca">Palomitas Time</span>
+                <div class="redes">
+                    <a href="http://www.twitter.com" class="centeredIcon">
+                        <i class="fab fa-twitter-f"></i>
+                    </a>
+                    <a href="http://www.facebook.com" class="centeredIcon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="http://www.facebook.com" class="centeredIcon">
+                        <i class="fab fa-instagram-f"></i>
+                    </a>
+                </div>
+                <span><b>2018 PALOMITASTIME.COM</b></span>
             </div>
         </div>
     </footer>
@@ -20,4 +28,36 @@
 
 <style scoped>
 
+    .marca{
+        font-family: 'Jua', sans-serif !important;
+        font-size: 1.5rem;
+    }
+
+    .redes{
+        display: flex;
+        max-width: 300px;
+        justify-content: space-between;
+    }
+
+    .centeredIcon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        color: dodgerblue;
+        background-color: ghostwhite;
+        border-radius: 100%;
+        margin-left: .5rem;
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        transition: all .5s;
+    }
+
+    .centeredIcon:hover {
+        color: white;
+        background-color: dodgerblue;
+    }
 </style>

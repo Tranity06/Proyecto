@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pelicula;
 use App\Models\Resena;
 use App\Models\Sesion;
+use App\Models\User;
 
 class PeliculaController extends Controller
 {
@@ -120,7 +121,13 @@ class PeliculaController extends Controller
     }
 
     public function getResenas($idPelicula){
-        return Resena::where('pelicula_id', $idPelicula)->get();
+        $resenas = Resena::where('pelicula_id', $idPelicula)->get();
+         foreach ($resenas as $resena ){
+            $user = $resena->user();
+            $resena['nombre_usuario'] = $user->name;
+            $resena['imagen_usuario'] = $user->avatar;
+        } 
+        return $resenas;
     }
 
     public function getSesiones($fecha){

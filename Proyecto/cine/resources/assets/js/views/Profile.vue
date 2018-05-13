@@ -3,7 +3,7 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-10-tablet is-offset-2-tablet">
-                    <img :src="'uploads/avatars/'+avatar"
+                    <img :src="'uploads/avatars/'+getAvatar"
                          style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
                     <h2> <b>{{ userName }}</b> Perfil</h2>
                     <form v-on:submit.prevent="upload">
@@ -17,17 +17,22 @@
     </section>
 </template>
 <script>
+    import store from '../store';
+
     export default {
         data() {
             return {
-                avatar: '',
                 image: '',
                 userName: '',
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
+        computed: {
+            getAvatar(){
+                return store.getters.avatar;
+            }
+        },
         mounted(){
-            this.avatar = JSON.parse(localStorage.getItem('user')).avatar;
             this.userName = JSON.parse(localStorage.getItem('user')).name;
         },
         methods: {
@@ -51,8 +56,8 @@
                         image: this.image
                     }
                 ).then(response => {
-                    alert('mira la consola');
                     console.log(response.data);
+                    store.commit('changeAvatar',response.data.avatar_name);
                 });
             }
         }
