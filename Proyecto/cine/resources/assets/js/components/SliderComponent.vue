@@ -55,10 +55,8 @@
             }
         },
         created(){
-            console.log('PAGES '+this.pages[0].style.background);
             axios.get('/api/slider')
                 .then(response => {
-                    console.log('MIO '+response.data[0].slider_image);
                     this.mountSlider(response.data);
                 })
                 .catch(error => {
@@ -69,7 +67,6 @@
             slider
         },
         methods: {
-
             mountSlider(data){
                 for (let i=0; i<=3;i++){
                     this.pages[i].style.background = 'url('+data[i].slider_image+')';
