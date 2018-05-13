@@ -2,13 +2,13 @@
         <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64">
-                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                    <img :src="'/uploads/avatars/'+this.resena.imagen_usuario">
                 </p>
             </figure>
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong>Emanuel Suca</strong> <small>31m</small>
+                        <strong>{{ this.resena.nombre_usuario }}</strong> <small>31m</small>
                         <br>
                         {{ this.resena.comentario }}
                     </p>
