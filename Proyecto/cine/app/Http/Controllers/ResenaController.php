@@ -13,20 +13,24 @@ class ResenaController extends Controller
     }
 
     public function crearResenia(Request $request, $idUsuario){
+        $user_resenas = Resena::where([
+            ['user_id',$idUsuario],
+            ['pelicula_id',$request['pelicula_id']]
+        ])->get();
+        if ( sizeof($user_resenas) > 0 ){
+            return 403;
+        }
+
         $resena = Resena::create([
             'valoracion' => $request['valoracion'], 
             'comentario' => $request['comentario'], 
-<<<<<<< HEAD
-            'usuario_id' => $idUsuario, 
-            'pelicula_id' => $idPelicula
-=======
             'user_id' => $idUsuario,
             'pelicula_id' => $request['pelicula_id']
->>>>>>> desarrollo
         ]);
 
-        $resena['imagen_usuario'] = User::find($idUsuario)->avatar;
-        $resena['nombre_usuario'] = User::find($idUsuario)->name;
+        $user = $resena->user();
+        $resena['imagen_usuario'] = $user->avatar;
+        $resena['nombre_usuario'] = $user->name;
 
         return $resena;
     }
