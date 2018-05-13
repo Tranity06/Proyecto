@@ -1,6 +1,5 @@
 <template>
-    <div style="margin-top: 1rem;border-top: 1px solid rgba(219,219,219,.5);padding-top: 1rem">
-        <article class="media" v-for="resena in resenas">
+        <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -11,7 +10,7 @@
                     <p>
                         <strong>Emanuel Suca</strong> <small>31m</small>
                         <br>
-                        {{ resena.comentario }}
+                        {{ this.resena.comentario }}
                     </p>
                 </div>
                 <nav class="level is-mobile">
@@ -26,27 +25,12 @@
                 </nav>
             </div>
         </article>
-    </div>
 </template>
 
 <script>
     export default {
+        props: ['resena'],
         name: "listar-resenia",
-        data(){
-            return {
-                resenas: [],
-                idPelicula: this.$route.params.id
-            }
-        },
-        mounted(){
-            axios.get(`/api/pelicula/${this.idPelicula}/resenas`)
-                .then(response => {
-                    this.resenas = response.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        }
     }
 </script>
 

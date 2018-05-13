@@ -63,7 +63,7 @@
                     pelicula_id: this.idPelicula
                 })
                     .then(response => {
-
+                        this.$emit('publicar', response.data)
                     })
                     .catch(error => {
                         console.log(error);
