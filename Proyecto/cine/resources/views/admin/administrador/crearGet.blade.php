@@ -41,12 +41,13 @@
                         url: '/admin/comprobar',
                         type: 'POST',
                         data: 'valor='+$texto,
-                        success: function(e){
-                            if ( e === 'existe'){
+                        statusCode:{
+                            204: function (){
                                 $input.addClass('errores');
                                 $input.next().text("El valor introducido ya existe.");
                                 $input.next().slideDown("slow");
-                            } else {
+                            },
+                            201: function (){
                                 $input.addClass('ok');
                                 $input.next().slideUp("slow");
                                 $input.next().text('');
@@ -108,7 +109,11 @@
 @endsection
 
 @section('content')
-    <div class="box box-default color-palette-box">
+    @if( isset($errors) && sizeof($errors)>0 )
+    <p>{{$errors}}</p>
+        <div class="callout callout-danger">Ha ocurrido un error durante la validación de los datos, no se ha registrado un nuevo administrador.</div>
+    @endif
+    <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Crear nuevo usuario</h3>
         </div>
@@ -119,7 +124,7 @@
                     <div class="formularios">
                         <div>
                             <div class="col-xs-4">
-                                <input class="form-control input-sm comprobar" type="text" id="nombre" name="nombre"/>
+                                <input class="form-control input-sm comprobar" type="text" id="nombre" name="name"/>
                                 <div class="callout callout-danger" id="errornombre" hidden></div>
                             </div>
                         </div>
@@ -141,7 +146,7 @@
                     <div class="formularios">
                         <div>
                             <div class="col-xs-4">
-                                <input id="pw1" class="form-control input-sm" type="password" name="pw" />
+                                <input id="pw1" class="form-control input-sm" type="password" name="password" />
                                 <input id="pw2" class="form-control input-sm comprobar-pw" type="password"/>
                                 <div class="callout callout-danger" id="errorpw" hidden></div>
                             </div>

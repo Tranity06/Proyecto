@@ -47,9 +47,9 @@ class AdminLoginController extends Controller
       // Attempt to log the user in
       if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location 
-        $email = $request['email'];
+        /* $email = $request['email'];
         $admin = Administrador::where('email', $email)->select('name')->first()->name; //Obtener el nombre del usuario logueado
-        $request->session()->put('nombre', $admin); //Añadir a la sesion el campo 'nombre' con el nombre del usuario
+        $request->session()->put('nombre', $admin); //Añadir a la sesion el campo 'nombre' con el nombre del usuario */
 
         return redirect()->intended(route('admin.login.submit'));
       }
@@ -60,7 +60,6 @@ class AdminLoginController extends Controller
 
     public function logout(Request $request)
     {
-      dd("Aqui");
         Auth::guard('admin')->logout();
 
         $request->session()->invalidate();

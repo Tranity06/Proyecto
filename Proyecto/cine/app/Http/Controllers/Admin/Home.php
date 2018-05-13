@@ -25,7 +25,7 @@ class Home extends Controller
      */
     public function index(Request $request)
     { 
-        $admin = $request->session()->get('nombre');
+        $admin = Auth::guard('admin')->user()->name;
         return view('admin.home', compact('admin'));
     }
 
