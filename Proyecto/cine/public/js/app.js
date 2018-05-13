@@ -61728,7 +61728,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -61752,6 +61752,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -61764,6 +61768,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             idUsuario: JSON.parse(localStorage.getItem('user')).id,
             idPelicula: this.$route.params.id,
             comento: '',
+            idResena: 0,
             ocultarOpciones: false
         };
     },
@@ -61794,7 +61799,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (index !== -1) {
                 this.comento = array[index].comentario;
-                console.log(this.comento);
+                this.idResena = array[index].id;
                 this.ocultarOpciones = true;
                 array.splice(index, 1);
             }
@@ -61953,7 +61958,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['comento', 'ocultarOpciones'],
+    props: ['comento', 'idResena', 'ocultarOpciones'],
     name: "escribir-resenia",
     data: function data() {
         return {
@@ -61986,7 +61991,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 comentario: this.comento,
                 pelicula_id: this.idPelicula
             }).then(function (response) {
+                _this.resena = response.data;
                 _this.$emit('publicar', response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        actualizarComentario: function actualizarComentario() {
+            var _this2 = this;
+
+            axios.put('/api/resena/' + this.idResena, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                valoracion: 0,
+                comentario: this.comento
+            }).then(function (response) {
+                _this2.$notify({
+                    group: 'auth',
+                    title: 'Comentario Actualizado',
+                    text: 'Tu comentario ha sido actualizado',
+                    duration: 5000
+                });
             }).catch(function (error) {
                 console.log(error);
             });
@@ -62046,7 +62072,8 @@ var render = function() {
                         "a",
                         {
                           staticClass: "button is-link",
-                          attrs: { disabled: _vm.caracteres > 140 }
+                          attrs: { disabled: _vm.caracteres > 140 },
+                          on: { click: _vm.actualizarComentario }
                         },
                         [
                           _c("span", [
@@ -62314,7 +62341,11 @@ var render = function() {
       { staticClass: "container" },
       [
         _c("escribir-resenia", {
-          attrs: { comento: _vm.comento, ocultarOpciones: _vm.ocultarOpciones },
+          attrs: {
+            comento: _vm.comento,
+            ocultarOpciones: _vm.ocultarOpciones,
+            idResena: _vm.idResena
+          },
           on: {
             publicar: function($event) {
               _vm.crearComentario($event)

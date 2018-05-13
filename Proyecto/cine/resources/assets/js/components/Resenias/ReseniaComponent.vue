@@ -1,7 +1,11 @@
 <template>
     <section class="section">
         <div class="container">
-            <escribir-resenia @publicar="crearComentario($event)" :comento.sync="comento" :ocultarOpciones="ocultarOpciones"></escribir-resenia>
+            <escribir-resenia @publicar="crearComentario($event)"
+                              :comento.sync="comento"
+                              :ocultarOpciones="ocultarOpciones"
+                              :idResena="idResena">
+            </escribir-resenia>
             <listar-resenia v-for="resena in resenas" :key="resena.id" :resena="resena"></listar-resenia>
         </div>
     </section>
@@ -19,6 +23,7 @@
                 idUsuario: JSON.parse(localStorage.getItem('user')).id,
                 idPelicula: this.$route.params.id,
                 comento: '',
+                idResena: 0,
                 ocultarOpciones: false
             }
         },
@@ -44,7 +49,7 @@
 
                 if (index !== -1) {
                     this.comento = array[index].comentario;
-                    console.log(this.comento);
+                    this.idResena = array[index].id;
                     this.ocultarOpciones = true;
                     array.splice(index, 1);
                 }

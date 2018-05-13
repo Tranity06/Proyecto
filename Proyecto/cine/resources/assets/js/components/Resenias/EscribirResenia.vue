@@ -18,7 +18,7 @@
                     <div class="level-item">
                         <a class="button is-warning" :disabled="caracteres > 140" @click="publicarComentario" v-if="!this.ocultarOpciones">Publicar</a>
                         <p class="buttons" v-else>
-                            <a class="button is-link" :disabled="caracteres > 140">
+                            <a class="button is-link" :disabled="caracteres > 140" @click="actualizarComentario">
                                 <span>
                                  Actualizar
                                 </span>
@@ -46,7 +46,7 @@
     import store from '../../store';
 
     export default {
-        props: ['comento','ocultarOpciones'],
+        props: ['comento','idResena','ocultarOpciones'],
         name: "escribir-resenia",
         data(){
             return {
@@ -77,7 +77,28 @@
                     pelicula_id: this.idPelicula
                 })
                     .then(response => {
+                        this.resena = response.data;
                         this.$emit('publicar', response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
+            actualizarComentario(){
+                axios.put(`/api/resena/${this.idResena}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    valoracion: 0,
+                    comentario: this.comento
+                })
+                    .then(response => {
+                        this.$notify({
+                            group: 'auth',
+                            title: 'Comentario Actualizado',
+                            text: 'Tu comentario ha sido actualizado',
+                            duration: 5000,
+                        });
                     })
                     .catch(error => {
                         console.log(error);
