@@ -115,7 +115,8 @@
 
         .navbar{
             top: 0;
-            transition: top 0.2s ease-in-out;
+            background-color: transparent !important;
+            transition: all .2s ease-in-out;
         }
 
         .navbar.nav-up{
@@ -123,7 +124,7 @@
         }
 
         .navbar.nav-down{
-            background: #0b0b0b !important;
+            background-color: #0b0b0b !important;
         }
 
 
@@ -167,9 +168,12 @@
                 // Scroll Down
                 $('.navbar').removeClass('nav-down').addClass('nav-up');
             } else {
-                // Scroll Up
-                if(st + $(window).height() < $(document).height()) {
-                    $('.navbar').removeClass('nav-up').addClass('nav-down');
+                if (st < 100){
+                    $('.navbar').removeClass('nav-up').removeClass('nav-down');
+                }else{
+                    if(st + $(window).height() < $(document).height()) {
+                        $('.navbar').removeClass('nav-up').addClass('nav-down');
+                    }
                 }
             }
 

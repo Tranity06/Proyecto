@@ -16,13 +16,13 @@
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item is-active">
+                    <a class="navbar-item has-text-white is-active">
                         Películas
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item has-text-white">
                         Restaurante
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item has-text-white">
                         Acerca de
                     </a>
                     <span class="navbar-item navbar-item-end">

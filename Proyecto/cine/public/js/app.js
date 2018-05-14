@@ -67602,15 +67602,15 @@ var render = function() {
         { staticClass: "navbar-menu", attrs: { id: "navbarMenuHeroA" } },
         [
           _c("div", { staticClass: "navbar-end" }, [
-            _c("a", { staticClass: "navbar-item is-active" }, [
+            _c("a", { staticClass: "navbar-item has-text-white is-active" }, [
               _vm._v("\n                    Películas\n                ")
             ]),
             _vm._v(" "),
-            _c("a", { staticClass: "navbar-item" }, [
+            _c("a", { staticClass: "navbar-item has-text-white" }, [
               _vm._v("\n                    Restaurante\n                ")
             ]),
             _vm._v(" "),
-            _c("a", { staticClass: "navbar-item" }, [
+            _c("a", { staticClass: "navbar-item has-text-white" }, [
               _vm._v("\n                    Acerca de\n                ")
             ]),
             _vm._v(" "),
