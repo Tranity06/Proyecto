@@ -67461,7 +67461,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.centeredIcon[data-v-5b258f66] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 20px;\n    width: 40px;\n    height: 40px;\n    color: dodgerblue;\n    background-color: ghostwhite;\n    border-radius: 100%;\n    margin-left: .5rem;\n    -webkit-transition: all .5s;\n    transition: all .5s;\n}\n.centeredIcon[data-v-5b258f66]:hover {\n    color: white;\n    background-color: dodgerblue;\n}\n.avatar[data-v-5b258f66] {\n    border-radius: 50%;\n    display: block;\n    width: 32px;\n    height: 32px;\n    margin-right: 9px;\n    margin-left: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.navbar-burger[data-v-5b258f66]{\n    color: #fff;\n}\n.navbar-burger span[data-v-5b258f66]{\n    height: 2px;\n}\n.logo-container span[data-v-5b258f66]{\n    color: #fff;\n}\n.navbar[data-v-5b258f66]{\n    background-color: transparent ;\n}\n.centeredIcon[data-v-5b258f66] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 20px;\n    width: 40px;\n    height: 40px;\n    color: dodgerblue;\n    background-color: ghostwhite;\n    border-radius: 100%;\n    margin-left: .5rem;\n    -webkit-transition: all .5s;\n    transition: all .5s;\n}\n.centeredIcon[data-v-5b258f66]:hover {\n    color: white;\n    background-color: dodgerblue;\n}\n.avatar[data-v-5b258f66] {\n    border-radius: 50%;\n    display: block;\n    width: 32px;\n    height: 32px;\n    margin-right: 9px;\n    margin-left: 5px;\n}\n", ""]);
 
 // exports
 
@@ -67574,7 +67574,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "navbar is-fixed-top" }, [
+  return _c("nav", { staticClass: "navbar is-fixed-top is-transparent" }, [
     _c("div", { staticClass: "container" }, [
       _c(
         "div",

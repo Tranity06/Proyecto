@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="has-navbar-fixed-top">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -95,6 +95,37 @@
             color: #363636;
         }
 
+        .navbar.solid {
+            padding-top: 1.25rem;
+            background-color: hsl(0, 0%, 21%) !important;
+            transition: background-color 1s ease 0s;
+        }
+
+        .navbar.is-hidden {
+            opacity: 0;
+            -webkit-transform: translate(0, -60px);
+            -webkit-transition: -webkit-transform .2s,background .3s,color .3s,opacity .3s;
+        }
+        .navbar.is-visible {
+            opacity: 1;
+            background-color: hsl(0, 0%, 21%) !important;
+            -webkit-transform: translate(0, 0);
+            -webkit-transition: -webkit-transform .2s,background .3s,color .3s;
+        }
+
+        .navbar{
+            top: 0;
+            transition: top 0.2s ease-in-out;
+        }
+
+        .navbar.nav-up{
+            top: -70px;
+        }
+
+        .navbar.nav-down{
+            background: #0b0b0b !important;
+        }
+
 
     </style>
 </head>
@@ -106,5 +137,44 @@
 
     <script src="{{ mix('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/modal/lity.js') }}"></script>
+    <script>
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('.navbar').outerHeight();
+
+        $(window).scroll(function(event){
+            didScroll = true;
+        });
+
+        setInterval(function() {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 250);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if(Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight){
+                // Scroll Down
+                $('.navbar').removeClass('nav-down').addClass('nav-up');
+            } else {
+                // Scroll Up
+                if(st + $(window).height() < $(document).height()) {
+                    $('.navbar').removeClass('nav-up').addClass('nav-down');
+                }
+            }
+
+            lastScrollTop = st;
+        }
+    </script>
 </body>
 </html>

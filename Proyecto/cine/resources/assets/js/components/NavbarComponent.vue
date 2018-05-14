@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar is-fixed-top">
+    <nav class="navbar is-fixed-top is-transparent">
         <div class="container">
             <div class="navbar-brand">
                 <router-link class="navbar-item" :to="{ name: 'home' }">
@@ -93,6 +93,23 @@
 </script>
 
 <style scoped>
+
+    .navbar-burger{
+        color: #fff;
+    }
+
+    .navbar-burger span{
+        height: 2px;
+    }
+    
+    .logo-container span{
+        color: #fff;
+    }
+
+    .navbar{
+        background-color: transparent ;
+    }
+
     .centeredIcon {
         display: flex;
         flex-direction: column;
