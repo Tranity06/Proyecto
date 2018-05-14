@@ -32,6 +32,70 @@
                 height: 70vh;
             }
         }
+
+        .js-cookie-consent.cookie-consent {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 15px;
+            background-color: hsl(48, 100%, 67%);
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 100;
+            overflow-y: scroll;
+        }
+
+        button.js-cookie-consent-agree.cookie-consent__agree {
+            background-color: #fff;
+            border-color: #dbdbdb;
+            border-width: 1px;
+            color: #363636;
+            cursor: pointer;
+            justify-content: center;
+            padding-bottom: calc(.375em - 1px);
+            padding-left: .75em;
+            padding-right: .75em;
+            padding-top: calc(.375em - 1px);
+            text-align: center;
+            white-space: nowrap;
+            -webkit-appearance: none;
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            box-shadow: none;
+            display: inline-flex;
+            font-size: 1rem;
+            height: 2.25em;
+            justify-content: flex-start;
+            line-height: 1.5;
+            padding-bottom: calc(.375em - 1px);
+            padding-left: calc(.625em - 1px);
+            padding-right: calc(.625em - 1px);
+            padding-top: calc(.375em - 1px);
+            position: relative;
+            vertical-align: top;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border-radius: 290486px;
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+
+        button.js-cookie-consent-agree.cookie-consent__agree:hover{
+            border-color: #b5b5b5;
+            color: #363636;
+        }
+
+        button.js-cookie-consent-agree.cookie-consent__agree:focus{
+            border-color: #3273dc;
+            color: #363636;
+        }
+
+
     </style>
 </head>
 <body>

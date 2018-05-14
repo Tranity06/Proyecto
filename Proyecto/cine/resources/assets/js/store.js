@@ -9,7 +9,8 @@ export default new Vuex.Store({
         avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
     },
     getters: {
-        avatar: state => state.avatar
+        avatar: state => state.avatar,
+        isLoggedIn: state => state.isLoggedIn
     },
     mutations: {
         loginUser (state) {

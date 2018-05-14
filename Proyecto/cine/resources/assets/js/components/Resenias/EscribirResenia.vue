@@ -71,6 +71,7 @@
                 axios.post(`/api/resena/${idUsuario}`, {
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('token')
                     },
                     valoracion: 0,
                     comentario: this.comento,

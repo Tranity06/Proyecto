@@ -813,6 +813,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
     getters: {
         avatar: function avatar(state) {
             return state.avatar;
+        },
+        isLoggedIn: function isLoggedIn(state) {
+            return state.isLoggedIn;
         }
     },
     mutations: {
@@ -61993,7 +61996,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var idUsuario = JSON.parse(localStorage.getItem('user')).id;
             axios.post('/api/resena/' + idUsuario, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                 },
                 valoracion: 0,
                 comentario: this.comento,
