@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use App\Models\Resena;
-use App\Models\Factura;
 
 class User extends Authenticatable implements JWTSubject
 {

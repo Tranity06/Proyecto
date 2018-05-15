@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/register', 'APIAuthController@register');
+Route::post('/register', 'APIAuthController@register')->name('auth.register');
 Route::post('/login', 'APIAuthController@login');
 Route::post('/recover', 'APIAuthController@recover');
 
