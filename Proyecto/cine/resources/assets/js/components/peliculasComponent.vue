@@ -24,9 +24,7 @@
                             </div>
                             <div class="pelicula-horario">
                                 <div class="tags">
-                                    <span class="tag is-rounded is-light">17:30</span>
-                                    <span class="tag is-rounded is-light">21:30</span>
-                                    <span class="tag is-rounded is-light">23:00</span>
+                                    <sesion-component v-for="sesion in peliculas[key].sesiones" :key="sesion.id" :sesion="sesion"></sesion-component>
                                 </div>
                             </div>
 
@@ -39,11 +37,17 @@
 </template>
 
 <script>
+
+    /* Necesito las sesiones de cada pelicula, de estas solo debo mostrar las de hoy y las que todavia estan disponibles. */
+
+    import SesionComponent from "./Peliculas/sesionComponent";
+
     export default {
+        components: {SesionComponent},
         name: "peliculas-component",
         data() {
             return {
-                peliculas: []
+                peliculas: [],
             }
         },
         mounted() {
@@ -56,6 +60,9 @@
                 .catch(error => {
                     console.log(error);
                 })
+        },
+        methods: {
+
         }
     }
 </script>
