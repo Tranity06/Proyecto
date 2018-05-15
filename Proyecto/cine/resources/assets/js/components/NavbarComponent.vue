@@ -12,7 +12,7 @@
                 <span></span>
                 <span></span>
                 <span></span>
-              </span>
+                </span>
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
                 <div class="navbar-end">
@@ -47,7 +47,7 @@
                               </div>
                             </div>
                         </div>
-                        <div v-show="!StoreStateEnabled" style="display: flex;">
+                        <div v-show="!StoreStateEnabled" style="display: flex; justify-content: center">
                             <router-link class="button is-primary" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span>Entrar</span>
@@ -96,6 +96,7 @@
 
     .navbar-burger{
         color: #fff;
+        z-index: 2;
     }
 
     .navbar-burger span{

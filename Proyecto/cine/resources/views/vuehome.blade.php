@@ -95,24 +95,6 @@
             color: #363636;
         }
 
-        .navbar.solid {
-            padding-top: 1.25rem;
-            background-color: hsl(0, 0%, 21%) !important;
-            transition: background-color 1s ease 0s;
-        }
-
-        .navbar.is-hidden {
-            opacity: 0;
-            -webkit-transform: translate(0, -60px);
-            -webkit-transition: -webkit-transform .2s,background .3s,color .3s,opacity .3s;
-        }
-        .navbar.is-visible {
-            opacity: 1;
-            background-color: hsl(0, 0%, 21%) !important;
-            -webkit-transform: translate(0, 0);
-            -webkit-transition: -webkit-transform .2s,background .3s,color .3s;
-        }
-
         .navbar{
             top: 0;
             background-color: transparent !important;
@@ -127,11 +109,44 @@
             background-color: #0b0b0b !important;
         }
 
+        .navbar-menu.editar {
+            position:absolute;
+            top: -1000px;
+            left:0;
+            width:100vw;
+            height: 100vh;
+            text-align:center;
+            background-color: white;
+            font-size:0px;
+            -webkit-transition: all 70ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -moz-transition: all 70ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -ms-transition: all 70ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -o-transition: all 70ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            transition: all 70ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+        }
+
+        .navbar-menu.editar.a {
+            color:#4a89dc;
+            text-transform:uppercase;
+            text-decoration:none;
+            letter-spacing:3px;
+        }
+
+        .navbar-menu.editar.animate{
+            font-size:21px;
+            top: 50px;
+            -webkit-transition: all 150ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -moz-transition: all 150ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -ms-transition: all 150ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -o-transition: all 150ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            transition: all 150ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+        }
+
+
 
     </style>
 </head>
 <body>
-
     <div id="app">
         <app></app>
     </div>
@@ -179,6 +194,62 @@
 
             lastScrollTop = st;
         }
+
+        /*----------------------------------------------------------------------------------*/
+
+        if( 'ontouchstart' in window ){ var click = 'touchstart'; }
+        else { var click = 'click'; }
+
+
+        $('.navbar-burger').on(click, function(){
+
+            if( !$(this).hasClass('is-active') ){ openMenu(); }
+            else { closeMenu(); }
+
+        });
+
+
+        $('a.navbar-item.has-text-white').on(click, function(e){
+            e.preventDefault();
+            closeMenu();
+        });
+
+
+        function openMenu(){
+
+            $('html, body').css({
+                overflow: 'hidden',
+                height: '100%'
+            });
+
+            $('.navbar').attr('style', 'background-color: white !important');
+            $('.logo-container > span').attr('style', 'color: black !important');
+            $('.navbar-burger').addClass('is-active').attr('style', 'color: black');
+            $('div.x, div.y, div.z').addClass('collapse');
+            $('.navbar-menu').addClass('is-active editar animate');
+            $('.navbar-item').addClass('animate').removeClass('has-text-white');
+            $('.navbar-item-end').addClass('animateespecial');
+        }
+
+        function closeMenu(){
+
+            $('html, body').css({
+                overflow: 'auto',
+                height: 'auto'
+            });
+
+            $('.navbar').removeAttr('style');
+            $('.logo-container > span').removeAttr('style');
+            $('.navbar-burger').removeClass('is-active').removeAttr('style');
+            $('div.x').removeClass('rotate45').addClass('rotate30');
+            $('div.z').removeClass('rotate135').addClass('rotate150');
+            $('.navbar-menu').removeClass('is-active editar animate');
+            $('.navbar-item').removeClass('animate has-text-white');
+            $('.navbar-item-end').removeClass('animateespecial');
+
+        }
+
+
     </script>
 </body>
 </html>
