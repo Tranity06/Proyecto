@@ -73,17 +73,17 @@ class APIAuthController extends Controller
             if ($user->is_verified == 1) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Account already verified..'
-                ]);
+                    'message' => 'Account already verified...'
+                ],200);
             }
             $user->update(['is_verified' => 1]);
             DB::table('user_verifications')->where('token', $verification_code)->delete();
             return response()->json([
                 'success' => true,
                 'message' => 'You have successfully verified your email address.'
-            ]);
+            ],200);
         }
-        return response()->json(['success' => false, 'error' => "Verification code is invalid."]);
+        return response()->json(['success' => false, 'error' => "Verification code is invalid."],400);
     }
 
     /**

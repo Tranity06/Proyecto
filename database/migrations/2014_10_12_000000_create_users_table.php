@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->integer('telefono', false, true)->unique();
             $table->string('avatar')->default('default.jpg');
             $table->integer('puntos', false, true)->default('0');
+            $table->boolean('is_verified')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
