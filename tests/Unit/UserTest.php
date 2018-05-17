@@ -41,7 +41,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_send_wrong_data()
+    public function it_sends_wrong_data_to_register()
     {
         Mail::fake();
 
@@ -105,15 +105,63 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_cant_login()
+    public function it_can_login()
+    {
+        $user = factory(User::class)->create([
+            'password' => bcrypt('123456')
+        ]);
+        $credentials = [
+            'email' => $user->email,
+            'password' => '123456',
+        ];
+
+        self::assertNotEmpty(JWTAuth::attempt($credentials));
+    }
+
+    /** @test */
+    public function it_sends_wrong_data_to_login()
+    {
+        $user = factory(User::class)->create([
+            'password' => bcrypt('123456')
+        ]);
+        $credentials = [
+            'password' => '123456',
+        ];
+
+        $this->post(route('auth.login'), $credentials)
+            ->assertStatus(400)
+            ->assertJsonValidationErrors('email');
+
+    }
+
+    /** @test */
+    public function it_is_unauthorized()
     {
         $user = factory(User::class)->create();
         $credentials = [
             'email' => $user->email,
-            'password' => $user->password,
+            'password' => 'nosequecontraseñaes',
         ];
 
-        self::assertFalse(JWTAuth::attempt($credentials));
+        $this->post(route('auth.login'),$credentials)
+            ->assertStatus(401)
+            ->assertJson(['success' => false, 'error' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.']);
+    }
+
+    /** @test */
+    public function it_can_logout()
+    {
+        $user = factory(User::class)->create([
+            'password' => bcrypt('123456')
+        ]);
+        $credentials = [
+            'email' => $user->email,
+            'password' => '123456',
+        ];
+        $token = JWTAuth::attempt($credentials);
+
+        $this->get(route('auth.logout').'?token='.$token)
+             ->assertJson(['success' => true, 'message' => "You have successfully logged out."]);
     }
 
     /** @test */

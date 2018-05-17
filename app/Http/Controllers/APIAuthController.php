@@ -101,7 +101,7 @@ class APIAuthController extends Controller
         ];
         $validator = Validator::make($credentials, $rules);
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->messages()]);
+            return response()->json(['success' => false, 'errors' => $validator->messages()],400);
         }
 
         $credentials['is_verified'] = 1;
@@ -115,10 +115,7 @@ class APIAuthController extends Controller
             // something went wrong whilst attempting to encode the token
             return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
         }
-        $response = compact('token');
-        $response['success'] = true;
-        $response['user']= Auth::user();
-        return response()->json(['success' => true, 'data' => ['token' => $token],'user'=>Auth::user()]);
+        return response()->json(['success' => true, 'token' => $token,'user'=>Auth::user()],200);
     }
 
     /**

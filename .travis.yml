@@ -8,12 +8,6 @@ addons:
 php:
   - 7.2
 
-services:
-  - mysql
-
-before_install:
-  - mysql -e 'CREATE DATABASE cine_test;'
-
 install:
   - cp .env.dusk.testing .env
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest

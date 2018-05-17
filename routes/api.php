@@ -19,7 +19,7 @@ Route::post('/login', 'APIAuthController@login')->name('auth.login');
 Route::post('/recover', 'APIAuthController@recover')->name('auth.recover');
 
 Route::group(['middleware' => ['jwt.auth']], function() {
-    Route::get('logout', 'APIAuthController@logout');
+    Route::get('logout', 'APIAuthController@logout')->name('auth.logout');
     Route::get('test', function(){
         return response()->json(['foo'=>'bar']);
     });
