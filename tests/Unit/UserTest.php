@@ -5,18 +5,20 @@ namespace Tests\Unit;
 use App\Mail\VerificarEmail;
 use App\Models\User;
 use App\Models\UserVerification;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use JWTAuth;
 
 class UserTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function it_can_create_an_user()
+    public function it_can_register()
     {
         Mail::fake();
 
@@ -39,7 +41,26 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_can_verify_an_user()
+    public function it_send_wrong_data()
+    {
+        Mail::fake();
+
+        $user = [
+            'name' => $this->faker->firstName,
+            'email' => $this->faker->email,
+            'password' => 'secret',
+            'password_confirmation' => 'secretA',
+            'telefono' => 123456789,
+        ];
+
+        $this->post(route('auth.register'), $user)
+            ->assertStatus(400)
+            ->assertJson(['success' => false, 'error' => 'Los datos introducidos no son correctos.']);
+
+    }
+
+    /** @test */
+    public function it_can_verify()
     {
         $user = factory(User::class)->create();
         $user_verification = UserVerification::create([
@@ -54,7 +75,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function user_is_already_verified()
+    public function it_is_already_verified()
     {
         $user = factory(User::class)->create();
         $user->update(['is_verified' => 1]);
@@ -81,6 +102,46 @@ class UserTest extends TestCase
             ->assertStatus(400)
             ->assertJson([ 'success' => false, 'error' => 'Verification code is invalid.']);
 
+    }
+
+    /** @test */
+    public function it_cant_login()
+    {
+        $user = factory(User::class)->create();
+        $credentials = [
+            'email' => $user->email,
+            'password' => $user->password,
+        ];
+
+        self::assertFalse(JWTAuth::attempt($credentials));
+    }
+
+    /** @test */
+    public function it_can_recovery_password()
+    {
+        Notification::fake();
+
+        $user = factory(User::class)->create();
+        $userData = [
+            'email' => $user->email,
+        ];
+
+        $this->post(route('auth.recover'),$userData)
+             ->assertStatus(200)
+             ->assertJson(['success' => true, 'message' => 'A reset email has been sent! Please check your email.']);
+        Notification::assertSentTo($user, ResetPassword::class);
+    }
+
+    /** @test */
+    public function it_cant_find_email()
+    {
+        $userData = [
+            'email' => $this->faker->email,
+        ];
+
+        $this->post(route('auth.recover'),$userData)
+             ->assertStatus(401)
+             ->assertJson(['success' => false, 'error' => 'Your email address was not found.'],200);
     }
 
 

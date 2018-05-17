@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\VerificarEmail;
-use App\Notifications\VerifyEmail;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -37,7 +36,7 @@ class APIAuthController extends Controller
         ];
         $validator = Validator::make($credentials, $rules);
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->messages()]);
+            return response()->json(['success' => false, 'error' => 'Los datos introducidos no son correctos.'],400);
         }
         $name = $request->name;
         $email = $request->email;
@@ -119,8 +118,7 @@ class APIAuthController extends Controller
         $response = compact('token');
         $response['success'] = true;
         $response['user']= Auth::user();
-        //return response()->json(['success' => true, 'data' => ['token' => $token]]);
-        return response()->json($response);
+        return response()->json(['success' => true, 'data' => ['token' => $token],'user'=>Auth::user()]);
     }
 
     /**
@@ -153,20 +151,15 @@ class APIAuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            $error_message = "Your email address was not found.";
-            return response()->json(['success' => false, 'error' => ['email' => $error_message]], 401);
+            return response()->json(['success' => false, 'error' => "Your email address was not found."], 401);
         }
-        try {
-            Password::sendResetLink($request->only('email'), function (Message $message) {
-                $message->subject('Your Password Reset Link');
-            });
-        } catch (\Exception $e) {
-            //Return with error
-            $error_message = $e->getMessage();
-            return response()->json(['success' => false, 'error' => $error_message], 401);
-        }
+
+        Password::sendResetLink($request->only('email'), function (Message $message) {
+            $message->subject('Your Password Reset Link');
+        });
+
         return response()->json([
-            'success' => true, 'data' => ['message' => 'A reset email has been sent! Please check your email.']
-        ]);
+            'success' => true, 'message' => 'A reset email has been sent! Please check your email.'
+        ],200);
     }
 }
