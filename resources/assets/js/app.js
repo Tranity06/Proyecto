@@ -10,8 +10,11 @@ import router from './routes.js';
 import Notifications from 'vue-notification';
 import VeeValidate from 'vee-validate';
 import { Validator } from 'vee-validate';
+import moment from 'moment';
+
 
 window.Vue = require('vue');
+Vue.prototype.moment = moment;
 
 Vue.use(VeeValidate);
 Vue.use(Notifications);
@@ -20,6 +23,8 @@ Vue.use(Notifications);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+moment.locale('es-Es');
 
 window.axios = axios
 axios.defaults.baseURL = 'http://localhost:8000';

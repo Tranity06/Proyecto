@@ -5,20 +5,13 @@
                 <div class="column">
                     <div class="showtime-form">
                         <div class="select">
-                            <select @change="mostrarAsientos(salaTarget)" v-model="salaTarget">
-                                <option v-for="sala in salas" :value="sala.id">Sala {{ sala.id }}</option>
+                            <select @change="mostrarHoras(dia)" v-model="dia">
+                                <option v-for="sesion in sesiones" :value="sesion.fecha">{{ moment(sesion.fecha).format('DD dddd') }}</option>
                             </select>
                         </div>
                         <div class="select">
-                            <select v-model="dia">
-                                <option value="25 Lunes">25 Lunes</option>
-                                <option value="26 Martes">26 Martes</option>
-                            </select>
-                        </div>
-                        <div class="select">
-                            <select v-model="hora">
-                                <option value="13:21">13:21</option>
-                                <option value="15:22">15:22</option>
+                            <select v-model="horaTarget">
+                                <option v-for="horaa in horas" :value="horaa.hora">{{ horaa.hora }}</option>
                             </select>
                         </div>
                     </div>
@@ -68,7 +61,7 @@
                             <img src="avengers.jpg" alt="" width="55" height="74">
                             <div class="informacion">
                                 <span class="has-text-weight-bold is-size-6">Vengadores: Infinity War</span>
-                                <span class="has-text-grey-light is-size-7">{{ dia + "," + hora + " Sala " + salaTarget}}</span>
+                                <span class="has-text-grey-light is-size-7">{{ dia + "," + horaTarget + " Sala " + salaTarget}}</span>
                                 <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
                             </div>
                             <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
@@ -103,9 +96,11 @@
             return {
                 salas: 0,
                 salaTarget: 1,
-                dia: "25 Lunes",
-                hora: "15:22",
+                dia: '',
+                horaTarget: '',
+                horas: [],
                 step: 1,
+                sesiones: [],
                 butacas: {
                     total: 0,
                     num: 0
@@ -115,13 +110,25 @@
         components: {
             PaymentComponent
         },
-        created() {
-            axios.get('http://localhost:8000/api/sala')
+        mounted() {
+            axios.get('/api/pelicula/2')
                 .then(response => {
-                    this.salas = response.data;
+                    console.log(response.data.sesiones);
+                    // los inserta ordenados por fecha.
+                    let uniq = [ ...new Set(response.data.sesiones) ];
+                    console.log(uniq);
+                    this.sesiones = response.data.sesiones.sort((a, b) => {
+                        return new Date(a.fecha) - new Date(b.fecha);
+                    });
+                    console.log('1:: '+this.sesiones[5].fecha);
+                    this.sesiones.forEach(sesion => console.log(sesion.fecha));
+                    console.log('2:: '+this.sesiones[5].fecha);
+                    let primeraFecha = this.sesiones[0].fecha;
+                    //this.mostrarHoras(primeraFecha);
+/*                    this.salas = response.data;
 
                     // Al obtener las salas tambien muestra por defecto las butacas de la primera sala
-                    this.mostrarAsientos(this.salas[0].id);
+                    this.mostrarAsientos(this.salas[0].id);*/
                 })
                 .catch(e => {
                     console.log(e);
@@ -133,9 +140,9 @@
                 this.step--;
             },
             next() {
-                let Validacion = this.$refs.butaca.getTotal() > 0;
+                let validacion = this.$refs.butaca.getTotal() > 0;
 
-                if (Validacion) {
+                if (validacion) {
                     this.butacas.total = this.$refs.butaca.getTotal();
                     this.butacas.num = this.$refs.butaca.getButacas();
                     this.step++;
@@ -144,6 +151,13 @@
                 }
 
 
+            },
+            mostrarHoras(day) {
+                console.log('3:: '+this.sesiones[5].fecha);
+               let horasSinOrdenar = this.sesiones.filter((sesion) => sesion.fecha === day);
+                console.log('4:: '+this.sesiones[5].fecha);
+               this.horas = horasSinOrdenar;
+                console.log('5:: '+this.sesiones[5].fecha);
             },
             mostrarAsientos(id) {
                 this.$refs.butaca.getAllButacas(id);
