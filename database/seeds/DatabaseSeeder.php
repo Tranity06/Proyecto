@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'administradores',
             'menu_producto',
             'clave_admin',*/
-    //        'administradores',
+            'administradores',
             'peliculas'
         ]);
 
