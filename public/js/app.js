@@ -84008,7 +84008,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "tipo" }, [
         _c("div", { staticClass: "seat seleccionado" }),
         _vm._v(" "),
-        _c("span", [_vm._v("Tus butacas")])
+        _c("span", { staticClass: "is-size-7" }, [_vm._v("Tus butacas")])
       ])
     ])
   }

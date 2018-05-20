@@ -121,7 +121,7 @@ class UserTest extends TestCase
     /** @test */
     public function it_sends_wrong_data_to_login()
     {
-        $user = factory(User::class)->create([
+        factory(User::class)->create([
             'password' => bcrypt('123456')
         ]);
         $credentials = [

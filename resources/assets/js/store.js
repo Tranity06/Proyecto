@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
@@ -9,18 +9,18 @@ export default new Vuex.Store({
         avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
     },
     getters: {
-        avatar: state => state.avatar,
-        isLoggedIn: state => state.isLoggedIn
+        avatar: (state) => state.avatar,
+        isLoggedIn: (state) => state.isLoggedIn
     },
     mutations: {
         loginUser (state) {
-            state.isLoggedIn = true
+            state.isLoggedIn = true;
         },
         logoutUser (state) {
-            state.isLoggedIn = false
+            state.isLoggedIn = false;
         },
         changeAvatar(state, avatar){
             state.avatar = avatar;
         }
     }
-})
+});

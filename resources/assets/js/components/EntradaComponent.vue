@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-show="step === 1">
-            <div class="columns">
+            <div class="columns is-gapless">
                 <div class="column">
                     <div class="showtime-form">
                         <div class="select">
@@ -20,7 +20,7 @@
                         <button @click.prevent="next()" class="button is-rounded is-warning grande">Pagar</button>
                     </div>
                 </div>
-                <div class="column">
+                <div class="column is-hidden-mobile">
                     <article>
                         imagen,
                         trailer
@@ -58,10 +58,10 @@
                             <span>Precio</span>
                         </div>
                         <div class="cuerpo">
-                            <img src="avengers.jpg" alt="" width="55" height="74">
+                            <img :src="caratula" alt="" width="55" height="74">
                             <div class="informacion">
-                                <span class="has-text-weight-bold is-size-6">Vengadores: Infinity War</span>
-                                <span class="has-text-grey-light is-size-7">{{ dia + "," + horaTarget + " Sala " + salaTarget}}</span>
+                                <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
+                                <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaTarget + " Sala " + salaTarget}}</span>
                                 <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
                             </div>
                             <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
@@ -101,6 +101,8 @@
                 horas: [],
                 step: 1,
                 sesiones: [],
+                caratula: '',
+                titulo: '',
                 butacas: {
                     total: 0,
                     num: 0
@@ -113,6 +115,10 @@
         mounted() {
             axios.get('/api/pelicula/2')
                 .then(response => {
+
+                    this.caratula = response.data.cartel;
+                    this.titulo = response.data.titulo;
+
                     let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
                         index === self.findIndex((t) => (
                             t.fecha === sesion.fecha
@@ -141,7 +147,6 @@
                     console.log(e);
                 })
         },
-
         methods: {
             prev() {
                 this.step--;
@@ -154,7 +159,7 @@
                     this.butacas.num = this.$refs.butaca.getButacas();
                     this.step++;
                 } else {
-                    alert("JAJAJA NO :D");
+                    alert("Debes seleccionar al menos una butaca.");
                 }
 
 
@@ -189,7 +194,7 @@
         display: flex;
         flex-direction: column;
         max-width: 350px;
-        margin: 1rem 0;
+        margin: 1rem auto;
 
         border-radius: 2%;
         background-color: white;
@@ -248,6 +253,7 @@
         font-size: 1em;
         margin-left: .5rem;
     }
+
 
 
 </style>

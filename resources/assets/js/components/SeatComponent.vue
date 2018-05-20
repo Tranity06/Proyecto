@@ -3,23 +3,44 @@
         <div class="info">
             <div class="tipo">
                 <div class="seat libre"></div>
-                <span>Libres</span>
+                <span class="is-size-7-mobile">Libres</span>
             </div>
             <div class="tipo">
                 <div class="seat ocupado"></div>
-                <span>Ocupadas</span>
+                <span class="is-size-7-mobile">Ocupadas</span>
             </div>
             <div class="tipo">
                 <div class="seat reservado"></div>
-                <span>Reservadas</span>
+                <span class="is-size-7-mobile">Reservadas</span>
             </div>
             <div class="tipo">
                 <div class="seat seleccionado"></div>
-                <span>Tus butacas</span>
+                <span class="is-size-7-mobile">Tus butacas</span>
             </div>
         </div>
         <div class="screen"></div>
+
+        <div class="seat-columns has-text-centered">
+            <div class="seat-column"><i>A</i></div>
+            <div class="seat-column"><i>B</i></div>
+            <div class="seat-column"><i>C</i></div>
+            <div class="seat-column"><i>D</i></div>
+            <div class="seat-column"><i>E</i></div>
+            <div class="seat-column"><i>F</i></div>
+            <div class="seat-column"><i>G</i></div>
+            <div class="seat-column"><i>H</i></div>
+        </div>
         <div class="seats-component">
+            <div class="seat-filas">
+                <div><i>1</i></div>
+                <div><i>2</i></div>
+                <div><i>3</i></div>
+                <div><i>4</i></div>
+                <div><i>5</i></div>
+                <div><i>6</i></div>
+                <div><i>7</i></div>
+                <div><i>8</i></div>
+            </div>
             <div class="seat" v-for="butaca in butacas"
                  @click="postEstadoButaca(butaca.id,butaca.estado)"
                  :class="getClass(butaca.estado,butaca.id)">
@@ -94,7 +115,7 @@
                 return {
                     'libre': (estado === 0),
                     'ocupado': (estado === 1),
-                    'reservado': (estado === 2),
+                    'reservado': (estado === 2) && !this.selected.includes(id),
                     'indisponible': (estado === 3),
                     'seleccionado': this.selected.includes(id)
                 }
@@ -115,6 +136,24 @@
 </script>
 
 <style scoped>
+
+
+    .seat-filas{
+        width: 0;
+        height: 0;
+        line-height: 25px;
+        position: relative;
+        left: -10px;
+    }
+
+    .seat-filas > div:not(:first-child){
+        margin: .38rem 0;
+    }
+
+    .seat-columns{
+        width: 280px;
+        margin: 0 auto;
+    }
 
     .bookingseats-form {
         display: flex;
@@ -140,21 +179,34 @@
         margin: 0 .3rem;
     }
 
+    .seat-column{
+        display: inline-block;
+        height: 25px;
+        width: 25px;
+        border-radius: 20%;
+        margin: 0 .17rem;
+        text-align: center;
+    }
+
     .libre {
         background-color: #E8E9EA;
     }
 
     .ocupado {
         background-color: #4B4B5B;
+        transition: background-color .25s ease-out;
         pointer-events: none;
     }
 
     .reservado {
         background-color: #fadf98;
+        transition: background-color .25s ease-out;
+        pointer-events: none;
     }
 
     .seleccionado {
         background-color: hsl(204, 86%, 53%) !important;
+        transition: background-color .25s ease-out;
     }
 
     .indisponible {
