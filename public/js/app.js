@@ -81502,7 +81502,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             _this.dia = _this.sesiones[0].fecha;
-            _this.horaTarget = _this.sesiones[0].hora;
+            _this.horaTarget = _this.sesiones[0].sala_id;
             console.log('1:: ' + _this.sesiones[5].fecha);
             _this.sesiones.forEach(function (sesion) {
                 return console.log(sesion.fecha);
@@ -81537,13 +81537,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         mostrarHoras: function mostrarHoras(day) {
-            console.log('3:: ' + this.sesiones[5].fecha);
-            var horasSinOrdenar = this.sesiones.filter(function (sesion) {
+            this.horas = this.sesiones.filter(function (sesion) {
                 return sesion.fecha === day;
             });
-            console.log('4:: ' + this.sesiones[5].fecha);
-            this.horas = horasSinOrdenar;
-            console.log('5:: ' + this.sesiones[5].fecha);
+            this.horaTarget = this.horas[0].sala_id;
+            this.mostrarAsientos(this.horaTarget);
         },
         mostrarAsientos: function mostrarAsientos(id) {
             this.$refs.butaca.getAllButacas(id);
@@ -81991,25 +81989,32 @@ var render = function() {
                         }
                       ],
                       on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.horaTarget = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.horaTarget = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          function($event) {
+                            _vm.mostrarAsientos(_vm.horaTarget)
+                          }
+                        ]
                       }
                     },
                     _vm._l(_vm.horas, function(horaa) {
-                      return _c("option", { domProps: { value: horaa.hora } }, [
-                        _vm._v(_vm._s(horaa.hora))
-                      ])
+                      return _c(
+                        "option",
+                        { domProps: { value: horaa.sala_id } },
+                        [_vm._v(_vm._s(horaa.hora))]
+                      )
                     })
                   )
                 ])

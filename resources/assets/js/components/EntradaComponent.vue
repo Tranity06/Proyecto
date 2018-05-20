@@ -10,8 +10,8 @@
                             </select>
                         </div>
                         <div class="select">
-                            <select v-model="horaTarget">
-                                <option v-for="horaa in horas" :value="horaa.hora">{{ horaa.hora }}</option>
+                            <select @change="mostrarAsientos(horaTarget)" v-model="horaTarget">
+                                <option v-for="horaa in horas" :value="horaa.sala_id">{{ horaa.hora }}</option>
                             </select>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                      });
 
                     this.dia = this.sesiones[0].fecha;
-                    this.horaTarget = this.sesiones[0].hora;
+                    this.horaTarget = this.sesiones[0].sala_id;
                     console.log('1:: '+this.sesiones[5].fecha);
                     this.sesiones.forEach(sesion => console.log(sesion.fecha));
 
@@ -160,12 +160,11 @@
 
             },
             mostrarHoras(day) {
-                console.log('3:: '+this.sesiones[5].fecha);
-               let horasSinOrdenar = this.sesiones.filter((sesion) => sesion.fecha === day);
-                console.log('4:: '+this.sesiones[5].fecha);
-               this.horas = horasSinOrdenar;
-                console.log('5:: '+this.sesiones[5].fecha);
+                this.horas = this.sesiones.filter((sesion) => sesion.fecha === day);
+                this.horaTarget = this.horas[0].sala_id;
+                this.mostrarAsientos(this.horaTarget);
             },
+
             mostrarAsientos(id) {
                 this.$refs.butaca.getAllButacas(id);
             }
