@@ -17,7 +17,7 @@
                                     <router-link class="button is-rounded" :to="'/pelicula/'+peliculas[key].id">
                                         <img src="icons/arrow-pointing-to-right.svg">
                                     </router-link>
-                                    <router-link class="button is-rounded" :to="{ name: 'entrada' }">
+                                    <router-link class="button is-rounded" :to="'/entrada/'+peliculas[key].id">
                                         Comprar entrada
                                     </router-link>
                                 </div>

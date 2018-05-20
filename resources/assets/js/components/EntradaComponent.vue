@@ -21,31 +21,11 @@
                     </div>
                 </div>
                 <div class="column is-hidden-mobile">
-                    <article>
-                        imagen,
-                        trailer
-                        calificacion edad
-                        genero
-                    </article>
-                    <div class="content">
-                        <blockquote>Ut venenatis, nisl scelerisque sollicitudin fermentum, quam libero hendrerit ipsum, ut
-                            blandit est tellus sit amet turpis.
-                        </blockquote>
-                        <blockquote>Ut venenatis, nisl scelerisque sollicitudin fermentum, quam libero hendrerit ipsum, ut
-                            blandit est tellus sit amet turpis.
-                        </blockquote>
+                    <div class="pelicula-card centrar-imagen">
+                        <img :src="caratula">
                     </div>
-                    <article class="message is-link">
-                        <div class="message-body">
-                            <h1 class="title">Sabias Que??</h1>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus
-                            mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
-                            fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac
-                            <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor,
-                            tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem
-                            eget, facilisis sodales sem.
-                        </div>
-                    </article>
+                    <span class="subtitle">{{ titulo }}</span>
+                    <a :href="trailer" data-lity class="button is-rounded is-danger">Ver trailer</a>
                 </div>
             </div>
         </div>
@@ -100,9 +80,11 @@
                 horaTarget: '',
                 horas: [],
                 step: 1,
+                pelicula: [],
                 sesiones: [],
                 caratula: '',
                 titulo: '',
+                trailer: '',
                 butacas: {
                     total: 0,
                     num: 0
@@ -113,11 +95,11 @@
             PaymentComponent
         },
         mounted() {
-            axios.get('/api/pelicula/2')
+            axios.get(`/api/pelicula/${this.$route.params.id}`)
                 .then(response => {
-
                     this.caratula = response.data.cartel;
                     this.titulo = response.data.titulo;
+                    this.trailer = response.data.trailer;
 
                     let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
                         index === self.findIndex((t) => (
@@ -178,6 +160,22 @@
 </script>
 
 <style scoped>
+
+
+    .pelicula-card {
+        width: 250px;
+        height: auto;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
+        text-align: center;
+        position: relative;
+        margin-bottom: .7rem;
+        line-height: 0;
+        /* margin-left: auto;
+        margin-right: auto; */
+    }
+
     .showtime-form {
         display: flex;
         justify-content: space-around;
