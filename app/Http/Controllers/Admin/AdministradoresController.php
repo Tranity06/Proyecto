@@ -48,10 +48,8 @@ class AdministradoresController extends Controller
             return response('nombre', $sol);
         }
         $sol = $this->comprobarEmail( $recibido );
-        return response('email', $sol);          
-    }
-
-    /**
+        return response('email', $sol);    
+    }/**
      * Guarda los datos del administrador que se han modificado.
      * Comprueba si son datos propios del usuario logueado o de otro usuario.
      * Sólo permite modificar datos agenos al super usuario.
@@ -67,33 +65,19 @@ class AdministradoresController extends Controller
         
         //Comprobar los permisos
         $admin = Auth::guard('admin')->user();
-        if ( $admin->id !== 1 ){
-            $tipoError = "Permiso denegado.";
-            $mensajeError = "No tienes permisos para realizar esta acción.";
-            return view('admin.administrador.error')
-                        ->with([
-                            'admin' => $admin->nombre,
-                            'tipoError' => $tipoError,
-                            'mensajeError' => $mensajeError
-                        ]);
+        $permisoDenegado = $this->comprobarPermisos($admin);
+        if ($permisoDenegado){
+            return $permisoDenegado;
         }
+
         $datos = Administrador::find($request->id);
         
-
         //Validar los datos
-        $credentials = $request->only('name', 'email', 'password', 'id');
-        $rules = [
-            'name' => 'nullable|string|max:20|unique:administradores',
-            'email' => 'nullable|string|email|max:255|unique:administradores',
-            'password' => 'nullable|string|regex:/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,12}$/',
-        ];
-
-        $validator = Validator::make($credentials, $rules);
-        if ($validator->fails()) {
-            return Redirect::to('admin/administradores')->withErrors($validator);
+        $datosIncorrectos = $this->validarDatos($request);
+        if ( $datosIncorrectos->fails() ){
+            return Redirect::to('admin/administradores')->withErrors($datosIncorrectos);
         }
-
-
+        
         //Realizarlos cambios
         $nombre = trim($request->name);
         $email = trim($request->email);
@@ -110,7 +94,6 @@ class AdministradoresController extends Controller
                 $datos->password = bcrypt($pw);
             }
             $datos->save();
-            $correcto = 'S';
             return view('admin.administrador.mostrar')
                         ->with(['admin' => $admin->name,
                         'administradores'=> Administrador::all(),
@@ -122,13 +105,7 @@ class AdministradoresController extends Controller
         $mensajeError = 'Es posible que los datos introducidos sean erróneos o ya existan en la base de datos.';
         return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));        
     }
-
-
-
-    ///////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
+    
     /**
      * Guarda los datos del administrador que se han modificado.
      * Comprueba si son datos propios del usuario logueado o de otro usuario.
@@ -142,23 +119,13 @@ class AdministradoresController extends Controller
         if ( $request->isMethod('get')){
             return redirect('admin/settings');
         }
-        
-        //Comprobar los permisos
         $admin = Auth::guard('admin')->user();        
 
         //Validar los datos
-        $credentials = $request->only('name', 'email', 'password', 'id');
-        $rules = [
-            'name' => 'nullable|string|max:20|unique:administradores',
-            'email' => 'nullable|string|email|max:255|unique:administradores',
-            'password' => 'nullable|string|regex:/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,12}$/',
-        ];
-
-        $validator = Validator::make($credentials, $rules);
-        if ($validator->fails()) {
-            return Redirect::to('admin/settings')->withErrors($validator);
+        $datosIncorrectos = $this->validarDatos($request);
+        if ( $datosIncorrectos->fails() ){
+            return Redirect::to('admin/settings')->withErrors($datosIncorrectos);
         }
-
 
         //Realizarlos cambios
         $nombre = trim($request->name);
@@ -190,11 +157,6 @@ class AdministradoresController extends Controller
         $mensajeError = 'Es posible que los datos introducidos sean erróneos o ya existan en la base de datos.';
         return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));        
     }
-
-    //////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////
     
     /**
      * Si el usuario logueado es el usuario principal devuelve la vista del formulario para crear 
@@ -206,19 +168,15 @@ class AdministradoresController extends Controller
         if (!Auth::guard('admin')->check()){
             return redirect('/admin');
         }
-        $admin = Auth::guard('admin')->user();
 
         //Comprobar permisos
-        if ( $admin->id == 1 ){
-            return view('admin.administrador.crearGet')
-                    ->with(['admin' => $admin->name ]);
+        $admin = Auth::guard('admin')->user();
+        $permisoDenegado = $this->comprobarPermisos($admin);
+        if ($permisoDenegado){
+            return $permisoDenegado;
         }
-        return view('admin.administrador.error')
-                    ->with([
-                        'admin' => $admin->name,
-                        'tipoError' => "Permiso denegado",
-                        'mensajeError' => "Sólo el adminstrador principal puede crear nuevas cuentas de usuario.",
-                    ]);
+        return view('admin.administrador.crearGet')
+                ->with(['admin' => $admin->name ]);
     }
     
     /**
@@ -260,8 +218,6 @@ class AdministradoresController extends Controller
         }
 
         //Si no es el administrador principal devuelve un mensaje de error.
-        $tipoError = "Permiso denegado";
-        $mensajeError = "Sólo el adminstrador principal puede crear nuevas cuentas de usuario.";
         return view('admin.administrador.error')
                     ->with([
                         'admin' => $admin->name,
@@ -347,5 +303,28 @@ class AdministradoresController extends Controller
             return 201;
         }
         return 204;
+    }
+
+    protected static function comprobarPermisos($admin){
+        if ( $admin->id !== 1 ){
+            return view('admin.administrador.error')
+                        ->with([
+                            'admin' => $admin->nombre,
+                            'tipoError' => "Permiso denegado.",
+                            'mensajeError' => "No tienes permisos para realizar esta acción."
+                        ]);
+        }
+        return false;
+    }
+
+    protected static function validarDatos($request){
+        $credentials = $request->only('name', 'email', 'password', 'id');
+        $rules = [
+            'name' => 'nullable|string|max:20|unique:administradores',
+            'email' => 'nullable|string|email|max:255|unique:administradores',
+            'password' => 'nullable|string|regex:/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,12}$/',
+        ];
+
+        return Validator::make($credentials, $rules);
     }
 }
