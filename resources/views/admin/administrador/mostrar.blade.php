@@ -223,7 +223,7 @@
         </div>
     </div>
     <div class="formDiv" hidden>
-        <form class="form" action="{{ route('admin.modificarPerfil') }}" method="post">
+        <form class="form" action="{{ route('admin.modificarAdmin') }}" method="post">
             <input type="hidden" name="token" value="1"/>
             <input type="hidden" name="id" id="id"/>
                 <div>
