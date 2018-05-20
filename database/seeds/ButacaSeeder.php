@@ -16,8 +16,8 @@ class ButacaSeeder extends Seeder
         $salas = Sala::all();
 
         foreach ($salas as $sala){
-            for ( $fila=1 ; $fila<=6 ; $fila++ ){
-                for ( $butaca=1 ; $butaca<=10 ; $butaca++ ){
+            for ( $fila=1 ; $fila<=8 ; $fila++ ){
+                for ( $butaca=1 ; $butaca<=8 ; $butaca++ ){
                     Butaca::create([
                         'fila' => $fila,
                         'numero' => $butaca,
