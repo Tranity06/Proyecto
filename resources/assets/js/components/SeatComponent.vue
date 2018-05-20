@@ -42,7 +42,7 @@
                 <div><i>8</i></div>
             </div>
             <div class="seat" v-for="butaca in butacas"
-                 @click="postEstadoButaca(butaca.id,butaca.estado)"
+                 @click="postEstadoButaca(butaca.id,butaca.estado,$event)"
                  :class="getClass(butaca.estado,butaca.id)">
             </div>
         </div>
@@ -64,7 +64,9 @@
                     hora: null,
                     butacas: null,
                 },
-                selected:[]
+                selected:[],
+                numerosPosibles: [],
+                firstSeat: undefined
             }
         },
         methods: {
@@ -94,6 +96,13 @@
             },
             postEstadoButaca: function (id, estado) {
 
+
+                if (!this.esContiguo(id)) {
+                    event.preventDefault();
+                    alert('es otra fila o numero');
+                    return;
+                }
+
                 this.sumTotal(estado);
 
                 let targetButaca = this.butacas.find(butaca => butaca.id == id);
@@ -106,7 +115,9 @@
                     })
                     .catch(e => {
                         console.log(e);
-                    })
+                    });
+
+
 
                 this.selected.includes(id) ? this.selected.splice(this.selected.indexOf(id), 1) : this.selected.push(id);
 
@@ -120,6 +131,90 @@
                     'seleccionado': this.selected.includes(id)
                 }
             },
+            esContiguo(id){
+                const seatSeleccionado = this.butacas.find((butaca) => butaca.id === id);
+                console.log(seatSeleccionado);
+                if (this.firstSeat === undefined){
+                    this.firstSeat = seatSeleccionado;
+                    this.esNumeroContiguo(seatSeleccionado.id);
+                    return true;
+                }else if(this.firstSeat !== undefined && this.selected.length === 0){
+                    this.firstSeat = seatSeleccionado;
+                    return true;
+                }else{
+                    if (this.firstSeat.fila !== seatSeleccionado.fila || !this.esNumeroContiguo(seatSeleccionado.id)){
+                        return false;
+                    }else {
+                        return true;
+                    }
+                }
+            },
+
+            esNumeroContiguo(num){
+                let numeroActual = this.firstSeat.id;
+
+                if (this.selected.length === 1){
+                    if (num === this.selected[0]){
+                        this.numerosPosibles = [];
+                        this.firstSeat = undefined;
+                        return true;
+                    }
+                }
+
+                if (this.numerosPosibles.length > 0){
+                    let esValido;
+
+                    for (let i = 0; i<this.numerosPosibles.length; i++){
+                        if (this.numerosPosibles[i] == num){
+                            esValido = true;
+                            break;
+                        }
+                    }
+
+                    let numeroAnteriorExiste = false;
+                    let numeroPosteriorExiste = false;
+
+                    for (let i = 0; i<this.selected.length; i++){
+                        if (this.selected[i] === num - 1){
+                            numeroAnteriorExiste = true;
+                            break;
+                        }
+                    }
+
+                    for (let i = 0; i<this.selected.length; i++){
+                        if (this.selected[i] === num + 1){
+                            numeroPosteriorExiste = true;
+                            break;
+                        }
+                    }
+
+
+                    if (numeroAnteriorExiste && numeroPosteriorExiste){
+                        return false;
+                    }
+
+
+
+                    if (esValido){
+                           if (num>numeroActual){
+                               this.numerosPosibles.push(num+1);
+                           }else{
+                               this.numerosPosibles.unshift(num-1);
+                           }
+                           return true;
+                    }else{
+                        return false;
+                    }
+                } else {
+                    let numeroAnterior = numeroActual - 1;
+                    let numeroPosterior = numeroActual + 1;
+                    this.numerosPosibles.push(numeroAnterior);
+                    this.numerosPosibles.push(numeroActual);
+                    this.numerosPosibles.push(numeroPosterior);
+                    return true;
+                }
+            },
+
             confirmarPago() {
                 alert("mira el console");
                 console.log(this.registration);

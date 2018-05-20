@@ -81360,7 +81360,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.showtime-form[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    margin-top: 1rem;\n}\n\n/* Panel Moderno */\n.precio[data-v-0507cf9d] {\n    justify-self: end;\n    margin-left: auto;\n}\n.panel-moderno[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    max-width: 350px;\n    margin: 1rem 0;\n\n    border-radius: 2%;\n    background-color: white;\n    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n    overflow: hidden;\n}\n.panel-moderno > .encabezado[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #F6F5F3;\n    padding: .5rem;\n}\n.panel-moderno > .cuerpo[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin: .5rem .5rem;\n}\n.cuerpo > .informacion[data-v-0507cf9d] {\n    margin-left: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.panel-moderno > .abajo[data-v-0507cf9d] {\n    margin: 0 .5rem;\n    padding: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n    border-top: 2px solid #F6F5F3;\n}\n\n/* Buttons component */\n.buttons-component[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    margin-bottom: .5rem;\n}\n.grande[data-v-0507cf9d] {\n    padding-left: 3em;\n    padding-right: 3em;\n    color: white;\n    font-weight: bold;\n    font-size: 1.5rem;\n}\n.normal[data-v-0507cf9d] {\n    padding-left: 1.5em;\n    padding-right: 1.5em;\n    color: white;\n    font-weight: bold;\n    font-size: 1em;\n    margin-left: .5rem;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.showtime-form[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    margin-top: 1rem;\n}\n\n/* Panel Moderno */\n.precio[data-v-0507cf9d] {\n    justify-self: end;\n    margin-left: auto;\n}\n.panel-moderno[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    max-width: 350px;\n    margin: 1rem auto;\n\n    border-radius: 2%;\n    background-color: white;\n    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n    overflow: hidden;\n}\n.panel-moderno > .encabezado[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #F6F5F3;\n    padding: .5rem;\n}\n.panel-moderno > .cuerpo[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin: .5rem .5rem;\n}\n.cuerpo > .informacion[data-v-0507cf9d] {\n    margin-left: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.panel-moderno > .abajo[data-v-0507cf9d] {\n    margin: 0 .5rem;\n    padding: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n    border-top: 2px solid #F6F5F3;\n}\n\n/* Buttons component */\n.buttons-component[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    margin-bottom: .5rem;\n}\n.grande[data-v-0507cf9d] {\n    padding-left: 3em;\n    padding-right: 3em;\n    color: white;\n    font-weight: bold;\n    font-size: 1.5rem;\n}\n.normal[data-v-0507cf9d] {\n    padding-left: 1.5em;\n    padding-right: 1.5em;\n    color: white;\n    font-weight: bold;\n    font-size: 1em;\n    margin-left: .5rem;\n}\n\n\n\n", ""]);
 
 // exports
 
@@ -81476,6 +81476,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             horas: [],
             step: 1,
             sesiones: [],
+            caratula: '',
+            titulo: '',
             butacas: {
                 total: 0,
                 num: 0
@@ -81490,6 +81492,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         axios.get('/api/pelicula/2').then(function (response) {
+
+            _this.caratula = response.data.cartel;
+            _this.titulo = response.data.titulo;
+
             var sesionesSinDiasDuplicados = response.data.sesiones.filter(function (sesion, index, self) {
                 return index === self.findIndex(function (t) {
                     return t.fecha === sesion.fecha;
@@ -81520,7 +81526,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-
     methods: {
         prev: function prev() {
             this.step--;
@@ -81533,7 +81538,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.butacas.num = this.$refs.butaca.getButacas();
                 this.step++;
             } else {
-                alert("JAJAJA NO :D");
+                alert("Debes seleccionar al menos una butaca.");
             }
         },
         mostrarHoras: function mostrarHoras(day) {
@@ -81923,7 +81928,7 @@ var render = function() {
         ]
       },
       [
-        _c("div", { staticClass: "columns" }, [
+        _c("div", { staticClass: "columns is-gapless" }, [
           _c(
             "div",
             { staticClass: "column" },
@@ -82067,7 +82072,7 @@ var render = function() {
               _c("div", { staticClass: "cuerpo" }, [
                 _c("img", {
                   attrs: {
-                    src: "avengers.jpg",
+                    src: _vm.caratula,
                     alt: "",
                     width: "55",
                     height: "74"
@@ -82078,13 +82083,13 @@ var render = function() {
                   _c(
                     "span",
                     { staticClass: "has-text-weight-bold is-size-6" },
-                    [_vm._v("Vengadores: Infinity War")]
+                    [_vm._v(_vm._s(_vm.titulo))]
                   ),
                   _vm._v(" "),
                   _c("span", { staticClass: "has-text-grey-light is-size-7" }, [
                     _vm._v(
                       _vm._s(
-                        _vm.dia +
+                        _vm.moment(_vm.dia).format("DD dddd") +
                           "," +
                           _vm.horaTarget +
                           " Sala " +
@@ -82160,7 +82165,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column" }, [
+    return _c("div", { staticClass: "column is-hidden-mobile" }, [
       _c("article", [
         _vm._v(
           "\n                    imagen,\n                    trailer\n                    calificacion edad\n                    genero\n                "
@@ -83817,7 +83822,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e] {\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n}\n.seleccionado[data-v-21aac05e] {\n    background-color: hsl(204, 86%, 53%) !important;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height: 50px;\n    width: 90%;\n    max-width: 320px;\n    border: solid 5px #fadf98;\n    border-color: #fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n\n", ""]);
+exports.push([module.i, "\n.seat-filas[data-v-21aac05e]{\n    width: 0;\n    height: 0;\n    line-height: 25px;\n    position: relative;\n    left: -10px;\n}\n.seat-filas > div[data-v-21aac05e]:not(:first-child){\n    margin: .38rem 0;\n}\n.seat-columns[data-v-21aac05e]{\n    width: 280px;\n    margin: 0 auto;\n}\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e] {\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.seat-column[data-v-21aac05e]{\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .17rem;\n    text-align: center;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n    pointer-events: none;\n}\n.seleccionado[data-v-21aac05e] {\n    background-color: hsl(204, 86%, 53%) !important;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height: 50px;\n    width: 90%;\n    max-width: 320px;\n    border: solid 5px #fadf98;\n    border-color: #fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n\n", ""]);
 
 // exports
 
@@ -83828,6 +83833,27 @@ exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -83873,7 +83899,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 hora: null,
                 butacas: null
             },
-            selected: []
+            selected: [],
+            numerosPosibles: [],
+            firstSeat: undefined
         };
     },
 
@@ -83904,6 +83932,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         postEstadoButaca: function postEstadoButaca(id, estado) {
 
+            if (!this.esContiguo(id)) {
+                event.preventDefault();
+                alert('es otra fila o numero');
+                return;
+            }
+
             this.sumTotal(estado);
 
             var targetButaca = this.butacas.find(function (butaca) {
@@ -83923,10 +83957,91 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return {
                 'libre': estado === 0,
                 'ocupado': estado === 1,
-                'reservado': estado === 2,
+                'reservado': estado === 2 && !this.selected.includes(id),
                 'indisponible': estado === 3,
                 'seleccionado': this.selected.includes(id)
             };
+        },
+        esContiguo: function esContiguo(id) {
+            var seatSeleccionado = this.butacas.find(function (butaca) {
+                return butaca.id === id;
+            });
+            console.log(seatSeleccionado);
+            if (this.firstSeat === undefined) {
+                this.firstSeat = seatSeleccionado;
+                this.esNumeroContiguo(seatSeleccionado.id);
+                return true;
+            } else if (this.firstSeat !== undefined && this.selected.length === 0) {
+                this.firstSeat = seatSeleccionado;
+                return true;
+            } else {
+                if (this.firstSeat.fila !== seatSeleccionado.fila || !this.esNumeroContiguo(seatSeleccionado.id)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        },
+        esNumeroContiguo: function esNumeroContiguo(num) {
+            var numeroActual = this.firstSeat.id;
+
+            if (this.selected.length === 1) {
+                if (num === this.selected[0]) {
+                    this.numerosPosibles = [];
+                    this.firstSeat = undefined;
+                    return true;
+                }
+            }
+
+            if (this.numerosPosibles.length > 0) {
+                var esValido = void 0;
+
+                for (var i = 0; i < this.numerosPosibles.length; i++) {
+                    if (this.numerosPosibles[i] == num) {
+                        esValido = true;
+                        break;
+                    }
+                }
+
+                var numeroAnteriorExiste = false;
+                var numeroPosteriorExiste = false;
+
+                for (var _i = 0; _i < this.selected.length; _i++) {
+                    if (this.selected[_i] === num - 1) {
+                        numeroAnteriorExiste = true;
+                        break;
+                    }
+                }
+
+                for (var _i2 = 0; _i2 < this.selected.length; _i2++) {
+                    if (this.selected[_i2] === num + 1) {
+                        numeroPosteriorExiste = true;
+                        break;
+                    }
+                }
+
+                if (numeroAnteriorExiste && numeroPosteriorExiste) {
+                    return false;
+                }
+
+                if (esValido) {
+                    if (num > numeroActual) {
+                        this.numerosPosibles.push(num + 1);
+                    } else {
+                        this.numerosPosibles.unshift(num - 1);
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                var numeroAnterior = numeroActual - 1;
+                var numeroPosterior = numeroActual + 1;
+                this.numerosPosibles.push(numeroAnterior);
+                this.numerosPosibles.push(numeroActual);
+                this.numerosPosibles.push(numeroPosterior);
+                return true;
+            }
         },
         confirmarPago: function confirmarPago() {
             alert("mira el console");
@@ -83958,20 +84073,27 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "screen" }),
     _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "seats-component" },
-      _vm._l(_vm.butacas, function(butaca) {
-        return _c("div", {
-          staticClass: "seat",
-          class: _vm.getClass(butaca.estado, butaca.id),
-          on: {
-            click: function($event) {
-              _vm.postEstadoButaca(butaca.id, butaca.estado)
+      [
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._l(_vm.butacas, function(butaca) {
+          return _c("div", {
+            staticClass: "seat",
+            class: _vm.getClass(butaca.estado, butaca.id),
+            on: {
+              click: function($event) {
+                _vm.postEstadoButaca(butaca.id, butaca.estado, $event)
+              }
             }
-          }
+          })
         })
-      })
+      ],
+      2
     ),
     _vm._v(" "),
     _vm.total > 0
@@ -83990,26 +84112,70 @@ var staticRenderFns = [
       _c("div", { staticClass: "tipo" }, [
         _c("div", { staticClass: "seat libre" }),
         _vm._v(" "),
-        _c("span", [_vm._v("Libres")])
+        _c("span", { staticClass: "is-size-7-mobile" }, [_vm._v("Libres")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "tipo" }, [
         _c("div", { staticClass: "seat ocupado" }),
         _vm._v(" "),
-        _c("span", [_vm._v("Ocupadas")])
+        _c("span", { staticClass: "is-size-7-mobile" }, [_vm._v("Ocupadas")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "tipo" }, [
         _c("div", { staticClass: "seat reservado" }),
         _vm._v(" "),
-        _c("span", [_vm._v("Reservadas")])
+        _c("span", { staticClass: "is-size-7-mobile" }, [_vm._v("Reservadas")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "tipo" }, [
         _c("div", { staticClass: "seat seleccionado" }),
         _vm._v(" "),
-        _c("span", { staticClass: "is-size-7" }, [_vm._v("Tus butacas")])
+        _c("span", { staticClass: "is-size-7-mobile" }, [_vm._v("Tus butacas")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "seat-columns has-text-centered" }, [
+      _c("div", { staticClass: "seat-column" }, [_c("i", [_vm._v("A")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "seat-column" }, [_c("i", [_vm._v("B")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "seat-column" }, [_c("i", [_vm._v("C")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "seat-column" }, [_c("i", [_vm._v("D")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "seat-column" }, [_c("i", [_vm._v("E")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "seat-column" }, [_c("i", [_vm._v("F")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "seat-column" }, [_c("i", [_vm._v("G")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "seat-column" }, [_c("i", [_vm._v("H")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "seat-filas" }, [
+      _c("div", [_c("i", [_vm._v("1")])]),
+      _vm._v(" "),
+      _c("div", [_c("i", [_vm._v("2")])]),
+      _vm._v(" "),
+      _c("div", [_c("i", [_vm._v("3")])]),
+      _vm._v(" "),
+      _c("div", [_c("i", [_vm._v("4")])]),
+      _vm._v(" "),
+      _c("div", [_c("i", [_vm._v("5")])]),
+      _vm._v(" "),
+      _c("div", [_c("i", [_vm._v("6")])]),
+      _vm._v(" "),
+      _c("div", [_c("i", [_vm._v("7")])]),
+      _vm._v(" "),
+      _c("div", [_c("i", [_vm._v("8")])])
     ])
   }
 ]
