@@ -46918,7 +46918,7 @@ window.Pusher = __webpack_require__(167);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
-  key: "",
+  key: "718c5f0fe7343b0ea5c4",
   cluster: 'eu',
   encrypted: true
 });
@@ -83817,7 +83817,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e] {\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height: 50px;\n    width: 90%;\n    max-width: 320px;\n    border: solid 5px #fadf98;\n    border-color: #fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n\n", ""]);
+exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e] {\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n}\n.seleccionado[data-v-21aac05e] {\n    background-color: hsl(204, 86%, 53%) !important;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height: 50px;\n    width: 90%;\n    max-width: 320px;\n    border: solid 5px #fadf98;\n    border-color: #fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n\n", ""]);
 
 // exports
 
@@ -83828,6 +83828,10 @@ exports.push([module.i, "\n.bookingseats-form[data-v-21aac05e] {\n    display: -
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -83868,7 +83872,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 dia: null,
                 hora: null,
                 butacas: null
-            }
+            },
+            selected: []
         };
     },
 
@@ -83876,7 +83881,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getAllButacas: function getAllButacas(id) {
             var _this = this;
 
-            axios.get('http://localhost:8000/api/butaca/' + id).then(function (response) {
+            axios.get('/api/butaca/' + id).then(function (response) {
                 _this.butacas = response.data;
             }).catch(function (e) {
                 console.log(e);
@@ -83906,18 +83911,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             targetButaca.estado = estado === 0 ? 2 : 0;
 
-            axios.post('http://localhost:8000/api/butaca/' + id, {
+            axios.post('/api/butaca/' + id, {
                 estado: estado === 0 ? 2 : 0
             }).then(function (response) {}).catch(function (e) {
                 console.log(e);
             });
+
+            this.selected.includes(id) ? this.selected.splice(this.selected.indexOf(id), 1) : this.selected.push(id);
         },
-        getClass: function getClass(estado) {
+        getClass: function getClass(estado, id) {
             return {
                 'libre': estado === 0,
                 'ocupado': estado === 1,
                 'reservado': estado === 2,
-                'indisponible': estado === 3
+                'indisponible': estado === 3,
+                'seleccionado': this.selected.includes(id)
             };
         },
         confirmarPago: function confirmarPago() {
@@ -83956,7 +83964,7 @@ var render = function() {
       _vm._l(_vm.butacas, function(butaca) {
         return _c("div", {
           staticClass: "seat",
-          class: _vm.getClass(butaca.estado),
+          class: _vm.getClass(butaca.estado, butaca.id),
           on: {
             click: function($event) {
               _vm.postEstadoButaca(butaca.id, butaca.estado)
@@ -83993,6 +84001,12 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "tipo" }, [
         _c("div", { staticClass: "seat reservado" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("Reservadas")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "tipo" }, [
+        _c("div", { staticClass: "seat seleccionado" }),
         _vm._v(" "),
         _c("span", [_vm._v("Tus butacas")])
       ])

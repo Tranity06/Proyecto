@@ -11,6 +11,10 @@
             </div>
             <div class="tipo">
                 <div class="seat reservado"></div>
+                <span>Reservadas</span>
+            </div>
+            <div class="tipo">
+                <div class="seat seleccionado"></div>
                 <span>Tus butacas</span>
             </div>
         </div>
@@ -18,7 +22,7 @@
         <div class="seats-component">
             <div class="seat" v-for="butaca in butacas"
                  @click="postEstadoButaca(butaca.id,butaca.estado)"
-                 :class="getClass(butaca.estado)">
+                 :class="getClass(butaca.estado,butaca.id)">
             </div>
         </div>
         <span class="has-text-centered is-size-3" v-if="total > 0">TOTAL: {{ total }}€</span>
@@ -38,12 +42,13 @@
                     dia: null,
                     hora: null,
                     butacas: null,
-                }
+                },
+                selected:[]
             }
         },
         methods: {
             getAllButacas: function (id) {
-                axios.get(`http://localhost:8000/api/butaca/${id}`)
+                axios.get(`/api/butaca/${id}`)
                     .then(response => {
                         this.butacas = response.data;
                     })
@@ -73,7 +78,7 @@
                 let targetButaca = this.butacas.find(butaca => butaca.id == id);
                 targetButaca.estado = ((estado === 0) ? 2 : 0);
 
-                axios.post(`http://localhost:8000/api/butaca/${id}`, {
+                axios.post(`/api/butaca/${id}`, {
                     estado: ((estado === 0) ? 2 : 0)
                 })
                     .then(response => {
@@ -81,13 +86,17 @@
                     .catch(e => {
                         console.log(e);
                     })
+
+                this.selected.includes(id) ? this.selected.splice(this.selected.indexOf(id), 1) : this.selected.push(id);
+
             },
-            getClass(estado) {
+            getClass(estado,id) {
                 return {
                     'libre': (estado === 0),
                     'ocupado': (estado === 1),
                     'reservado': (estado === 2),
-                    'indisponible': (estado === 3)
+                    'indisponible': (estado === 3),
+                    'seleccionado': this.selected.includes(id)
                 }
             },
             confirmarPago() {
@@ -142,6 +151,10 @@
 
     .reservado {
         background-color: #fadf98;
+    }
+
+    .seleccionado {
+        background-color: hsl(204, 86%, 53%) !important;
     }
 
     .indisponible {
