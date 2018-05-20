@@ -164,26 +164,7 @@ class AdminTest extends TestCase
     }
 
     /** @test */
-    public function ruta_modificaradmin_post_perfil_con_sesion(){
-        $admin = Administrador::create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('123456')
-        ]);
-        $datos = [
-            'name' => 'Lorena',
-            'email' => '',
-            'password' => ''
-        ];
-        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
-        $this->actingAs($admin, 'admin')
-            ->post('admin/modificaradmin', $datos, $headers)
-            ->assertStatus(200)
-            ->assertSee('Datos de la cuenta');
-    }
-
-    /** @test */
-    public function ruta_modificaradmin_post_con_sesion_no_superadmin_otroadmin(){
+    public function ruta_modificaradmin_post_con_sesion_no_superadmin(){
         $superadmin = Administrador::create([
             'id' => 1,
             'name' => 'Admin',
@@ -210,7 +191,7 @@ class AdminTest extends TestCase
     }
 
     /** @test */
-    public function ruta_modificaradmin_post_con_sesion_superadmin_otroadmin_nombre_correcto(){
+    public function ruta_modificaradmin_post_con_sesion_superadmin_nombre_correcto(){
         $superadmin = Administrador::create([
             'id' => 1,
             'name' => 'Admin',
@@ -237,7 +218,7 @@ class AdminTest extends TestCase
     }
 
     /** @test */
-    public function ruta_modificaradmin_post_con_sesion_superadmin_otroadmin_nombre_incorrecto(){
+    public function ruta_modificaradmin_post_con_sesion_superadmin_nombre_incorrecto(){
         $superadmin = Administrador::create([
             'id' => 1,
             'name' => 'Admin',
@@ -263,7 +244,7 @@ class AdminTest extends TestCase
     }
 
     /** @test */
-    public function ruta_modificaradmin_post_con_sesion_superadmin_otroadmin_email_correcto(){
+    public function ruta_modificaradmin_post_con_sesion_superadmin_email_correcto(){
         $superadmin = Administrador::create([
             'id' => 1,
             'name' => 'Admin',
@@ -290,7 +271,7 @@ class AdminTest extends TestCase
     }
 
     /** @test */
-    public function ruta_modificaradmin_post_con_sesion_superadmin_otroadmin_email_incorrecto(){
+    public function ruta_modificaradmin_post_con_sesion_superadmin_email_incorrecto(){
         $superadmin = Administrador::create([
             'id' => 1,
             'name' => 'Admin',
@@ -314,6 +295,29 @@ class AdminTest extends TestCase
             ->post('admin/modificaradmin', $datos, $headers)
             ->assertStatus(302);
     }
+
+    /**********************************************************
+     *          RUTA - '/admin/modificaradmin'
+     **********************************************************/
+    /** @test */
+    public function ruta_modificarperfil_post_perfil_con_sesion(){
+        $admin = Administrador::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('123456')
+        ]);
+        $datos = [
+            'name' => 'Lorena',
+            'email' => '',
+            'password' => ''
+        ];
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($admin, 'admin')
+            ->post('admin/modificarperfil', $datos, $headers)
+            ->assertStatus(200)
+            ->assertSee('Datos de la cuenta');
+    }
+
 
     /**********************************************************
      *          RUTA - '/admin/crearadministrador'
@@ -350,7 +354,7 @@ class AdminTest extends TestCase
         $this->actingAs($admin, 'admin')
             ->get('admin/crearadministrador')
             ->assertStatus(200)
-            ->assertSee('Permiso denegado');
+            ->assertSee('Permiso denegado.');
     }
 
     /** @test */
