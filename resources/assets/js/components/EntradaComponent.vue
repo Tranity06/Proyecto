@@ -113,18 +113,25 @@
         mounted() {
             axios.get('/api/pelicula/2')
                 .then(response => {
-                    console.log(response.data.sesiones);
+                    let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
+                        index === self.findIndex((t) => (
+                            t.fecha === sesion.fecha
+                        ))
+                    );
+
                     // los inserta ordenados por fecha.
-                    let uniq = [ ...new Set(response.data.sesiones) ];
-                    console.log(uniq);
-                    this.sesiones = response.data.sesiones.sort((a, b) => {
-                        return new Date(a.fecha) - new Date(b.fecha);
-                    });
+                     this.sesiones =sesionesSinDiasDuplicados.sort((a, b) => {
+                            return new Date(a.fecha) - new Date(b.fecha);
+                     });
+
+                    this.dia = this.sesiones[0].fecha;
+                    this.horaTarget = this.sesiones[0].hora;
                     console.log('1:: '+this.sesiones[5].fecha);
                     this.sesiones.forEach(sesion => console.log(sesion.fecha));
+
                     console.log('2:: '+this.sesiones[5].fecha);
                     let primeraFecha = this.sesiones[0].fecha;
-                    //this.mostrarHoras(primeraFecha);
+                    this.mostrarHoras(primeraFecha);
 /*                    this.salas = response.data;
 
                     // Al obtener las salas tambien muestra por defecto las butacas de la primera sala
