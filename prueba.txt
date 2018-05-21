@@ -1,0 +1,1 @@
+Contenido cualquiera para probar que se suben archivos al repositorio desde la VM
