@@ -126,14 +126,16 @@ class PeliculaController extends Controller
                 ['fecha', $fecha['fecha']]
             ])->orderBy('hora')->get();
 
-            $sesion['horas'] = [];
-            foreach( $horas as $hora ){
-                $ses['id'] = $hora['id'];
-                $ses['hora'] = $hora['hora'];
-                $ses['sala_id'] = $hora['sala_id'];
-                array_push($sesion['horas'], $ses);
+            if ( sizeof($horas) > 0){
+                $sesion['horas'] = [];
+                foreach( $horas as $hora ){
+                    $ses['id'] = $hora['id'];
+                    $ses['hora'] = $hora['hora'];
+                    $ses['sala_id'] = $hora['sala_id'];
+                    array_push($sesion['horas'], $ses);
+                }
+                    array_push($sesiones, $sesion);
             }
-            array_push($sesiones, $sesion);
         }
         $pelicula['sesiones'] = $sesiones;
         return $pelicula;
