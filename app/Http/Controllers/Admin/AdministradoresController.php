@@ -67,18 +67,21 @@ class AdministradoresController extends Controller
         
         //Comprobar los permisos
         $admin = Auth::guard('admin')->user();
-        if ( $admin->id !== 1 ){
-            $tipoError = "Permiso denegado.";
-            $mensajeError = "No tienes permisos para realizar esta acción.";
-            return view('admin.administrador.error')
-                        ->with([
-                            'admin' => $admin->nombre,
-                            'tipoError' => $tipoError,
-                            'mensajeError' => $mensajeError
-                        ]);
+        if ( isset($request->id) ){
+            if ( $admin->id !== 1 ){
+                $tipoError = "Permiso denegado.";
+                $mensajeError = "No tienes permisos para realizar esta acción.";
+                return view('admin.administrador.error')
+                            ->with([
+                                'admin' => $admin->nombre,
+                                'tipoError' => $tipoError,
+                                'mensajeError' => $mensajeError
+                            ]);
+            }
+            $datos = Administrador::find($request->id);
+        } else {
+            $datos = $admin;
         }
-        $datos = Administrador::find($request->id);
-        
 
         //Validar los datos
         $credentials = $request->only('name', 'email', 'password', 'id');
@@ -90,72 +93,9 @@ class AdministradoresController extends Controller
 
         $validator = Validator::make($credentials, $rules);
         if ($validator->fails()) {
-            return Redirect::to('admin/administradores')->withErrors($validator);
-        }
-
-
-        //Realizarlos cambios
-        $nombre = trim($request->name);
-        $email = trim($request->email);
-        $pw = trim($request->password);
-
-        if ( $this->comprobarNombre($nombre) === 201 && $this->comprobarEmail($email) === 201 ){
-            if ( strlen($nombre) > 0 ){
-                $datos->name = $nombre;
-            } 
-            if ( strlen($email) > 0 ){
-                $datos->email = $email;
+            if ( isset($request->id)){
+                return Redirect::to('admin/administradores')->withErrors($validator);    
             }
-            if ( strlen($pw) > 0 ){
-                $datos->password = bcrypt($pw);
-            }
-            $datos->save();
-            $correcto = 'S';
-            return view('admin.administrador.mostrar')
-                        ->with(['admin' => $admin->name,
-                        'administradores'=> Administrador::all(),
-                        'sumerAdmin' => 'sa'
-                        ]) ;
-           
-        }
-        $tipoError = 'Error al intentar modificar los datos.';
-        $mensajeError = 'Es posible que los datos introducidos sean erróneos o ya existan en la base de datos.';
-        return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));        
-    }
-
-
-
-    ///////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
-    /**
-     * Guarda los datos del administrador que se han modificado.
-     * Comprueba si son datos propios del usuario logueado o de otro usuario.
-     * Sólo permite modificar datos agenos al super usuario.
-     */
-    public function modificarPerfil(Request $request){
-        //Comprobar el acceso
-        if (!Auth::guard('admin')->check()){
-            return redirect('/admin');
-        }
-        if ( $request->isMethod('get')){
-            return redirect('admin/settings');
-        }
-        
-        //Comprobar los permisos
-        $admin = Auth::guard('admin')->user();        
-
-        //Validar los datos
-        $credentials = $request->only('name', 'email', 'password', 'id');
-        $rules = [
-            'name' => 'nullable|string|max:20|unique:administradores',
-            'email' => 'nullable|string|email|max:255|unique:administradores',
-            'password' => 'nullable|string|regex:/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,12}$/',
-        ];
-
-        $validator = Validator::make($credentials, $rules);
-        if ($validator->fails()) {
             return Redirect::to('admin/settings')->withErrors($validator);
         }
 
@@ -167,34 +107,36 @@ class AdministradoresController extends Controller
 
         if ( $this->comprobarNombre($nombre) === 201 && $this->comprobarEmail($email) === 201 ){
             if ( strlen($nombre) > 0 ){
-                $admin->name = $nombre;
+                $datos->name = $nombre;
+                $admin = $nombre;
+                if ( !isset($request->id) ){
+                    $admin = $nombre;
+                }
             } 
             if ( strlen($email) > 0 ){
-                $admin->email = $email;
+                $datos->email = $email;
             }
             if ( strlen($pw) > 0 ){
-                $admin->password = bcrypt($pw);
+                $datos->password = bcrypt($pw);
             }
-            $admin->save();
+            $datos->save();
             $correcto = 'S';
 
+            //Volver a la lista de administradores.
+            if ( isset($request->id) ){
+                return view('admin.administrador.mostrar')
+                            ->with(['admin' => $admin,
+                            'administradores'=> Administrador::all(),
+                            'sumerAdmin' => 'sa'
+                            ]) ;
+            }
             //Volver al perfil.
-            return view('admin.administrador.perfil')
-                    ->with([
-                        'datos' => $admin,
-                        'admin' => $admin->nombre,
-                        'correcto' => $correcto
-                    ]);
+            return view('admin.administrador.perfil', compact('datos', 'admin', 'correcto'));
         }
         $tipoError = 'Error al intentar modificar los datos.';
         $mensajeError = 'Es posible que los datos introducidos sean erróneos o ya existan en la base de datos.';
         return view('admin.administrador.error', compact('admin', 'tipoError', 'mensajeError'));        
     }
-
-    //////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////
     
     /**
      * Si el usuario logueado es el usuario principal devuelve la vista del formulario para crear 

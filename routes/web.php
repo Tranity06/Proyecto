@@ -81,8 +81,7 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('admin/comprobar','Admin\AdministradoresController@comprobarDatos'); //AJAX
   Route::get('admin/comprobar','Admin\AdministradoresController@comprobarDatos');
   
-  Route::post('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin')->name('admin.modificarAdmin');
-  Route::post('admin/modificarperfil','Admin\AdministradoresController@modificarPerfil')->name('admin.modificarPerfil');
+  Route::post('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin')->name('admin.modificarPerfil');
   Route::get('admin/modificaradmin','Admin\AdministradoresController@modificarAdmin');
 
   Route::get('admin/crearadministrador', 'Admin\AdministradoresController@crearGet')->name('admin.crearAdmin.get');
