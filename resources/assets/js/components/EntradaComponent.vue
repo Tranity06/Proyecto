@@ -1,69 +1,68 @@
 <template>
-    <div>
-        <div v-show="step === 1">
-            <div class="columns is-gapless">
-                <div class="column">
-                    <div class="showtime-form">
-                        <div class="select">
-                            <select @change="mostrarHoras(dia)" v-model="dia">
-                                <option v-for="sesion in sesiones" :value="sesion.fecha">{{ moment(sesion.fecha).format('DD dddd') }}</option>
-                            </select>
-                        </div>
-                        <div class="select">
-                            <select @change="mostrarAsientos(horaTarget)" v-model="horaTarget">
-                                <option v-for="horaa in horas" :value="horaa.sala_id">{{ horaa.hora }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <seat-component ref="butaca"></seat-component>
-                    <div class="buttons-component">
-                        <button @click.prevent="next()" class="button is-rounded is-warning grande">Pagar</button>
-                    </div>
-                </div>
-                <div class="column is-hidden-mobile">
-                    <div class="pelicula-card centrar-imagen">
-                        <img :src="caratula">
-                    </div>
-                    <span class="subtitle">{{ titulo }}</span>
-                    <a :href="trailer" data-lity class="button is-rounded is-danger">Ver trailer</a>
-                </div>
-            </div>
-        </div>
-        <div v-show="step === 2">
-            <div class="columns">
-                <div class="column">
-                    <section class="panel-moderno">
-                        <div class="encabezado">
-                            <span>Producto</span>
-                            <span>Precio</span>
-                        </div>
-                        <div class="cuerpo">
-                            <img :src="caratula" alt="" width="55" height="74">
-                            <div class="informacion">
-                                <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
-                                <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaTarget + " Sala " + salaTarget}}</span>
-                                <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
+    <div class="container">
+            <div v-show="step === 1">
+                <div class="columns is-gapless">
+                    <div class="column is-8">
+                        <div class="showtime-form">
+                            <div class="select">
+                                <select @change="mostrarHoras(dia)" v-model="dia">
+                                    <option v-for="sesion in sesiones" :value="sesion.fecha">{{ moment(sesion.fecha).format('DD dddd') }}</option>
+                                </select>
                             </div>
-                            <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
+                            <div class="select">
+                                <select @change="mostrarAsientos(horaTarget)" v-model="horaTarget">
+                                    <option v-for="horaa in horas" :value="horaa.sala_id">{{ horaa.hora }}</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="abajo has-text-weight-bold">
-                            Total: {{ butacas.total }}€
+                        <seat-component ref="butaca"></seat-component>
+                        <div class="buttons-component">
+                            <button @click.prevent="next()" class="button is-rounded is-warning grande">Pagar</button>
                         </div>
-                    </section>
-                </div>
-                <div class="column">
-                    <payment-component></payment-component>
+                    </div>
+                    <div class="column is-hidden-mobile">
+                        <div class="pelicula-card centrar-imagen">
+                            <img :src="caratula">
+                        </div>
+                        <span class="subtitle">{{ titulo }}</span>
+                        <a :href="trailer" data-lity class="button is-rounded is-danger">Ver trailer</a>
+                    </div>
                 </div>
             </div>
-            <div class="buttons-component">
-                <button @click.prevent="prev()" class="button is-rounded is-warning normal">Volver</button>
-                <button @click.prevent="confirmarPago()" class="button is-rounded is-warning normal"><i
-                        class="fas fa-lock" style="margin-right: .5rem"></i> Confirmar y pagar
-                </button>
+            <div v-show="step === 2">
+                <div class="columns">
+                    <div class="column">
+                        <section class="panel-moderno">
+                            <div class="encabezado">
+                                <span>Producto</span>
+                                <span>Precio</span>
+                            </div>
+                            <div class="cuerpo">
+                                <img :src="caratula" alt="" width="55" height="74">
+                                <div class="informacion">
+                                    <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
+                                    <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaTarget + " Sala " + salaTarget}}</span>
+                                    <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
+                                </div>
+                                <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
+                            </div>
+                            <div class="abajo has-text-weight-bold">
+                                Total: {{ butacas.total }}€
+                            </div>
+                        </section>
+                    </div>
+                    <div class="column">
+                        <payment-component></payment-component>
+                    </div>
+                </div>
+                <div class="buttons-component">
+                    <button @click.prevent="prev()" class="button is-rounded is-warning normal">Volver</button>
+                    <button @click.prevent="confirmarPago()" class="button is-rounded is-warning normal"><i
+                            class="fas fa-lock" style="margin-right: .5rem"></i> Confirmar y pagar
+                    </button>
+                </div>
+
             </div>
-
-        </div>
-
     </div>
 </template>
 
@@ -101,7 +100,10 @@
                     this.titulo = response.data.titulo;
                     this.trailer = response.data.trailer;
 
-                    let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
+                    this.sesiones = response.data.sesiones;
+                    console.log(this.sesiones);
+
+/*                    let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
                         index === self.findIndex((t) => (
                             t.fecha === sesion.fecha
                         ))
@@ -117,7 +119,9 @@
                     console.log('1:: '+this.sesiones[5].fecha);
                     this.sesiones.forEach(sesion => console.log(sesion.fecha));
 
-                    console.log('2:: '+this.sesiones[5].fecha);
+                    console.log('2:: '+this.sesiones[5].fecha);*/
+                    this.dia = this.sesiones[0].fecha;
+                    this.horaTarget = this.sesiones[0].sala_id;
                     let primeraFecha = this.sesiones[0].fecha;
                     this.mostrarHoras(primeraFecha);
 /*                    this.salas = response.data;
@@ -147,7 +151,13 @@
 
             },
             mostrarHoras(day) {
-                this.horas = this.sesiones.filter((sesion) => sesion.fecha === day);
+
+                let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === day);
+
+                console.log(diaSeleccionado[0].horas);
+                this.horas = diaSeleccionado[0].horas;
+                console.log(this.horas);
+                console.log('HORAS:: '+this.horas[0][0])
                 this.horaTarget = this.horas[0].sala_id;
                 this.mostrarAsientos(this.horaTarget);
             },
@@ -160,6 +170,25 @@
 </script>
 
 <style scoped>
+
+    .center-screen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+    }
+
+    .cardChromeless {
+        background: #fff;
+        -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.04);
+        box-shadow: 0 1px 4px rgba(0,0,0,.04);
+        border: 1px solid rgba(0,0,0,.09);
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        padding: 20px;
+    }
 
 
     .pelicula-card {
