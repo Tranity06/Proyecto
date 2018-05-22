@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="has-navbar-fixed-top">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,6 +32,21 @@
                 height: 70vh;
             }
         }
+
+        .navbar{
+            top: 0;
+            background-color: transparent !important;
+            transition: all .2s ease-in-out;
+        }
+
+        .navbar.nav-up{
+            top: -70px;
+        }
+
+        .navbar.nav-down{
+            background-color: #0b0b0b !important;
+        }
+
     </style>
 </head>
 <body>
@@ -42,5 +57,47 @@
 
     <script src="{{ mix('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/modal/lity.js') }}"></script>
+    <script>
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('.navbar').outerHeight();
+
+        $(window).scroll(function(event){
+            didScroll = true;
+        });
+
+        setInterval(function() {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 250);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if(Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight){
+                // Scroll Down
+                $('.navbar').removeClass('nav-down').addClass('nav-up');
+            } else {
+                if (st < 100){
+                    $('.navbar').removeClass('nav-up').removeClass('nav-down');
+                }else{
+                    if(st + $(window).height() < $(document).height()) {
+                        $('.navbar').removeClass('nav-up').addClass('nav-down');
+                    }
+                }
+            }
+
+            lastScrollTop = st;
+        }
+    </script>
 </body>
 </html>

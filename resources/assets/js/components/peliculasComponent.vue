@@ -23,9 +23,9 @@
                                 </div>
                             </div>
                             <div class="pelicula-horario">
-                                <div class="tags">
+<!--                                <div class="tags">
                                     <sesion-component v-for="sesion in peliculas[key].sesiones" :key="sesion.id" :sesion="sesion"></sesion-component>
-                                </div>
+                                </div>-->
                             </div>
 
                         </div>
@@ -82,6 +82,8 @@
         box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
         text-align: center;
         position: relative;
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: .7rem;
         line-height: 0;
         /* margin-left: auto;
