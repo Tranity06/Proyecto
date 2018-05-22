@@ -15,7 +15,7 @@ class ResenaController extends Controller
     }
 
     public function crearResenia(Request $request, $idUsuario){
-        $user = $this->getAuthenticatedUser(); dd($user);
+        $user = $this->getAuthenticatedUser();
 
         $user_resenas = Resena::where([
             ['user_id',$idUsuario],
