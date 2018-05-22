@@ -116,26 +116,7 @@ class PeliculaController extends Controller
 
     public function getOne($idPelicula){
         $pelicula = Pelicula::find($idPelicula);
-        $fechas = Sesion::distinct()->where('pelicula_id',$idPelicula)->orderBy('fecha')->get(['fecha']);
-        $sesiones = [];
-        foreach ( $fechas as $fecha ){
-            $sesion['fecha'] = $fecha['fecha'];
-            $horas =  Sesion::where([
-                ['pelicula_id', $idPelicula],
-                ['estado', 1],
-                ['fecha', $fecha['fecha']]
-            ])->orderBy('hora')->get();
-
-            $sesion['horas'] = [];
-            foreach( $horas as $hora ){
-                $ses['id'] = $hora['id'];
-                $ses['hora'] = $hora['hora'];
-                $ses['sala_id'] = $hora['sala_id'];
-                array_push($sesion['horas'], $ses);
-            }
-            array_push($sesiones, $sesion);
-        }
-        $pelicula['sesiones'] = $sesiones;
+        $pelicula['sesiones'] = $pelicula->sesiones();
         return $pelicula;
     }
 
