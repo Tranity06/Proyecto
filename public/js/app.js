@@ -73895,7 +73895,7 @@ var routes = [{
     component: __WEBPACK_IMPORTED_MODULE_6__views_Profile___default.a,
     meta: { requiresAuth: true }
 }, {
-    path: '/entrada',
+    path: '/entrada/:id',
     name: 'entrada',
     component: __WEBPACK_IMPORTED_MODULE_7__components_EntradaComponent___default.a,
     meta: { requiresAuth: true }
@@ -79221,7 +79221,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         mountSlider: function mountSlider(data) {
             for (var i = 0; i <= 3; i++) {
                 this.pages[i].style.background = 'url(' + data[i].slider_image + ')';
-                this.pages[i].html = '<div>' + data[i].titulo + '</div><a href="' + data[i].trailer + '" style="z-index: 9999" data-lity><img src="icons/play-button.svg"> Trailer</a>';
+                this.pages[i].html = '<div class="has-text-weight-bold is-uppercase is-size-3 is-size-5-mobile">' + data[i].titulo + '</div>\n                                      <div class="is-italic has-text-white is-size-5 is-size-7-mobile">pr\xF3ximamente el ' + data[i].estreno + '</div>\n                                      <a class="button is-rounded is-small is-warning" href="' + data[i].trailer + '" style="z-index: 9999" data-lity>\n                                      <span class="has-text-white">trailer</span>\n                                         <span class="icon is-small" style="color:white;">\n                                            <i class="fas fa-play"></i>\n                                         </span>\n                                      </a>';
             }
         }
     }
@@ -79527,7 +79527,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Pelicula Card */\n.section-peliculas[data-v-2c098c0c]{\n    margin-bottom: 1.5rem;\n}\n.pelicula-card[data-v-2c098c0c] {\n    width: 250px;\n    height: auto;\n    overflow: hidden;\n    border-radius: 10px;\n    -webkit-box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);\n            box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);\n    text-align: center;\n    position: relative;\n    margin-bottom: .7rem;\n    line-height: 0;\n    /* margin-left: auto;\n    margin-right: auto; */\n}\n.pelicula-body[data-v-2c098c0c] {\n    width: 100%;\n    height: 25%;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n}\n.pelicula-trailer[data-v-2c098c0c] {\n    position: absolute;\n    top: 30%;\n    left: 40%;\n}\n.pelicula-horario[data-v-2c098c0c] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    padding-bottom: 10px;\n}\n.pelicula-opciones[data-v-2c098c0c] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    opacity: 0;\n    margin-bottom: 10px;\n}\n.pelicula-card:hover .pelicula-opciones[data-v-2c098c0c]{\n    opacity: 1;\n    -webkit-transition: opacity .4s;\n    transition: opacity .4s;\n}\n.grow[data-v-2c098c0c] { -webkit-transition: all .2s ease-in-out; transition: all .2s ease-in-out;\n}\n.grow[data-v-2c098c0c]:hover { -webkit-transform: scale(1.2); transform: scale(1.2);\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Pelicula Card */\n.section-peliculas[data-v-2c098c0c]{\n    margin-bottom: 1.5rem;\n}\n.pelicula-card[data-v-2c098c0c] {\n    width: 250px;\n    height: auto;\n    overflow: hidden;\n    border-radius: 10px;\n    -webkit-box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);\n            box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);\n    text-align: center;\n    position: relative;\n    margin-left: auto;\n    margin-right: auto;\n    margin-bottom: .7rem;\n    line-height: 0;\n    /* margin-left: auto;\n    margin-right: auto; */\n}\n.pelicula-body[data-v-2c098c0c] {\n    width: 100%;\n    height: 25%;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n}\n.pelicula-trailer[data-v-2c098c0c] {\n    position: absolute;\n    top: 30%;\n    left: 40%;\n}\n.pelicula-horario[data-v-2c098c0c] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    padding-bottom: 10px;\n}\n.pelicula-opciones[data-v-2c098c0c] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    opacity: 0;\n    margin-bottom: 10px;\n}\n.pelicula-card:hover .pelicula-opciones[data-v-2c098c0c]{\n    opacity: 1;\n    -webkit-transition: opacity .4s;\n    transition: opacity .4s;\n}\n.grow[data-v-2c098c0c] { -webkit-transition: all .2s ease-in-out; transition: all .2s ease-in-out;\n}\n.grow[data-v-2c098c0c]:hover { -webkit-transform: scale(1.2); transform: scale(1.2);\n}\n\n", ""]);
 
 // exports
 
@@ -79797,11 +79797,11 @@ var render = function() {
                           "router-link",
                           {
                             staticClass: "button is-rounded",
-                            attrs: { to: { name: "entrada" } }
+                            attrs: { to: "/entrada/" + _vm.peliculas[key].id }
                           },
                           [
                             _vm._v(
-                              "\n                                    Comprar entrada\n                                "
+                              "\n                                        Comprar entrada\n                                    "
                             )
                           ]
                         )
@@ -79810,18 +79810,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "pelicula-horario" }, [
-                    _c(
-                      "div",
-                      { staticClass: "tags" },
-                      _vm._l(_vm.peliculas[key].sesiones, function(sesion) {
-                        return _c("sesion-component", {
-                          key: sesion.id,
-                          attrs: { sesion: sesion }
-                        })
-                      })
-                    )
-                  ])
+                  _c("div", { staticClass: "pelicula-horario" })
                 ])
               ])
             ]
@@ -81360,7 +81349,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.showtime-form[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    margin-top: 1rem;\n}\n\n/* Panel Moderno */\n.precio[data-v-0507cf9d] {\n    justify-self: end;\n    margin-left: auto;\n}\n.panel-moderno[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    max-width: 350px;\n    margin: 1rem auto;\n\n    border-radius: 2%;\n    background-color: white;\n    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n    overflow: hidden;\n}\n.panel-moderno > .encabezado[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #F6F5F3;\n    padding: .5rem;\n}\n.panel-moderno > .cuerpo[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin: .5rem .5rem;\n}\n.cuerpo > .informacion[data-v-0507cf9d] {\n    margin-left: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.panel-moderno > .abajo[data-v-0507cf9d] {\n    margin: 0 .5rem;\n    padding: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n    border-top: 2px solid #F6F5F3;\n}\n\n/* Buttons component */\n.buttons-component[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    margin-bottom: .5rem;\n}\n.grande[data-v-0507cf9d] {\n    padding-left: 3em;\n    padding-right: 3em;\n    color: white;\n    font-weight: bold;\n    font-size: 1.5rem;\n}\n.normal[data-v-0507cf9d] {\n    padding-left: 1.5em;\n    padding-right: 1.5em;\n    color: white;\n    font-weight: bold;\n    font-size: 1em;\n    margin-left: .5rem;\n}\n\n\n\n", ""]);
+exports.push([module.i, "\n.pelicula-card[data-v-0507cf9d] {\n    width: 250px;\n    height: auto;\n    overflow: hidden;\n    border-radius: 10px;\n    -webkit-box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);\n            box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);\n    text-align: center;\n    position: relative;\n    margin-bottom: .7rem;\n    line-height: 0;\n    /* margin-left: auto;\n    margin-right: auto; */\n}\n.showtime-form[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    margin-top: 1rem;\n}\n\n/* Panel Moderno */\n.precio[data-v-0507cf9d] {\n    justify-self: end;\n    margin-left: auto;\n}\n.panel-moderno[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    max-width: 350px;\n    margin: 1rem auto;\n\n    border-radius: 2%;\n    background-color: white;\n    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n    overflow: hidden;\n}\n.panel-moderno > .encabezado[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    background-color: #F6F5F3;\n    padding: .5rem;\n}\n.panel-moderno > .cuerpo[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin: .5rem .5rem;\n}\n.cuerpo > .informacion[data-v-0507cf9d] {\n    margin-left: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.panel-moderno > .abajo[data-v-0507cf9d] {\n    margin: 0 .5rem;\n    padding: .5rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n    border-top: 2px solid #F6F5F3;\n}\n\n/* Buttons component */\n.buttons-component[data-v-0507cf9d] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    margin-bottom: .5rem;\n}\n.grande[data-v-0507cf9d] {\n    padding-left: 3em;\n    padding-right: 3em;\n    color: white;\n    font-weight: bold;\n    font-size: 1.5rem;\n}\n.normal[data-v-0507cf9d] {\n    padding-left: 1.5em;\n    padding-right: 1.5em;\n    color: white;\n    font-weight: bold;\n    font-size: 1em;\n    margin-left: .5rem;\n}\n\n\n\n", ""]);
 
 // exports
 
@@ -81373,27 +81362,6 @@ exports.push([module.i, "\n.showtime-form[data-v-0507cf9d] {\n    display: -webk
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PaymentComponent__ = __webpack_require__(235);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PaymentComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PaymentComponent__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -81475,9 +81443,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             horaTarget: '',
             horas: [],
             step: 1,
+            pelicula: [],
             sesiones: [],
             caratula: '',
             titulo: '',
+            trailer: '',
             butacas: {
                 total: 0,
                 num: 0
@@ -81491,30 +81461,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
-        axios.get('/api/pelicula/2').then(function (response) {
-
+        axios.get('/api/pelicula/' + this.$route.params.id).then(function (response) {
             _this.caratula = response.data.cartel;
             _this.titulo = response.data.titulo;
+            _this.trailer = response.data.trailer;
 
-            var sesionesSinDiasDuplicados = response.data.sesiones.filter(function (sesion, index, self) {
-                return index === self.findIndex(function (t) {
-                    return t.fecha === sesion.fecha;
-                });
-            });
+            _this.sesiones = response.data.sesiones;
+            console.log(_this.sesiones);
 
-            // los inserta ordenados por fecha.
-            _this.sesiones = sesionesSinDiasDuplicados.sort(function (a, b) {
-                return new Date(a.fecha) - new Date(b.fecha);
-            });
-
+            /*                    let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
+                                    index === self.findIndex((t) => (
+                                        t.fecha === sesion.fecha
+                                    ))
+                                );
+            
+                                // los inserta ordenados por fecha.
+                                 this.sesiones =sesionesSinDiasDuplicados.sort((a, b) => {
+                                        return new Date(a.fecha) - new Date(b.fecha);
+                                 });
+            
+                                this.dia = this.sesiones[0].fecha;
+                                this.horaTarget = this.sesiones[0].sala_id;
+                                console.log('1:: '+this.sesiones[5].fecha);
+                                this.sesiones.forEach(sesion => console.log(sesion.fecha));
+            
+                                console.log('2:: '+this.sesiones[5].fecha);*/
             _this.dia = _this.sesiones[0].fecha;
             _this.horaTarget = _this.sesiones[0].sala_id;
-            console.log('1:: ' + _this.sesiones[5].fecha);
-            _this.sesiones.forEach(function (sesion) {
-                return console.log(sesion.fecha);
-            });
-
-            console.log('2:: ' + _this.sesiones[5].fecha);
             var primeraFecha = _this.sesiones[0].fecha;
             _this.mostrarHoras(primeraFecha);
             /*                    this.salas = response.data;
@@ -81542,9 +81515,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         mostrarHoras: function mostrarHoras(day) {
-            this.horas = this.sesiones.filter(function (sesion) {
+
+            var diaSeleccionado = this.sesiones.filter(function (sesion) {
                 return sesion.fecha === day;
             });
+
+            console.log(diaSeleccionado[0].horas);
+            this.horas = diaSeleccionado[0].horas;
+            console.log(this.horas);
+            console.log('HORAS:: ' + this.horas[0][0]);
             this.horaTarget = this.horas[0].sala_id;
             this.mostrarAsientos(this.horaTarget);
         },
@@ -81914,7 +81893,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "section" }, [
     _c(
       "div",
       {
@@ -81931,7 +81910,7 @@ var render = function() {
         _c("div", { staticClass: "columns is-gapless" }, [
           _c(
             "div",
-            { staticClass: "column" },
+            { staticClass: "column is-8" },
             [
               _c("div", { staticClass: "showtime-form" }, [
                 _c("div", { staticClass: "select" }, [
@@ -82046,7 +82025,24 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "column is-hidden-mobile" }, [
+            _c("div", { staticClass: "pelicula-card centrar-imagen" }, [
+              _c("img", { attrs: { src: _vm.caratula } })
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "subtitle" }, [
+              _vm._v(_vm._s(_vm.titulo))
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button is-rounded is-danger",
+                attrs: { href: _vm.trailer, "data-lity": "" }
+              },
+              [_vm._v("Ver trailer")]
+            )
+          ])
         ])
       ]
     ),
@@ -82067,7 +82063,7 @@ var render = function() {
         _c("div", { staticClass: "columns" }, [
           _c("div", { staticClass: "column" }, [
             _c("section", { staticClass: "panel-moderno" }, [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "cuerpo" }, [
                 _c("img", {
@@ -82110,9 +82106,9 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "abajo has-text-weight-bold" }, [
                 _vm._v(
-                  "\n                        Total: " +
+                  "\n                            Total: " +
                     _vm._s(_vm.butacas.total) +
-                    "€\n                    "
+                    "€\n                        "
                 )
               ])
             ])
@@ -82152,7 +82148,7 @@ var render = function() {
                 staticClass: "fas fa-lock",
                 staticStyle: { "margin-right": ".5rem" }
               }),
-              _vm._v(" Confirmar y pagar\n            ")
+              _vm._v(" Confirmar y pagar\n                ")
             ]
           )
         ])
@@ -82161,53 +82157,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-hidden-mobile" }, [
-      _c("article", [
-        _vm._v(
-          "\n                    imagen,\n                    trailer\n                    calificacion edad\n                    genero\n                "
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content" }, [
-        _c("blockquote", [
-          _vm._v(
-            "Ut venenatis, nisl scelerisque sollicitudin fermentum, quam libero hendrerit ipsum, ut\n                        blandit est tellus sit amet turpis.\n                    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("blockquote", [
-          _vm._v(
-            "Ut venenatis, nisl scelerisque sollicitudin fermentum, quam libero hendrerit ipsum, ut\n                        blandit est tellus sit amet turpis.\n                    "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("article", { staticClass: "message is-link" }, [
-        _c("div", { staticClass: "message-body" }, [
-          _c("h1", { staticClass: "title" }, [_vm._v("Sabias Que??")]),
-          _vm._v(
-            "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-          ),
-          _c("strong", [
-            _vm._v("Pellentesque risus\n                        mi")
-          ]),
-          _vm._v(
-            ", tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet\n                        fringilla. Nullam gravida purus diam, et dictum "
-          ),
-          _c("a", [_vm._v("felis venenatis")]),
-          _vm._v(" efficitur. Aenean ac\n                        "),
-          _c("em", [_vm._v("eleifend lacus")]),
-          _vm._v(
-            ", in mollis lectus. Donec sodales, arcu et sollicitudin porttitor,\n                        tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem\n                        eget, facilisis sodales sem.\n                    "
-          )
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -83822,7 +83771,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.seat-filas[data-v-21aac05e]{\n    width: 0;\n    height: 0;\n    line-height: 25px;\n    position: relative;\n    left: -10px;\n}\n.seat-filas > div[data-v-21aac05e]:not(:first-child){\n    margin: .38rem 0;\n}\n.seat-columns[data-v-21aac05e]{\n    width: 280px;\n    margin: 0 auto;\n}\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e] {\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.seat-column[data-v-21aac05e]{\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .17rem;\n    text-align: center;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n    pointer-events: none;\n}\n.seleccionado[data-v-21aac05e] {\n    background-color: hsl(204, 86%, 53%) !important;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height: 50px;\n    width: 90%;\n    max-width: 320px;\n    border: solid 5px #fadf98;\n    border-color: #fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n\n", ""]);
+exports.push([module.i, "\n.seat-filas[data-v-21aac05e]{\n    width: 0;\n    height: 0;\n    line-height: 25px;\n    position: relative;\n    left: -10px;\n}\n.seat-filas > div[data-v-21aac05e]:not(:first-child){\n    margin: .38rem 0;\n}\n.seat-columns[data-v-21aac05e]{\n    width: 280px;\n    margin: 0 auto;\n}\n.bookingseats-form[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.bookingseats-form > .info[data-v-21aac05e] {\n    margin-top: .8rem;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    max-width: 600px;\n    margin-left: auto;\n    margin-right: auto;\n}\n.tipo[data-v-21aac05e] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.seat[data-v-21aac05e] {\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .3rem;\n}\n.seat-column[data-v-21aac05e]{\n    display: inline-block;\n    height: 25px;\n    width: 25px;\n    border-radius: 20%;\n    margin: 0 .17rem;\n    text-align: center;\n}\n.libre[data-v-21aac05e] {\n    background-color: #E8E9EA;\n}\n.ocupado[data-v-21aac05e] {\n    background-color: #4B4B5B;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n    pointer-events: none;\n}\n.reservado[data-v-21aac05e] {\n    background-color: #fadf98;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n    pointer-events: none;\n}\n.seleccionado[data-v-21aac05e] {\n    background-color: hsl(204, 86%, 53%) !important;\n    -webkit-transition: background-color .25s ease-out;\n    transition: background-color .25s ease-out;\n}\n.indisponible[data-v-21aac05e] {\n    background-color: red;\n    pointer-events: none;\n}\n.screen[data-v-21aac05e] {\n    margin: .8rem auto;\n    height: 50px;\n    width: 90%;\n    max-width: 320px;\n    border: solid 5px #fadf98;\n    border-color: #fadf98 transparent transparent transparent;\n    border-radius: 50%/45px 45px 0 0;\n}\n.seats-component[data-v-21aac05e] {\n    width: 280px;\n    height: 270px;\n    margin: 0 auto;\n}\n\n", ""]);
 
 // exports
 
@@ -84784,7 +84733,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.marca[data-v-8651e08a]{\n    font-family: 'Jua', sans-serif !important;\n    font-size: 1.5rem;\n}\n.redes[data-v-8651e08a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    max-width: 300px;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.centeredIcon[data-v-8651e08a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 20px;\n    width: 40px;\n    height: 40px;\n    color: dodgerblue;\n    background-color: ghostwhite;\n    border-radius: 100%;\n    margin-left: .5rem;\n    -webkit-transition: all .5s;\n    transition: all .5s;\n}\n.centeredIcon[data-v-8651e08a]:hover {\n    color: white;\n    background-color: dodgerblue;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-8651e08a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n@media (max-width: 700px) {\n.content[data-v-8651e08a]{\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: column;\n                flex-direction: column;\n}\n}\n.marca[data-v-8651e08a]{\n    font-family: 'Jua', sans-serif !important;\n    font-size: 1.5rem;\n}\n.redes[data-v-8651e08a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    min-width: 250px;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.centeredIcon[data-v-8651e08a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 20px;\n    width: 40px;\n    height: 40px;\n    background-color: white;\n    border-radius: 100%;\n    margin-left: .5rem;\n    -webkit-transition: all .5s;\n    transition: all .5s;\n}\n.facebook[data-v-8651e08a]{\n    color: #3b5998;\n}\n.twitter[data-v-8651e08a]{\n    color: #15a7ff;\n}\n.facebook[data-v-8651e08a]:hover {\n    color: white;\n    background-color: #3b5998;\n}\n.twitter[data-v-8651e08a]:hover {\n    color: white;\n    background-color: #15a7ff;\n}\n.instagram[data-v-8651e08a]{\n    color: #bc2a8d;\n}\n.instagram[data-v-8651e08a]:hover{\n    color: white;\n    background-color: #bc2a8d;\n}\n\n", ""]);
 
 // exports
 
@@ -84846,16 +84795,16 @@ var staticRenderFns = [
             _c(
               "a",
               {
-                staticClass: "centeredIcon",
+                staticClass: "centeredIcon twitter",
                 attrs: { href: "http://www.twitter.com" }
               },
-              [_c("i", { staticClass: "fab fa-twitter-f" })]
+              [_c("i", { staticClass: "fab fa-twitter" })]
             ),
             _vm._v(" "),
             _c(
               "a",
               {
-                staticClass: "centeredIcon",
+                staticClass: "centeredIcon facebook",
                 attrs: { href: "http://www.facebook.com" }
               },
               [_c("i", { staticClass: "fab fa-facebook-f" })]
@@ -84864,10 +84813,10 @@ var staticRenderFns = [
             _c(
               "a",
               {
-                staticClass: "centeredIcon",
+                staticClass: "centeredIcon instagram",
                 attrs: { href: "http://www.facebook.com" }
               },
-              [_c("i", { staticClass: "fab fa-instagram-f" })]
+              [_c("i", { staticClass: "fab fa-instagram" })]
             )
           ]),
           _vm._v(" "),

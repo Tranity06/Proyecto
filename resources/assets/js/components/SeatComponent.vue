@@ -259,6 +259,9 @@
         margin-top: .8rem;
         display: flex;
         justify-content: space-around;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .tipo {

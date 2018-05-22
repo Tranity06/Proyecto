@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="section">
             <div v-show="step === 1">
                 <div class="columns is-gapless">
                     <div class="column is-8">
@@ -170,26 +170,6 @@
 </script>
 
 <style scoped>
-
-    .center-screen {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        min-height: 100vh;
-    }
-
-    .cardChromeless {
-        background: #fff;
-        -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.04);
-        box-shadow: 0 1px 4px rgba(0,0,0,.04);
-        border: 1px solid rgba(0,0,0,.09);
-        -webkit-border-radius: 3px;
-        border-radius: 3px;
-        padding: 20px;
-    }
-
 
     .pelicula-card {
         width: 250px;
