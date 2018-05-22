@@ -71,7 +71,14 @@
             mountSlider(data){
                 for (let i=0; i<=3;i++){
                     this.pages[i].style.background = 'url('+data[i].slider_image+')';
-                    this.pages[i].html = `<div>${data[i].titulo}</div><a href="${data[i].trailer}" style="z-index: 9999" data-lity><img src="icons/play-button.svg"> Trailer</a>`
+                    this.pages[i].html = `<div class="has-text-weight-bold is-uppercase is-size-3 is-size-5-mobile">${data[i].titulo}</div>
+                                          <div class="is-italic has-text-white is-size-5 is-size-7-mobile">próximamente el ${data[i].estreno}</div>
+                                          <a class="button is-rounded is-small is-warning" href="${data[i].trailer}" style="z-index: 9999" data-lity>
+                                          <span class="has-text-white">trailer</span>
+                                             <span class="icon is-small" style="color:white;">
+                                                <i class="fas fa-play"></i>
+                                             </span>
+                                          </a>`
                 }
             },
         }
