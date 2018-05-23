@@ -6,9 +6,6 @@ use App\Events\ResenaEvent;
 use Illuminate\Http\Request;
 use App\Models\Resena;
 use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class ResenaController extends Controller
 {
