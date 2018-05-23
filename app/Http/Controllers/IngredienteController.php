@@ -7,42 +7,33 @@ use Illuminate\Http\Request;
 
 class IngredienteController extends Controller {
 
-    public function list() {
-        $ingredientes = Ingrediente::all();
+    public function getAll() {
+        return response()->json(Ingrediente::all());
     }
 
-    public function getAdd() {
-    }
-
-    public function postAdd(Request $request) {
-        $this->validate($request, [
-            'nombre' => 'unique:ingrediente'
-        ]);
-        
-        Ingrediente::create([
+    public function addIngrediente(Request $request) {
+        $ingrediente = Ingrediente::create([
             'nombre' => $request['nombre'],
-            'descripcion' => $request['descripcion']
+            'descripcion' => $request['descripcion'],
         ]);
+
+        return response()->json($ingrediente, 201);
     }
 
-    public function getUpdate(Request $request) {
-        $id = $request->input('id');
-        $ingrediente = Ingrediente::find($id);
+    public function updateIngrediente(Request $request, $idIngrediente) {
+        $ingrediente = Ingrediente::find($idIngrediente);
+        $ingrediente->nombre = $request['nombre'];
+        $ingrediente->descripcion = $request['descripcion'];
+        $ingrediente->save();
+
+        return response()->json($ingrediente, 200);
     }
 
-    public function postUpdate(Request $request) {
-        $id = $request->input('id');
-        $ingrediente = Ingrediente::find($id);
-        $Ingrediente::update([
-            'nombre' => $request['nombre'],
-            'descripcion' => $request['descripcion']
-        ]);
-    }
+    public function deleteIngrediente(Request $request, $idIngrediente) {
+        $ingrediente = Ingrediente::find($idIngrediente);
+        $ingrediente->delete();
 
-    public function delete(Request $request) {
-        $id = $request->input('id');
-        $ingrediente = Ingrediente::find($id);
-        $Ingrediente::destroy($ingrediente);
+        return 204;
     }
 
 }

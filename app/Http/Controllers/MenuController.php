@@ -7,37 +7,31 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller {
 
-    public function list() {
-        $menus = menu::all();
+    public function getAll() {
+        return response()->json(Menu::all());
     }
 
-    public function postAdd(Request $request) {
-        $this->validate($request, [
-            'nombre' => 'unique:menu'
+    public function addMenu(Request $request) {
+        $menu = Menu::create([
+            'nombre' => $request['nombre'],
         ]);
-        
-        Menu::create([
-            'nombre' => $request['nombre']
-        ]);
+
+        return response()->json($menu, 201);
     }
 
-    public function getUpdate(Request $request) {
-        $id = $request->input('id');
-        $menu = Menu::find($id);
+    public function updateMenu(Request $request, $idMenu) {
+        $menu = Menu::find($idMenu);
+        $menu->nombre = $request['nombre'];
+        $menu->save();
+
+        return response()->json($menu, 200);
     }
 
-    public function postUpdate(Request $request) {
-        $id = $request->input('id');
-        $menu = Menu::find($id);
-        $menu::update([
-            'nombre' => $request['nombre']
-        ]);
-    }
+    public function deleteMenu(Request $request, $idMenu) {
+        $menu = Menu::find($idMenu);
+        $menu->delete();
 
-    public function delete(Request $request) {
-        $id = $request->input('id');
-        $menu = Menu::find($id);
-        $menu::destroy($menu);
+        return 204;
     }
 
 }
