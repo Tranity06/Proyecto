@@ -67,12 +67,7 @@
                 this.caracteres = this.comento.length;
             },
             publicarComentario(){
-                let idUsuario = JSON.parse(localStorage.getItem('user')).id;
-                axios.post(`/api/resena/${idUsuario}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer '+localStorage.getItem('token')
-                    },
+                axios.post(`/api/resena?token=${localStorage.getItem('token')}`, {
                     valoracion: 0,
                     comentario: this.comento,
                     pelicula_id: this.idPelicula
