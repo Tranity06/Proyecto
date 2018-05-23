@@ -27,7 +27,7 @@ class MenuController extends Controller {
         return response()->json($menu, 200);
     }
 
-    public function deleteMenu(Request $request, $idMenu) {
+    public function deleteMenu($idMenu) {
         $menu = Menu::find($idMenu);
         $menu->delete();
 

@@ -29,7 +29,7 @@ class IngredienteController extends Controller {
         return response()->json($ingrediente, 200);
     }
 
-    public function deleteIngrediente(Request $request, $idIngrediente) {
+    public function deleteIngrediente($idIngrediente) {
         $ingrediente = Ingrediente::find($idIngrediente);
         $ingrediente->delete();
 

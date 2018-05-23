@@ -97,7 +97,7 @@ Route::delete('/categoria/{idCategoria}','CategoriaController@delete')->name('ca
 Route::get('/ingrediente', 'IngredienteController@getAll')->name('ingrediente.get');
 Route::post('/ingrediente', 'IngredienteController@addIngrediente')->name('ingrediente.add');
 Route::put('/ingrediente/{idIngrediente}', 'IngredienteController@updateIngrediente')->name('ingrediente.update');
-Route::delete('/ingrediente{idIngrediente}', 'IngredienteController@deleteIngrediente')->name('ingrediente.delete');
+Route::delete('/ingrediente/{idIngrediente}', 'IngredienteController@deleteIngrediente')->name('ingrediente.delete');
 
 
 /**
@@ -106,8 +106,8 @@ Route::delete('/ingrediente{idIngrediente}', 'IngredienteController@deleteIngred
 
 Route::get('/menu', 'MenuController@getAll')->name('menu.get');
 Route::post('/menu', 'MenuController@addMenu')->name('menu.add');
-Route::put('/menu{idMenu}', 'MenuController@updateMenu')->name('menu.update');
-Route::delete('/menu{idMenu}', 'MenuController@deleteMenu')->name('menu.delete');
+Route::put('/menu/{idMenu}', 'MenuController@updateMenu')->name('menu.update');
+Route::delete('/menu/{idMenu}', 'MenuController@deleteMenu')->name('menu.delete');
 
 
 /**
@@ -116,5 +116,5 @@ Route::delete('/menu{idMenu}', 'MenuController@deleteMenu')->name('menu.delete')
 
 Route::get('/producto', 'ProductoController@getAll')->name('producto.get');
 Route::post('/producto', 'ProductoController@addProducto')->name('producto.add');
-Route::put('/producto{idProducto}', 'ProductoController@updateProducto')->name('producto.update');
-Route::delete('/producto{idProducto}', 'ProductoController@deleteProducto')->name('producto.delete');
+Route::put('/producto/{idProducto}', 'ProductoController@updateProducto')->name('producto.update');
+Route::delete('/producto/{idProducto}', 'ProductoController@deleteProducto')->name('producto.delete');
