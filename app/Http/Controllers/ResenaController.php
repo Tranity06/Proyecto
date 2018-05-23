@@ -12,14 +12,24 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class ResenaController extends Controller
 {
+    /**
+     * Devuelve todas las reseñas del usuario logueado.
+     */
     public function getAllFromUser(){
-        return auth()->user()->resenas();
+        $user = auth()->user();
+        if ( $user == null ) {
+            return response()->json('Permiso denegado', 403);
+        }
+        return response()->json($user->resenas(), 201); 
     }
 
-
+    /**
+     * Si el uusario está logueado registra la reseña.
+     * El usuario no puede escribir dos reseñas sobre la misma pelicula.
+     */
     public function crearResenia(Request $request){
-       // $user = auth()->user();
-       $user = JWTAuth::toUser(JWTAuth::getToken());
+        //$user = auth()->user();
+        $user = JWTAuth::toUser(JWTAuth::getToken());
 
         $user_resenas = Resena::where([
             ['user_id',$user->id],

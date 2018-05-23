@@ -8,15 +8,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Resena;
 use App\Models\Pelicula;
+use JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 class ResenaTest extends TestCase
 {
     use RefreshDatabase;
-    /**********************************************************
-     *          RUTA - '/resena/'
-     **********************************************************/
-
+    
     protected $user;
+    //protected $token;
     protected $pelicula;
 
     public function setUp()
@@ -31,6 +31,10 @@ class ResenaTest extends TestCase
             'telefono' => 654987321,
             'is_verified' => 1
         ]);
+
+       /*  $this->token = JWTAuth::fromUser($this->user);
+        JWTAuth::setToken($this->token);
+        Auth::attempt(['name' => $this->user->name, 'password' => $this->user->password]); */
 
         $this->pelicula = Pelicula::create([
             'idtmdb' => 299536,
@@ -50,8 +54,12 @@ class ResenaTest extends TestCase
         ]);
     }
 
+    /**********************************************************
+     *          RUTA - GET '/resena/'
+     **********************************************************/
+
     /** @test */
-    public function ver_resenas_usuario()
+    public function ver_resenas_usuario_logueado()
     {
 
         Resena::create([
@@ -63,12 +71,57 @@ class ResenaTest extends TestCase
 
         $this->actingAs($this->user, 'api')
              ->get(route('resena.get'))
+             ->assertStatus(201)
              ->assertJsonStructure([
                 '*' => [
                     'id', 'valoracion', 'comentario', 'user_id', 'pelicula_id'
                 ]
             ])
-            ->assertJsonFragment(['comentario' => 'Chachi'])
-        ;
+            ->assertJsonFragment(['comentario' => 'Chachi']);
     }
+
+    /** @test */
+    public function ver_resenas_usuario_no_logueado()
+    {
+        Resena::create([
+            'valoracion' => 2,
+            'comentario' => 'Chachi',
+            'user_id' => $this->user->id,
+            'pelicula_id' => $this->pelicula->id
+        ]);
+
+        $this->get(route('resena.get'))
+             ->assertStatus(403);
+    }
+
+    /**********************************************************
+     *          RUTA - POST '/resena/'
+     **********************************************************/
+
+     /** @test */
+   /*  public function crear_resena_usuario_logueado()
+    {
+        $resena = [
+            'valoracion' => 2,
+            'comentario' => 'Chachi',
+            'pelicula_id' => $this->pelicula->id
+        ];
+
+        $token = JWTAuth::fromUser($this->user);
+        JWTAuth::setToken($token);
+        Auth::attempt(['name' => $this->user->name, 'password' => $this->user->password]);
+
+        $headers = ['X-CSRF-TOKEN' => csrf_token(),
+                    'Authorization' => 'Bearer '.$token ];
+        $this->actingAs($this->user, 'api')
+             ->post(route('resena.crearResenia'), $resena, $headers) //Añadir token a la ruta
+             ->assertStatus(201)
+             ->assertJsonStructure([
+                '*' => [
+                    "valoracion","comentario","user_id","pelicula_id","updated_at",
+                    "created_at","id","imagen_usuario","nombre_usuario"
+                ]
+            ])
+            ->assertJsonFragment(['comentario' => 'Chachi']);
+    } */
 }
