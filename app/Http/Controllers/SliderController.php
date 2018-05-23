@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pelicula;
-use App\Models\Resena;
-use App\Models\Sesion;
 
 class SliderController extends Controller
 {
