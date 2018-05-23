@@ -107,10 +107,6 @@
         color: #fff;
     }
 
-    .navbar{
-        background-color: transparent ;
-    }
-
     .centeredIcon {
         display: flex;
         flex-direction: column;

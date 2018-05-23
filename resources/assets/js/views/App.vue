@@ -8,7 +8,6 @@
 </template>
 <script>
     import NavbarComponent from '../components/NavbarComponent';
-    import FooterComponent from "../components/FooterComponent";
     export default {
         components: {
             NavbarComponent

@@ -1,68 +1,82 @@
 <template>
-    <div class="section">
-            <div v-show="step === 1">
-                <div class="columns is-gapless">
-                    <div class="column is-8">
-                        <div class="showtime-form">
-                            <div class="select">
-                                <select @change="mostrarHoras(dia)" v-model="dia">
-                                    <option v-for="sesion in sesiones" :value="sesion.fecha">{{ moment(sesion.fecha).format('DD dddd') }}</option>
-                                </select>
-                            </div>
-                            <div class="select">
-                                <select @change="mostrarAsientos(horaTarget)" v-model="horaTarget">
-                                    <option v-for="horaa in horas" :value="horaa.sala_id">{{ horaa.hora }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <seat-component ref="butaca"></seat-component>
-                        <div class="buttons-component">
-                            <button @click.prevent="next()" class="button is-rounded is-warning grande">Pagar</button>
-                        </div>
-                    </div>
-                    <div class="column is-hidden-mobile">
-                        <div class="pelicula-card centrar-imagen">
-                            <img :src="caratula">
-                        </div>
-                        <span class="subtitle">{{ titulo }}</span>
-                        <a :href="trailer" data-lity class="button is-rounded is-danger">Ver trailer</a>
-                    </div>
+    <div>
+        <section class="hero is-dark">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        Primary title
+                    </h1>
+                    <h2 class="subtitle">
+                        Primary subtitle
+                    </h2>
                 </div>
             </div>
-            <div v-show="step === 2">
-                <div class="columns">
-                    <div class="column">
-                        <section class="panel-moderno">
-                            <div class="encabezado">
-                                <span>Producto</span>
-                                <span>Precio</span>
-                            </div>
-                            <div class="cuerpo">
-                                <img :src="caratula" alt="" width="55" height="74">
-                                <div class="informacion">
-                                    <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
-                                    <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaTarget + " Sala " + salaTarget}}</span>
-                                    <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
+        </section>
+        <div class="section">
+                <div v-show="step === 1">
+                    <div class="columns is-gapless">
+                        <div class="column is-8">
+                            <div class="showtime-form">
+                                <div class="select">
+                                    <select @change="mostrarHoras(dia)" v-model="dia">
+                                        <option v-for="sesion in sesiones" :value="sesion.fecha">{{ moment(sesion.fecha).format('DD dddd') }}</option>
+                                    </select>
                                 </div>
-                                <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
+                                <div class="select">
+                                    <select @change="mostrarAsientos(horaTarget)" v-model="horaTarget">
+                                        <option v-for="horaa in horas" :value="horaa.sala_id">{{ horaa.hora }}</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="abajo has-text-weight-bold">
-                                Total: {{ butacas.total }}€
+                            <seat-component ref="butaca"></seat-component>
+                            <div class="buttons-component">
+                                <button @click.prevent="next()" class="button is-rounded is-warning grande">Pagar</button>
                             </div>
-                        </section>
-                    </div>
-                    <div class="column">
-                        <payment-component></payment-component>
+                        </div>
+                        <div class="column is-hidden-mobile">
+                            <div class="pelicula-card centrar-imagen">
+                                <img :src="caratula">
+                            </div>
+                            <span class="subtitle">{{ titulo }}</span>
+                            <a :href="trailer" data-lity class="button is-rounded is-danger">Ver trailer</a>
+                        </div>
                     </div>
                 </div>
-                <div class="buttons-component">
-                    <button @click.prevent="prev()" class="button is-rounded is-warning normal">Volver</button>
-                    <button @click.prevent="confirmarPago()" class="button is-rounded is-warning normal"><i
-                            class="fas fa-lock" style="margin-right: .5rem"></i> Confirmar y pagar
-                    </button>
-                </div>
+                <div v-show="step === 2">
+                    <div class="columns">
+                        <div class="column">
+                            <section class="panel-moderno">
+                                <div class="encabezado">
+                                    <span>Producto</span>
+                                    <span>Precio</span>
+                                </div>
+                                <div class="cuerpo">
+                                    <img :src="caratula" alt="" width="55" height="74">
+                                    <div class="informacion">
+                                        <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
+                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaTarget + " Sala " + salaTarget}}</span>
+                                        <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
+                                    </div>
+                                    <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
+                                </div>
+                                <div class="abajo has-text-weight-bold">
+                                    Total: {{ butacas.total }}€
+                                </div>
+                            </section>
+                        </div>
+                        <div class="column">
+                            <payment-component></payment-component>
+                        </div>
+                    </div>
+                    <div class="buttons-component">
+                        <button @click.prevent="prev()" class="button is-rounded is-warning normal">Volver</button>
+                        <button @click.prevent="confirmarPago()" class="button is-rounded is-warning normal"><i
+                                class="fas fa-lock" style="margin-right: .5rem"></i> Confirmar y pagar
+                        </button>
+                    </div>
 
-            </div>
+                </div>
+        </div>
     </div>
 </template>
 
