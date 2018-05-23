@@ -13,8 +13,19 @@
     <link href="https://fonts.googleapis.com/css?family=Jua|Lato:400,700" rel="stylesheet">
     <link href="{{ asset('css/utilidades.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/modal/lity.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/footer.css') }}" media="all" rel="stylesheet" type="text/css" />
 
     <style>
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
         .vue-notification{
             margin-top: .5rem !important;
             font-size: .8rem !important;
@@ -47,13 +58,36 @@
             background-color: #0b0b0b !important;
         }
 
+        .contentprueba {
+            flex: 1 0 auto;
+        }
+
     </style>
 </head>
 <body>
 
-    <div id="app">
+    <div id="app" class="contentprueba">
         <app></app>
     </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <span class="marca">Palomitas Time</span>
+                <div class="redes">
+                    <a href="http://www.twitter.com" class="centeredIcon twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="http://www.facebook.com" class="centeredIcon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="http://www.facebook.com" class="centeredIcon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <span><b>2018 PALOMITASTIME.COM</b></span>
+            </div>
+        </div>
+    </footer>
 
     <script src="{{ mix('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/modal/lity.js') }}"></script>

@@ -94,7 +94,6 @@ class UserTest extends TestCase
     /** @test */
     public function verification_code_is_invalid()
     {
-        $user = factory(User::class)->create();
 
         $token = str_random(30);
 

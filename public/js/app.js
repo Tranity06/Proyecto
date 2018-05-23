@@ -84218,7 +84218,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.contentprueba[data-v-50e73d1e] {\n    -webkit-box-flex: 1;\n        -ms-flex: 1 0 auto;\n            flex: 1 0 auto;\n}\n", ""]);
 
 // exports
 
@@ -84241,13 +84241,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        FooterComponent: __WEBPACK_IMPORTED_MODULE_1__components_FooterComponent___default.a,
         NavbarComponent: __WEBPACK_IMPORTED_MODULE_0__components_NavbarComponent___default.a
     }
 });
@@ -84728,7 +84726,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.content[data-v-8651e08a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n@media (max-width: 700px) {\n.content[data-v-8651e08a]{\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: column;\n                flex-direction: column;\n}\n}\n.marca[data-v-8651e08a]{\n    font-family: 'Jua', sans-serif !important;\n    font-size: 1.5rem;\n}\n.redes[data-v-8651e08a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    min-width: 250px;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.centeredIcon[data-v-8651e08a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 20px;\n    width: 40px;\n    height: 40px;\n    background-color: white;\n    border-radius: 100%;\n    margin-left: .5rem;\n    -webkit-transition: all .5s;\n    transition: all .5s;\n}\n.facebook[data-v-8651e08a]{\n    color: #3b5998;\n}\n.twitter[data-v-8651e08a]{\n    color: #15a7ff;\n}\n.facebook[data-v-8651e08a]:hover {\n    color: white;\n    background-color: #3b5998;\n}\n.twitter[data-v-8651e08a]:hover {\n    color: white;\n    background-color: #15a7ff;\n}\n.instagram[data-v-8651e08a]{\n    color: #bc2a8d;\n}\n.instagram[data-v-8651e08a]:hover{\n    color: white;\n    background-color: #bc2a8d;\n}\n\n", ""]);
+exports.push([module.i, "\n.footer[data-v-8651e08a]{\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n}\n.content[data-v-8651e08a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n@media (max-width: 700px) {\n.content[data-v-8651e08a]{\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: column;\n                flex-direction: column;\n}\n}\n.marca[data-v-8651e08a]{\n    font-family: 'Jua', sans-serif !important;\n    font-size: 1.5rem;\n}\n.redes[data-v-8651e08a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    min-width: 250px;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n.centeredIcon[data-v-8651e08a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 20px;\n    width: 40px;\n    height: 40px;\n    background-color: white;\n    border-radius: 100%;\n    margin-left: .5rem;\n    -webkit-transition: all .5s;\n    transition: all .5s;\n}\n.facebook[data-v-8651e08a]{\n    color: #3b5998;\n}\n.twitter[data-v-8651e08a]{\n    color: #15a7ff;\n}\n.facebook[data-v-8651e08a]:hover {\n    color: white;\n    background-color: #3b5998;\n}\n.twitter[data-v-8651e08a]:hover {\n    color: white;\n    background-color: #15a7ff;\n}\n.instagram[data-v-8651e08a]{\n    color: #bc2a8d;\n}\n.instagram[data-v-8651e08a]:hover{\n    color: white;\n    background-color: #bc2a8d;\n}\n\n", ""]);
 
 // exports
 
@@ -84840,14 +84838,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "contentprueba" },
     [
       _c("navbar-component"),
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _c("notifications", { attrs: { group: "auth" } }),
-      _vm._v(" "),
-      _c("footer-component")
+      _c("notifications", { attrs: { group: "auth" } })
     ],
     1
   )
