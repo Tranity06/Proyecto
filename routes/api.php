@@ -90,43 +90,31 @@ Route::put('/categoria/{idCategoria}','CategoriaController@update')->name('categ
 Route::delete('/categoria/{idCategoria}','CategoriaController@delete')->name('categoria.delete');
   
   
-  /**
-   * Productos
-   */
-  
-  Route::prefix('producto')->group(function() {
-    Route::get('/add', 'ProductoController@getAdd')->name('producto.add');
-    Route::post('/add', 'ProductoController@postAdd');
-    Route::get('/', 'ProductoController@list')->name('producto.list');
-    Route::get('/update', 'ProductoController@getUpdate')->name('producto.update');
-    Route::post('/update', 'ProductoController@postUpdate');
-    Route::get('/delete', 'ProductoController@delete')->name('producto.delete');
-  });
-  
-  
-  /**
-   * Ingredientes
-   */
-  
-  Route::prefix('ingrediente')->group(function() {
-    Route::get('/add', 'IngredienteController@getAdd')->name('ingrediente.add');
-    Route::post('/add', 'IngredienteController@postAdd');
-    Route::get('/', 'IngredienteController@list')->name('ingrediente.list');
-    Route::get('/update', 'IngredienteController@getUpdate')->name('ingrediente.update');
-    Route::post('/update', 'IngredienteController@postUpdate');
-    Route::get('/delete', 'IngredienteController@delete')->name('ingrediente.delete');
-  });
-  
-  
-  /**
-   * Menus
-   */
-  
-  Route::prefix('menu')->group(function() {
-    Route::get('/add', 'MenuController@getAdd')->name('menu.add');
-    Route::post('/add', 'MenuController@postAdd');
-    Route::get('/', 'MenuController@list')->name('menu.list');
-    Route::get('/update', 'MenuController@getUpdate')->name('menu.update');
-    Route::post('/update', 'MenuController@postUpdate');
-    Route::get('/delete', 'MenuController@delete')->name('menu.delete');
-  });
+/**
+ * Ingredientes
+ */
+
+Route::get('/ingrediente', 'IngredienteController@getAll')->name('ingrediente.get');
+Route::post('/ingrediente', 'IngredienteController@addIngrediente')->name('ingrediente.add');
+Route::put('/ingrediente/{idIngrediente}', 'IngredienteController@updateIngrediente')->name('ingrediente.update');
+Route::delete('/ingrediente/{idIngrediente}', 'IngredienteController@deleteIngrediente')->name('ingrediente.delete');
+
+
+/**
+ * Menus
+ */
+
+Route::get('/menu', 'MenuController@getAll')->name('menu.get');
+Route::post('/menu', 'MenuController@addMenu')->name('menu.add');
+Route::put('/menu/{idMenu}', 'MenuController@updateMenu')->name('menu.update');
+Route::delete('/menu/{idMenu}', 'MenuController@deleteMenu')->name('menu.delete');
+
+
+/**
+ * Productos
+ */
+
+Route::get('/producto', 'ProductoController@getAll')->name('producto.get');
+Route::post('/producto', 'ProductoController@addProducto')->name('producto.add');
+Route::put('/producto/{idProducto}', 'ProductoController@updateProducto')->name('producto.update');
+Route::delete('/producto/{idProducto}', 'ProductoController@deleteProducto')->name('producto.delete');
