@@ -7,37 +7,35 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller {
 
-    public function list() {
-        $categorias = Categoria::all();
+    public function getAll() {
+       return response()->json(Categoria::all(),200);
     }
 
-    public function getAdd() {
-        return view('categoria.add');
-    }
-
-    public function postAdd(Request $request) {
-        Categoria::create([
-            'nombre' => $request['nombre']
+    //me comenta Lorena que crear categoria va en la parte de administrador y no va por api[Que es solamente para el front].
+    public function crearCategoria(Request $request) {
+        $categoria = Categoria::create([
+            'nombre' => $request['nombre'],
         ]);
+
+        //devuelvo un 201 que indica que se ha creado, realmente ningun estado hace falta que se devuelva
+        //Laravel lo hace automaticamente, pero me gusta verlo claro.
+        return response()->json($categoria, 201);
     }
 
-    public function getUpdate(Request $request) {
-        $id = $request->input('id');
-        $categoria = Categoria::find($id);
+    //va en la parte de administrador y no va por api[Que es solamente para el front].
+    public function update(Request $request,$idCategoria) {
+        $categoria = Categoria::find($idCategoria);
+        $categoria->nombre = $request['nombre'];
+        $categoria->save();
+
+        return response()->json($categoria,200);
     }
 
-    public function postUpdate(Request $request) {
-        $id = $request->input('id');
-        $categoria = Categoria::find($id);
-        $categoria::update([
-            'nombre' => $request['nombre']
-        ]);
-    }
-
-    public function delete(Request $request) {
-        $id = $request->input('id');
-        $categoria = Categoria::find($id);
-        $categoria::destroy($categoria);
+    //va en la parte de administrador y no va por api[Que es solamente para el front].
+    public function delete($idCategoria) {
+        $categoria = Categoria::find($idCategoria);
+        $categoria->delete();
+        return 204;
     }
 
 }
