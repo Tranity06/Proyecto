@@ -5,20 +5,24 @@ namespace App\Http\Controllers;
 use App\Events\ResenaEvent;
 use Illuminate\Http\Request;
 use App\Models\Resena;
-use App\Models\User;
 use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class ResenaController extends Controller
 {
-    public function getAllFromUser($idUsuario){
-        return User::find($idUsuario)->resenas();
+    public function getAllFromUser(){
+        return auth()->user()->resenas();
     }
 
-    public function crearResenia(Request $request, $idUsuario){
-        $user = $this->getAuthenticatedUser();
+
+    public function crearResenia(Request $request){
+       // $user = auth()->user();
+       $user = JWTAuth::toUser(JWTAuth::getToken());
 
         $user_resenas = Resena::where([
-            ['user_id',$idUsuario],
+            ['user_id',$user->id],
             ['pelicula_id',$request['pelicula_id']]
         ])->get();
         if ( sizeof($user_resenas) > 0 ){
@@ -28,17 +32,16 @@ class ResenaController extends Controller
         $resena = Resena::create([
             'valoracion' => $request['valoracion'], 
             'comentario' => $request['comentario'], 
-            'user_id' => $idUsuario,
+            'user_id' => $user->id,
             'pelicula_id' => $request['pelicula_id']
         ]);
 
-        $user = $resena->user();
         $resena['imagen_usuario'] = $user->avatar;
         $resena['nombre_usuario'] = $user->name;
 
         broadcast(new ResenaEvent($resena))->toOthers();
 
-        return $resena;
+        return response()->json($resena, 201);
     }
 
     public function update(Request $request, $idResena){
@@ -53,31 +56,5 @@ class ResenaController extends Controller
         $resena = Resena::find($idResena);
         $resena->delete();
         return 204;
-    }
-
-    public function getAuthenticatedUser()
-    {
-        try {
-
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-
-        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-
-            return response()->json(['token_expired'], $e->getStatusCode());
-
-        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-
-            return response()->json(['token_invalid'], $e->getStatusCode());
-
-        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-
-            return response()->json(['token_absent'], $e->getStatusCode());
-
-        }
-
-        // the token is valid and we have found the user via the sub claim
-        return response()->json(compact('user'));
     }
 }

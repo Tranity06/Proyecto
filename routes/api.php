@@ -63,8 +63,9 @@ Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('
 /**
  * Reseñas
  */
-Route::get('/resena/{idUsuario}','ResenaController@getAllFromUser')->name('resena.get');
-Route::post('/resena/{idUsuario}','ResenaController@crearResenia')->name('resena.crearResenia');
+Route::get('/resena','ResenaController@getAllFromUser')->name('resena.get');
+
+Route::post('/resena','ResenaController@crearResenia')->name('resena.crearResenia');
 Route::put('/resena/{idResena}','ResenaController@update')->name('resena.update');
 Route::delete('/resena/{idResena}','ResenaController@delete')->name('resena.delete');
 
@@ -77,14 +78,17 @@ Route::get('/slider','SliderController@get')->name('slider.get');
  * Categorias
  */
 
-Route::prefix('categoria')->group(function() {
-    Route::get('/add', 'CategoriaController@getAdd')->name('categoria.add');
-    Route::post('/add', 'CategoriaController@postAdd');
-    Route::get('/', 'CategoriaController@list')->name('categoria.list');
-    Route::get('/update', 'CategoriaController@getUpdate')->name('categoria.update');
-    Route::post('/update', 'CategoriaController@postUpdate');
-    Route::get('/delete', 'CategoriaController@delete')->name('categoria.delete');
-  });
+/** NO UTILICES VERBOS EN LAS RUTAS, solamente el nombre, mira nuestros ejemplos mas arriba, el de reseña es un buen ejemplo.
+ *  GET -> /categoria -> Lista y una categoria en concreto
+ *  POST ->  /categoria -> y pasas por request todos los parametros necesarios para crear una categoria
+ *  PUT -> /categoria/{idCategoria}
+ *  DELETE -> /categoria/{idCategoria}
+ */
+
+Route::get('/categoria','CategoriaController@getAll')->name('categoria.get');
+Route::post('/categoria','CategoriaController@crearCategoria')->name('categoria.crearCategoria');
+Route::put('/categoria/{idCategoria}','CategoriaController@update')->name('categoria.update');
+Route::delete('/categoria/{idCategoria}','CategoriaController@delete')->name('categoria.delete');
   
   
   /**
