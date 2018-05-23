@@ -16,9 +16,10 @@ class ResenaController extends Controller
         return auth()->user()->resenas();
     }
 
+
     public function crearResenia(Request $request){
        // $user = auth()->user();
-       $user = JWTAuth::toUser(JWTAuth::getToken());;
+       $user = JWTAuth::toUser(JWTAuth::getToken());
 
         $user_resenas = Resena::where([
             ['user_id',$user->id],
