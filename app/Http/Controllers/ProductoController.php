@@ -15,40 +15,38 @@ class ProductoController extends Controller {
 
     public function addProducto(Request $request) {
         //Validacion de los datos
-    $credentials = $request->only('nombre', 'precio', 'descripcion', 'stock', 'categoria_id');
+    $credentials = $request->only('nombre', 'precio', 'stock', 'imagen', 'categoria_id');
         $rules = [
             'nombre' => 'required|string|min:1',
             'precio' => 'required|min:1',
-            'descripcion' => 'required|string|min:1',
             'stock' => 'required|int|min:1',
+            'imagen' => 'required|string|min:1',
             'categoria_id' => 'required|min:1'
         ];
         $validator = Validator::make($credentials, $rules);
         if ($validator->fails()) {
             return response()->json('Debes rellenar todos los campos.', 403);
         }
-
         
-        
-        Producto::create([
+        $producto = Producto::create([
             'nombre' => $request['nombre'],
             'precio' => $request['precio'],
-            'descripcion' => $request['descripcion'],
             'stock' => $request['stock'],
+            'imagen' => $request['imagen'],
             'categoria_id' => $request['categoria_id']
         ]);
 
         return response()->json($producto, 201);
     }
 
-    public function updateProducto(Request $request, $idProducto, $idCategoria) {
+    public function updateProducto(Request $request, $idProducto) {
         $producto = Producto::find($idProducto);
 
         $producto->nombre = $request['nombre'];
         $producto->precio = $request['precio'];
-        $producto->descripcion = $request['descripcion'];
         $producto->stock = $request['stock'];
-        $producto->id_categoria = $idCategoria;
+        $producto->imagen = $request['imagen'];
+        $producto->categoria_id = $request['categoria_id'];
 
         $producto->save();
 
