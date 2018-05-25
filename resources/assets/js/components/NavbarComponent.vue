@@ -53,9 +53,16 @@
                                     <span>Entrar</span>
                                 </div>
                             </router-link>
-                            <a href="http://www.facebook.com" class="centeredIcon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
+<!--                            <a href="http://www.facebook.com" class="centeredIcon">
+                                <i class="fab fa-google"></i>
+                            </a>-->
+                              <g-signin-button
+                                      class="centeredIcon"
+                                      :params="googleSignInParams"
+                                      @success="onSignInSuccess"
+                                      @error="onSignInError">
+                                <i class="fab fa-google"></i>
+                              </g-signin-button>
                         </div>
                 </span>
                 </div>
@@ -69,6 +76,13 @@
 
     export default {
         name: "navbar-component",
+        data () {
+            return {
+                googleSignInParams: {
+                    client_id: '807265199183-m5l3c4mkeftknbq73c2f8stdnimnk1nk.apps.googleusercontent.com'
+                }
+            }
+        },
         computed: {
             StoreStateEnabled() {
                 return store.state.isLoggedIn;
@@ -87,8 +101,19 @@
                     duration: 5000,
                 });
                 this.$router.push({ name: 'home' });
+            },
+            onSignInSuccess (googleUser) {
+                // `googleUser` is the GoogleUser object that represents the just-signed-in user.
+                // See https://developers.google.com/identity/sign-in/web/reference#users
+                const profile = googleUser.getBasicProfile() // etc etc
+                console.log(profile);
+            },
+            onSignInError (error) {
+                // `error` contains any error occurred.
+                console.log('OH NOES', error)
             }
         }
+
     }
 </script>
 
@@ -115,7 +140,7 @@
         font-size: 20px;
         width: 40px;
         height: 40px;
-        color: dodgerblue;
+        color: #d34836;
         background-color: ghostwhite;
         border-radius: 100%;
         margin-left: .5rem;
@@ -126,7 +151,7 @@
 
     .centeredIcon:hover {
         color: white;
-        background-color: dodgerblue;
+        background-color: #d34836;
     }
 
     .avatar {

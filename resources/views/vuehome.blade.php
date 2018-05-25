@@ -14,6 +14,7 @@
     <link href="{{ asset('css/utilidades.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/modal/lity.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/footer.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://apis.google.com/js/api:client.js"></script>
 
     <style>
 
