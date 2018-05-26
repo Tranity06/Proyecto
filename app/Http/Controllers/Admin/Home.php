@@ -23,7 +23,7 @@ class Home extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     { 
         $admin = Auth::guard('admin')->user()->name;
         return view('admin.home', compact('admin'));
