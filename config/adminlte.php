@@ -143,8 +143,17 @@ return [
             ]
         ],
         [
-            'text'       => 'Sala',
-            'url'  => '#',
+            'text'       => 'Salas',
+            'submenu' => [
+                [
+                    'text' => 'Mostrar',
+                    'url'  => '/salas',
+                ],
+                [
+                    'text' => 'Crear',
+                    'url'  => '/sala',
+                ],
+            ]
         ],
         [
             'text'       => 'Sesiones',

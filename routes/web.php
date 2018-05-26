@@ -106,3 +106,12 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('slider', 'SliderController@mostrar');
   Route::post('slider/borrar', 'SliderController@borrar');
   Route::post('/slider/anadir', 'SliderController@anadir');
+
+  /**
+   * Gestión SALAS
+   */
+  ROUTE::get('salas', 'SalaController@motrarTodas');
+  ROUTE::get('sala', 'SalaController@motrarSala');
+  ROUTE::post('sala', 'SalaController@crear'); //AJAX
+  ROUTE::post('sala/borrar', 'SalaController@borrar'); //AJAX
+  ROUTE::post('sala/modificar', 'SalaController@modificar'); //AJAX
