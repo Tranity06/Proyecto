@@ -10,6 +10,8 @@ use App\Models\Pelicula;
 
 class PeliculaApiTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function setUp()
     {
         parent::setUp();
