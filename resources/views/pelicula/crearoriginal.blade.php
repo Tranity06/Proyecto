@@ -13,11 +13,18 @@
             clear: left;
         }
 
+        #poster{
+            float: left;
+            display: block;
+        }
+
+        #datos-peli{
+            float: left;
+            width: 80%
+        }
+
         #resultado>.buscar, #resultado>.guardar{
             margin-left: 1em;
-            margin-top: 1em;
-        }
-        p {
             margin-top: 1em;
         }
     </style>
@@ -102,6 +109,9 @@
                 }
 
                 $.ajax(settings).done(function (response) { console.log(response);
+                    var titulo = response.title;
+                    var titulo_original = response.original_title;
+                    var estreno = response.release_date;
                     var generos = [];
                     response.genres.forEach(function(entry){
                         generos.push(entry.name);
@@ -119,44 +129,66 @@
                         actores.push(response['credits']['cast'][i]['name']);
                     }
                     actores = actores.join(', ');
-                    url = 'https://www.youtube.com/watch?v='+response.videos.results[0]['key'];
 
-                    $('#idtmdb').val($idtmdb);
-                    $('#titulo').val(response.title);
-                    $('#titulo_original').val(response.original_title);
-                    $('#estreno').val(response.release_date);
-                    $('#generos').val(generos);
-                    $('#director').val(director);
-                    $('#actores').val(actores);
-                    $('#sinopsis').val(response.overview);
-                    $('#duracion').val(response.runtime);
-                    $('#trailer').val(url);
-                    $('#poster').val('https://image.tmdb.org/t/p/w500'+response.poster_path);
-                    $('#slider_image').val('https://image.tmdb.org/t/p/w500'+response.backdrop_path);
-                    $('#popularidad').val(response.popularity);
-                    $('#imagen_poster').attr('src', 'https://image.tmdb.org/t/p/w500'+response.poster_path);
-                    $('#imagen_slider').attr('src', 'https://image.tmdb.org/t/p/w500'+response.backdrop_path);
-                    $('#video_trailer').attr('src', 'https://www.youtube.com/embed/'+url);
-                    $('#detalle').slideDown();
+                    var sinopsis = response['overview'];
+                    var duracion = response.runtime;
+
+                    var $contenedor_datos = $('<dl id="datos-peli" class="dl-horizontal"></dl>');
+                    var $titulo = $('<dt>Título</dt><dd id="titulo">'+titulo+'</dd>');
+                    var $titulo_original = $('<dt>Título original</dt><dd id="titulo_original">'+titulo_original+'</dd>');
+                    var $estreno = $('<dt>Fecha de estreno</dt><dd id="estreno">'+estreno+'</dd>');
+                    var $director = $('<dt>Director</dt><dd id="director">'+director+'</dd>');
+                    var $actores = $('<dt>Actores</dt><dd id="actores">'+actores+'</dd>');
+                    var $sinopsis = $('<dt>Sinopsis</dt><dd id="sinopsis">'+sinopsis+'</dd>');
+                    var $generos = $('<dt>Géneros</dt><dd id="generos">'+generos+'</dd>');
+                    var $duracion = $('<dt>Duración</dt><dd id="duracion">'+duracion+'</dd>');
+                    var $slider = $('<dt>Añadir al slider</dt><dd id="duracion"><input type="checkbox" id="slider"/></dd>');
+                    var $idtmdb_hidden = $('<input type="hidden" name="idtmdb" id="idtmdb" value="'+$idtmdb+'"/>');
+                                        
+                    $contenedor_datos.append($titulo);
+                    $contenedor_datos.append($titulo_original);
+                    $contenedor_datos.append($estreno);
+                    $contenedor_datos.append($generos);
+                    $contenedor_datos.append($director);
+                    $contenedor_datos.append($actores);
+                    $contenedor_datos.append($sinopsis);
+                    $contenedor_datos.append($duracion);
+                    $contenedor_datos.append($slider);
+                    $contenedor_datos.append($idtmdb_hidden);
+
+                    var poster = response.poster_path;
+                    var $poster = $('<img id="poster" src="https://image.tmdb.org/t/p/w500'+poster+'" alt="Póster de la película película" width="200">');
+                    var $slider_image = $('<input type="hidden" name="idtmdb" id="idtmdb" value="'+$idtmdb+'"/>');
+
+                    var $atras = $('<input type="button" class="buscar sub btn btn-primary" value="Volver a la lista"/>');
+                    var $guardar = $('<input type="button" class="guardar sub btn btn-primary" id="guardar" value="Guardar"/>');
+
+                    $('#resultado').append($poster);
+                    $('#resultado').append($contenedor_datos);
+                    $('#resultado').append($atras);
+                    $('#resultado').append($guardar);
+
+                    $('#form_trailer').val( 'https://www.youtube.com/watch?v='+response.videos.results[0]['key'] );
+                    $('#form_slider_image').val( 'https://image.tmdb.org/t/p/w500'+response.backdrop_path );
+                    $('#form_popularidad').val( response.popularity );
                 });
             });
 
-            $('#poster').on('change', function(){
-                $('#imagen_poster').slideUp();
-                $('#imagen_poster').attr('src', $('#poster').val());
-                $('#imagen_poster').slideDown();
-            });
-
-            $('#slider_image').on('change', function(){
-                $('#imagen_slider').slideUp();
-                $('#imagen_slider').attr('src', $('#slider_image').val());
-                $('#imagen_slider').slideDown();
-            });
-
-            $('#trailer').on('change', function(){
-                $('#video_trailer').slideUp();
-                $('#video_trailer').attr('src', $('#trailer').val());
-                $('#video_trailer').slideDown();
+            $('#resultado').on('click', '.guardar', function(e){
+                var $formulario = $('#formulario');
+                $('#form_idtmdb').val( $('#idtmdb').val() );
+                $('#form_titulo').val( $('#titulo').text());
+                $('#form_titulo_original').val( $('#titulo_original').text());
+                $('#form_estreno').val( $('#estreno').text());
+                $('#form_generos').val( $('#generos').text());
+                $('#form_director').val( $('#director').text());
+                $('#form_actores').val( $('#actores').text());
+                $('#form_sinopsis').val( $('#sinopsis').text());form_trailer
+                $('#form_duracion').val( $('#duracion').text());
+                $('#form_poster').val($('#poster').attr('src'));
+                $( $('#form_slider').attr('checked', $('#slider').is(':checked') ))
+                
+                $formulario.submit();
             });
         });
     </script>
@@ -198,60 +230,22 @@
                 <input type="button" class="buscar sub btn btn-primary" value="Buscar"/>
             </div>
             <div id="resultado">
-            </div>
-            <div id="detalle" hidden>
-                <form action=""{{ route('pelicula.crear') }}"" id="formulario" method="POST">{{ csrf_field() }}
-                    <input type="hidden" class="form-control input-sm" id="idtmdb" name="idtmdb"/>
-                    
-                    <p>Título:</p>
-                    <input type="text" class="form-control input-sm" id="titulo" name="titulo"/>
-            
-                    <p>Título original:</p>
-                    <input type="text" class="form-control input-sm" id="titulo_original" name="titulo_original"/>
-            
-                    <p>Fecha de estreno:</p>
-                    <input type="text" class="form-control input-sm" id="estreno" name="estreno"/>
-            
-                    <p>Géneros:</p>
-                    <input type="text" class="form-control input-sm" id="generos" name="generos"/>
-            
-                    <p>Director:</p>
-                    <input type="text" class="form-control input-sm" id="director" name="director"/>
-            
-                    <p>Actores:</p>
-                    <input type="text" class="form-control input-sm" id="actores" name="actores"/>
-            
-                    <p>Sinopsis:</p>
-                    <textarea class="form-control input-sm" id="sinopsis" name="sinopsis" rows="4"></textarea>
-            
-                    <p>Duración:</p>
-                    <input type="text" class="form-control input-sm" id="duracion" name="duracion"/>
-            
-                    <p>Cartel:</p>
-                    <input type="text" class="form-control input-sm" id="poster" name="poster"/>
-                    <img id="imagen_poster" src="#" alt="Póster de la película película" width="200"/>
-
-                    <p>Tráiler:</p>
-                    <input type="text" class="form-control input-sm" id="trailer" name="trailer"/>
-                    <iframe id="video_trailer" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <!-- <div id="video_trailer"></div> -->
-                    
-            
-                    <p>Añadir al slider:</p>
-                    <input type="checkbox" id="slider" name="slider"/>
-                    
-                    <p>Imagen del slider:</p>
-                    <input type="text" class="form-control input-sm" id="slider_image" name="slider_image"/>
-                    <img id="imagen_slider" src="#" alt="Imagen del slider de la película película"/>
-
-                    <input type="hidden" class="form-control input-sm" id="popularidad" name="popularidad"/>
-                    
-                    <p>
-                    <input type="button" class="buscar sub btn btn-primary" value="Volver a la lista"/>
-                    <input type="submit" class="guardar sub btn btn-primary" id="guardar" value="Guardar"/>
-                    </p>
-                </form>
-            </div>
         </div>
     </div>
+    <form action=""{{ route('pelicula.crear') }}"" id="formulario" method="POST" hidden>{{ csrf_field() }}
+        <input type="text" id="form_idtmdb" name="idtmdb"/>
+        <input type="text" id="form_titulo" name="titulo"/>
+        <input type="text" id="form_titulo_original" name="titulo_original"/>
+        <input type="text" id="form_estreno" name="estreno"/>
+        <input type="text" id="form_generos" name="generos"/>
+        <input type="text" id="form_director" name="director"/>
+        <input type="text" id="form_actores" name="actores"/>
+        <input type="text" id="form_sinopsis" name="sinopsis"/>
+        <input type="text" id="form_duracion" name="duracion"/>
+        <input type="text" id="form_trailer" name="trailer"/>
+        <input type="text" id="form_poster" name="poster"/>
+        <input type="checkbox" id="form_slider" name="slider"/>
+        <input type="text" id="form_slider_image" name="slider_image"/>
+        <input type="hidden" id="form_popularidad" name="popularidad"/>
+    </form>
 @stop
