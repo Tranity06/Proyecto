@@ -19,7 +19,7 @@ class PeliculaController extends Controller
      * Si el administrador está logueado devuelve el formulario para crear una nueva pelñicula.
      * Si el administrador no está logueado redirige al login.
      */
-    public function crear(Request $request){
+    public function crear(){
         // Comprobar autenticación
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
@@ -102,7 +102,7 @@ class PeliculaController extends Controller
      * Muestra la información de las películas registradas.
      * Si el administrador no está logueado redirige al login
      */
-    public function mostrar(Request $request){
+    public function mostrar(){
         // Comprobar autenticación
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
@@ -122,7 +122,6 @@ class PeliculaController extends Controller
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
         }
-        $admin = Auth::guard('admin')->user()->name;
 
         $pelicula = Pelicula::find($request['id']);
         if( $pelicula == null ){
@@ -147,16 +146,39 @@ class PeliculaController extends Controller
      * API
      */
 
+    /**
+     * Devuelve todas las películas registradas.
+     * Devuelve todas las sesiones activas de las películas el día de la consulta.
+     */
     public function getAll(){
+        $peliculas = Pelicula::orderBy('estreno', 'desc')->get();
+        $hoy = date('Y-n-d');
+
+        foreach ( $peliculas as $pelicula ){
+            $pelicula['sesiones'] = Sesion::where([
+                ['pelicula_id', $pelicula->id],
+                ['fecha', $hoy],
+                ['estado', 1]
+            ])->orderBy('hora')->get();
+        }
+
+        return response()->json($peliculas, 200);
+    }
+    /* public function getAll(){
         $peliculas = Pelicula::orderBy('estreno', 'desc')->get();
 
         foreach ( $peliculas as $pelicula ){
             $pelicula['sesiones'] = $pelicula->sesiones();
         }
 
-        return $peliculas;
-    }
+        return response()->json($peliculas, 200);
+    } */
 
+    /**
+     * Devuelve la información de la película indicada y
+     * las sesiones agrupadas por fechas y ordenadas por hora.
+     * Sólo las sesiones activas.
+     */
     public function getOne($idPelicula){
         $pelicula = Pelicula::find($idPelicula);
         $fechas = Sesion::distinct()->where('pelicula_id',$idPelicula)->orderBy('fecha')->get(['fecha']);
@@ -181,20 +203,30 @@ class PeliculaController extends Controller
             }
         }
         $pelicula['sesiones'] = $sesiones;
-        return $pelicula;
+        return response()->json($pelicula, 200);
     }
 
+    /**
+     * Devuelve todas las reseñas de la película indicada
+     */
     public function getResenas($idPelicula){
         $resenas = Resena::where('pelicula_id', $idPelicula)->get();
          foreach ($resenas as $resena ){
             $user = $resena->user();
             $resena['nombre_usuario'] = $user->name;
             $resena['imagen_usuario'] = $user->avatar;
-        } 
-        return $resenas;
+        }
+        return response()->json($resenas, 200);
     }
 
+    /**
+     * Devuelve las sesiones activas programadas para el día indicado.
+     */
     public function getSesiones($fecha){
-        return Sesion::where('fecha', $fecha)->get();
+        $sesiones = Sesion::where([
+            ['fecha', $fecha],
+            ['estado', 1]
+        ])->get();
+        return response()->json($sesiones, 200);
     }
 }
