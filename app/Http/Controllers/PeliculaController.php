@@ -48,7 +48,7 @@ class PeliculaController extends Controller
         }
 
         //Comprobar validez de los datos
-        $credentials = $request->only('idtmdb', 'titulo', 'titulo_original', 'estreno', 'generos', 'director', 'actores', 'sinopsis', 'duracion', 'cartel', 'trailer', 'slider_image', 'popularidad');
+        $credentials = $request->only('idtmdb', 'titulo', 'titulo_original', 'estreno', 'generos', 'director', 'actores', 'sinopsis', 'duracion', 'poster', 'trailer', 'slider_image', 'popularidad');
         $rules = [
             'idtmdb' => 'required|integer|min:1|unique:peliculas',
             'titulo' => 'required|string|min:1',
@@ -59,7 +59,7 @@ class PeliculaController extends Controller
             'actores' => 'required|string|min:1',
             'sinopsis' => 'required|string|min:1',
             'duracion' => 'required|integer|min:1',
-            'cartel' => 'required|string|min:1',
+            'poster' => 'required|string|min:1',
             'trailer' => 'required|string|min:1',
             'slider_image' => 'required|string|min:1',
             'popularidad' => 'required|min:1'
@@ -128,7 +128,8 @@ class PeliculaController extends Controller
             return response()->json('La película indicada no existe', 400);
         }
         $pelicula->delete();
-        return response()->json('Película borrada.', 204);
+        return response('Película borrada.', 204);
+        //return response()->json('Película borrada.', 204);
     }
 
     /**

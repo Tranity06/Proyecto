@@ -38,7 +38,7 @@
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
                 var $id= $boton.next().val();
-               // if (confirm("¿Seguro que quieres eliminar esta película?")){
+                if (confirm("¿Seguro que quieres eliminar esta película?")){
                     $.ajaxSetup({
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                     });
@@ -46,8 +46,8 @@
                         url: '/peliculas/borrar',
                         type: 'POST',
                         data: 'id='+$id,
-                        success: function(e){
-                            if ( e === 'Borrado'){
+                        statusCode:{
+                            204: function (){
                                 $boton.closest('tr')
                                 .children('td')
                                 .animate({ 
@@ -57,13 +57,14 @@
                                 .children().slideUp(function () {
                                     $(this).closest('tr').remove();
                                 });
-                            } else {
+                            },
+                            400: function() {
                                 console.log("Error");
                             }
                         },
                         async: true,
                     });
-               // }
+                }
             });
         });
     </script>
@@ -79,7 +80,7 @@
 @endsection
 
 @section('content')
-    <div class="box box-default color-palette-box">
+    <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Películas registrados</h3>
         </div>

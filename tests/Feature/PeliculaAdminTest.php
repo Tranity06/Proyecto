@@ -86,7 +86,7 @@ class PeliculaAdminTest extends TestCase
             'actores' => $this->faker->name,
             'sinopsis' => $this->faker->text,
             'duracion' => 149,
-            'cartel' => $this->faker->name,
+            'poster' => $this->faker->name,
             'trailer' => 'https://www.youtube.com/watch?v=wJbudwIF0cE',
             'slider' => true,
             'slider_image' => 'https://image.tmdb.org/t/p/w500/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg',
