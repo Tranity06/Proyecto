@@ -4,6 +4,14 @@
             <div class="columns">
                 <div class="column is-narrow">
                     <form method="post" class="box-form" v-on:submit.prevent="register">
+                        <h1 class="title has-text-weight-bold"><span>Regístrate</span></h1>
+
+                        <article class="message is-danger" v-if="registerError">
+                            <div class="message-body">
+                               El email introducido o el teléfono ya existen
+                            </div>
+                        </article>
+
                         <div class="field">
                             <label class="label">Introduce tu nombre</label>
                             <div class="control has-icons-left has-icons-right">
