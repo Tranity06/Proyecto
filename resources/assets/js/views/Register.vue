@@ -67,14 +67,14 @@
                         <div class="field">
                             <div class="control">
                                 <label class="checkbox">
-                                    <input type="checkbox">
-                                    I agree to the <a href="#">terms and conditions</a>
+                                    <input type="checkbox" v-model="checked">
+                                    He leído y acepto los términos y condiciones de uso
                                 </label>
                             </div>
                         </div>
 
                         <div class="control">
-                            <button class="button is-primary" type="submit">Registrarme</button>
+                            <button class="button is-primary" type="submit" :disabled='errors.any() || !isComplete'>Registrarme</button>
                         </div>
                     </form>
                 </div>
@@ -98,9 +98,15 @@
                 telefono: '',
                 password: '',
                 password_confirmation: '',
+                checked: false,
                 registerError: false,
 
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        },
+        computed: {
+            isComplete () {
+                return this.nombre && this.password && this.email && this.telefono && this.password_confirmation && this.checked;
             }
         },
         methods: {
@@ -142,5 +148,4 @@
 </script>
 
 <style scoped>
-
 </style>

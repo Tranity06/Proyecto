@@ -8,7 +8,7 @@
 
                         <article class="message is-danger" v-if="loginError">
                             <div class="message-body">
-                                La contraseña o el email introducido no son validos.
+                                La contraseña o el email introducido no es valido.
                             </div>
                         </article>
 
@@ -49,7 +49,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link" type="submit">Login</button>
+                                <button class="button is-link" type="submit" :disabled='errors.any()>0 || !isComplete'>Login</button>
                             </div>
                         </div>
                         <a href="recuperar">¿Has olvidado tu contraseña?</a>
@@ -93,6 +93,11 @@
                 loginError: false,
 
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        },
+        computed: {
+            isComplete () {
+                return this.email && this.password;
             }
         },
         methods: {

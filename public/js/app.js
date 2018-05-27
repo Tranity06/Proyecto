@@ -46839,13 +46839,25 @@ axios.defaults.baseURL = 'http://localhost:8000';
 var dict = {
     custom: {
         email: {
-            required: 'Introduce un email valido.',
-            email: 'que es esto?'
+            required: 'El email no puede estar vacío',
+            email: 'El email no es correcto'
         },
-        name: {
-            required: function required() {
-                return 'Your name is empty';
-            }
+        nombre: {
+            required: 'El nombre no puede estar vacío',
+            alpha: 'Solo tu primer nombre'
+        },
+        telefono: {
+            required: 'El teléfono no puede estar vacío',
+            digits: 'El teléfono debe empezar por 6 y tener 9 números'
+        },
+        password: {
+            required: 'La contraseña no puede estar vacía',
+            min: 'La contraseña debe tener mínimo 6 caracteres'
+        },
+        password_confirmation: {
+            required: 'La contraseña no puede estar vacía',
+            min: 'La contraseña debe tener mínimo 6 caracteres',
+            confirmed: 'Las contraseñas no coinciden'
         }
     }
 };
@@ -79953,7 +79965,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -80063,6 +80075,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    computed: {
+        isComplete: function isComplete() {
+            return this.email && this.password;
+        }
+    },
     methods: {
         submitLogin: function submitLogin() {
             var _this = this;
@@ -80133,7 +80150,7 @@ var render = function() {
                   ? _c("article", { staticClass: "message is-danger" }, [
                       _c("div", { staticClass: "message-body" }, [
                         _vm._v(
-                          "\n                            La contraseña o el email introducido no son validos.\n                        "
+                          "\n                            La contraseña o el email introducido no es valido.\n                        "
                         )
                       ])
                     ])
@@ -80253,7 +80270,21 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(3),
                 _vm._v(" "),
-                _vm._m(4),
+                _c("div", { staticClass: "field is-grouped" }, [
+                  _c("div", { staticClass: "control" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button is-link",
+                        attrs: {
+                          type: "submit",
+                          disabled: _vm.errors.any() > 0 || !_vm.isComplete
+                        }
+                      },
+                      [_vm._v("Login")]
+                    )
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("a", { attrs: { href: "recuperar" } }, [
                   _vm._v("¿Has olvidado tu contraseña?")
@@ -80277,6 +80308,8 @@ var render = function() {
               _vm._v(" "),
               _c("p", [_vm._v("Crea tu cuenta de Palomitas time:")]),
               _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
               _vm._m(5),
               _vm._v(" "),
               _vm._m(6),
@@ -80286,8 +80319,6 @@ var render = function() {
               _vm._m(8),
               _vm._v(" "),
               _vm._m(9),
-              _vm._v(" "),
-              _vm._m(10),
               _vm._v(" "),
               _c(
                 "router-link",
@@ -80346,20 +80377,6 @@ var staticRenderFns = [
             "\n                                Recordar usuario\n                            "
           )
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field is-grouped" }, [
-      _c("div", { staticClass: "control" }, [
-        _c(
-          "button",
-          { staticClass: "button is-link", attrs: { type: "submit" } },
-          [_vm._v("Login")]
-        )
       ])
     ])
   },
@@ -80525,7 +80542,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -80637,12 +80654,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             telefono: '',
             password: '',
             password_confirmation: '',
+            checked: false,
             registerError: false,
 
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
     },
 
+    computed: {
+        isComplete: function isComplete() {
+            return this.nombre && this.password && this.email && this.telefono && this.password_confirmation && this.checked;
+        }
+    },
     methods: {
         register: function register() {
             var _this = this;
@@ -80983,14 +81006,71 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _c("div", { staticClass: "field" }, [
+                  _c("div", { staticClass: "control" }, [
+                    _c("label", { staticClass: "checkbox" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.checked,
+                            expression: "checked"
+                          }
+                        ],
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: Array.isArray(_vm.checked)
+                            ? _vm._i(_vm.checked, null) > -1
+                            : _vm.checked
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.checked,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.checked = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.checked = $$c
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(
+                        "\n                                He leído y acepto los términos y condiciones de uso\n                            "
+                      )
+                    ])
+                  ])
+                ]),
                 _vm._v(" "),
-                _vm._m(6)
+                _c("div", { staticClass: "control" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button is-primary",
+                      attrs: {
+                        type: "submit",
+                        disabled: _vm.errors.any() || !_vm.isComplete
+                      }
+                    },
+                    [_vm._v("Registrarme")]
+                  )
+                ])
               ]
             )
           ]),
           _vm._v(" "),
-          _vm._m(7)
+          _vm._m(5)
         ])
       ])
     ]
@@ -81035,32 +81115,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "icon is-small is-left" }, [
       _c("i", { staticClass: "fas fa-lock" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field" }, [
-      _c("div", { staticClass: "control" }, [
-        _c("label", { staticClass: "checkbox" }, [
-          _c("input", { attrs: { type: "checkbox" } }),
-          _vm._v("\n                                I agree to the "),
-          _c("a", { attrs: { href: "#" } }, [_vm._v("terms and conditions")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "control" }, [
-      _c(
-        "button",
-        { staticClass: "button is-primary", attrs: { type: "submit" } },
-        [_vm._v("Registrarme")]
-      )
     ])
   },
   function() {
@@ -81535,7 +81589,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.tarjeta[data-v-f5d70176] {\n     display: -webkit-box;\n     display: -ms-flexbox;\n     display: flex;\n     height: 0;\n     padding-bottom: 100%;\n     position: relative;\n     margin-bottom: 5px;\n     -webkit-box-sizing: border-box;\n             box-sizing: border-box;\n}\n.tile-inner[data-v-f5d70176] {\n     width: auto;\n     height: auto;\n     position: absolute;\n     top: 15px;\n     left: 15px;\n     right: 15px;\n     bottom: 15px;\n     -webkit-box-shadow: 0 0 25px rgba(0,0,0,0.08);\n             box-shadow: 0 0 25px rgba(0,0,0,0.08);\n     background-color: #fff;\n     border-radius: 8px;\n     -webkit-transition: -webkit-box-shadow 0.5s;\n     transition: -webkit-box-shadow 0.5s;\n     transition: box-shadow 0.5s;\n     transition: box-shadow 0.5s, -webkit-box-shadow 0.5s;\n}\n.tarjeta .tile-inner[data-v-f5d70176]:hover {\n     -webkit-box-shadow: 0 0 25px rgba(0,0,0,0.18);\n             box-shadow: 0 0 25px rgba(0,0,0,0.18);\n     -webkit-transition: -webkit-box-shadow 0.5s;\n     transition: -webkit-box-shadow 0.5s;\n     transition: box-shadow 0.5s;\n     transition: box-shadow 0.5s, -webkit-box-shadow 0.5s;\n}\n.tarjeta .tile-inner .gradient[data-v-f5d70176] {\n     display: inline-block;\n     width: auto;\n     height: auto;\n     border-radius: 50%;\n     background-color: #f2f2f2;\n     background-position: center;\n     background-size: cover;\n     background-repeat: no-repeat;\n     margin: 55px;\n     position: absolute;\n     top: 0;\n     left: 0;\n     right: 0;\n     bottom: 0;\n}\n.tarjeta .tile-inner .details[data-v-f5d70176] {\n     display: block;\n     width: 100%;\n     height: 100%;\n     color: #ccc;\n}\n.tarjeta .tile-inner .details h3[data-v-f5d70176] {\n     display: inline-block;\n     width: auto;\n     position: absolute;\n     top: 20px;\n     left: 20px;\n     font-weight: 400;\n     font-size: 1em;\n     margin: 0;\n}\n.tarjeta .tile-inner .details p[data-v-f5d70176] {\n     display: inline-block;\n     width: auto;\n     position: absolute;\n     bottom: 20px;\n     left: 20px;\n     font-weight: 400;\n     font-size: 1em;\n     margin: 0;\n}\n.tarjeta .tile-inner .details a[data-v-f5d70176],\n .tarjeta .tile-inner .details .btn[data-v-f5d70176] {\n     display: inline-block;\n     -moz-appearance: none;\n     appearance: none;\n     -webkit-appearance: none;\n     background: none;\n     border: none;\n     border-radius: 0;\n     width: auto;\n     height: auto;\n     line-height: 100%;\n     position: absolute;\n     bottom: 20px;\n     right: 20px;\n     font-weight: 400;\n     font-size: 1em;\n     color: #ccc;\n}\n@media (min-width: 460px) {\n.home-link[data-v-f5d70176] {\n         display: inline-block;\n         float: right;\n}\n}\n@media (min-width: 768px) {\n.tarjetas .tarjeta[data-v-f5d70176] {\n         padding-bottom: 50%;\n}\n}\n@media (min-width: 992px) {\n.tarjetas .tarjeta[data-v-f5d70176] {\n         padding-bottom: 33.333%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.tarjeta[data-v-f5d70176]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n\n    width: 250px;\n    height: auto;\n\n    -webkit-box-shadow: 0 0 25px rgba(0,0,0,0.08);\n\n            box-shadow: 0 0 25px rgba(0,0,0,0.08);\n    background-color: #fff;\n    border-radius: 8px;\n    -webkit-transition: -webkit-box-shadow 0.5s;\n    transition: -webkit-box-shadow 0.5s;\n    transition: box-shadow 0.5s;\n    transition: box-shadow 0.5s, -webkit-box-shadow 0.5s;\n}\n.tarjeta > .titulo[data-v-f5d70176]{\n    color: grey;\n    padding: .2rem;\n}\n.tarjeta > .imagen[data-v-f5d70176]{\n    background: url(\"https://galicine.es/images/iconos-premios/Premio02.png\");\n    width: 200px;\n    height: 200px;\n}\n.tarjeta > .botones-debajo[data-v-f5d70176]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    width: 100%;\n    padding: 1rem;\n}\n.botones-debajo > .comprar[data-v-f5d70176] {\n}\n\n", ""]);
 
 // exports
 
@@ -81546,10 +81600,6 @@ exports.push([module.i, "\n.tarjeta[data-v-f5d70176] {\n     display: -webkit-bo
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
 //
 //
 //
@@ -81631,35 +81681,94 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tarjetas columns" }, [
-      _c("div", { staticClass: "tarjeta" }, [
-        _c("div", { staticClass: "tile-inner" }, [
-          _c("div", {
-            staticClass: "gradient",
-            staticStyle: {
-              "background-image":
-                "linear-gradient(120deg, #f093fb 0%, #f5576c 100%)"
-            }
-          }),
+    return _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "columns is-mobile is-multiline" }, [
+          _c(
+            "div",
+            { staticClass: "column is-half-mobile is-one-quarter-desktop" },
+            [
+              _c("div", { staticClass: "tarjeta" }, [
+                _c("div", { staticClass: "titulo is-size-5" }, [
+                  _vm._v(
+                    "\n                        Nombre\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "imagen" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "botones-debajo" }, [
+                  _c("div", { staticClass: "alergenos" }, [
+                    _vm._v(
+                      "\n                            iconos al..\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "comprar" }, [
+                    _vm._v(
+                      "\n                           comprar\n                        "
+                    )
+                  ])
+                ])
+              ])
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "details" }, [
-            _c("h3", [_vm._v("Ripe")]),
-            _vm._v(" "),
-            _c("p", [_vm._v("#f093fb → #f5576c")]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn",
-                attrs: {
-                  href: "#",
-                  "data-clipboard-text":
-                    "background-image:linear-gradient(120deg, #f093fb 0%, #f5576c 100%);"
-                }
-              },
-              [_vm._v("Copy CSS")]
-            )
-          ])
+          _c(
+            "div",
+            { staticClass: "column is-half-mobile is-one-quarter-desktop" },
+            [
+              _c("div", { staticClass: "tarjeta" }, [
+                _c("div", { staticClass: "titulo is-size-5" }, [
+                  _vm._v("\n                        Hola\n                    ")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "imagen" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "botones-debajo" }, [
+                  _c("div", { staticClass: "alergenos" }, [
+                    _vm._v(
+                      "\n                            A B C\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "comprar" }, [
+                    _vm._v(
+                      "\n                            A\n                        "
+                    )
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "column is-half-mobile is-one-quarter-desktop" },
+            [
+              _c("div", { staticClass: "tarjeta" }, [
+                _c("div", { staticClass: "titulo is-size-5" }, [
+                  _vm._v("\n                        Hola\n                    ")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "imagen" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "botones-debajo" }, [
+                  _c("div", { staticClass: "alergenos" }, [
+                    _vm._v(
+                      "\n                            A B C\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "comprar" }, [
+                    _vm._v(
+                      "\n                            A\n                        "
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
         ])
       ])
     ])
