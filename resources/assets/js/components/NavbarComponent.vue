@@ -19,9 +19,9 @@
                     <a class="navbar-item has-text-white is-active">
                         Películas
                     </a>
-                    <a class="navbar-item has-text-white">
+                    <router-link class="navbar-item has-text-white" :to="{ name: 'restaurante' }">
                         Restaurante
-                    </a>
+                    </router-link>
                     <a class="navbar-item has-text-white">
                         Acerca de
                     </a>
@@ -105,7 +105,7 @@
             onSignInSuccess (googleUser) {
                 // `googleUser` is the GoogleUser object that represents the just-signed-in user.
                 // See https://developers.google.com/identity/sign-in/web/reference#users
-                const profile = googleUser.getBasicProfile() // etc etc
+                const profile = googleUser.getBasicProfile().getEmail();// etc etc
                 console.log(profile);
             },
             onSignInError (error) {

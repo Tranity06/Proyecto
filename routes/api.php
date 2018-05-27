@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 
 Route::post('/register', 'APIAuthController@register')->name('auth.register');
 Route::post('/login', 'APIAuthController@login')->name('auth.login');
+Route::post('/google', 'APIAuthController@loginWithGoogle')->name('auth.google');
 Route::post('/recover', 'APIAuthController@recover')->name('auth.recover');
 
 Route::group(['middleware' => ['jwt.auth']], function() {

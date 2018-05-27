@@ -8,6 +8,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import Register from './views/Register';
 import Profile from './views/Profile';
+import Restaurante from './views/Restaurante';
 import Entrada  from './components/EntradaComponent';
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
             path: '/login',
             name: 'login',
             component: Login,
+        },
+        {
+            path: '/restaurante',
+            name: 'restaurante',
+            component: Restaurante,
         },
         {
             path: '/register',
