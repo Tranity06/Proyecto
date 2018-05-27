@@ -3,59 +3,61 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
-use App\Models\Categoria;
+//use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Validator;
 
 class ProductoController extends Controller {
 
-    public function list() {
-        $productos = Producto::all();
+    public function getAll() {
+        return response()->json(Producto::all());
     }
 
-    public function getAdd() {
-        $categorias = Categoria::all();
-    }
-
-    public function postAdd(Request $request, $idCategoria) {
-        $this->validate($request, [
-            'nombre' => 'unique:producto'
-        ]);
-
-        $imagen = $request->get('image');
-        $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-        Image::make($imageData)->resize(300, 300)->save( public_path('/uploads/avatars/' . $fileName));
-        $user->avatar = $fileName;
+    public function addProducto(Request $request) {
+        //Validacion de los datos
+    $credentials = $request->only('nombre', 'precio', 'stock', 'imagen', 'categoria_id');
+        $rules = [
+            'nombre' => 'required|string|min:1',
+            'precio' => 'required|min:1',
+            'stock' => 'required|int|min:1',
+            'imagen' => 'required|string|min:1',
+            'categoria_id' => 'required|min:1'
+        ];
+        $validator = Validator::make($credentials, $rules);
+        if ($validator->fails()) {
+            return response()->json('Debes rellenar todos los campos.', 403);
+        }
         
-        Producto::create([
+        $producto = Producto::create([
             'nombre' => $request['nombre'],
             'precio' => $request['precio'],
-            'descripcion' => $request['descripcion'],
             'stock' => $request['stock'],
-            'imagen' => $imagen,
-            'categoria_id' => $idCategoria
+            'imagen' => $request['imagen'],
+            'categoria_id' => $request['categoria_id']
         ]);
+
+        return response()->json($producto, 201);
     }
 
-    public function getUpdate(Request $request) {
-        $categorias = Categoria::all();
-        $id = $request['id'];
-        $producto = Producto::find($id);
+    public function updateProducto(Request $request, $idProducto) {
+        $producto = Producto::find($idProducto);
+
+        $producto->nombre = $request['nombre'];
+        $producto->precio = $request['precio'];
+        $producto->stock = $request['stock'];
+        $producto->imagen = $request['imagen'];
+        $producto->categoria_id = $request['categoria_id'];
+
+        $producto->save();
+
+        return response()->json($producto, 200);
     }
 
-    public function postUpdate(Request $request, $idCategoria) {
-        Producto::update([
-            'nombre' => $request['nombre'],
-            'precio' => $request['precio'],
-            'descripcion' => $request['descripcion'],
-            'stock' => $request['stock'],
-            'categoria_id' => $idCategoria
-        ]);
-    }
+    public function deleteProducto($idProducto) {
+        $producto = Producto::find($idProducto);
+        $producto->delete();
 
-    public function delete(Request $request) {
-        $id = $request['id'];
-        $producto = Producto::find($id);
-        $producto::destroy($producto);
+        return 204;
     }
 
 }
