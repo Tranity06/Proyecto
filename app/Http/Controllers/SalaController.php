@@ -78,7 +78,6 @@ class SalaController extends Controller
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
         }
-        $admin = Auth::guard('admin')->user()->name;
 
         //Comprobar datos
         $credentials = $request->only('numero', 'filas', 'butacas');
@@ -123,7 +122,6 @@ class SalaController extends Controller
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
         }
-        $admin = Auth::guard('admin')->user()->name;
 
         //Comprobar que la sala existe
         $sala = Sala::where('numero', $request->idSala)->get()->first();
