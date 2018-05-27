@@ -21,6 +21,9 @@
                                 <h2 class="subtitle has-text-white">
                                     {{ info.generos + ' '+info.duracion+'min' }}
                                 </h2>
+
+                                <a class="button is-warning is-rounded" :href="info.trailer" data-lity>Ver Trailer</a>
+
                                 <h1 class="is-size-4 has-text-white">
                                     Sinopsis
                                 </h1>
@@ -33,7 +36,7 @@
 
                     </div>
                     <div class="is-hidden-tablet has-text-centered">
-                        <i class="fa fa-play-circle fa-3x" style="color: white" aria-hidden="true"></i>
+                        <a :href="info.trailer" data-lity><img src="icons/play-button.svg"></a>
                         <h1 class="title has-text-white">
                             {{ info.titulo }}
                             <span class="tag is-danger">PE-7</span>
@@ -48,9 +51,9 @@
             <!-- Hero footer: will stick at the bottom -->
             <div class="hero-foot sombra">
                 <div class="es-posicionado">
-                        <a class="button is-large is-rounded">
-                            Comprar Entrada
-                        </a>
+                    <router-link class="button is-rounded" :to="'/entrada/'+id">
+                        Comprar entrada
+                    </router-link>
                 </div>
             </div>
         </section>

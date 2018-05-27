@@ -118,6 +118,12 @@
         margin-bottom: 10px;
     }
 
+    @media only screen and (max-width: 1024px) {
+        .pelicula-opciones {
+            opacity: 1;
+        }
+    }
+
     .pelicula-card:hover .pelicula-opciones{
         opacity: 1;
         transition: opacity .4s;
