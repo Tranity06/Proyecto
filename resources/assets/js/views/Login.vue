@@ -1,5 +1,5 @@
 <template>
-    <section class="section" style="height: 100vh">
+    <section class="section" style="margin-top: 30px">
         <div class="container">
             <div class="columns">
                 <div class="column is-narrow">
@@ -38,6 +38,7 @@
                         </div>
                         <!-- Password -->
 
+<!--
                         <div class="field">
                             <div class="control">
                                 <label class="checkbox">
@@ -46,6 +47,7 @@
                                 </label>
                             </div>
                         </div>
+-->
 
                         <div class="field is-grouped">
                             <div class="control">
@@ -140,5 +142,8 @@
 </script>
 
 <style scoped>
-
+    .box-form{
+        box-shadow: 0 0 25px rgba(0,0,0,0.08);
+        background-color: #fff;
+    }
 </style>
