@@ -67,7 +67,7 @@
                 this.caracteres = this.comento.length;
             },
             publicarComentario(){
-                axios.post(`/api/resena?token=${localStorage.getItem('token')}`, {
+                axios.post(`/api/resena?token=${store.getters.token}`, {
                     valoracion: 0,
                     comentario: this.comento,
                     pelicula_id: this.idPelicula
@@ -88,7 +88,7 @@
                     })
             },
             actualizarComentario(){
-                axios.put(`/api/resena/${this.idResena}`, {
+                axios.put(`/api/resena/${this.idResena}?token=${store.getters.token}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -109,7 +109,7 @@
                     })
             },
             eliminarComentario(){
-                axios.delete(`/api/resena/${this.idResena}`)
+                axios.delete(`/api/resena/${this.idResena}?token=${store.getters.token}`)
                     .then(response => {
                         this.$emit('update:comento', '');
                         this.$emit('update:ocultarOpciones', false);

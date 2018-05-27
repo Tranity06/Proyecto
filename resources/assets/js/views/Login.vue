@@ -43,16 +43,15 @@
                         </div>
                         <!-- Password -->
 
-<!--
                         <div class="field">
                             <div class="control">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="remember">
+                                    <input type="checkbox" name="remember" v-model="checked">
                                     Recordar usuario
                                 </label>
                             </div>
                         </div>
--->
+
 
                         <div class="field is-grouped">
                             <div class="control">
@@ -99,6 +98,7 @@
                 email: '',
                 password: '',
                 loginError: false,
+                checked: false,
 
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
@@ -111,7 +111,6 @@
         methods: {
             submitLogin() {
                 this.loginError = false;
-                console.log("Entro al metodo");
                 axios.post(`/api/login`, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -121,10 +120,22 @@
                 })
                     .then(response => {
                         console.log(response.data);
+                        console.log(this.checked);
                         if (response.data.success){
                             store.commit('loginUser');
-                            localStorage.setItem('token', response.data.token);
-                            localStorage.setItem('user',JSON.stringify(response.data.user));
+
+                            if (this.checked === false){
+                                // Session -> porque solo quiero que lo recuerde esta sesion
+                                console.log('session');
+                                sessionStorage.setItem('token',response.data.token);
+                                sessionStorage.setItem('user',JSON.stringify(response.data.user));
+                            }else {
+                                console.log('local');
+                                localStorage.setItem('token', response.data.token);
+                                localStorage.setItem('user',JSON.stringify(response.data.user));
+                            }
+
+
                             this.$router.push({ name: 'home' })
 
                             this.$notify({

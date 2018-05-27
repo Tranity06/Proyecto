@@ -93,7 +93,6 @@
         },
         methods: {
             Logout() {
-                localStorage.removeItem('token');
                 store.commit('logoutUser');
                 this.$notify({
                     group: 'auth',
