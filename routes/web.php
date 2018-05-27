@@ -111,7 +111,8 @@ Route::get('/admin', 'Admin\Home@index');
    * Gestión SALAS
    */
   ROUTE::get('salas', 'SalaController@motrarTodas');
-  ROUTE::get('sala', 'SalaController@motrarSala');
-  ROUTE::post('sala', 'SalaController@crear'); //AJAX
+  ROUTE::get('sala/{idSala}', 'SalaController@motrarSala');
+  ROUTE::get('sala', 'SalaController@crear');
+  ROUTE::post('sala', 'SalaController@crearPost'); //AJAX
   ROUTE::post('sala/borrar', 'SalaController@borrar'); //AJAX
-  ROUTE::post('sala/modificar', 'SalaController@modificar'); //AJAX
+  //ROUTE::post('sala/modificar', 'SalaController@modificar'); //AJAX

@@ -14,4 +14,11 @@ class Butaca extends Model
     protected $fillable = [
         'fila','numero','estado','sala_id'
     ];
+
+    /**
+     * Devuelve la sala donde está la butaca.
+     */
+    public function sala(){
+        return $this->belongsTo(Sala::class)->get();
+    }
 }
