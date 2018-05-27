@@ -4,43 +4,53 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link href="{{ asset('css/theme.blue.css') }}" rel="stylesheet">
     <style>
-        /* p, .sub, .cambiar-pw {
-            display: block;
-            clear: left;
+        label {
+            margin-top: 1em;
         }
-        input {
-            margin-bottom: .2em;
-        }
-
-        .errores{
-            border-color: red;
-        }
-
-        .ok {
-            border-color: green;
-        } */
     </style>
 @stop
 
 @section('js')
     <script src={{ asset('js/jquery-3.3.1.js') }}></script>
-    <script src={{ asset('js/jquery.tablesorter.js') }}></script>
-    <script src={{ asset('js/jquery.tablesorter.widgets-filter-formatter.min.js') }}></script>
-    {{-- <script>
+    <script>
         $(document).ready(function(){
-            $(function() {
-                $(".table").tablesorter({
-                    theme: 'blue',
-                    widgets: ['zebra']
+            $('.crear').on('click', function(){
+                var numero = $('#numero').val();
+                var filas = $('#filas').val();
+                var butacas = $('#butacas').val();
+                var $callout = $('.callout').first();
+                var $boton = $(this)
+                $boton.attr('disabled', 'disabled');
+                $callout.slideUp();
+                $callout.text('');
+                $callout.removeClass('callout-success');
+                $callout.removeClass('callout-danger');
+
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                });
+                $.ajax({
+                    url: '/sala',
+                    type: 'POST',
+                    data: 'numero='+numero+'&filas='+filas+'&butacas='+butacas,
+                    statusCode:{
+                        201: function (e){
+                            $callout.text("Sala creada.");
+                            $callout.addClass('callout-success').slideDown();
+                            $boton.removeAttr('disabled');
+                        },
+                        403: function(e) {
+                            $callout.text(e.responseJSON);
+                            $callout.addClass('callout-danger').slideDown();
+                            $boton.removeAttr('disabled');
+                        }
+                    },
+                    async: true,
                 });
             });
-
-            $('.table').on('click', '.detalles', function(){
-                var idSala = $(this).next().val();
-                console.log(idSala);
-            });
+            
         });
-    </script> --}}
+    </script>
 @stop
 
 @section('admin', $admin )
@@ -58,13 +68,16 @@
             <h3 class="box-title">Crear nueva sala.</h3>
         </div>
         <div class="box-body">
-            <p>Nº de sala:</p>
-            <input type="text" id="numero" name="numero"/>
-            <p>Nº de filas:</p>
-            <input type="text" id="filas" name="filas"/>
-            <p>Nº de butacas por fila:</p>
-            <input type="text" id="butacas" name="butacas"/>
-            <input type="button" value="Crear"/>
+            <div class="callout" hidden>
+            </div>
+            
+            <p><label for="numero">Nº de sala:</label></p>
+            <input type="number" class="form-control input-sm" id="numero" name="numero"/>
+            <p><label for="filas">Nº de filas:</label></p>
+            <input type="number" class="form-control input-sm" id="filas" name="filas" value="8" disabled/>
+            <p><label for="butacas">Nº de butacas por fila:</lable></p>
+            <input type="number" class="form-control input-sm" id="butacas" name="butacas" value="8" disabled/>
+            <p><input type="button" class="crear sub btn btn-primary" value="Crear"/></p>
         </div>
     </div>
 @stop
