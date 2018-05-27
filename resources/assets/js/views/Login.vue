@@ -135,6 +135,8 @@
                                 localStorage.setItem('user',JSON.stringify(response.data.user));
                             }
 
+                            store.commit('changeId',response.data.user.id);
+                            store.commit('changeToken',response.data.token);
 
                             this.$router.push({ name: 'home' })
 
