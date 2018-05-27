@@ -22,7 +22,7 @@ class SalaController extends Controller
         }
         $admin = Auth::guard('admin')->user()->name;
 
-        $salas = Sala::get();
+        $salas = Sala::orderBy('numero')->get();
         foreach ($salas as $sala ){
             $sala['sesiones'] = $sala->sesiones();
         }
@@ -117,6 +117,11 @@ class SalaController extends Controller
         return response()->json('Sala creada.', 201);
     }
 
+    /**
+     * Elimina la sala indicada.
+     * Elimina las butacas de la sala.
+     * Si el administrador no está autenticado redirige al login.
+     */
     public function borrar(Request $request){
         // Comprobar autenticación
         if (!Auth::guard('admin')->check()){
@@ -124,10 +129,14 @@ class SalaController extends Controller
         }
 
         //Comprobar que la sala existe
-        $sala = Sala::where('numero', $request->idSala)->get()->first();
+        $sala = Sala::find($request->idSala);
         if ( $sala == null ){
             return response()->json('La sala indicada no existe.', 403);
         }
+        /* $sala = Sala::where('numero', $request->idSala)->get()->first();
+        if ( $sala == null ){
+            return response()->json('La sala indicada no existe.', 403);
+        } */
 
         //Comprobar que la sala no tiene sesiones programadas
         $sesiones = $sala->sesiones();

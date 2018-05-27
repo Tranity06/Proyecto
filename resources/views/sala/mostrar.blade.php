@@ -37,7 +37,50 @@
 
             $('.table').on('click', '.detalles', function(){
                 var idSala = $(this).next().val();
-                console.log(idSala);
+                var getUrl = window.location;
+                var destino = getUrl .protocol + "//" + getUrl.host + "/sala/" + idSala;
+                $( location ).attr("href", destino);
+            });
+
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+            $('.table').on('click', '.borrar', function(){
+                var $boton = $(this);
+                var $idSala= $boton.next().val();
+                var $numeroSala = $boton.closest('tr').children('td').eq(0).text();
+
+                var $callout = $('.callout').first();
+                $boton.attr('disabled', 'disabled');
+                $callout.slideUp();
+                $callout.text('');
+                $callout.removeClass('callout-danger');
+
+                if (confirm("¿Seguro que quieres eliminar la sala "+$numeroSala+"?")){
+                    $.ajax({
+                        url: '/sala/borrar',
+                        type: 'POST',
+                        data: 'idSala='+$idSala,
+                        statusCode:{
+                            204: function (){
+                                $boton.closest('tr')
+                                .children('td')
+                                .animate({ 
+                                    padding: 0
+                                })
+                                .wrapInner('<div/>')
+                                .children().slideUp(function () {
+                                    $(this).closest('tr').remove();
+                                });
+                            },
+                            403: function (){
+                                $callout.text(e.responseJSON);
+                                $callout.addClass('callout-danger').slideDown();
+                            }
+                        },
+                        async: true,
+                    });
+                }
             });
         });
     </script>
@@ -58,6 +101,8 @@
             <h3 class="box-title">Lista de salas registradas.</h3>
         </div>
         <div class="box-body">
+            <div class="callout" hidden>
+            </div>
             <table class="table table-bordered table-hover tablesorter">
                 <thead>
                     <tr>
