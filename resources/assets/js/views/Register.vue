@@ -1,4 +1,6 @@
 <template>
+    <div>
+     <div class="relleno"></div>
     <section class="section" style="margin-top: 30px">
         <div class="container">
             <div class="columns">
@@ -93,6 +95,7 @@
             </div>
         </div>
     </section>
+    </div>
 </template>
 
 <script>
@@ -156,6 +159,17 @@
 </script>
 
 <style scoped>
+
+    .relleno{
+        position: absolute;
+        top: 0;
+        background-color: black;
+        width: 100%;
+        height: 56px;
+
+        transition: all .2s ease-in-out;
+    }
+
     .box-form{
         box-shadow: 0 0 25px rgba(0,0,0,0.08);
         background-color: #fff;
