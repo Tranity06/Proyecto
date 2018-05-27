@@ -16,9 +16,9 @@
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item has-text-white is-active">
+                    <router-link class="navbar-item has-text-white is-active" :to="{ name: 'home' }">
                         Películas
-                    </a>
+                    </router-link>
                     <router-link class="navbar-item has-text-white" :to="{ name: 'restaurante' }">
                         Restaurante
                     </router-link>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div v-show="!StoreStateEnabled" style="display: flex; justify-content: center">
-                            <router-link class="button is-primary" :to="{ name: 'login' }">
+                            <router-link class="button is-primary entrar" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span>Entrar</span>
                                 </div>

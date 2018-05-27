@@ -136,6 +136,7 @@
                 })
                     .then(response => {
                         if (response.data.success){
+                            this.$router.push({ name: 'login' });
                             this.$notify({
                                 group: 'auth',
                                 title: 'Activa tu cuenta',
