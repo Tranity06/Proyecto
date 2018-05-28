@@ -116,3 +116,9 @@ Route::get('/admin', 'Admin\Home@index');
   ROUTE::post('sala', 'SalaController@crearPost'); //AJAX
   ROUTE::post('sala/borrar', 'SalaController@borrar'); //AJAX
   //ROUTE::post('sala/modificar', 'SalaController@modificar'); //AJAX
+
+  /**
+   * Gestión BUTACAS
+   */
+  Route::get('butaca/bloquear', 'ButacaController@bloquear');
+  Route::get('butaca/desbloquear', 'ButacaController@desbloquear');
