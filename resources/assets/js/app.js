@@ -12,6 +12,8 @@ import VeeValidate from 'vee-validate';
 import { Validator } from 'vee-validate';
 import moment from 'moment';
 import GSignInButton from 'vue-google-signin-button';
+import AlgoliaComponents from 'vue-instantsearch';
+
 
 
 window.Vue = require('vue');
@@ -20,6 +22,7 @@ Vue.prototype.moment = moment;
 Vue.use(VeeValidate);
 Vue.use(Notifications);
 Vue.use(GSignInButton);
+Vue.use(AlgoliaComponents);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
