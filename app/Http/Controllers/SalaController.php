@@ -42,7 +42,11 @@ class SalaController extends Controller
         $admin = Auth::guard('admin')->user()->name;
 
         $sala = Sala::find($idSala);
+
         $sala['aforo'] = sizeof($sala->butacas());
+        $sala['filas'] = $sala->butacas()->max('fila');
+        $sala['butacas'] = $sala->butacas()->max('numero');
+
         $sesiones = $sala->sesiones();
 
         $butacas_bloqueadas = [];
