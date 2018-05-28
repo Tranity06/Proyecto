@@ -9,13 +9,15 @@ export default new Vuex.Store({
         avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
                 || JSON.parse(sessionStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(sessionStorage.getItem('user')).avatar,
         token: localStorage.getItem('token')==null ? sessionStorage.getItem('token') : localStorage.getItem('token'),
-        userId: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).id : JSON.parse(sessionStorage.getItem('user')) !=null ? JSON.parse(sessionStorage.getItem('user')).id : null
+        userId: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).id : JSON.parse(sessionStorage.getItem('user')) !=null ? JSON.parse(sessionStorage.getItem('user')).id : null,
+        name: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).name : JSON.parse(sessionStorage.getItem('user')) !=null ? JSON.parse(sessionStorage.getItem('user')).name : null
     },
     getters: {
         avatar: (state) => state.avatar,
         isLoggedIn: (state) => state.isLoggedIn,
         token: (state) => state.token,
         userId: (state) => state.userId,
+        name: (state) => state.name,
     },
     mutations: {
         loginUser (state) {
@@ -36,6 +38,9 @@ export default new Vuex.Store({
         },
         changeId(state, userId){
             state.userId = userId;
+        },
+        changeName(state, name){
+            state.name = name;
         }
     }
 });

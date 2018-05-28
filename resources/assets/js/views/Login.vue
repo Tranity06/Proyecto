@@ -136,6 +136,7 @@
                             }
 
                             store.commit('changeId',response.data.user.id);
+                            store.commit('changeName',response.data.user.name);
                             store.commit('changeToken',response.data.token);
 
                             this.$router.push({ name: 'home' })
