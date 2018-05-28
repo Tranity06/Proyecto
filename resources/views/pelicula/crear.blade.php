@@ -119,7 +119,7 @@
                         actores.push(response['credits']['cast'][i]['name']);
                     }
                     actores = actores.join(', ');
-                    url = 'https://www.youtube.com/watch?v='+response.videos.results[0]['key'];
+                    url = 'https://www.youtube.com/embed/'+response.videos.results[0]['key'];
 
                     $('#idtmdb').val($idtmdb);
                     $('#titulo').val(response.title);
@@ -136,7 +136,7 @@
                     $('#popularidad').val(response.popularity);
                     $('#imagen_poster').attr('src', 'https://image.tmdb.org/t/p/w500'+response.poster_path);
                     $('#imagen_slider').attr('src', 'https://image.tmdb.org/t/p/w500'+response.backdrop_path);
-                    $('#video_trailer').attr('src', 'https://www.youtube.com/embed/'+url);
+                    $('#video_trailer').attr('src', url);
                     $('#detalle').slideDown();
                 });
             });
