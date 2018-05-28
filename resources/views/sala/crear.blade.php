@@ -7,6 +7,12 @@
         label {
             margin-top: 1em;
         }
+        input {
+            margin-bottom: .2em;
+        }
+        p {
+            margin-bottom: 0em;
+        }
     </style>
 @stop
 

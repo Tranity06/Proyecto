@@ -24,7 +24,8 @@ class SalaController extends Controller
 
         $salas = Sala::orderBy('numero')->get();
         foreach ($salas as $sala ){
-            $sala['sesiones'] = $sala->sesiones();
+            $sala['sesiones'] = sizeof($sala->sesiones());
+            $sala['aforo'] = sizeof($sala->butacas());
         }
         return view('sala.mostrar', compact('admin', 'salas'));
     }
@@ -103,8 +104,8 @@ class SalaController extends Controller
         ]);
 
         //Crear butacas
-        for ( $fila=0 ; $fila<=$request->filas ; $fila++ ){
-            for ( $butaca=0 ; $butaca<=$request->butacas ; $butaca++ ){
+        for ( $fila=1 ; $fila<=$request->filas ; $fila++ ){
+            for ( $butaca=1 ; $butaca<=$request->butacas ; $butaca++ ){
                 Butaca::create([
                     'fila' => $fila,
                     'numero' => $butaca,

@@ -118,8 +118,8 @@
                         <div class="fila">
                             <tr>
                                 <td> {{ $sala->numero}} </td>
-                                <td> TODO </td>
-                                <td> {{ sizeof($sala->sesiones) }} </td>
+                                <td> {{ $sala->aforo }} </td>
+                                <td> {{ $sala->sesiones }} </td>
                                 <td>
                                     <button class="detalles"><i class="glyphicon glyphicon-pencil"></i></button>
                                     <input type="hidden" name="id" value="{{ $sala->id }}"/>
