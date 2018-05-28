@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\ProductoIngrediente;
+use App\Models\ProductoMenu;
 //use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Validator;
@@ -34,6 +36,16 @@ class ProductoController extends Controller {
             'stock' => $request['stock'],
             'imagen' => $request['imagen'],
             'categoria_id' => $request['categoria_id']
+        ]);
+
+        ProductoIngrediente::create([
+            'producto_id' => $producto->id,
+            'ingrediente_id' => $request['ingrediente_id']
+        ]);
+
+        MenuIngrediente::create([
+            'producto_id' => $producto->id,
+            'menu_id' => $request['menu_id']
         ]);
 
         return response()->json($producto, 201);
