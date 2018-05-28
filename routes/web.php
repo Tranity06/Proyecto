@@ -120,5 +120,5 @@ Route::get('/admin', 'Admin\Home@index');
   /**
    * Gestión BUTACAS
    */
-  Route::get('butaca/bloquear', 'ButacaController@bloquear');
-  Route::get('butaca/desbloquear', 'ButacaController@desbloquear');
+  Route::post('butaca/bloquear', 'ButacaController@bloquear');
+  Route::post('butaca/desbloquear', 'ButacaController@desbloquear');

@@ -22,7 +22,7 @@ class TestButacaSeeder extends Seeder
                 Butaca::create([
                     'fila' => $fila,
                     'numero' => $butaca,
-                    'estado' => $fila=1? 1 : 0,
+                    'estado' => $fila==1? 1 : 0,
                     'sala_id' => $sala->id,
                 ]);
             }
