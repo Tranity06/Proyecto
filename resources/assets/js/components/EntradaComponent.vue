@@ -37,7 +37,7 @@
                             <div class="pelicula-card centrar-imagen">
                                 <img :src="caratula">
                             </div>
-                            <span class="subtitle">{{ titulo }}</span>
+                            <p class="subtitle">{{ titulo }}</p>
                             <a :href="trailer" data-lity class="button is-rounded is-danger">Ver trailer</a>
                         </div>
                     </div>

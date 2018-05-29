@@ -14,13 +14,14 @@
 <script>
     import EscribirResenia from "./EscribirResenia";
     import ListarResenia from "./ListarResenia";
+    import store from '../../store';
 
     export default {
         name: "resenia-component",
         data(){
             return {
                 resenas: [],
-                idUsuario: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).id : null,
+                idUsuario: store.getters.userId,
                 idPelicula: this.$route.params.id,
                 comento: '',
                 idResena: 0,

@@ -1,5 +1,10 @@
 <template>
-    <section class="section" style="height: 100vh">
+    <div>
+
+    <div class="relleno">
+    </div>
+
+    <section class="section" style="margin-top: 30px">
         <div class="container">
             <div class="columns">
                 <div class="column is-narrow">
@@ -8,7 +13,7 @@
 
                         <article class="message is-danger" v-if="loginError">
                             <div class="message-body">
-                                La contraseña o el email introducido no son validos.
+                                La contraseña o el email introducido no es valido.
                             </div>
                         </article>
 
@@ -41,15 +46,16 @@
                         <div class="field">
                             <div class="control">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="remember">
+                                    <input type="checkbox" name="remember" v-model="checked">
                                     Recordar usuario
                                 </label>
                             </div>
                         </div>
 
+
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link" type="submit">Login</button>
+                                <button class="button is-link" type="submit" :disabled='errors.any()>0 || !isComplete'>Login</button>
                             </div>
                         </div>
                         <a href="recuperar">¿Has olvidado tu contraseña?</a>
@@ -80,6 +86,7 @@
             </div>
         </div>
     </section>
+    </div>
 </template>
 
 <script>
@@ -91,14 +98,19 @@
                 email: '',
                 password: '',
                 loginError: false,
+                checked: false,
 
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        },
+        computed: {
+            isComplete () {
+                return this.email && this.password;
             }
         },
         methods: {
             submitLogin() {
                 this.loginError = false;
-                console.log("Entro al metodo");
                 axios.post(`/api/login`, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -108,10 +120,25 @@
                 })
                     .then(response => {
                         console.log(response.data);
+                        console.log(this.checked);
                         if (response.data.success){
                             store.commit('loginUser');
-                            localStorage.setItem('token', response.data.token);
-                            localStorage.setItem('user',JSON.stringify(response.data.user));
+
+                            if (this.checked === false){
+                                // Session -> porque solo quiero que lo recuerde esta sesion
+                                console.log('session');
+                                sessionStorage.setItem('token',response.data.token);
+                                sessionStorage.setItem('user',JSON.stringify(response.data.user));
+                            }else {
+                                console.log('local');
+                                localStorage.setItem('token', response.data.token);
+                                localStorage.setItem('user',JSON.stringify(response.data.user));
+                            }
+
+                            store.commit('changeId',response.data.user.id);
+                            store.commit('changeName',response.data.user.name);
+                            store.commit('changeToken',response.data.token);
+
                             this.$router.push({ name: 'home' })
 
                             this.$notify({
@@ -136,4 +163,18 @@
 
 <style scoped>
 
+    .relleno{
+        position: absolute;
+        top: 0;
+        background-color: black;
+        width: 100%;
+        height: 56px;
+
+        transition: background-color .2s ease-in-out;
+    }
+
+    .box-form{
+        box-shadow: 0 0 25px rgba(0,0,0,0.08);
+        background-color: #fff;
+    }
 </style>

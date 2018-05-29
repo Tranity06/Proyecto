@@ -16,12 +16,12 @@
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item has-text-white is-active">
+                    <router-link class="navbar-item has-text-white is-active" :to="{ name: 'home' }">
                         Películas
-                    </a>
-                    <a class="navbar-item has-text-white">
+                    </router-link>
+                    <router-link class="navbar-item has-text-white" :to="{ name: 'restaurante' }">
                         Restaurante
-                    </a>
+                    </router-link>
                     <a class="navbar-item has-text-white">
                         Acerca de
                     </a>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div v-show="!StoreStateEnabled" style="display: flex; justify-content: center">
-                            <router-link class="button is-primary" :to="{ name: 'login' }">
+                            <router-link class="button is-primary entrar" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span>Entrar</span>
                                 </div>
@@ -93,7 +93,6 @@
         },
         methods: {
             Logout() {
-                localStorage.removeItem('token');
                 store.commit('logoutUser');
                 this.$notify({
                     group: 'auth',
@@ -105,7 +104,7 @@
             onSignInSuccess (googleUser) {
                 // `googleUser` is the GoogleUser object that represents the just-signed-in user.
                 // See https://developers.google.com/identity/sign-in/web/reference#users
-                const profile = googleUser.getBasicProfile() // etc etc
+                const profile = googleUser.getBasicProfile().getEmail();// etc etc
                 console.log(profile);
             },
             onSignInError (error) {

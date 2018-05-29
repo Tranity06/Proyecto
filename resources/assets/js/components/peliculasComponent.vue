@@ -2,8 +2,6 @@
     <section class="section-peliculas">
         <div class="container">
 
-            <div class="button">Filtro</div>
-
             <div class="columns is-multiline is-centered">
                 <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculas">
                     <div class="pelicula-card centrar-imagen">
@@ -116,6 +114,12 @@
         justify-content: center;
         opacity: 0;
         margin-bottom: 10px;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .pelicula-opciones {
+            opacity: 1;
+        }
     }
 
     .pelicula-card:hover .pelicula-opciones{

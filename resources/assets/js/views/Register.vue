@@ -1,9 +1,19 @@
 <template>
-    <section class="section" style="height: 100vh">
+    <div>
+     <div class="relleno"></div>
+    <section class="section" style="margin-top: 30px">
         <div class="container">
             <div class="columns">
                 <div class="column is-narrow">
                     <form method="post" class="box-form" v-on:submit.prevent="register">
+                        <h1 class="title has-text-weight-bold"><span>Regístrate</span></h1>
+
+                        <article class="message is-danger" v-if="registerError">
+                            <div class="message-body">
+                               El email introducido o el teléfono ya existen
+                            </div>
+                        </article>
+
                         <div class="field">
                             <label class="label">Introduce tu nombre</label>
                             <div class="control has-icons-left has-icons-right">
@@ -67,14 +77,14 @@
                         <div class="field">
                             <div class="control">
                                 <label class="checkbox">
-                                    <input type="checkbox">
-                                    I agree to the <a href="#">terms and conditions</a>
+                                    <input type="checkbox" v-model="checked">
+                                    He leído y acepto los términos y condiciones de uso
                                 </label>
                             </div>
                         </div>
 
                         <div class="control">
-                            <button class="button is-primary" type="submit">Registrarme</button>
+                            <button class="button is-primary" type="submit" :disabled='errors.any() || !isComplete'>Registrarme</button>
                         </div>
                     </form>
                 </div>
@@ -85,6 +95,7 @@
             </div>
         </div>
     </section>
+    </div>
 </template>
 
 <script>
@@ -98,9 +109,15 @@
                 telefono: '',
                 password: '',
                 password_confirmation: '',
+                checked: false,
                 registerError: false,
 
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        },
+        computed: {
+            isComplete () {
+                return this.nombre && this.password && this.email && this.telefono && this.password_confirmation && this.checked;
             }
         },
         methods: {
@@ -119,6 +136,7 @@
                 })
                     .then(response => {
                         if (response.data.success){
+                            this.$router.push({ name: 'login' });
                             this.$notify({
                                 group: 'auth',
                                 title: 'Activa tu cuenta',
@@ -143,4 +161,18 @@
 
 <style scoped>
 
+    .relleno{
+        position: absolute;
+        top: 0;
+        background-color: black;
+        width: 100%;
+        height: 56px;
+
+        transition: all .2s ease-in-out;
+    }
+
+    .box-form{
+        box-shadow: 0 0 25px rgba(0,0,0,0.08);
+        background-color: #fff;
+    }
 </style>

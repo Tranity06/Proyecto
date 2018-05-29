@@ -118,6 +118,34 @@ class APIAuthController extends Controller
         return response()->json(['success' => true, 'token' => $token,'user'=>Auth::user()],200);
     }
 
+    public function loginWithGoogle(Request $request)
+    {
+        $credentials = $request->only('name', 'email');
+
+        $rules = [
+            'email' => 'required|email',
+            'password' => 'required',
+        ];
+
+        $name = $request->name;
+        $email = $request->email;
+
+        $user = User::create([
+            'name' => $name,
+            'email' => $email,
+        ]);
+        try {
+            // attempt to verify the credentials and create a token for the user
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['success' => false, 'error' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 401);
+            }
+        } catch (JWTException $e) {
+            // something went wrong whilst attempting to encode the token
+            return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
+        }
+        return response()->json(['success' => true, 'token' => $token,'user'=>Auth::user()],200);
+    }
+
     /**
      * Log out
      * Invalidate the token, so user cannot use it anymore

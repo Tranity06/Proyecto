@@ -12,6 +12,8 @@ import VeeValidate from 'vee-validate';
 import { Validator } from 'vee-validate';
 import moment from 'moment';
 import GSignInButton from 'vue-google-signin-button';
+import AlgoliaComponents from 'vue-instantsearch';
+
 
 
 window.Vue = require('vue');
@@ -20,6 +22,7 @@ Vue.prototype.moment = moment;
 Vue.use(VeeValidate);
 Vue.use(Notifications);
 Vue.use(GSignInButton);
+Vue.use(AlgoliaComponents);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,11 +38,25 @@ axios.defaults.baseURL = 'http://localhost:8000';
 const dict = {
     custom: {
         email: {
-            required: 'Introduce un email valido.',
-            email: 'que es esto?'
+            required: 'El email no puede estar vacío',
+            email: 'El email no es correcto'
         },
-        name: {
-            required: () => 'Your name is empty'
+        nombre: {
+            required: 'El nombre no puede estar vacío',
+            alpha: 'Solo tu primer nombre'
+        },
+        telefono: {
+           required: 'El teléfono no puede estar vacío',
+           digits: 'El teléfono debe empezar por 6 y tener 9 números'
+        },
+        password: {
+            required: 'La contraseña no puede estar vacía',
+            min: 'La contraseña debe tener mínimo 6 caracteres'
+        },
+        password_confirmation: {
+            required: 'La contraseña no puede estar vacía',
+            min: 'La contraseña debe tener mínimo 6 caracteres',
+            confirmed: 'Las contraseñas no coinciden'
         }
     }
 };

@@ -7,7 +7,7 @@
                         <img :src="'uploads/avatars/'+getAvatar">
                         <div class="perfil-info">
                             <p class="title">
-                                {{ userName }}
+                                {{ getName }}
                             </p>
                             <p class="subtitle">
                                 1250 puntos
@@ -23,7 +23,7 @@
                             <li class="is-active">
                                 <a>
                                     <span class="icon is-small"><i class="fas fa-cog" aria-hidden="true"></i></span>
-                                    <span class="is-hidden-mobile">Datos</span>
+                                    <span class="is-hidden-mobile">Cambiar Datos</span>
                                 </a>
                             </li>
                             <li>
@@ -50,8 +50,8 @@
             </div>
         </section>
         <section class="section">
-            <div class="container">
-                <div class="columns">
+            <div class="container is-fluid">
+<!--                <div class="columns">
                     <div class="column is-10-tablet is-offset-2-tablet">
                         <form v-on:submit.prevent="upload">
                             <label>Cambiar avatar</label>
@@ -59,6 +59,12 @@
                             <input type="submit" class="button" value="Guardar">
                         </form>
                     </div>
+                </div>-->
+                <div class="flexcontainer">
+                    <cambiar-avatar class="tarjeta"></cambiar-avatar>
+                    <cambiar-email class="tarjeta"></cambiar-email>
+                    <cambiar-telefono class="tarjeta"></cambiar-telefono>
+                    <cambiar-clave class="tarjeta"></cambiar-clave>
                 </div>
             </div>
         </section>
@@ -66,22 +72,31 @@
 </template>
 <script>
     import store from '../store';
+    import CambiarEmail from "../components/Cambiar_datos/cambiarEmail";
+    import CambiarTelefono from "../components/Cambiar_datos/cambiarTelefono";
+    import CambiarClave from "../components/Cambiar_datos/cambiarClave";
+    import CambiarAvatar from "../components/Cambiar_datos/cambiarAvatar";
 
     export default {
+        components: {
+            CambiarAvatar,
+            CambiarClave,
+            CambiarTelefono,
+            CambiarEmail},
         data() {
             return {
                 image: '',
-                userName: '',
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
         computed: {
             getAvatar(){
                 return store.getters.avatar;
+            },
+
+            getName(){
+                return store.getters.name;
             }
-        },
-        mounted(){
-            this.userName = JSON.parse(localStorage.getItem('user')).name;
         },
         methods: {
             onFileChange(e) {
@@ -100,7 +115,7 @@
             },
             upload(){
                 axios.post('/api/avatar',{
-                        userId: JSON.parse(localStorage.getItem('user')).id,
+                        userId: store.getters.userId,
                         image: this.image
                     }
                 ).then(response => {
@@ -112,6 +127,31 @@
     }
 </script>
 <style scoped>
+
+    .flexcontainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* You can set flex-wrap and
+           flex-direction individually */
+        flex-direction: row;
+        flex-wrap: wrap;
+        /* Or do it all in one line
+          with flex flow */
+        flex-flow: row wrap;
+        /* tweak where items line
+           up on the row
+           valid values are: flex-start,
+           flex-end, space-between,
+           space-around, stretch */
+        align-content: flex-end;
+    }
+
+    .tarjeta {
+        width: 325px;
+        height: auto;
+        margin: .5rem .5rem;
+    }
 
     .container{
         display: flex;

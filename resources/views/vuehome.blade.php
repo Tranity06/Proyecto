@@ -63,6 +63,17 @@
             flex: 1 0 auto;
         }
 
+        @media screen and (max-width: 1023px) {
+            .navbar-menu {
+                margin-left: auto;
+                min-width: 50%;
+            }
+        }
+
+        .fondoblanco{
+            background-color: white !important;
+        }
+
     </style>
 </head>
 <body>
@@ -93,46 +104,96 @@
     <script src="{{ mix('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/modal/lity.js') }}"></script>
     <script>
-        var didScroll;
-        var lastScrollTop = 0;
-        var delta = 5;
-        var navbarHeight = $('.navbar').outerHeight();
+        $(function(){
 
-        $(window).scroll(function(event){
-            didScroll = true;
-        });
+            var didScroll;
+            var lastScrollTop = 0;
+            var delta = 5;
+            var navbarHeight = $('.navbar').outerHeight();
 
-        setInterval(function() {
-            if (didScroll) {
-                hasScrolled();
-                didScroll = false;
-            }
-        }, 250);
+            $(window).scroll(function(event){
+                didScroll = true;
+            });
 
-        function hasScrolled() {
-            var st = $(this).scrollTop();
+            setInterval(function() {
+                if (didScroll) {
+                    hasScrolled();
+                    didScroll = false;
+                }
+            }, 250);
 
-            // Make sure they scroll more than delta
-            if(Math.abs(lastScrollTop - st) <= delta)
-                return;
+            function hasScrolled() {
+                var st = $(this).scrollTop();
 
-            // If they scrolled down and are past the navbar, add class .nav-up.
-            // This is necessary so you never see what is "behind" the navbar.
-            if (st > lastScrollTop && st > navbarHeight){
-                // Scroll Down
-                $('.navbar').removeClass('nav-down').addClass('nav-up');
-            } else {
-                if (st < 100){
-                    $('.navbar').removeClass('nav-up').removeClass('nav-down');
-                }else{
-                    if(st + $(window).height() < $(document).height()) {
-                        $('.navbar').removeClass('nav-up').addClass('nav-down');
+                // Make sure they scroll more than delta
+                if(Math.abs(lastScrollTop - st) <= delta)
+                    return;
+
+                // If they scrolled down and are past the navbar, add class .nav-up.
+                // This is necessary so you never see what is "behind" the navbar.
+                if (st > lastScrollTop && st > navbarHeight){
+                    // Scroll Down
+                    $('.navbar').removeClass('nav-down').addClass('nav-up');
+                } else {
+                    if (st < 100){
+                        $('.navbar').removeClass('nav-up').removeClass('nav-down');
+                    }else{
+                        if(st + $(window).height() < $(document).height()) {
+                            $('.navbar').removeClass('nav-up').addClass('nav-down');
+                        }
                     }
                 }
+
+                lastScrollTop = st;
+            }
+        });
+    </script>
+    <script>
+
+        $(function(){
+
+            $('.navbar-burger').click(function() {
+
+                //si cerca del top que ponga el fondo blanco, texto negro y muestre el menu.
+                if ($(document).scrollTop() < 100){
+                    openMenu()
+                } else { //si esta mas lejos, el texto blanco, fondo igual, y el logo igual.
+                    $('a.navbar-item').toggleClass('has-text-black');
+                    $('a.button').click(function(e){
+                        $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active has-text-black');
+                        $('.navbar').removeClass('fondoblanco');
+                        $('a.navbar-item').removeClass('has-text-black');
+                        $('.logo-container > span').removeClass('has-text-black');
+                    });
+
+                    $('a.navbar-item').click(function(e){
+                        $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active');
+                    });
+                }
+
+                $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
+
+            });
+
+            function openMenu(){
+                // Activar Desactivar Fondo blanco del navbar
+                $('.navbar').toggleClass('fondoblanco');
+                // Activar desactivar el texto negro de los enlaces
+                $('a.navbar-item').toggleClass('has-text-black');
+                // Poner el texto negro del navbar
+                $('.logo-container > span').toggleClass('has-text-black');
+                $('#navbarMenuHeroA, .navbar-burger').toggleClass('has-text-black');
+                //Cuando haga click en algun elemento del menu:
+                //Quitar 'is-active y has-text-black', el fondo blanco y el texto negro.
+                $('a.navbar-item').click(function(e){
+                    $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active has-text-black');
+                    $('.navbar').removeClass('fondoblanco');
+                    $('a.navbar-item').removeClass('has-text-black');
+                    $('.logo-container > span').removeClass('has-text-black');
+                });
             }
 
-            lastScrollTop = st;
-        }
+        });
     </script>
 </body>
 </html>
