@@ -49,7 +49,7 @@
                 </nav>
             </div>
         </section>
-        <section class="section">
+        <section class="section" style="  background: #f0f0f0;">
             <div class="container is-fluid">
 <!--                <div class="columns">
                     <div class="column is-10-tablet is-offset-2-tablet">
@@ -66,9 +66,7 @@
                     <cambiar-telefono class="tarjeta"></cambiar-telefono>
                     <cambiar-clave class="tarjeta"></cambiar-clave>
                 </div>
-                <div v-if="this.tab === 2">
-                    Entradas
-                </div>
+                <pelicula-ticket v-if="this.tab === 2"></pelicula-ticket>
                 <div v-if="this.tab === 3">
                     Reseñas
                 </div>
@@ -85,9 +83,11 @@
     import CambiarTelefono from "../components/Cambiar_datos/cambiarTelefono";
     import CambiarClave from "../components/Cambiar_datos/cambiarClave";
     import CambiarAvatar from "../components/Cambiar_datos/cambiarAvatar";
+    import PeliculaTicket from "../components/PeliculaTicket";
 
     export default {
         components: {
+            PeliculaTicket,
             CambiarAvatar,
             CambiarClave,
             CambiarTelefono,
