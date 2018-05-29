@@ -68,7 +68,8 @@
                 </div>
                 <pelicula-ticket v-if="this.tab === 2"></pelicula-ticket>
                 <div v-if="this.tab === 3">
-                    Reseñas
+                    <ver-resenias></ver-resenias>
+                    <ver-resenias></ver-resenias>
                 </div>
                 <div v-if="this.tab === 4">
                     Ofertas
@@ -84,9 +85,11 @@
     import CambiarClave from "../components/Cambiar_datos/cambiarClave";
     import CambiarAvatar from "../components/Cambiar_datos/cambiarAvatar";
     import PeliculaTicket from "../components/PeliculaTicket";
+    import VerResenias from "../components/Resenias/verResenias";
 
     export default {
         components: {
+            VerResenias,
             PeliculaTicket,
             CambiarAvatar,
             CambiarClave,
