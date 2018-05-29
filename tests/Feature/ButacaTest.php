@@ -40,7 +40,7 @@ class ButacaTest extends TestCase
         $datos = [
             'idSala' => $this->sala->id,
             'fila' => 2,
-            'butacas' => [1,2]
+            'butacas' => '1,2'
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->post('butaca/bloquear', $datos, $headers)
@@ -53,7 +53,7 @@ class ButacaTest extends TestCase
         $datos = [
             'idSala' => $this->sala->id,
             'fila' => 2,
-            'butacas' => [1,2]
+            'butacas' => '1,2'
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
@@ -95,7 +95,7 @@ class ButacaTest extends TestCase
         $datos = [
             'idSala' => $this->sala->id,
             'fila' => 10,
-            'butacas' => [1,2]
+            'butacas' => '1,2'
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
@@ -109,7 +109,7 @@ class ButacaTest extends TestCase
         $datos = [
             'idSala' => $this->sala->id,
             'fila' => 10,
-            'butacas' => [1,20]
+            'butacas' => '1,20'
         ];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')

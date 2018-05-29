@@ -61,7 +61,7 @@
 
                 if (confirm("¿Seguro que quieres desbloquear la butaca "+butaca+"?")){
                     $.ajax({
-                        url: '/butaca/desbloquear', //TODO
+                        url: '/butaca/desbloquear',
                         type: 'POST',
                         data: 'idButaca='+$idButacaBloqueada,
                         statusCode:{
@@ -99,14 +99,29 @@
             });
 
             $('.bloquear').on('click', function(){
-                $fila = 'fila='+$('#fila').val();console.log($fila);
+                $sala = 'idSala='+$('#idSala').val();
+                $fila = 'fila='+$('#fila').val();
                 if ( $('#completa').is(':checked')){
                     $butacas = 'all=true';
                 } else {
-                    $butacas = 'butacas='+$('#butacas').val().join();
+                    $butacas = 'butacas='+$('#butacas').val();console.log($butacas);
                 }
-                datos = $fila+'&'+$butacas;
-                console.log(datos);
+                datos = $sala+'&'+$fila+'&'+$butacas; 
+                $.ajax({
+                    url: '/butaca/bloquear',
+                    type: 'POST',
+                    data: datos,
+                    statusCode:{
+                        201: function (e){
+                            console.log(e.responseJSON);
+                        },
+                        403: function (e){console.log(e.responseJSON);
+                            /* $callout.text(e.responseJSON);
+                            $callout.addClass('callout-danger').slideDown(); */
+                        }
+                    },
+                    async: true,
+                });
                 
             });
         });
@@ -134,6 +149,7 @@
             <p><label>Butacas bloqueadas:</label> <span>{{ sizeof($butacas_bloqueadas) }}</span>
                 <button class="mostrar-bloquear"><i class="glyphicon glyphicon-pencil"></i></button></p>
             <div id="form-bloquear" class="box-body">
+                <input type="hidden" id="idSala" name="idSala" value="{{$sala->id}}"
                 <div class="form-group"><label for="fila">Fila:</label>
                     <select name="fila" id="fila">
                         @for ( $fila=1 ; $fila<= $sala->filas ; $fila++ )

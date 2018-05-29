@@ -23,7 +23,7 @@ class ButacaController extends Controller
         //Recoger los datos
         $sala = Sala::find($request->idSala);
         $fila = $request->fila;
-        $butacas = isset($request->butacas) ? $request->butacas : $this->filaEntera($sala);
+        $butacas = isset($request->butacas) ? explode(',', $request->butacas) : $this->filaEntera($sala);
 
         //Modificar las butacas
         $butacas_modificadas = [];
