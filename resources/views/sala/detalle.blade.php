@@ -43,27 +43,29 @@
                 }
             });
 
-            $('.table').on('click', '.borrar', function(){
+            $.ajaxSetup({
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                    });
+
+            $('.table').on('click', '.borrar', function(){console.log("Borras?");
                 var $boton = $(this);
                 var $idButacaBloqueada= $boton.next().val()
                 var $fila = $boton.closest('tr').children('td').eq(0).text().trim();
                 var $butaca = $boton.closest('tr').children('td').eq(1).text().trim();
                 var butaca = 'F'+$fila+'-B'+$butaca;
-               /* var $numeroSala = $boton.closest('tr').children('td').eq(0).text();
 
-                var $callout = $('.callout').first();
-                $boton.attr('disabled', 'disabled');
+                var $callout = $('.callout-butaca').first();
                 $callout.slideUp();
                 $callout.text('');
                 $callout.removeClass('callout-danger');
 
                 if (confirm("¿Seguro que quieres desbloquear la butaca "+butaca+"?")){
                     $.ajax({
-                        url: '#', //TODO
+                        url: '/butaca/desbloquear', //TODO
                         type: 'POST',
-                        data: 'idSala='+$idSala,
+                        data: 'idButaca='+$idButacaBloqueada,
                         statusCode:{
-                            204: function (){
+                            201: function (){ console.log("Borrando");
                                 $boton.closest('tr')
                                 .children('td')
                                 .animate({ 
@@ -74,14 +76,14 @@
                                     $(this).closest('tr').remove();
                                 });
                             },
-                            403: function (){
+                            403: function (e){console.log(e.responseJSON);
                                 $callout.text(e.responseJSON);
                                 $callout.addClass('callout-danger').slideDown();
                             }
                         },
                         async: true,
                     });
-                }*/
+                }
             });
 
             $('.mostrar-bloquear').on('click', function(){
@@ -153,6 +155,8 @@
             <div>
                 <input type="button" class="mostrar sub btn btn-primary" value="Mostrar"/>
                 <div class="slide" hidden>
+                <div class="callout-butaca" hidden>
+                </div>
                 <table class="table table-bordered table-hover tablesorter">
                     <thead>
                         <tr>

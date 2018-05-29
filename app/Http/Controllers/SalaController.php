@@ -52,7 +52,7 @@ class SalaController extends Controller
         $butacas_bloqueadas = [];
         $butacas = $sala->butacas();
         foreach($butacas as $butaca){
-            if ($butaca->estado == "0"){
+            if ($butaca->estado == "1"){
                 array_push($butacas_bloqueadas, $butaca);
             }
         }
