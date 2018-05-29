@@ -20,26 +20,26 @@
                 <nav class="tabs is-boxed is-fullwidth">
                     <div class="container">
                         <ul>
-                            <li class="is-active">
-                                <a>
+                            <li :class="{'is-active': this.tab===1}">
+                                <a @click="selectTab(1)">
                                     <span class="icon is-small"><i class="fas fa-cog" aria-hidden="true"></i></span>
                                     <span class="is-hidden-mobile">Cambiar Datos</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===2}">
+                                <a @click="selectTab(2)">
                                     <span class="icon is-small"><i class="fas fa-ticket-alt" aria-hidden="true"></i></span>
                                     <span class="is-hidden-mobile">Entradas</span>
                                 </a>
-                            </li>
-                            <li>
-                                <a>
+                            </li >
+                            <li :class="{'is-active': this.tab===3}">
+                                <a @click="selectTab(3)">
                                     <span class="icon is-small"><i class="far fa-comment" aria-hidden="true"></i></span>
                                     <span class="is-hidden-mobile">Reseñas</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===4}">
+                                <a @click="selectTab(4)">
                                     <span class="icon is-small"><i class="far fa-star" aria-hidden="true"></i></span>
                                     <span class="is-hidden-mobile">Ofertas</span>
                                 </a>
@@ -54,17 +54,26 @@
 <!--                <div class="columns">
                     <div class="column is-10-tablet is-offset-2-tablet">
                         <form v-on:submit.prevent="upload">
-                            <label>Cambiar avatar</label>
+                            <label>Cambiar   atar</label>
                             <input type="file" name="avatar" @change="onFileChange">
                             <input type="submit" class="button" value="Guardar">
                         </form>
                     </div>
                 </div>-->
-                <div class="flexcontainer">
+                <div class="flexcontainer" v-if="this.tab === 1">
                     <cambiar-avatar class="tarjeta"></cambiar-avatar>
                     <cambiar-email class="tarjeta"></cambiar-email>
                     <cambiar-telefono class="tarjeta"></cambiar-telefono>
                     <cambiar-clave class="tarjeta"></cambiar-clave>
+                </div>
+                <div v-if="this.tab === 2">
+                    Entradas
+                </div>
+                <div v-if="this.tab === 3">
+                    Reseñas
+                </div>
+                <div v-if="this.tab === 4">
+                    Ofertas
                 </div>
             </div>
         </section>
@@ -86,6 +95,7 @@
         data() {
             return {
                 image: '',
+                tab: 1,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
@@ -122,6 +132,24 @@
                     console.log(response.data);
                     store.commit('changeAvatar',response.data.avatar_name);
                 });
+            },
+            selectTab(selectedTab) {
+                switch (selectedTab){
+                    case 1:
+                        this.tab = 1;
+                        console.log(this.tab);
+                        break;
+                    case 2:
+                        this.tab = 2;
+                        console.log(this.tab);
+                        break;
+                    case 3:
+                        this.tab = 3;
+                        break;
+                    case 4:
+                        this.tab = 4;
+                        break;
+                }
             }
         }
     }
