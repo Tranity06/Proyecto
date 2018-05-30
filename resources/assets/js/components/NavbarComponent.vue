@@ -1,10 +1,11 @@
 <template>
-    <nav class="navbar is-fixed-top is-transparent animate-search">
+    <nav class="navbar is-fixed-top is-transparent animate-search"  v-click-outside="hide">
         <div class="main-search" :class="{'puedo-ver': searchDisparado === true }">
             <div class="container">
                 <ais-index :app-id="'0TZV0R68WE'"
                            :api-key="'40ed7ce0a36dde51997fb88645263243'"
-                           :index-name="'peliculas'">
+                           :index-name="'peliculas'"
+                          >
 
                     <ais-input :placeholder="'Buscar peliculas'"></ais-input>
 
@@ -105,6 +106,7 @@
 </template>
 
 <script>
+    import vClickOutside from 'v-click-outside'
     import store from '../store';
 
     export default {
@@ -155,7 +157,13 @@
             },
             verTrailer(){
                 this.searchDisparado = false;
-            }
+            },
+            hide(event) {
+                this.searchDisparado = false;
+            },
+        },
+        directives: {
+            clickOutside: vClickOutside.directive
         }
 
     }
