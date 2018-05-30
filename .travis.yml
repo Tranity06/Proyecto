@@ -16,7 +16,6 @@ install:
 before_script:
   - cp .env.dusk.testing .env
   - php artisan key:generate
-  - php artisan jwt:secret
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - php artisan serve &
 
