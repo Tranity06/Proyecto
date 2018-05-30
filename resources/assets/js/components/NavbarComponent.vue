@@ -10,9 +10,19 @@
 
                     <ais-results>
                         <template slot-scope="{ result }">
-                            <div>
-                                <span>{{ result.titulo }}</span>
-                                <span>{{ result.id }}</span>
+                            <div class="pelicula-item">
+                                <div>
+                                    <span class="has-text-weight-bold">{{ result.titulo }}</span>
+                                    <span>{{ result.duracion }} min</span>
+                                </div>
+                                <div>
+                                    <span class="button is-light is-small" @click="irEntrada(result.id)">
+                                        comprar entrada
+                                    </span>
+                                    <a :href="result.trailer" class="button is-light is-small" data-lity @click="verTrailer()">
+                                        ver trailer
+                                    </a>
+                                </div>
                             </div>
                         </template>
                     </ais-results>
@@ -138,6 +148,13 @@
             dispararSearch(){
                 this.searchDisparado = true;
                 console.log('search triggered')
+            },
+            irEntrada(id){
+                this.searchDisparado = false;
+                this.$router.replace({ path: `/pelicula/${id}` })
+            },
+            verTrailer(){
+                this.searchDisparado = false;
             }
         }
 
@@ -145,6 +162,11 @@
 </script>
 
 <style scoped>
+
+    .pelicula-item{
+        display: flex;
+        flex-direction: column;
+    }
 
     .ais-index{
         position: absolute;
