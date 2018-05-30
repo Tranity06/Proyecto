@@ -1,6 +1,26 @@
 <template>
-    <nav class="navbar is-fixed-top is-transparent">
-        <div class="container">
+    <nav class="navbar is-fixed-top is-transparent animate-search">
+        <div class="main-search" :class="{'puedo-ver': searchDisparado === true }">
+            <div class="container">
+                <ais-index :app-id="'0TZV0R68WE'"
+                           :api-key="'40ed7ce0a36dde51997fb88645263243'"
+                           :index-name="'peliculas'">
+
+                    <ais-input :placeholder="'Buscar peliculas'"></ais-input>
+
+                    <ais-results>
+                        <template slot-scope="{ result }">
+                            <div>
+                                <span>{{ result.titulo }}</span>
+                                <span>{{ result.id }}</span>
+                            </div>
+                        </template>
+                    </ais-results>
+
+                </ais-index>
+            </div>
+        </div>
+        <div class="container" v-if="searchDisparado === false">
             <div class="navbar-brand">
                 <router-link class="navbar-item" :to="{ name: 'home' }">
                     <div class="logo-container">
@@ -15,7 +35,7 @@
                 </span>
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
-                <div class="navbar-end">
+                <div class="navbar-start">
                     <router-link class="navbar-item has-text-white is-active" :to="{ name: 'home' }">
                         Películas
                     </router-link>
@@ -25,6 +45,9 @@
                     <a class="navbar-item has-text-white">
                         Acerca de
                     </a>
+                </div>
+                <div class="navbar-end">
+                    <span class="navbar-item has-text-white" @click="dispararSearch"><i class="fas fa-search fa-lg"></i></span>
                     <span class="navbar-item navbar-item-end">
                         <div class="user-login" v-show="StoreStateEnabled">
                           <i class="fas fa-shopping-cart fa-sm carta"></i>
@@ -80,7 +103,8 @@
             return {
                 googleSignInParams: {
                     client_id: '807265199183-m5l3c4mkeftknbq73c2f8stdnimnk1nk.apps.googleusercontent.com'
-                }
+                },
+                searchDisparado: false
             }
         },
         computed: {
@@ -110,6 +134,10 @@
             onSignInError (error) {
                 // `error` contains any error occurred.
                 console.log('OH NOES', error)
+            },
+            dispararSearch(){
+                this.searchDisparado = true;
+                console.log('search triggered')
             }
         }
 
@@ -117,6 +145,94 @@
 </script>
 
 <style scoped>
+
+    .ais-index{
+        position: absolute;
+        margin: 10px 20%;
+        width: 70%;
+
+    }
+
+    @media only screen and (min-width: 768px){
+        .ais-results{
+            display: block;
+            position: absolute;
+            top: 44px;
+            left: 0;
+            padding: 2em;
+            /*display: none;*/
+            width: calc(90% - 286px);
+            margin: 0 calc(5% + 116px) 0 calc(5% + 170px);
+            box-shadow: 0 4px 40px rgba(0,0,0,.39);
+
+            background-color: #fff;
+            max-height: calc(100vh - 50px);
+            overflow-y: auto;
+            border-radius: 3px;
+        }
+    }
+
+
+    .ais-results{
+        padding: 1em;
+        background-color: #fff;
+        max-height: calc(100vh - 50px);
+        overflow-y: auto;
+    }
+
+    .ais-input {
+        font-size: 1.4rem;
+        color: #fff;
+        /* height: 100%; */
+        background-color: transparent;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        border: none;
+        border-radius: 0;
+    }
+
+    .ais-input:focus{
+        outline:none;
+    }
+
+    <!-->
+
+    .animate-search .main-search.puedo-ver {
+        animation: slide-in .3s;
+    }
+
+    @keyframes slide-in {
+        0% {
+            transform: translateY(-100%)
+        }
+
+        to {
+            transform: translateY(0)
+        }
+    }
+
+
+    .main-search.puedo-ver {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .main-search {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background: #191c1e;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .3s,visibility .3s;
+    }
+
 
     .navbar-burger{
         color: #fff;
