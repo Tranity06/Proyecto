@@ -18,7 +18,7 @@
                                 </div>
                                 <div>
                                     <span class="button is-light is-small" @click="irEntrada(result.id)">
-                                        comprar entrada
+                                        ver pelicula
                                     </span>
                                     <a :href="result.trailer" class="button is-light is-small" data-lity @click="verTrailer()">
                                         ver trailer
@@ -27,15 +27,15 @@
                             </div>
                         </template>
                     </ais-results>
-
                 </ais-index>
+                <i class="fas fa-times"></i>
             </div>
         </div>
         <div class="container" v-if="searchDisparado === false">
             <div class="navbar-brand">
                 <router-link class="navbar-item" :to="{ name: 'home' }">
                     <div class="logo-container">
-                        <img src="48px.png" alt="Logo">
+                        <img src="48px.png" alt="Logo" class="is-hidden-mobile">
                         <span>Palomitas time</span>
                     </div>
                 </router-link>
@@ -149,7 +149,6 @@
             },
             dispararSearch(){
                 this.searchDisparado = true;
-                console.log('search triggered')
             },
             irEntrada(id){
                 this.searchDisparado = false;
@@ -160,6 +159,7 @@
             },
             hide(event) {
                 this.searchDisparado = false;
+                console.log('Clicked outside. Event: ', event);
             },
         },
         directives: {
