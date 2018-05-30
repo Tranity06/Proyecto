@@ -1,7 +1,7 @@
 <template>
     <div>
         <slider-component></slider-component>
-        <menupelicula-component></menupelicula-component>
+        <menupelicula-component @changeTab="updateTab($event)"></menupelicula-component>
         <ais-index :app-id="'0TZV0R68WE'"
                    :api-key="'40ed7ce0a36dde51997fb88645263243'"
                    :index-name="'peliculas'">
@@ -11,7 +11,7 @@
             <ais-results></ais-results>
 
         </ais-index>
-        <peliculas-component></peliculas-component>
+        <peliculas-component :tab="tab"></peliculas-component>
     </div>
 </template>
 <script>
@@ -28,8 +28,14 @@
         data() {
             return {
                 idDeAlgolia: "{{ config('scout.algolia.id') }}",
-                keyDeAlgolia: "{{ env('ALGOLIA_SEARCH') }}"
+                keyDeAlgolia: "{{ env('ALGOLIA_SEARCH') }}",
+                tab: 1
             }
         },
+        methods: {
+            updateTab: function (updatedTab) {
+                this.tab = updatedTab;
+            }
+        }
     }
 </script>
