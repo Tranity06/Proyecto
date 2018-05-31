@@ -24,6 +24,11 @@
             $('.select2').select2();
             $('#form-bloquear').hide()
 
+            var $but_bloq = [];
+            for ( var i=0 ; i<$('.but-bloq').length ; i++){
+                $but_bloq.push(parseInt($('.but-bloq')[i].value));
+            }
+
             $(function() {
                 $(".table").tablesorter({
                     theme: 'blue',
@@ -47,7 +52,7 @@
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                     });
 
-            $('.table').on('click', '.borrar', function(){console.log("Borras?");
+            $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
                 var $idButacaBloqueada= $boton.next().val()
                 var $fila = $boton.closest('tr').children('td').eq(0).text().trim();
@@ -65,7 +70,7 @@
                         type: 'POST',
                         data: 'idButaca='+$idButacaBloqueada,
                         statusCode:{
-                            201: function (){ console.log("Borrando");
+                            201: function (){
                                 $boton.closest('tr')
                                 .children('td')
                                 .animate({ 
@@ -75,8 +80,14 @@
                                 .children().slideUp(function () {
                                     $(this).closest('tr').remove();
                                 });
+
+                                var index = $but_bloq.indexOf(parseInt($idButacaBloqueada));
+                                if ( index >= 0 ){
+                                    $but_bloq.splice(index, 1);
+                                    $('#num-bloq').text($but_bloq.length);
+                                }
                             },
-                            403: function (e){console.log(e.responseJSON);
+                            403: function (e){
                                 $callout.text(e.responseJSON);
                                 $callout.addClass('callout-danger').slideDown();
                             }
@@ -104,7 +115,7 @@
                 if ( $('#completa').is(':checked')){
                     $butacas = 'all=true';
                 } else {
-                    $butacas = 'butacas='+$('#butacas').val();console.log($butacas);
+                    $butacas = 'butacas='+$('#butacas').val();
                 }
                 datos = $sala+'&'+$fila+'&'+$butacas; 
                 $.ajax({
@@ -113,7 +124,17 @@
                     data: datos,
                     statusCode:{
                         201: function (e){
-                            console.log(e.responseJSON);
+                            var $tabla = $('#tabla-butacas').first('tbody');
+                            for (var i=0 ; i<e.length ; i++ ){
+                                if ( $but_bloq.indexOf(e[i].id) < 0 ){
+                                    var $fila = $('<tr><td>'+e[i].fila+'</td><td>'+e[i].numero+'</td><td><button class="borrar"><i class="fa fa-fw fa-trash-o"></i></button><input type="hidden" name="id" value="'+e[i].id+'"/></td></tr>')
+                                    $tabla.prepend($fila);
+                                    $fila.find('td').css('color', 'blue');
+                                    $but_bloq.push(e[i].i);
+                                }
+                            }
+                            $('#num-bloq').text($but_bloq.length);
+                            
                         },
                         403: function (e){console.log(e.responseJSON);
                             /* $callout.text(e.responseJSON);
@@ -146,7 +167,7 @@
         <div class="box-body">
             <p><label>Nº Sala:</label> <span>{{$sala->numero}}</span></p>
             <p><label>Aforo:</label> <span> {{$sala->aforo}}</span></p>
-            <p><label>Butacas bloqueadas:</label> <span>{{ sizeof($butacas_bloqueadas) }}</span>
+            <p><label>Butacas bloqueadas:</label> <span id="num-bloq">{{ sizeof($butacas_bloqueadas) }}</span>
                 <button class="mostrar-bloquear"><i class="glyphicon glyphicon-pencil"></i></button></p>
             <div id="form-bloquear" class="box-body">
                 <input type="hidden" id="idSala" name="idSala" value="{{$sala->id}}"
@@ -173,7 +194,7 @@
                 <div class="slide" hidden>
                 <div class="callout-butaca" hidden>
                 </div>
-                <table class="table table-bordered table-hover tablesorter">
+                <table id ="tabla-butacas" class="table table-bordered table-hover tablesorter">
                     <thead>
                         <tr>
                             <th>Fila</th>
@@ -189,7 +210,7 @@
                                     <td> {{ $butaca->numero}} </td>
                                     <td>
                                         <button class="borrar"><i class="fa fa-fw fa-trash-o"></i></button>
-                                        <input type="hidden" name="id" value="{{ $butaca->id }}"/>
+                                        <input type="hidden" name="id" class="but-bloq" value="{{ $butaca->id }}"/>
                                     </td>
                                 </tr>
                             </div>

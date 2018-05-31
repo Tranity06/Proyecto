@@ -113,7 +113,7 @@ class SalaController extends Controller
                 Butaca::create([
                     'fila' => $fila,
                     'numero' => $butaca,
-                    'estado' => 1,
+                    'estado' => 0,
                     'sala_id' => $sala->id
                 ]);
             }
