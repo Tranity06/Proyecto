@@ -179,16 +179,16 @@
                 // Activar Desactivar Fondo blanco del navbar
                 $('.navbar').toggleClass('fondoblanco');
                 // Activar desactivar el texto negro de los enlaces
-                $('a.navbar-item').toggleClass('has-text-black');
+                $('.navbar-item').toggleClass('has-text-black');
                 // Poner el texto negro del navbar
                 $('.logo-container > span').toggleClass('has-text-black');
                 $('#navbarMenuHeroA, .navbar-burger').toggleClass('has-text-black');
                 //Cuando haga click en algun elemento del menu:
                 //Quitar 'is-active y has-text-black', el fondo blanco y el texto negro.
-                $('a.navbar-item').click(function(e){
+                $('.navbar-item').click(function(e){
                     $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active has-text-black');
                     $('.navbar').removeClass('fondoblanco');
-                    $('a.navbar-item').removeClass('has-text-black');
+                    $('.navbar-item').removeClass('has-text-black');
                     $('.logo-container > span').removeClass('has-text-black');
                 });
             }

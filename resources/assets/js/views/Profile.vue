@@ -20,26 +20,26 @@
                 <nav class="tabs is-boxed is-fullwidth">
                     <div class="container">
                         <ul>
-                            <li class="is-active">
-                                <a>
+                            <li :class="{'is-active': this.tab===1}">
+                                <a @click="selectTab(1)">
                                     <span class="icon is-small"><i class="fas fa-cog" aria-hidden="true"></i></span>
                                     <span class="is-hidden-mobile">Cambiar Datos</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===2}">
+                                <a @click="selectTab(2)">
                                     <span class="icon is-small"><i class="fas fa-ticket-alt" aria-hidden="true"></i></span>
                                     <span class="is-hidden-mobile">Entradas</span>
                                 </a>
-                            </li>
-                            <li>
-                                <a>
+                            </li >
+                            <li :class="{'is-active': this.tab===3}">
+                                <a @click="selectTab(3)">
                                     <span class="icon is-small"><i class="far fa-comment" aria-hidden="true"></i></span>
                                     <span class="is-hidden-mobile">Reseñas</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===4}">
+                                <a @click="selectTab(4)">
                                     <span class="icon is-small"><i class="far fa-star" aria-hidden="true"></i></span>
                                     <span class="is-hidden-mobile">Ofertas</span>
                                 </a>
@@ -49,22 +49,30 @@
                 </nav>
             </div>
         </section>
-        <section class="section">
+        <section class="section" style="  background: #f0f0f0;">
             <div class="container is-fluid">
 <!--                <div class="columns">
                     <div class="column is-10-tablet is-offset-2-tablet">
                         <form v-on:submit.prevent="upload">
-                            <label>Cambiar avatar</label>
+                            <label>Cambiar   atar</label>
                             <input type="file" name="avatar" @change="onFileChange">
                             <input type="submit" class="button" value="Guardar">
                         </form>
                     </div>
                 </div>-->
-                <div class="flexcontainer">
+                <div class="flexcontainer" v-if="this.tab === 1">
                     <cambiar-avatar class="tarjeta"></cambiar-avatar>
                     <cambiar-email class="tarjeta"></cambiar-email>
                     <cambiar-telefono class="tarjeta"></cambiar-telefono>
                     <cambiar-clave class="tarjeta"></cambiar-clave>
+                </div>
+                <pelicula-ticket v-if="this.tab === 2"></pelicula-ticket>
+                <div v-if="this.tab === 3">
+                    <ver-resenias></ver-resenias>
+                    <ver-resenias></ver-resenias>
+                </div>
+                <div v-if="this.tab === 4">
+                    Ofertas
                 </div>
             </div>
         </section>
@@ -76,9 +84,13 @@
     import CambiarTelefono from "../components/Cambiar_datos/cambiarTelefono";
     import CambiarClave from "../components/Cambiar_datos/cambiarClave";
     import CambiarAvatar from "../components/Cambiar_datos/cambiarAvatar";
+    import PeliculaTicket from "../components/PeliculaTicket";
+    import VerResenias from "../components/Resenias/verResenias";
 
     export default {
         components: {
+            VerResenias,
+            PeliculaTicket,
             CambiarAvatar,
             CambiarClave,
             CambiarTelefono,
@@ -86,6 +98,7 @@
         data() {
             return {
                 image: '',
+                tab: 1,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
@@ -122,6 +135,24 @@
                     console.log(response.data);
                     store.commit('changeAvatar',response.data.avatar_name);
                 });
+            },
+            selectTab(selectedTab) {
+                switch (selectedTab){
+                    case 1:
+                        this.tab = 1;
+                        console.log(this.tab);
+                        break;
+                    case 2:
+                        this.tab = 2;
+                        console.log(this.tab);
+                        break;
+                    case 3:
+                        this.tab = 3;
+                        break;
+                    case 4:
+                        this.tab = 4;
+                        break;
+                }
             }
         }
     }

@@ -2,7 +2,7 @@
     <div>
         <navbar-component></navbar-component>
 
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
         <notifications group="auth" />
     </div>
 </template>
