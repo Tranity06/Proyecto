@@ -122,3 +122,13 @@ Route::get('/admin', 'Admin\Home@index');
    */
   Route::post('butaca/bloquear', 'ButacaController@bloquear');
   Route::post('butaca/desbloquear', 'ButacaController@desbloquear');
+
+  /**
+   * Gestión plantillas de sesiones
+   */
+  Route::get('plantillas', 'PlantillaSesionController@mostrarTodas')->name('plantillas.mostrar');
+  Route::get('plantilla/{idPlantilla}', 'PlantillaSesionController@mostrarPlantilla')->name('plantilla.mostrar');
+  Route::get('plantilla', 'PlantillaSesionController@crear')->name('plantillas.crear');
+  Route::post('plantilla', 'PlantillaSesionController@crearPost');
+  Route::post('plantilla/modificar', 'PlantillaSesionController@modificar');
+  Route::post('plantilla/borrar', 'PlantillaSesionController@borrar');
