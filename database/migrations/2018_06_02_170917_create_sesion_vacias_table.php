@@ -15,6 +15,13 @@ class CreateSesionVaciasTable extends Migration
     {
         Schema::create('sesion_vacias', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('pase');
+            $table->time('hora');
+            
+            //Clave foránea SALA.
+            $table->unsignedInteger('sala_id');
+            $table->foreign('sala_id')->references('id')->on('salas');
+            
             $table->timestamps();
         });
     }

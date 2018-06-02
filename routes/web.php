@@ -132,3 +132,9 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('plantilla', 'PlantillaSesionController@crearPost');
   Route::post('plantilla/modificar', 'PlantillaSesionController@modificar');
   Route::post('plantilla/borrar', 'PlantillaSesionController@borrar');
+
+  /**
+   * Gestión sesiones vacías
+   */
+  Route::post('sesionvacia/borrar', 'SesionVaciaController@borrar');
+  Route::post('sesionvacia/crear', 'SesionVaciaController@crear');
