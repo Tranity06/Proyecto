@@ -155,25 +155,23 @@ class PeliculaController extends Controller
         $peliculas = Pelicula::orderBy('estreno', 'desc')->get();
         $hoy = date('Y-n-d');
 
+        $pelis = [];
+        $peli = [];
         foreach ( $peliculas as $pelicula ){
-            $pelicula['sesiones'] = Sesion::where([
-                ['pelicula_id', $pelicula->id],
-                ['fecha', $hoy],
-                ['estado', 1]
-            ])->orderBy('hora')->get();
+            $peli['titulo'] = $pelicula->titulo;
+            $peli['is_estreno'] = false;
+            $peli['proximamente'] = false;
+            if ( strtotime($pelicula->estreno) == strtotime($hoy) ){
+                $peli['is_estreno'] = true;
+            }
+            else if ( strtotime($pelicula->estreno) > strtotime($hoy) ){
+                $peli['proximamente'] = true;
+            }
+            array_push($pelis, $peli);
         }
 
-        return response()->json($peliculas, 200);
+        return response()->json($pelis, 200);
     }
-    /* public function getAll(){
-        $peliculas = Pelicula::orderBy('estreno', 'desc')->get();
-
-        foreach ( $peliculas as $pelicula ){
-            $pelicula['sesiones'] = $pelicula->sesiones();
-        }
-
-        return response()->json($peliculas, 200);
-    } */
 
     /**
      * Devuelve la información de la película indicada y
