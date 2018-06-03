@@ -122,3 +122,11 @@ Route::get('/admin', 'Admin\Home@index');
    */
   Route::post('butaca/bloquear', 'ButacaController@bloquear');
   Route::post('butaca/desbloquear', 'ButacaController@desbloquear');
+
+  /**
+   * Gestión MENÚS
+   */
+  Route::get('menus/crear', 'MenuController@crear');
+  Route::post('menus/crear', 'MenuController@crearPost')->name('menu.crear');
+  Route::get('menus/mostrar', 'MenuController@mostrar');
+  Route::post('menus/borrar', 'MenuController@borrar');

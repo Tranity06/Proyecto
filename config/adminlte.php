@@ -169,20 +169,29 @@ return [
             'submenu' => [
                 [
                     'text' => 'Crear',
-                    'url'  => '#',
+                    'url'  => 'productos/crear',
                 ],
                 [
                     'text' => 'Ver todos',
-                    'url'  => '#',
+                    'url'  => 'productos/mostrar',
                 ],
             ]
         ],
         [
-            'text'       => 'Menús',
-            'url'  => '#',
+            'text' => 'Menús',
+            'submenu' => [
+                [
+                    'text' => 'Crear nuevo',
+                    'url' => 'menus/crear'
+                ],
+                [
+                    'text' => 'Ver todos',
+                    'url'  => 'menus/mostrar',
+                ],
+            ],
         ],
         [
-            'text'       => 'Sesiones',
+            'text' => 'Sesiones',
             'url'  => '#',
         ],
     ],
