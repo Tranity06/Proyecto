@@ -130,3 +130,11 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('menus/crear', 'MenuController@crearPost')->name('menu.crear');
   Route::get('menus/mostrar', 'MenuController@mostrar');
   Route::post('menus/borrar', 'MenuController@borrar');
+
+  /**
+   * Gestión PRODUCTOS
+   */
+  Route::get('productos/crear', 'ProductoController@crear');
+  Route::post('productos/crear', 'ProductoController@crearPost')->name('producto.crear');
+  Route::get('productos/mostrar', 'ProductoController@mostrar');
+  Route::post('productos/borrar', 'ProductoController@borrar');
