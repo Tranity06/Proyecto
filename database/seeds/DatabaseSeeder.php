@@ -25,10 +25,10 @@ class DatabaseSeeder extends Seeder
             /*'facturas',
             'butacas_reservadas',*/
             'categorias',
-            /*'productos',
-            'lineas_ventas',
-            'ingredientes',
-            'ingrediente_producto',
+            'productos',
+            /*'lineas_ventas',
+            'ingredientes',*/
+            /*'ingrediente_producto',
             'menus',
             'administradores',
             'menu_producto',
@@ -49,7 +49,8 @@ class DatabaseSeeder extends Seeder
             ButacaSeeder::class,
             PeliculasSeeder::class,
             SesionesSeeder::class,
-            CategoriasSeeder::class
+            CategoriasSeeder::class,
+            ProductosSeeder::class
         ]);
 //        $this->call(FacturasSeeder::class);
 //        $this->call(ButacasReservadasSeeder::class);
