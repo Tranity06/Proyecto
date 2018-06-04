@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PlantillaSesion;
 use Auth;
+use App\Models\Sala;
 
 class PlantillaSesionController extends Controller
 {
@@ -32,7 +33,9 @@ class PlantillaSesionController extends Controller
             return redirect('/admin'); 
         }
         $admin = Auth::guard('admin')->user()->name;
-        return view('plantillas.crear', compact('admin'));
+
+        $salas = Sala::all('numero');
+        return view('plantillas.crear', compact('admin', 'salas'));
     }
 
     /**
@@ -45,9 +48,13 @@ class PlantillaSesionController extends Controller
             return redirect('/admin'); 
         }
 
+        $descripcion = ' ';
+        if ( isset($request->descripcion) && strlen($request->descripcion) > 1 ){
+            $descripcion = $request->descripcion;
+        }
         $plantilla = PlantillaSesion::create([
             'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion
+            'descripcion' => $descripcion
         ]);
 
         return response()->json($plantilla, 201);

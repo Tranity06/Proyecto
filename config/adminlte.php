@@ -143,6 +143,10 @@ return [
             ]
         ],
         [
+            'text'       => 'Slider',
+            'url'  => 'slider',
+        ],
+        [
             'text'       => 'Salas',
             'submenu' => [
                 [
@@ -157,11 +161,29 @@ return [
         ],
         [
             'text'       => 'Sesiones',
-            'url'  => '#',
-        ],
-        [
-            'text'       => 'Slider',
-            'url'  => 'slider',
+            'submenu' => [
+                [
+                    'text' => 'Plantillas',
+                    'submenu' => [
+                        [
+                            'text' => 'Mostrar',
+                            'url'  => '/plantillas',
+                        ],
+                        [
+                            'text' => 'Crear',
+                            'url'  => '/plantilla',
+                        ],
+                    ]
+                ],
+                [
+                    'text' => 'Mostrar',
+                    'url'  => '/sala',
+                ],
+                [
+                    'text' => 'Crear',
+                    'url'  => '/sala',
+                ],
+            ]
         ],
         'TIENDA',
         [

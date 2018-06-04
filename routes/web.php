@@ -129,12 +129,12 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('plantillas', 'PlantillaSesionController@mostrarTodas')->name('plantillas.mostrar');
   Route::get('plantilla/{idPlantilla}', 'PlantillaSesionController@mostrarPlantilla')->name('plantilla.mostrar');
   Route::get('plantilla', 'PlantillaSesionController@crear')->name('plantillas.crear');
-  Route::post('plantilla', 'PlantillaSesionController@crearPost');
-  Route::post('plantilla/modificar', 'PlantillaSesionController@modificar');
-  Route::post('plantilla/borrar', 'PlantillaSesionController@borrar');
+  Route::post('plantilla', 'PlantillaSesionController@crearPost'); //AJAX
+  Route::post('plantilla/modificar', 'PlantillaSesionController@modificar'); //AJAX
+  Route::post('plantilla/borrar', 'PlantillaSesionController@borrar'); //AJAX
 
   /**
    * Gestión sesiones vacías
    */
-  Route::post('sesionvacia/borrar', 'SesionVaciaController@borrar');
-  Route::post('sesionvacia/crear', 'SesionVaciaController@crear');
+  Route::post('sesionvacia/borrar', 'SesionVaciaController@borrar'); //AJAX
+  Route::post('sesionvacia/crear', 'SesionVaciaController@crear'); //AJAX

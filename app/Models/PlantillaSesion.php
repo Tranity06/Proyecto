@@ -18,7 +18,7 @@ class PlantillaSesion extends Model
     /**
      * Sesiones de la plantilla
      */
-    public function seiones(){
-        return $this->hasMany(SesionVacia::class)->get();
+    public function sesiones(){
+        return $this->belongsToMany(SesionVacia::class);
     }
 }
