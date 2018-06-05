@@ -25,6 +25,23 @@ class PlantillaSesionController extends Controller
     }
 
     /**
+     * Muestra los datos de la plantilla indicada y las sesiones que
+     * tiene asociadas.
+     * Si el administrador no está autenticado redirige al login.
+     */
+    public function mostrarPlantilla($idPlantilla){
+        // Comprobar autenticación
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin');
+        }
+
+        $admin = Auth::guard('admin')->user()->name;
+        $plantilla = PlantillaSesion::find($idPlantilla);
+        $sesiones = $plantilla->sesiones()->get();
+        return view('plantillas.detalle', compact('admin', 'plantilla', 'sesiones'));
+    }
+
+    /**
      * Muestra el formulario para crear una nueva plantilla.
      * Si el administrador no está autenticado redirige al login.
      */

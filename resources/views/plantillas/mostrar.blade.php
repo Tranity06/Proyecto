@@ -24,6 +24,7 @@
             $.ajaxSetup({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
             });
+
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
                 var $idPlantilla= $boton.next().val();
@@ -60,7 +61,14 @@
                         async: true,
                     });
                 }
-            });           
+            });
+
+            $('.table').on('click', '.detalles', function(){
+                var idPlantilla = $(this).next().val();
+                var getUrl = window.location;
+                var destino = getUrl .protocol + "//" + getUrl.host + "/plantilla/" + idPlantilla;
+                $( location ).attr("href", destino);
+            });        
         });
     </script>
 @stop
