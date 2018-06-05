@@ -24,6 +24,16 @@ class PerfilController extends Controller {
         return response()->json('Success',200);
     }
 
+    public function cambiarTelefono(Request $request){
+        $user = User::find($this->getUser()->id);
+
+        $user->telefono = $request->telefono;
+
+        $user->saveOrFail();
+
+        return response()->json('Success',200);
+    }
+
     public function getUser(){
         $user = auth()->user();
 
