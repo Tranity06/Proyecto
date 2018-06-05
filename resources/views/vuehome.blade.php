@@ -156,8 +156,10 @@
 
                 //si cerca del top que ponga el fondo blanco, texto negro y muestre el menu.
                 if ($(document).scrollTop() < 100){
+                    console.log('hola desde el home');
                     openMenu()
                 } else { //si esta mas lejos, el texto blanco, fondo igual, y el logo igual.
+                    console.log('hola desde el home mas de 100');
                     $('a.navbar-item').toggleClass('has-text-black');
                     $('a.button').click(function(e){
                         $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active has-text-black');

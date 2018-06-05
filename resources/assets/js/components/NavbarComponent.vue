@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar is-fixed-top is-transparent animate-search"  v-click-outside="hide">
+    <nav class="navbar is-fixed-top is-transparent animate-search" v-click-outside="hide">
         <div class="main-search" :class="{'puedo-ver': searchDisparado === true }">
             <div class="container">
                 <ais-index :app-id="'0TZV0R68WE'"
@@ -106,8 +106,8 @@
 </template>
 
 <script>
-    import vClickOutside from 'v-click-outside'
     import store from '../store';
+    import ClickOutside from 'vue-click-outside';
 
     export default {
         name: "navbar-component",
@@ -159,13 +159,14 @@
             },
             hide(event) {
                 this.searchDisparado = false;
+
                 console.log('Clicked outside. Event: ', event);
             },
         },
+        // do not forget this section
         directives: {
-            clickOutside: vClickOutside.directive
+            ClickOutside
         }
-
     }
 </script>
 
