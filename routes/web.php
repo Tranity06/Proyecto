@@ -106,3 +106,35 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('slider', 'SliderController@mostrar');
   Route::post('slider/borrar', 'SliderController@borrar');
   Route::post('/slider/anadir', 'SliderController@anadir');
+
+  /**
+   * Gestión SALAS
+   */
+  ROUTE::get('salas', 'SalaController@motrarTodas')->name('salas.mostrar');
+  ROUTE::get('sala/{idSala}', 'SalaController@motrarSala');
+  ROUTE::get('sala', 'SalaController@crear');
+  ROUTE::post('sala', 'SalaController@crearPost'); //AJAX
+  ROUTE::post('sala/borrar', 'SalaController@borrar'); //AJAX
+  //ROUTE::post('sala/modificar', 'SalaController@modificar'); //AJAX
+
+  /**
+   * Gestión BUTACAS
+   */
+  Route::post('butaca/bloquear', 'ButacaController@bloquear');
+  Route::post('butaca/desbloquear', 'ButacaController@desbloquear');
+
+  /**
+   * Gestión MENÚS
+   */
+  Route::get('menus/crear', 'MenuController@crear');
+  Route::post('menus/crear', 'MenuController@crearPost')->name('menu.crear');
+  Route::get('menus/mostrar', 'MenuController@mostrar');
+  Route::post('menus/borrar', 'MenuController@borrar');
+
+  /**
+   * Gestión PRODUCTOS
+   */
+  Route::get('productos/crear', 'ProductoController@crear');
+  Route::post('productos/crear', 'ProductoController@crearPost')->name('producto.crear');
+  Route::get('productos/mostrar', 'ProductoController@mostrar');
+  Route::post('productos/borrar', 'ProductoController@borrar');

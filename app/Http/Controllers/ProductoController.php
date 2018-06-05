@@ -7,9 +7,19 @@ use App\Models\ProductoIngrediente;
 use App\Models\ProductoMenu;
 //use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Auth;
 use Validator;
 
 class ProductoController extends Controller {
+
+    public function crear(){
+        // Comprobar autenticación
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+        return view('producto.crear', compact('admin'));
+    }
 
     public function getAll() {
         return response()->json(Producto::all());
@@ -70,6 +80,16 @@ class ProductoController extends Controller {
         $producto->delete();
 
         return 204;
+    }
+
+    public function mostrar(){
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+        
+        $productos = Producto::all();
+        return view('productos.mostrar', compact('admin', 'productos'));
     }
 
 }

@@ -12,6 +12,20 @@ class CategoriasSeeder extends Seeder
      */
     public function run()
     {
-        factory(Categoria::class,20)->create();
+        Categoria::create([
+            'nombre' => 'Bebidas'
+        ]);
+
+        Categoria::create([
+            'nombre' => 'Patatas y derivados'
+        ]);
+
+        Categoria::create([
+            'nombre' => 'Comida caliente'
+        ]);
+
+        Categoria::create([
+            'nombre' => 'Chocolates y lácteos'
+        ]);
     }
 }

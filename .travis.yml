@@ -9,12 +9,12 @@ php:
   - 7.2
 
 install:
-  - cp .env.dusk.testing .env
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - yarn
   - yarn run production
 
 before_script:
+  - cp .env.dusk.testing .env
   - php artisan key:generate
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - php artisan serve &

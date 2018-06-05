@@ -4,8 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Auth;
 
 class MenuController extends Controller {
+
+    public function crear(){
+        // Comprobar autenticación
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+        return view('menu.crear', compact('admin'));
+    }
 
     public function getAll() {
         return response()->json(Menu::all());
@@ -32,6 +42,16 @@ class MenuController extends Controller {
         $menu->delete();
 
         return 204;
+    }
+
+    public function mostrar(){
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+        
+        $menus = Menu::all();
+        return view('menus.mostrar', compact('admin', 'menus'));
     }
 
 }
