@@ -37,7 +37,7 @@
             <div class="navbar-brand">
                 <router-link class="navbar-item" :to="{ name: 'home' }">
                     <div class="logo-container">
-                        <img src="48px.png" alt="Logo" class="is-hidden-mobile">
+                        <img src="/48px.png" alt="Logo" class="is-hidden-mobile">
                         <span :class="{'has-text-black': textblack && textblackLogo}" @click="closeMenu" >Palomitas time</span>
                     </div>
                 </router-link>
@@ -67,7 +67,7 @@
                           <div class="dropdown is-hoverable">
                               <div class="dropdown-trigger">
                                   <img class="avatar"
-                                       :src="'uploads/avatars/'+getAvatar"
+                                       :src="'/uploads/avatars/'+getAvatar"
                                        aria-haspopup="true" aria-controls="dropdown-menu">
                               </div>
                               <div class="dropdown-menu" id="dropdown-menu" role="menu">
