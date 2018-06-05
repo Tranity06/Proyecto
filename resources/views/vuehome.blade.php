@@ -149,9 +149,23 @@
         });
     </script>
     <script>
+/*        $(function(){
 
-        $(function(){
-
+            //Hago click en el menu y
+            //si esta a menos de 100px del top :: ABRO EL MENU
+                // -> toggle fondoblanco
+                // -> toggle textblack
+                //si hago click en un link del menu ::
+                // -> isActive = false
+                // -> fondoblanco = false
+                // -> textblack = false
+            //si esta a mas de 100px del top ::
+                // -> toggle isActive
+                // -> toggle textblack
+                //si hago click en un link del menu ::
+                // -> isActive = false
+                // -> textblack = false
+                // -> fondoblanco = false
             $('.navbar-burger').click(function() {
 
                 //si cerca del top que ponga el fondo blanco, texto negro y muestre el menu.
@@ -173,7 +187,7 @@
                     });
                 }
 
-                $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
+//                $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
 
             });
 
@@ -195,7 +209,7 @@
                 });
             }
 
-        });
+        });*/
     </script>
 </body>
 </html>

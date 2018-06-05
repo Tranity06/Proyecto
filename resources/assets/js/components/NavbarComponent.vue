@@ -1,14 +1,14 @@
 <template>
-    <nav class="navbar is-fixed-top is-transparent animate-search" v-click-outside="hide">
+    <nav class="navbar is-fixed-top is-transparent animate-search" v-click-outside="hide" :class="{'fondoblanco': fondoBlanco}">
         <div class="main-search" :class="{'puedo-ver': searchDisparado === true }">
             <div class="container">
+
                 <ais-index :app-id="'0TZV0R68WE'"
                            :api-key="'40ed7ce0a36dde51997fb88645263243'"
                            :index-name="'peliculas'"
+                           :query="query"
                           >
-
-                    <ais-input :placeholder="'Buscar peliculas'"></ais-input>
-
+                    <input v-model="query" class="ais-input" placeholder="Busca ...">
                     <ais-results>
                         <template slot-scope="{ result }">
                             <div class="pelicula-item">
@@ -38,29 +38,29 @@
                 <router-link class="navbar-item" :to="{ name: 'home' }">
                     <div class="logo-container">
                         <img src="48px.png" alt="Logo" class="is-hidden-mobile">
-                        <span>Palomitas time</span>
+                        <span :class="{'has-text-black': textblack && textblackLogo}" @click="closeMenu" >Palomitas time</span>
                     </div>
                 </router-link>
-                <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                <span class="navbar-burger burger" :class="{'is-active': isActive,'has-text-black': textblack && textblackLogo}" data-target="navbarMenuHeroA" @click="menu">
                 <span></span>
                 <span></span>
                 <span></span>
                 </span>
             </div>
-            <div id="navbarMenuHeroA" class="navbar-menu">
+            <div id="navbarMenuHeroA" class="navbar-menu" :class="{'is-active': isActive,'has-text-black': textblack}">
                 <div class="navbar-start">
-                    <router-link class="navbar-item has-text-white is-active" :to="{ name: 'home' }">
-                        Películas
+                    <router-link class="navbar-item has-text-white is-active" :to="{ name: 'home' }" :class="{'has-text-black': textblack}">
+                        <span  @click="closeMenu">Películas</span>
                     </router-link>
-                    <router-link class="navbar-item has-text-white" :to="{ name: 'restaurante' }">
-                        Restaurante
+                    <router-link class="navbar-item has-text-white" :to="{ name: 'restaurante' }" :class="{'has-text-black': textblack}" >
+                        <span @click="closeMenu">Restaurante</span>
                     </router-link>
-                    <a class="navbar-item has-text-white">
+                    <a class="navbar-item has-text-white" :class="{'has-text-black': textblack}" @click="closeMenu">
                         Acerca de
                     </a>
                 </div>
                 <div class="navbar-end">
-                    <span class="navbar-item has-text-white" @click="dispararSearch"><i class="fas fa-search fa-lg"></i></span>
+                    <span class="navbar-item"  :class="{'has-text-black': textblack,'has-text-white': !textblack}" @click="dispararSearch"><i class="fas fa-search fa-lg"></i></span>
                     <span class="navbar-item navbar-item-end">
                         <div class="user-login" v-show="StoreStateEnabled">
                           <i class="fas fa-shopping-cart fa-sm carta"></i>
@@ -86,7 +86,7 @@
                         <div v-show="!StoreStateEnabled" style="display: flex; justify-content: center">
                             <router-link class="button is-primary entrar" :to="{ name: 'login' }">
                                 <div class="logo-container">
-                                    <span>Entrar</span>
+                                    <span @click="closeMenu">Entrar</span>
                                 </div>
                             </router-link>
 <!--                            <a href="http://www.facebook.com" class="centeredIcon">
@@ -118,7 +118,12 @@
                 googleSignInParams: {
                     client_id: '807265199183-m5l3c4mkeftknbq73c2f8stdnimnk1nk.apps.googleusercontent.com'
                 },
-                searchDisparado: false
+                searchDisparado: false,
+                isActive: false,
+                textblack: false,
+                textblackLogo: true,
+                fondoBlanco: false,
+                query: ''
             }
         },
         computed: {
@@ -150,6 +155,7 @@
                 console.log('OH NOES', error)
             },
             dispararSearch(){
+                this.closeMenu();
                 this.searchDisparado = true;
             },
             irEntrada(id){
@@ -161,9 +167,50 @@
             },
             hide(event) {
                 this.searchDisparado = false;
+                this.query = '';
 
                 console.log('Clicked outside. Event: ', event);
             },
+            menu() {
+
+
+                //Hago click en el menu y
+                //si esta a menos de 100px del top :: ABRO EL MENU
+                // -> toggle fondoblanco DONE
+                // -> toggle textblack DONE
+                //si hago click en un link del menu ::
+                // -> isActive = false DONE
+                // -> textblack = false DONE
+                // -> fondoblanco = false DONE
+                //si esta a mas de 100px del top ::
+                // -> toggle isActive
+                // -> toggle textblack
+                //si hago click en un link del menu ::
+                // -> isActive = false
+                // -> textblack = false
+                // -> fondoblanco = false
+
+                const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+
+                if (scrollTop < 100){
+                    this.openMenu()
+                } else {
+                    this.textblack = !this.textblack;
+                    this.textblackLogo = false;
+                }
+
+                this.isActive = !this.isActive;
+            },
+
+            openMenu(){
+                this.fondoBlanco = !this.fondoBlanco;
+                this.textblack = !this.textblack;
+            },
+            closeMenu(){
+                this.isActive = false;
+                this.textblack = false;
+                this.fondoBlanco = false;
+            }
         },
         // do not forget this section
         directives: {
@@ -204,6 +251,12 @@
         display: none;
     }
 
+    @media only screen and (max-width: 600px){
+        .situarIzquierda{
+            left: 90%;
+        }
+    }
+
     @media only screen and (min-width: 768px){
         .ais-results{
             display: block;
@@ -227,7 +280,8 @@
     .ais-results{
         padding: 1em;
         background-color: #fff;
-        max-height: calc(100vh - 50px);
+        margin-top: 15px;
+        max-height: calc(100vh - 60px);
         overflow-y: auto;
     }
 
