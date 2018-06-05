@@ -17,7 +17,6 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->string('nombre')->unique();
             $table->decimal('precio', 5, 2);
-            $table->integer('stock', false, true);
             $table->string('imagen');
 
             //Clave foránea CATEGORIA.

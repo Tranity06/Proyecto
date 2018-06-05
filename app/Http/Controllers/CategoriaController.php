@@ -11,6 +11,18 @@ class CategoriaController extends Controller {
        return response()->json(Categoria::all(),200);
     }
 
+    /**
+     * Comprueba si el admin esta logueado
+     * Si lo esta accede a la creacion de Categorias, sino vuelve a la pantalla de autenticacion
+     */
+    public function crear(){
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+        return view('categoria.crear', compact('admin'));
+    }
+
     //me comenta Lorena que crear categoria va en la parte de administrador y no va por api[Que es solamente para el front].
     public function crearCategoria(Request $request) {
         $categoria = Categoria::create([

@@ -149,15 +149,31 @@
         });
     </script>
     <script>
+/*        $(function(){
 
-        $(function(){
-
+            //Hago click en el menu y
+            //si esta a menos de 100px del top :: ABRO EL MENU
+                // -> toggle fondoblanco
+                // -> toggle textblack
+                //si hago click en un link del menu ::
+                // -> isActive = false
+                // -> fondoblanco = false
+                // -> textblack = false
+            //si esta a mas de 100px del top ::
+                // -> toggle isActive
+                // -> toggle textblack
+                //si hago click en un link del menu ::
+                // -> isActive = false
+                // -> textblack = false
+                // -> fondoblanco = false
             $('.navbar-burger').click(function() {
 
                 //si cerca del top que ponga el fondo blanco, texto negro y muestre el menu.
                 if ($(document).scrollTop() < 100){
+                    console.log('hola desde el home');
                     openMenu()
                 } else { //si esta mas lejos, el texto blanco, fondo igual, y el logo igual.
+                    console.log('hola desde el home mas de 100');
                     $('a.navbar-item').toggleClass('has-text-black');
                     $('a.button').click(function(e){
                         $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active has-text-black');
@@ -171,7 +187,7 @@
                     });
                 }
 
-                $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
+//                $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
 
             });
 
@@ -193,7 +209,7 @@
                 });
             }
 
-        });
+        });*/
     </script>
 </body>
 </html>
