@@ -39,7 +39,7 @@ class SesionVaciaController extends Controller
         }
 
         $plantilla = PlantillaSesion::find($request->plantilla_id);
-        //$this->reiniciarPlantilla($plantilla);
+        $this->reiniciarPlantilla($plantilla);
         $sesiones = $request->sesiones;
         $idsSesiones = [];
         foreach ( $sesiones as $sesion ){
@@ -47,7 +47,7 @@ class SesionVaciaController extends Controller
                 ['sala_id', '=', $sesion['sala_id']],
                 ['pase', '=', $sesion['pase']],
                 ['hora', '=', $sesion['hora']]
-            ])->first();
+            ])->first(); 
 
             if ($sesion_registrada == null){
                 $sesion_registrada = SesionVacia::create([
@@ -65,7 +65,7 @@ class SesionVaciaController extends Controller
     private static function reiniciarPlantilla ( $plantilla ){
         $sesiones = $plantilla->sesiones();
         foreach ( $sesiones as $sesion ){
-            $plantilla->sesiones()->detach($sesion->id);
+            $plantilla->sesiones()->detach($sesion['id']);
         }
     }
 
