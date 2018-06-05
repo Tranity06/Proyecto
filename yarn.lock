@@ -7679,6 +7679,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-click-outside@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.0.7.tgz#cdd2b1605e3c4944784e1794eae4a12a0f700bd6"
+
 vue-concise-slider@^2.4.8:
   version "2.4.8"
   resolved "https://registry.yarnpkg.com/vue-concise-slider/-/vue-concise-slider-2.4.8.tgz#49211b494549a75f09a03e400bcabb4955a066f3"
@@ -7744,10 +7748,6 @@ vue-notification@^1.3.7:
   resolved "https://registry.yarnpkg.com/vue-notification/-/vue-notification-1.3.7.tgz#207a2d83513041821c7cc42856b68e0b7df616c8"
   dependencies:
     velocity-animate "^1.5.0"
-
-vue-on-click-outside@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/vue-on-click-outside/-/vue-on-click-outside-1.0.3.tgz#6b7200c2b50fa45eb77dce2daad7ab436d9dd611"
 
 vue-router@^3.0.1:
   version "3.0.1"

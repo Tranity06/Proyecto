@@ -28,7 +28,9 @@
                         </template>
                     </ais-results>
                 </ais-index>
-                <i class="fas fa-times"></i>
+
+                <span class="situarIzquierda" @click="hide"><i class="fas fa-times"></i></span>
+
             </div>
         </div>
         <div class="container" v-if="searchDisparado === false">
@@ -172,6 +174,13 @@
 
 <style scoped>
 
+    .situarIzquierda{
+        color: white;
+        position: absolute;
+        top: 15px;
+        left: 70%;
+    }
+
     .pelicula-item{
         display: flex;
         flex-direction: column;
@@ -182,6 +191,17 @@
         margin: 10px 20%;
         width: 70%;
 
+    }
+
+    ::-ms-clear {
+        display: none;
+    }
+
+    ::-webkit-search-decoration,
+    ::-webkit-search-cancel-button,
+    ::-webkit-search-results-button,
+    ::-webkit-search-results-decoration {
+        display: none;
     }
 
     @media only screen and (min-width: 768px){

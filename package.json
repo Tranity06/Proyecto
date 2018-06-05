@@ -24,6 +24,7 @@
         "moment": "^2.22.1",
         "pusher-js": "^4.2.2",
         "vee-validate": "^2.0.9",
+        "vue-click-outside": "^1.0.7",
         "vue-concise-slider": "^2.4.8",
         "vue-google-signin-button": "^1.0.2",
         "vue-instantsearch": "^1.6.0",
