@@ -2,7 +2,7 @@
     <form method="post" class="box-form" v-on:submit.prevent="cambiarAvatar">
         <h1 class="subtitle has-text-weight-bold"><span>Cambiar avatar</span></h1>
 
-        <article class="message is-danger" v-if="registerError">
+        <article class="message is-danger" v-if="servidorError">
             <div class="message-body">
                 El avatar no es valido
             </div>
@@ -21,6 +21,9 @@
 </template>
 
 <script>
+
+    import store from '../../store';
+
     export default {
         name: "cambiar-avatar",
         data(){
@@ -28,6 +31,11 @@
                 image: '',
                 servidorError: false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        },
+        computed: {
+            isComplete () {
+                return this.image;
             }
         },
         methods: {
@@ -74,19 +82,20 @@
                 reader.readAsDataURL(file);
             },
             cambiarAvatar() {
-                axios.post(`/api/datos?token=${store.getters.token}`,{
+                axios.post(`/api/datos/avatar?token=${store.getters.token}`,{
                         image: this.image
                     }
                 ).then(response => {
 
-                    if (response.data.success){
+                    if (response.status === 200){
 
                         //TODO Actualizar el token.
                         store.commit('changeAvatar',response.data.avatar_name);
 
                         this.$notify({
-                            group: 'success',
-                            text: '¡Avatar cambiado con exito!',
+                            group: 'auth',
+                            type: 'success',
+                            text: 'El teléfono se ha actualizado',
                             duration: 3000,
                         });
 

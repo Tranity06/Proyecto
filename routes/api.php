@@ -30,9 +30,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Guardar avatar
-Route::post('/avatar', 'ProfileController@update_avatar');
-
 // Devuelve todas las salas.
 Route::get("/sala", function (){
     return App\Models\Sala::all();
@@ -127,3 +124,4 @@ Route::delete('/producto/{idProducto}', 'ProductoController@deleteProducto')->na
 
 Route::post('/datos/email','PerfilController@cambiarEmail')->name('cambiar.email');
 Route::post('/datos/telefono','PerfilController@cambiarTelefono')->name('cambiar.telefono');
+Route::post('/datos/avatar','PerfilController@cambiarAvatar')->name('cambiar.avatar');

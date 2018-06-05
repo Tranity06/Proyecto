@@ -11,6 +11,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Image;
+use Validator;
 
 class PerfilController extends Controller {
 
@@ -32,6 +35,25 @@ class PerfilController extends Controller {
         $user->saveOrFail();
 
         return response()->json('Success',200);
+    }
+
+    public function cambiarAvatar(Request $request){
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image64:jpeg,jpg,png'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        } else {
+            $imageData = $request->get('image');
+            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            Image::make($imageData)->resize(300, 300)->save( public_path('/uploads/avatars/' . $fileName));
+
+            $user = User::find($this->getUser()->id);
+            $user->avatar = $fileName;
+            $user->saveOrFail();
+
+            return response()->json(['success'=>true,'avatar_name'=>$fileName],200);
+        }
     }
 
     public function getUser(){
