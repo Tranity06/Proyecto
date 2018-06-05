@@ -118,7 +118,7 @@ class APIAuthController extends Controller
         return response()->json(['success' => true, 'token' => $token,'user'=>Auth::user()],200);
     }
 
-    public function loginWithGoogle(Request $request)
+/*    public function loginWithGoogle(Request $request)
     {
         $credentials = $request->only('name', 'email');
 
@@ -144,7 +144,7 @@ class APIAuthController extends Controller
             return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
         }
         return response()->json(['success' => true, 'token' => $token,'user'=>Auth::user()],200);
-    }
+    }*/
 
     /**
      * Log out

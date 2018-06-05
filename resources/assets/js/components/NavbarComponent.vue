@@ -168,8 +168,6 @@
             hide(event) {
                 this.searchDisparado = false;
                 this.query = '';
-
-                console.log('Clicked outside. Event: ', event);
             },
             menu() {
 
@@ -193,6 +191,7 @@
                 const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
 
                 if (scrollTop < 100){
+                    this.textblackLogo = true;
                     this.openMenu()
                 } else {
                     this.textblack = !this.textblack;

@@ -120,3 +120,9 @@ Route::get('/producto', 'ProductoController@getAll')->name('producto.get');
 Route::post('/producto', 'ProductoController@addProducto')->name('producto.add');
 Route::put('/producto/{idProducto}', 'ProductoController@updateProducto')->name('producto.update');
 Route::delete('/producto/{idProducto}', 'ProductoController@deleteProducto')->name('producto.delete');
+
+/**
+ * Perfil
+ */
+
+Route::post('/datos/email','PerfilController@cambiarEmail')->name('cambiar.email');
