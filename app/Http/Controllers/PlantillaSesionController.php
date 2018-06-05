@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PlantillaSesion;
 use Auth;
 use App\Models\Sala;
+use App\Models\SesionVacia;
 
 class PlantillaSesionController extends Controller
 {
@@ -104,6 +105,13 @@ class PlantillaSesionController extends Controller
         $plantilla = PlantillaSesion::find($request->idPlantilla);
         if ( $plantilla == null ){
             return response()->json('La plantilla no existe.', 403);
+        }
+        $sesiones = SesionVacia::get();
+        foreach ($sesiones as $sesion ){
+            $sesion->plantillas()->detach($request->idPlantilla);
+            if (sizeof($sesion->plantillas()->get()) < 1 ){
+                $sesion->delete();
+            }
         }
 
         $plantilla->delete();

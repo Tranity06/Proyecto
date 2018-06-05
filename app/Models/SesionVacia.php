@@ -19,7 +19,7 @@ class SesionVacia extends Model
      * Plantillas a las que pertenece
      */
     public function plantillas(){
-        return $this->belongsToMany(PlantillaSesion::class)->get();
+        return $this->belongsToMany(PlantillaSesion::class);
     }
 
     /**
