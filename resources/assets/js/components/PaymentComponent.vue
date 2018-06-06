@@ -4,12 +4,12 @@
         <div class="field is-grouped">
             <p class="control">
                 <button class="button is-large" @click.prevent="isVisa()">
-                    <img src="icons/Visa.svg" alt="Visa">
+                    <img src="/icons/Visa.svg" alt="Visa">
                 </button>
             </p>
             <p class="control">
                 <button class="button is-large" @click.prevent="prev()">
-                    <img src="icons/PayPal.svg" alt="Paypal">
+                    <img src="/icons/PayPal.svg" alt="Paypal">
                 </button>
             </p>
         </div>

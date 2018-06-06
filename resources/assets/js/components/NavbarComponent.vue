@@ -37,7 +37,7 @@
             <div class="navbar-brand">
                 <router-link class="navbar-item" :to="{ name: 'home' }">
                     <div class="logo-container">
-                        <img src="48px.png" alt="Logo" class="is-hidden-mobile">
+                        <img src="/48px.png" alt="Logo" class="is-hidden-mobile">
                         <span :class="{'has-text-black': textblack && textblackLogo}" @click="closeMenu" >Palomitas time</span>
                     </div>
                 </router-link>
@@ -67,7 +67,7 @@
                           <div class="dropdown is-hoverable">
                               <div class="dropdown-trigger">
                                   <img class="avatar"
-                                       :src="'uploads/avatars/'+getAvatar"
+                                       :src="'/uploads/avatars/'+getAvatar"
                                        aria-haspopup="true" aria-controls="dropdown-menu">
                               </div>
                               <div class="dropdown-menu" id="dropdown-menu" role="menu">
@@ -168,8 +168,6 @@
             hide(event) {
                 this.searchDisparado = false;
                 this.query = '';
-
-                console.log('Clicked outside. Event: ', event);
             },
             menu() {
 
@@ -193,6 +191,7 @@
                 const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
 
                 if (scrollTop < 100){
+                    this.textblackLogo = true;
                     this.openMenu()
                 } else {
                     this.textblack = !this.textblack;

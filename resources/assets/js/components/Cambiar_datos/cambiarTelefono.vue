@@ -2,7 +2,7 @@
     <form method="post" class="box-form" v-on:submit.prevent="cambiarTelefono">
         <h1 class="subtitle has-text-weight-bold"><span>Cambiar Teléfono</span></h1>
 
-        <article class="message is-danger" v-if="registerError">
+        <article class="message is-danger" v-if="telefonoRepetido">
             <div class="message-body">
                 El teléfono ya existe
             </div>
@@ -27,6 +27,9 @@
 </template>
 
 <script>
+
+    import store from '../../store';
+
     export default {
         name: "cambiar-telefono",
         data(){
@@ -44,29 +47,33 @@
         methods: {
             cambiarTelefono() {
                 this.telefonoRepetido = false;
-                axios.post(`/api/datos?token=${store.getters.token}`, {
+                axios.post(`/api/datos/telefono?token=${store.getters.token}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     telefono: this.telefono
                 })
                     .then(response => {
-                        if (response.data.success){
+                        if (response.status === 200){
 
                             //TODO Actualizar el token.
 
                             this.$notify({
-                                group: 'success',
-                                text: '¡Teléfono cambiado con exito!',
+                                group: 'auth',
+                                type: 'success',
+                                text: 'El teléfono se ha actualizado',
                                 duration: 3000,
                             });
 
+                            this.telefono = '';
                         }else{
                             this.telefonoRepetido = true;
+                            this.telefono = '';
                         }
                     })
                     .catch(error => {
                         this.telefonoRepetido = true;
+                        this.telefono = '';
                     })
             }
         }
