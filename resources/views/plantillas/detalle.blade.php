@@ -35,6 +35,34 @@
             <h3 class="box-title">Detalle plantilla {{$plantilla->nombre}}</h3>
         </div>
         <div class="box-body">
+            <div id="tabla-sesiones">
+                    <table id="sesiones">
+                        <thead>
+                            <tr>
+                                <th>Sala</th>
+                                <th>Pase 1</th>
+                                <th>Pase 2</th>
+                                <th>Pase 3</th>
+                                <th>Pase 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach( $salas as $sala )
+                                <tr>
+                                    <td>{{$sala->numero}}</td>
+                                    @for($pase=1; $pase<5; $pase++)
+                                        @if(isset($sesiones[$sala->id][$pase][0]['hora']))
+                                            <td><input type="time" class="hora" value="{{$sesiones[$sala->id][$pase][0]['hora']}}"/></td>
+                                        @else
+                                            <td><input type="time" class="hora"/></td>
+                                        @endif
+                                    @endfor
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <input type="button" id="guardar" value="Guardar cambios"/>
+                </div>
         </div>
     </div>
 @stop
