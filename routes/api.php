@@ -125,3 +125,4 @@ Route::delete('/producto/{idProducto}', 'ProductoController@deleteProducto')->na
 Route::post('/datos/email','PerfilController@cambiarEmail')->name('cambiar.email');
 Route::post('/datos/telefono','PerfilController@cambiarTelefono')->name('cambiar.telefono');
 Route::post('/datos/avatar','PerfilController@cambiarAvatar')->name('cambiar.avatar');
+Route::post('/datos/clave','PerfilController@cambiarClave')->name('cambiar.clave');

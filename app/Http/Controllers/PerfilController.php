@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Image;
 use Validator;
+use JWTAuth;
 
 class PerfilController extends Controller {
 
@@ -53,6 +54,41 @@ class PerfilController extends Controller {
             $user->saveOrFail();
 
             return response()->json(['success'=>true,'avatar_name'=>$fileName],200);
+        }
+    }
+
+    public function cambiarClave(Request $request){
+        $data = $request->only('password','password_confirmation','paso');
+        $rules = [
+            'paso' => 'required',
+            'password' => 'required|min:6|confirmed'
+        ];
+        $validator = Validator::make($data, $rules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => 'Los datos introducidos no son correctos.'],400);
+        }
+
+        if ($request->paso === 1){
+            $credentials['email']=User::find($this->getUser()->id)->email;
+            $credentials['password']=$request->password;
+
+            if ( ! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(false, 401);
+            }
+            return response()->json(true,200);
+        }
+
+        if ($request->paso === 2){
+            $credentials['email']=User::find($this->getUser()->id)->email;
+            $credentials['password']=$request->password;
+
+            $user = User::find($this->getUser()->id);
+            $user->password = bcrypt($request->password);
+            $user->saveOrFail();
+            if ( ! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(false, 401);
+            }
+            return response()->json(['token' => $token],200);
         }
     }
 

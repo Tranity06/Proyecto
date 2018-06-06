@@ -8,7 +8,7 @@
                            :index-name="'peliculas'"
                            :query="query"
                           >
-                    <input v-model="query" class="ais-input" placeholder="Busca ...">
+                    <input v-model="query" class="ais-input" placeholder="Busca ..." autofocus>
                     <ais-results>
                         <template slot-scope="{ result }">
                             <div class="pelicula-item">
