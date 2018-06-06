@@ -116,8 +116,8 @@
                     director = director.join(', ');
                     var actores = [];
                     for ( var i=0 ; i<5 ; i++ ){
-                        actores.push(response['credits']['cast'][i]['name']);
-                    }
+                        actores.push(response['credits']['cast'][i]['character']+' - '+response['credits']['cast'][i]['name']);
+                    } console.log(actores);
                     actores = actores.join(', ');
                     url = 'https://www.youtube.com/embed/'+response.videos.results[0]['key'];
 

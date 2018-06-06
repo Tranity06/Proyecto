@@ -21,7 +21,7 @@ class CreatePeliculasTable extends Migration
             $table->date('estreno')->nullable();
             $table->string('generos')->nullable();
             $table->string('director')->nullable();
-            $table->string('actores')->nullable();
+            $table->string('actores', 300)->nullable();
             $table->string('sinopsis', 1500 )->nullable();
             $table->unsignedInteger('duracion')->nullable();
             $table->string('cartel')->nullable();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pelicula;
+use Auth;
 
 class SliderController extends Controller
 {
@@ -18,23 +19,20 @@ class SliderController extends Controller
      * WEB
      */
     public function mostrar(Request $request){
-        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
-
-        // Si no hay ningún usuario logueado regirige al login
-        if ($admin == null){
-            return redirect('/admin');
+        // Comprobar autenticación
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
         }
+        $admin = Auth::guard('admin')->user()->name;
 
         $peliculas = Pelicula::all();
         return view('pelicula.slider', compact('admin', 'peliculas'));
     }
 
     public function borrar(Request $request){
-        $admin = $request->session()->get('nombre'); //Obtener el nombre del usuario de los datos de la sesion
-
-        // Si no hay ningún usuario logueado regirige al login
-        if ($admin == null){
-            return redirect('/admin');
+        // Comprobar autenticación
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
         }
 
         $pelicula = Pelicula::find($request['id']);
@@ -47,6 +45,11 @@ class SliderController extends Controller
     }
 
     public function anadir(Request $request){
+        // Comprobar autenticación
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        
         $pelicula = Pelicula::find($request['anadir']);
         $pelicula['slider'] = 1;
         $pelicula->save();

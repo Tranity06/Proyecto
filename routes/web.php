@@ -124,6 +124,22 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('butaca/desbloquear', 'ButacaController@desbloquear');
 
   /**
+   * Gestión plantillas de sesiones
+   */
+  Route::get('plantillas', 'PlantillaSesionController@mostrarTodas')->name('plantillas.mostrar');
+  Route::get('plantilla/{idPlantilla}', 'PlantillaSesionController@mostrarPlantilla')->name('plantilla.mostrar');
+  Route::get('plantilla', 'PlantillaSesionController@crear')->name('plantillas.crear');
+  Route::post('plantilla', 'PlantillaSesionController@crearPost'); //AJAX
+  Route::post('plantilla/modificar', 'PlantillaSesionController@modificar'); //AJAX
+  Route::post('plantilla/borrar', 'PlantillaSesionController@borrar'); //AJAX
+
+  /**
+   * Gestión sesiones vacías
+   */
+  Route::post('sesionvacia/borrar', 'SesionVaciaController@borrar'); //AJAX
+  Route::post('sesionvacia/crear', 'SesionVaciaController@crear'); //AJAX
+  
+  /**
    * Gestión MENÚS
    */
   Route::get('menus/crear', 'MenuController@crear');
