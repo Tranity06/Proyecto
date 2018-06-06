@@ -65,6 +65,7 @@
                     <cambiar-email class="tarjeta"></cambiar-email>
                     <cambiar-telefono class="tarjeta"></cambiar-telefono>
                     <cambiar-clave class="tarjeta"></cambiar-clave>
+                    <eliminar-cuenta class="tarjeta"></eliminar-cuenta>
                 </div>
                 <pelicula-ticket v-if="this.tab === 2"></pelicula-ticket>
                 <div v-if="this.tab === 3">
@@ -86,9 +87,11 @@
     import CambiarAvatar from "../components/Cambiar_datos/cambiarAvatar";
     import PeliculaTicket from "../components/PeliculaTicket";
     import VerResenias from "../components/Resenias/verResenias";
+    import EliminarCuenta from "../components/Cambiar_datos/eliminarCuenta";
 
     export default {
         components: {
+            EliminarCuenta,
             VerResenias,
             PeliculaTicket,
             CambiarAvatar,
