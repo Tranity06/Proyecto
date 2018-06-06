@@ -36,7 +36,7 @@
 
                     </div>
                     <div class="is-hidden-tablet has-text-centered">
-                        <a :href="info.trailer" data-lity><img src="icons/play-button.svg"></a>
+                        <a :href="info.trailer" data-lity><img src="/icons/play-button.svg"></a>
                         <h1 class="title has-text-white">
                             {{ info.titulo }}
                             <span class="tag is-danger">PE-7</span>
