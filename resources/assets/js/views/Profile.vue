@@ -6,10 +6,16 @@
                     <div class="perfil-header">
                         <img :src="'uploads/avatars/'+getAvatar">
                         <div class="perfil-info">
-                            <p class="title">
+                            <p class="is-size-2 has-text-weight-bold">
                                 {{ getName }}
                             </p>
-                            <p class="subtitle">
+                            <p class="is-size-6 has-text-grey-light">
+                                {{ getEmail }}
+                            </p>
+                            <p class="is-size-6 has-text-grey-light">
+                                {{ getTelefono }}
+                            </p>
+                            <p class="is-size-6 has-text-grey-light">
                                 1250 puntos
                             </p>
                         </div>
@@ -109,9 +115,14 @@
             getAvatar(){
                 return store.getters.avatar;
             },
-
             getName(){
                 return store.getters.name;
+            },
+            getEmail(){
+                return store.getters.email;
+            },
+            getTelefono(){
+                return store.getters.telefono;
             }
         },
         methods: {

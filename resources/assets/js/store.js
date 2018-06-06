@@ -10,7 +10,9 @@ export default new Vuex.Store({
                 || JSON.parse(sessionStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(sessionStorage.getItem('user')).avatar,
         token: localStorage.getItem('token')==null ? sessionStorage.getItem('token') : localStorage.getItem('token'),
         userId: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).id : JSON.parse(sessionStorage.getItem('user')) !=null ? JSON.parse(sessionStorage.getItem('user')).id : null,
-        name: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).name : JSON.parse(sessionStorage.getItem('user')) !=null ? JSON.parse(sessionStorage.getItem('user')).name : null
+        name: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).name : JSON.parse(sessionStorage.getItem('user')) !=null ? JSON.parse(sessionStorage.getItem('user')).name : null,
+        email: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).email : JSON.parse(sessionStorage.getItem('user')) !=null ? JSON.parse(sessionStorage.getItem('user')).email : null,
+        telefono: JSON.parse(localStorage.getItem('user')) !=null ? JSON.parse(localStorage.getItem('user')).telefono : JSON.parse(sessionStorage.getItem('user')) !=null ? JSON.parse(sessionStorage.getItem('user')).telefono : null
     },
     getters: {
         avatar: (state) => state.avatar,
@@ -18,6 +20,8 @@ export default new Vuex.Store({
         token: (state) => state.token,
         userId: (state) => state.userId,
         name: (state) => state.name,
+        email: (state) => state.email,
+        telefono: (state) => state.telefono,
     },
     mutations: {
         loginUser (state) {
@@ -41,6 +45,12 @@ export default new Vuex.Store({
         },
         changeName(state, name){
             state.name = name;
+        },
+        changeEmail(state, email){
+            state.email = email;
+        },
+        changeTelefono(state, telefono){
+            state.telefono = telefono;
         }
     }
 });

@@ -56,7 +56,7 @@
                             <div class="alergenos">
                               {{producto.precio}}€
                             </div>
-                            <button class="button is-warning is-rounded is-small">Comprar</button>
+                            <button class="button is-warning is-rounded is-small">Añadir</button>
                             <div class="select is-rounded is-small">
                                 <select>
                                     <option>1</option>
