@@ -161,6 +161,8 @@ class PeliculaController extends Controller
             $peli['titulo'] = $pelicula->titulo;
             $peli['is_estreno'] = false;
             $peli['proximamente'] = false;
+            $peli['cartel'] = $pelicula->cartel;
+            $peli['trailer'] = $pelicula->trailer;
             if ( strtotime($pelicula->estreno) == strtotime($hoy) ){
                 $peli['is_estreno'] = true;
             }
