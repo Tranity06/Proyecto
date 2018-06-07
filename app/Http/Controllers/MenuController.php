@@ -14,7 +14,7 @@ class MenuController extends Controller {
             return redirect('/admin'); 
         }
         $admin = Auth::guard('admin')->user()->name;
-        return view('menu.crear', compact('admin'));
+        return view('menus.crear', compact('admin'));
     }
 
     public function getAll() {
