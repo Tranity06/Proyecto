@@ -72,8 +72,12 @@ class ResenaTest extends TestCase
             'pelicula_id' => $this->pelicula->id
         ]);
 
-        $this->actingAs($this->user, 'api')
-             ->get(route('resena.get'))
+        $token = JWTAuth::fromUser($this->user);
+        $headers = ['X-CSRF-TOKEN' => csrf_token(),
+            'Authorization' => 'Bearer '.$token];
+
+
+        $this->get(route('resena.get'),$headers)
              ->assertStatus(201)
              ->assertJsonStructure([
                 '*' => [
