@@ -17,25 +17,25 @@
                         <ul>
                             <li class="is-active">
                                 <a>
-                                    <span class="icon is-small"><i class="fas fa-cog" aria-hidden="true"></i></span>
+                                    <img src="/icons/bebida.svg" alt="Bebidas">
                                     <span class="is-hidden-mobile">{{this.categorias[0].nombre}}</span>
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    <span class="icon is-small"><i class="fas fa-ticket-alt" aria-hidden="true"></i></span>
+                                    <img src="/icons/patatas.svg" alt="Patatas">
                                     <span class="is-hidden-mobile">{{this.categorias[1].nombre}}</span>
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    <span class="icon is-small"><i class="far fa-comment" aria-hidden="true"></i></span>
+                                    <img src="/icons/popcorn.svg" alt="Comida">
                                     <span class="is-hidden-mobile">{{this.categorias[2].nombre}}</span>
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    <span class="icon is-small"><i class="far fa-star" aria-hidden="true"></i></span>
+                                    <img src="/icons/chocolate.svg" alt="Chocolate">
                                     <span class="is-hidden-mobile">{{this.categorias[3].nombre}}</span>
                                 </a>
                             </li>
