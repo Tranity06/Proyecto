@@ -13,6 +13,8 @@ import { Validator } from 'vee-validate';
 import moment from 'moment';
 import GSignInButton from 'vue-google-signin-button';
 import AlgoliaComponents from 'vue-instantsearch';
+import '../../../node_modules/nprogress/nprogress.css';
+import NProgress from 'nprogress';
 
 
 
@@ -34,6 +36,20 @@ moment.locale('es');
 
 window.axios = axios;
 axios.defaults.baseURL = 'http://localhost:8000';
+
+// before a request is made start the nprogress
+axios.interceptors.request.use(config => {
+    NProgress.start();
+    return config
+})
+
+// before a response is returned stop nprogress
+axios.interceptors.response.use(response => {
+    NProgress.done();
+    return response
+})
+
+
 
 const dict = {
     custom: {
