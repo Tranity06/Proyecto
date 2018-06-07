@@ -74,6 +74,18 @@
 </template>
 
 <script>
+
+    const getProductos = (callback) => {
+
+        axios
+            .get('/api/producto/')
+            .then(response => {
+                callback(null, response.data);
+            }).catch(error => {
+            callback(error, error.response.data);
+        });
+    };
+
     export default {
         name: "restaurante",
         data() {
@@ -92,13 +104,27 @@
                     console.log(error);
                 });
 
-            axios.get('/api/producto')
+/*            axios.get('/api/producto')
                 .then(response => {
                     this.productos = response.data;
                 })
                 .catch(error => {
                     console.log(error);
-                })
+                })*/
+        },
+        beforeRouteEnter (to, from, next) {
+            getProductos((err, data) => {
+                next(vm => vm.setData(err, data));
+            });
+        },
+        methods: {
+            setData(err, productos) {
+                if (err) {
+                    this.error = err.toString();
+                } else {
+                    this.productos = productos;
+                }
+            },
         }
     }
 </script>

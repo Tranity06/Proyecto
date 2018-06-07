@@ -37,6 +37,7 @@ moment.locale('es');
 window.axios = axios;
 axios.defaults.baseURL = 'http://localhost:8000';
 
+/*
 // before a request is made start the nprogress
 axios.interceptors.request.use(config => {
     NProgress.start();
@@ -48,6 +49,7 @@ axios.interceptors.response.use(response => {
     NProgress.done();
     return response
 })
+*/
 
 
 
