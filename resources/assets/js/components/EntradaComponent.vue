@@ -84,6 +84,18 @@
 
     import PaymentComponent from './PaymentComponent';
 
+    const getEntrada = (id,callback) => {
+
+        axios
+            .get('/api/pelicula/'+id)
+            .then(response => {
+
+                callback(null, response.data);
+            }).catch(error => {
+            callback(error, error.response.data);
+        });
+    };
+
     export default {
         data() {
             return {
@@ -107,7 +119,7 @@
         components: {
             PaymentComponent
         },
-        mounted() {
+/*        mounted() {
             axios.get(`/api/pelicula/${this.$route.params.id}`)
                 .then(response => {
                     this.caratula = response.data.cartel;
@@ -115,9 +127,8 @@
                     this.trailer = response.data.trailer;
 
                     this.sesiones = response.data.sesiones;
-                    console.log(this.sesiones);
 
-/*                    let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
+/!*                    let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
                         index === self.findIndex((t) => (
                             t.fecha === sesion.fecha
                         ))
@@ -133,20 +144,26 @@
                     console.log('1:: '+this.sesiones[5].fecha);
                     this.sesiones.forEach(sesion => console.log(sesion.fecha));
 
-                    console.log('2:: '+this.sesiones[5].fecha);*/
+                    console.log('2:: '+this.sesiones[5].fecha);*!/
                     this.dia = this.sesiones[0].fecha;
                     this.horaTarget = this.sesiones[0].sala_id;
                     let primeraFecha = this.sesiones[0].fecha;
                     this.mostrarHoras(primeraFecha);
-/*                    this.salas = response.data;
+/!*                    this.salas = response.data;
 
                     // Al obtener las salas tambien muestra por defecto las butacas de la primera sala
-                    this.mostrarAsientos(this.salas[0].id);*/
+                    this.mostrarAsientos(this.salas[0].id);*!/
                 })
                 .catch(e => {
                     console.log(e);
                 })
+        },*/
+        beforeRouteEnter (to, from, next) {
+            getEntrada(to.params.id,(err, data) => {
+                next(vm => vm.setData(err, data));
+            });
         },
+
         methods: {
             prev() {
                 this.step--;
@@ -178,7 +195,25 @@
 
             mostrarAsientos(id) {
                 this.$refs.butaca.getAllButacas(id);
-            }
+            },
+
+            setData(err, data) {
+                if (err) {
+                    this.error = err.toString();
+                } else {
+                    this.caratula = data.cartel;
+                    this.titulo = data.titulo;
+                    this.trailer = data.trailer;
+
+                    this.sesiones = data.sesiones;
+                    this.dia = this.sesiones[0].fecha;
+                    this.horaTarget = this.sesiones[0].sala_id;
+                    let primeraFecha = this.sesiones[0].fecha;
+                    this.mostrarHoras(primeraFecha);
+                }
+
+                console.log(data);
+            },
         }
     }
 </script>
