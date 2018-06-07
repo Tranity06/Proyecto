@@ -34,7 +34,7 @@
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                 });
                 $.ajax({
-                    url: '/menu',
+                    url: '/menus/crear',
                     type: 'POST',
                     data: 'nombre='+nombre,
                     statusCode:{
