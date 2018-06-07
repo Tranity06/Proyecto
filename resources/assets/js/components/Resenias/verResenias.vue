@@ -1,20 +1,21 @@
 <template>
     <div class="ver-resenia">
         <div class="info">
-            <span>INFINI WAR</span>
-            <span>Martes 07 2018</span>
+            <span>{{ tituloPelicula }}</span>
+            <span>{{ moment(fecha).format("D MMMM YYYY") }}</span>
             <span>
                 <i class="fas fa-star"></i>
                 Recompensa
             </span>
         </div>
-        <p  style="margin-top: 1rem; margin-bottom: 1rem;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam blanditiis dolore eius explicabo in ipsum iste magnam mollitia necessitatibus non porro reprehenderit soluta totam vel velit, vitae voluptatem, voluptatibus voluptatum!</p>
+        <p  style="margin-top: 1rem; margin-bottom: 1rem;">{{ texto }}</p>
         <button class="button is-danger is-rounded" style="align-self: center;">Eliminar reseña</button>
     </div>
 </template>
 
 <script>
     export default {
+        props: ['tituloPelicula','fecha','texto'],
         name: "ver-resenias"
     }
 </script>
@@ -37,6 +38,10 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+    }
+
+    .info > span{
+        margin-right: 1rem;
     }
 
 

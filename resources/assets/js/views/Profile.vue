@@ -34,7 +34,7 @@
                             </li>
                             <li :class="{'is-active': this.tab===2}">
                                 <a @click="selectTab(2)">
-                                    <span class="icon is-small"><i class="fas fa-ticket-alt" aria-hidden="true"></i></span>
+                                    <img src="/icons/ticket.svg" alt="Entrada">
                                     <span class="is-hidden-mobile">Entradas</span>
                                 </a>
                             </li >
@@ -75,8 +75,7 @@
                 </div>
                 <pelicula-ticket v-if="this.tab === 2"></pelicula-ticket>
                 <div v-if="this.tab === 3">
-                    <ver-resenias></ver-resenias>
-                    <ver-resenias></ver-resenias>
+                    <ver-resenias v-for="resenia in resenias" :key="resenia.id" :tituloPelicula="resenia.pelicula_id" :fecha="resenia.created_at" :texto="resenia.comentario"></ver-resenias>
                 </div>
                 <div v-if="this.tab === 4">
                     Ofertas
@@ -108,6 +107,7 @@
             return {
                 image: '',
                 tab: 1,
+                resenias: [],
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
@@ -124,6 +124,15 @@
             getTelefono(){
                 return store.getters.telefono;
             }
+        },
+        mounted() {
+            axios.get(`/api/resena?token=${store.getters.token}`)
+            .then(response => {
+                this.resenias = response.data
+            })
+            .catch(error => {
+                console.log(error);
+            })
         },
         methods: {
             onFileChange(e) {

@@ -30,7 +30,7 @@ Vue.use(AlgoliaComponents);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-moment.locale('es-Es');
+moment.locale('es');
 
 window.axios = axios;
 axios.defaults.baseURL = 'http://localhost:8000';

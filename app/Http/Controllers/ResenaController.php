@@ -15,10 +15,12 @@ class ResenaController extends Controller
      * Devuelve todas las reseñas del usuario logueado.
      */
     public function getAllFromUser(){
-        $user = auth()->user();
-        if ( $user == null ) {
-            return response()->json('Permiso denegado', 403);
+        try{
+            $user = JWTAuth::toUser(JWTAuth::getToken());
+        } catch (JWTException $e){
+            return response()->json('Permiso denegado.', 403);
         }
+
         return response()->json($user->resenas(), 201); 
     }
 
