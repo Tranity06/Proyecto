@@ -37,12 +37,12 @@ class MenuController extends Controller {
         return response()->json($menu, 200);
     }
 
-    public function deleteMenu($idMenu) {
+    /*public function deleteMenu($idMenu) {
         $menu = Menu::find($idMenu);
         $menu->delete();
 
         return 204;
-    }
+    }*/
 
     public function mostrar(){
         if (!Auth::guard('admin')->check()){
@@ -52,6 +52,22 @@ class MenuController extends Controller {
         
         $menus = Menu::all();
         return view('menus.mostrar', compact('admin', 'menus'));
+    }
+
+    public function deleteMenu(Request $request){
+        // Comprobar autenticación
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+
+        $menu = menu::find($request->idMenu);
+
+        if ( $menu == null ){
+            return response()->json('El menu indicado no existe.', 403);
+        }
+        
+        $menu->delete();
+        return response()->json('Menu borrado.', 204);
     }
 
 }
