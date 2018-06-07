@@ -18,7 +18,7 @@ class SliderController extends Controller
     /**
      * WEB
      */
-    public function mostrar(Request $request){
+    public function mostrar(){
         // Comprobar autenticación
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
