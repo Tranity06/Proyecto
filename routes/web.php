@@ -145,7 +145,7 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('menus/crear', 'MenuController@crear');
   Route::post('menus/crear', 'MenuController@addMenu')->name('menus.crear');
   Route::get('menus/mostrar', 'MenuController@mostrar');
-  Route::post('menus/borrar', 'MenuController@borrar');
+  Route::post('menus/borrar', 'MenuController@deleteMenu');
 
   /**
    * Gestión PRODUCTOS
