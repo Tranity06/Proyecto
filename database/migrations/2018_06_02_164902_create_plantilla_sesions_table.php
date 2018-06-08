@@ -28,6 +28,6 @@ class CreatePlantillaSesionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plantilla_sesions');
+        Schema::dropIfExists('plantilla_sesiones');
     }
 }
