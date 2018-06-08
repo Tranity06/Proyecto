@@ -35,7 +35,7 @@ Vue.use(AlgoliaComponents);
 moment.locale('es');
 
 window.axios = axios;
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = 'https://palomitastime.online';
 
 /*
 // before a request is made start the nprogress
