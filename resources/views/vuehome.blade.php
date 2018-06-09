@@ -25,6 +25,8 @@
         body {
             display: flex;
             flex-direction: column;
+            width: auto !important;
+            overflow-x: hidden !important;
         }
 
         .vue-notification{
