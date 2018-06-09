@@ -15,7 +15,14 @@
     <script>
         $(document).ready(function(){
             var sesiones_all = $('.table').first().data('cosas');
-            console.log(sesiones_all)
+            var peliculas = $('.table').first().data('peliculas');
+            
+            var selectPeliculas = '<select name="idPelicula" id="idPelicula">';
+            selectPeliculas+= '<option value="-1">Seleccionar película</option>';
+            for ( var i=0; i<peliculas.length ; i++ ){
+                selectPeliculas+='<option value="'+peliculas[i]['id']+'">'+peliculas[i]['titulo']+'</option>';
+            }
+            selectPeliculas+='</select>';
 
             $(function() {
                 $(".table").tablesorter({
@@ -43,19 +50,28 @@
                     if ( sesiones[sala]!=null){
                         for (var pase=1 ; pase<5 ; pase++ ) {
                             console.log('sala?'+sesiones[sala][pase]['pelicula']['titulo']);
-                            horas+= '<td data-pelicula="">'+sesiones[sala][pase]['hora']+'</td>';
-                            pelis+= '<td data-pelicula="">'+sesiones[sala][pase]['pelicula']['titulo']+'</td>';
+                            horas+= '<td><input type="time" id="'+sesiones[sala][pase]['id']+'" value="'+sesiones[sala][pase]['hora']+'"/></td>';
+                            pelis+= '<td><select name="idPelicula" id="idPelicula">';
+                            pelis+= '<option value="-1">Seleccionar película</option>';
+                            for ( var i=0; i<peliculas.length ; i++ ){
+                                pelis+='<option value="'+peliculas[i]['id']+'" ';
+                                if ( sesiones[sala][pase]['pelicula']['titulo'] != null ){
+                                    pelis+='selected';
+                                }
+                                pelis+= '>'+peliculas[i]['titulo']+'</option>';
+                            }
+                            pelis+='</select></td>'; console.log('pelis'+pelis);
                         }
                     } else {
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            horas+= '<td data-pelicula="">'+'HORA'+'</td>';
-                            pelis+= '<td data-pelicula="">'+'PELI'+'</td>';
+                            horas+= '<td>'+'<input type="time"/>'+'</td>';
+                            pelis+= '<td>'+selectPeliculas+'</td>';
                         }
                     }
                     cuerpo+= horas+'</tr>'+pelis+'</tr>'
                     
                 }
-                $body.append(cuerpo);
+                $body.html(cuerpo);
             });
                     
         });
@@ -81,7 +97,7 @@
                 <input type="date" id="fecha" name="fecha"/>
             </label>
             <div id="tabla-sesiones">
-                <table class="table table-bordered table-hover tablesorter" id="sesiones" data-cosas="{{$sesiones}}">
+                <table class="table table-bordered table-hover tablesorter" id="sesiones" data-cosas="{{$sesiones}}" data-peliculas="{{$peliculas}}">
                     <thead>
                         <tr>
                             <th>Sala</th>
