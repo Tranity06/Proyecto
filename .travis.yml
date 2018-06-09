@@ -1,0 +1,29 @@
+sudo: required
+language: php
+dist: trusty
+
+addons:
+  chrome: stable
+
+php:
+  - 7.2
+
+install:
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+  - yarn
+  - yarn run production
+
+before_script:
+  - cp .env.dusk.testing .env
+  - php artisan key:generate
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - php artisan serve &
+
+script:
+  - php vendor/bin/phpunit --coverage-clover build/coverage/xml
+
+after_script:
+  - php vendor/bin/codacycoverage clover build/coverage/xml  
+
+notifications:
+  email: false

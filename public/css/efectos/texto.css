@@ -1,0 +1,163 @@
+
+/* START REVEAL TEXT */
+
+.reveal-text,
+.reveal-text::after {
+    -webkit-animation-delay: .5s;
+    animation-delay: .5s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-duration: 800ms;
+    animation-duration: 800ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+    animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.reveal-text {
+    position: relative;
+    font-size: 10vw;
+    display: block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-animation-name: reveal-text;
+    animation-name: reveal-text;
+    color: #FFF;
+    white-space: nowrap;
+    cursor: default
+
+}
+
+.reveal-text::after {
+    content: "";
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f2f98b;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    pointer-events: none;
+    -webkit-animation-name: revealer-text;
+    animation-name: revealer-text;
+}
+
+
+@-webkit-keyframes reveal-text {
+    from {
+        -webkit-clip-path: inset(0 100% 0 0);
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        -webkit-clip-path: inset(0 0 0 0);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+
+@keyframes reveal-text {
+    from {
+        -webkit-clip-path: inset(0 100% 0 0);
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        -webkit-clip-path: inset(0 0 0 0);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+
+@-webkit-keyframes revealer-text {
+
+    0%, 50% {
+        -webkit-transform-origin: 0 50%;
+        transform-origin: 0 50%;
+    }
+
+    60%, 100% {
+        -webkit-transform-origin: 100% 50%;
+        transform-origin: 100% 50%;
+    }
+
+
+    60% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+
+    100% {
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+    }
+}
+
+
+@keyframes revealer-text {
+
+    0%, 50% {
+        -webkit-transform-origin: 0 50%;
+        transform-origin: 0 50%;
+    }
+
+    60%, 100% {
+        -webkit-transform-origin: 100% 50%;
+        transform-origin: 100% 50%;
+    }
+
+
+    60% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+    }
+
+    100% {
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+    }
+}
+
+/* END REVEAL TEXT */
+
+
+/* START FADE TEXT
+
+    -> Para que el efecto del home sea tan chulo he tenido que crear asignar un delay distinto.
+
+ */
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+.fade {
+    opacity:0;
+    animation:fadeIn ease-in 1;
+    animation-fill-mode:forwards;
+    animation-duration:1s;
+}
+
+.fade.fade-subtitulo {
+    animation-delay: 0.8s;
+}
+
+.fade.fade-boton {
+    animation-delay: 1.1s;
+}
+
+.fade.fade-estreno {
+    animation-delay: 1.5s;
+}
+
+.fade.fade-estreno-fecha {
+    animation-delay: 1.7s;
+}
+
+/* END FADE TEXT */
