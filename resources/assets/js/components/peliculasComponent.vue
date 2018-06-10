@@ -2,7 +2,7 @@
     <section class="section-peliculas">
         <div class="container">
 
-            <div class="columns is-multiline is-centered" v-if="this.tab === 1">
+            <div class="columns is-multiline is-centered nomarginright" v-if="this.tab === 1">
                 <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculas">
                     <div class="pelicula-card centrar-imagen">
                         <img :src="peliculas[key].cartel">
@@ -161,6 +161,10 @@
 
 <style scoped>
     /* Pelicula Card */
+
+    .nomarginright{
+         margin-right: 0 !important;
+    }
 
     .section-peliculas{
         margin-bottom: 1.5rem;

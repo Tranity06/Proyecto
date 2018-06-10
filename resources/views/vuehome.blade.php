@@ -15,7 +15,6 @@
     <link href="{{ asset('css/modal/lity.css') }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/footer.css') }}" media="all" rel="stylesheet" type="text/css" />
     <script src="https://apis.google.com/js/api:client.js"></script>
-
     <style>
 
         html, body {
@@ -25,8 +24,6 @@
         body {
             display: flex;
             flex-direction: column;
-            width: auto !important;
-            overflow-x: hidden !important;
         }
 
         .vue-notification{
@@ -106,7 +103,8 @@
     <script src="{{ mix('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/modal/lity.js') }}"></script>
     <script>
-        $(function(){
+        $(document).ready(function () {
+            // etc
 
             var didScroll;
             var lastScrollTop = 0;
@@ -149,69 +147,6 @@
                 lastScrollTop = st;
             }
         });
-    </script>
-    <script>
-/*        $(function(){
-
-            //Hago click en el menu y
-            //si esta a menos de 100px del top :: ABRO EL MENU
-                // -> toggle fondoblanco
-                // -> toggle textblack
-                //si hago click en un link del menu ::
-                // -> isActive = false
-                // -> fondoblanco = false
-                // -> textblack = false
-            //si esta a mas de 100px del top ::
-                // -> toggle isActive
-                // -> toggle textblack
-                //si hago click en un link del menu ::
-                // -> isActive = false
-                // -> textblack = false
-                // -> fondoblanco = false
-            $('.navbar-burger').click(function() {
-
-                //si cerca del top que ponga el fondo blanco, texto negro y muestre el menu.
-                if ($(document).scrollTop() < 100){
-                    console.log('hola desde el home');
-                    openMenu()
-                } else { //si esta mas lejos, el texto blanco, fondo igual, y el logo igual.
-                    console.log('hola desde el home mas de 100');
-                    $('a.navbar-item').toggleClass('has-text-black');
-                    $('a.button').click(function(e){
-                        $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active has-text-black');
-                        $('.navbar').removeClass('fondoblanco');
-                        $('a.navbar-item').removeClass('has-text-black');
-                        $('.logo-container > span').removeClass('has-text-black');
-                    });
-
-                    $('a.navbar-item').click(function(e){
-                        $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active');
-                    });
-                }
-
-//                $('#navbarMenuHeroA, .navbar-burger').toggleClass('is-active');
-
-            });
-
-            function openMenu(){
-                // Activar Desactivar Fondo blanco del navbar
-                $('.navbar').toggleClass('fondoblanco');
-                // Activar desactivar el texto negro de los enlaces
-                $('.navbar-item').toggleClass('has-text-black');
-                // Poner el texto negro del navbar
-                $('.logo-container > span').toggleClass('has-text-black');
-                $('#navbarMenuHeroA, .navbar-burger').toggleClass('has-text-black');
-                //Cuando haga click en algun elemento del menu:
-                //Quitar 'is-active y has-text-black', el fondo blanco y el texto negro.
-                $('.navbar-item').click(function(e){
-                    $('#navbarMenuHeroA, .navbar-burger').removeClass('is-active has-text-black');
-                    $('.navbar').removeClass('fondoblanco');
-                    $('.navbar-item').removeClass('has-text-black');
-                    $('.logo-container > span').removeClass('has-text-black');
-                });
-            }
-
-        });*/
     </script>
 </body>
 </html>
