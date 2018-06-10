@@ -201,7 +201,7 @@ class PeliculaController extends Controller
                     $butacas = [];
                     foreach ( $butacas_reservadas as $butaca_reservada ){
                         $butaca['id'] = $butaca_reservada->id;
-                        $butaca_reservada['estado'] = $butaca_reservada->estado;
+                        $butaca['estado'] = $butaca_reservada->estado;
                         $butaca['fila'] = Butaca::find($butaca_reservada->butaca_id)->fila;
                         $butaca['numero'] = Butaca::find($butaca_reservada->butaca_id)->numero;
                         array_push($butacas, $butaca);

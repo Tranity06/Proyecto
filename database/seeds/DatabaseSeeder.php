@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             SalaSeeder::class,
             ButacaSeeder::class,
             PeliculasSeeder::class,
-            //SesionesSeeder::class,
+            SesionesSeeder::class,
             CategoriasSeeder::class,
             ProductosSeeder::class
         ]);
