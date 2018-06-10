@@ -219,6 +219,7 @@
                 this.isActive = false;
                 this.textblack = false;
                 this.fondoBlanco = false;
+                this.isDropdownActive = false;
             },
             dropdown(){
                 if (this.isDropdownActive === false){
