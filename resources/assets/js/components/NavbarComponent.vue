@@ -79,21 +79,21 @@
                             </div>
                         </div>
                         <div v-show="!StoreStateEnabled" style="display: flex; justify-content: center">
-                            <router-link class="button is-primary entrar" :to="{ name: 'login' }">
+                            <router-link class="button is-danger entrar" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span @click="closeMenu">Entrar</span>
                                 </div>
                             </router-link>
 <!--                            <a href="http://www.facebook.com" class="centeredIcon">
                                 <i class="fab fa-google"></i>
-                            </a>-->
+                            </a>--><!--
                               <g-signin-button
                                       class="centeredIcon"
                                       :params="googleSignInParams"
                                       @success="onSignInSuccess"
                                       @error="onSignInError">
                                 <i class="fab fa-google"></i>
-                              </g-signin-button>
+                              </g-signin-button>-->
                         </div>
                 </span>
                 </div>

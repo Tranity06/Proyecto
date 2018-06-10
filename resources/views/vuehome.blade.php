@@ -19,6 +19,7 @@
 
         html, body {
             height: 100%;
+            background-color: #f5f5f5;
         }
 
         body {
@@ -72,7 +73,6 @@
         .fondoblanco{
             background-color: white !important;
         }
-
     </style>
 </head>
 <body>

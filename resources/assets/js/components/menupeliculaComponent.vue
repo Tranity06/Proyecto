@@ -35,7 +35,7 @@
     }
 
     .menu-pelicula > .opciones {
-        background-color: white;
+        background-color: #f5f5f5;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         padding: 1.25rem;
