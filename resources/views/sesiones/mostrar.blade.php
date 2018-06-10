@@ -25,7 +25,6 @@
             selectPeliculas+='</select>';
 
             var plantillas = $('#plantilla').data('plantillas');
-            console.log(plantillas);
 
             $(function() {
                 $(".table").tablesorter({
@@ -51,7 +50,7 @@
                     plantilla = $('#plantilla').val();
                     if ( typeof sesiones !== "undefined" && sesiones[sala]!=null){
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            horas+= '<td><input type="time"';
+                            horas+= '<td id="'+sala+pase+'"><input type="time"';
                             pelis+= '<td><select name="idPelicula" id="idPelicula">';
                             pelis+= '<option value="-1">- Seleccionar película -</option>';
                             for ( var i=0; i<peliculas.length ; i++ ){
@@ -68,7 +67,7 @@
                         }
                     } else {
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            horas+= '<td><input type="time" value="'+plantillas[plantilla][sala][pase][0]['hora']+'"/></td>';
+                            horas+= '<td id="'+sala+pase+'"><input type="time" value="'+plantillas[plantilla][sala][pase][0]['hora']+'"/></td>';
                             pelis+= '<td>'+selectPeliculas+'</td>';
                         }
                     }
@@ -76,6 +75,21 @@
                     
                 }
                 $body.html(cuerpo);
+            });
+
+            $('#plantilla').change(function () {
+                if (confirm("Si cambias la plantilla cambiarán las horas de las sesiones, ¿Seguro que quieres hacerlo?")){
+                    var plantilla = $(this).val();
+                    for ( var sala=1 ; sala<=5 ; sala++ ) {
+                        for (var pase=1; pase<=4 ; pase++ ){
+                            var id='#'+sala+pase;
+                            $(id).children().first().val('');
+                            if ( typeof plantillas[plantilla][sala][pase][0] !== "undefined" ){
+                                $(id).children().first().val(plantillas[plantilla][sala][pase][0]['hora']);
+                            }
+                        }
+                    }
+                }
             });
                     
         });
