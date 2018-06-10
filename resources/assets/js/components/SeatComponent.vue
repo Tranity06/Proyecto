@@ -51,7 +51,8 @@
                 v-show="isModalVisible"
                 @close="closeModal"
         >
-            <span slot="body">Las butacas tienen que ser contiguas</span>
+            <span slot="header">Las butacas tienen que ser contiguas</span>
+            <span slot="body">¿Os habéis enfadado?</span>
         </modal>
     </div>
 

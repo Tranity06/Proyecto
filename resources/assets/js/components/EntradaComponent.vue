@@ -80,7 +80,8 @@
                     v-show="isModalVisible"
                     @close="closeModal"
             >
-                <span slot="body">Elige al menos una butaca</span>
+                <span slot="header">Elige al menos una butaca</span>
+                <span slot="body">No está permitido ver la pelicula de pie :(</span>
             </modal>
         </div>
     </div>

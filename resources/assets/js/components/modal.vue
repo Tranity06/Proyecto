@@ -5,9 +5,8 @@
                 <header class="modal_main-header">
                     <slot name="header">
                         <span>This is the default tile!</span>
-
-                        <a class="delete" @click="close"></a>
                     </slot>
+                    <a class="delete" @click="close"></a>
                 </header>
                 <section class="modal_main-body">
                     <slot name="body">
@@ -83,7 +82,7 @@
 
     .modal_main-header {
         border-bottom: 1px solid #eeeeee;
-        color: #4AAE9B;
+        color: hsl(348, 100%, 61%);
         justify-content: space-between;
         align-items: center;
     }
