@@ -54,7 +54,7 @@
                                     <img :src="caratula" alt="" width="55" height="74">
                                     <div class="informacion">
                                         <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
-                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + salaTarget}}</span>
+                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + horaTarget}}</span>
                                         <span class="has-text-grey-light is-size-7"> {{ butacas.num }} {{butacas.num > 1 ? 'entradas': 'entrada'}}</span>
                                     </div>
                                     <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
@@ -65,7 +65,7 @@
                             </section>
                         </div>
                         <div class="column">
-                            <payment-component></payment-component>
+                            <payment-component ref="pago"></payment-component>
                         </div>
                     </div>
                     <div class="buttons-component">
@@ -178,7 +178,14 @@
                 console.log(data);
             },
             confirmarPago(){
-                console.log('confirmar pago');
+                // fecha -> dia
+                // hora -> horaSeleccionada
+                // sala -> horaTarget
+                // butacas -> butacas
+
+                // Faltan los datos de la tarjeta de credito :D
+
+                console.log(this.$refs.pago.getDatosVisa());
             }
         }
     }
