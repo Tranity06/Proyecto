@@ -96,7 +96,7 @@
     const getEntrada = (id,callback) => {
 
         axios
-            .get('/api/pelicula/'+id)
+            .get('/api/pelicula/'+id+'/entrada')
             .then(response => {
                 callback(null, response.data);
             }).catch(error => {

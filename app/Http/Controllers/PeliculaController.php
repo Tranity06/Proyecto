@@ -185,7 +185,12 @@ class PeliculaController extends Controller
      * Sólo las sesiones activas.
      */
     public function getOne($idPelicula){
-        $pelicula = Pelicula::find($idPelicula);
+        $pelicula = Pelicula::where('id', $idPelicula)->get(['id','titulo','generos','sinopsis','duracion','cartel','trailer','slider_image'])->first();
+        return response()->json($pelicula, 200);
+    }
+
+    public function getEntrada($idPelicula){
+        $pelicula = Pelicula::where('id', $idPelicula)->get(['titulo', 'cartel', 'trailer'])->first();
         $fechas = Sesion::distinct()->where('pelicula_id',$idPelicula)->orderBy('fecha')->get(['fecha']);
         $sesiones = [];
         foreach ( $fechas as $fecha ){
