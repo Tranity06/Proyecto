@@ -54,8 +54,8 @@
                                     <img :src="caratula" alt="" width="55" height="74">
                                     <div class="informacion">
                                         <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
-                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaTarget + " Sala " + salaTarget}}</span>
-                                        <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
+                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + horaTarget}}</span>
+                                        <span class="has-text-grey-light is-size-7"> {{ butacas.num }} {{butacas.num > 1 ? 'entradas': 'entrada'}}</span>
                                     </div>
                                     <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
                                 </div>
@@ -65,7 +65,7 @@
                             </section>
                         </div>
                         <div class="column">
-                            <payment-component></payment-component>
+                            <payment-component ref="pago"></payment-component>
                         </div>
                     </div>
                     <div class="buttons-component">
@@ -76,13 +76,33 @@
                     </div>
 
                 </div>
+            <modal
+                    v-show="isModalVisible"
+                    @close="closeModal"
+            >
+                <span slot="header">Elige al menos una butaca</span>
+                <span slot="body">No está permitido ver la pelicula de pie :(</span>
+            </modal>
         </div>
     </div>
 </template>
 
 <script>
 
+    import store from '../store';
     import PaymentComponent from './PaymentComponent';
+    import modal from './modal.vue';
+
+    const getEntrada = (id,callback) => {
+
+        axios
+            .get('/api/pelicula/'+id)
+            .then(response => {
+                callback(null, response.data);
+            }).catch(error => {
+            callback(error, error.response.data);
+        });
+    };
 
     export default {
         data() {
@@ -90,7 +110,8 @@
                 salas: 0,
                 salaTarget: 1,
                 dia: '',
-                horaTarget: '',
+                horaTarget: null,
+                horaSeleccionada: '1',
                 horas: [],
                 step: 1,
                 pelicula: [],
@@ -101,53 +122,28 @@
                 butacas: {
                     total: 0,
                     num: 0
-                }
+                },
+                isModalVisible: false,
             }
         },
         components: {
-            PaymentComponent
+            PaymentComponent,
+            modal
         },
-        mounted() {
-            axios.get(`/api/pelicula/${this.$route.params.id}`)
-                .then(response => {
-                    this.caratula = response.data.cartel;
-                    this.titulo = response.data.titulo;
-                    this.trailer = response.data.trailer;
 
-                    this.sesiones = response.data.sesiones;
-                    console.log(this.sesiones);
-
-/*                    let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
-                        index === self.findIndex((t) => (
-                            t.fecha === sesion.fecha
-                        ))
-                    );
-
-                    // los inserta ordenados por fecha.
-                     this.sesiones =sesionesSinDiasDuplicados.sort((a, b) => {
-                            return new Date(a.fecha) - new Date(b.fecha);
-                     });
-
-                    this.dia = this.sesiones[0].fecha;
-                    this.horaTarget = this.sesiones[0].sala_id;
-                    console.log('1:: '+this.sesiones[5].fecha);
-                    this.sesiones.forEach(sesion => console.log(sesion.fecha));
-
-                    console.log('2:: '+this.sesiones[5].fecha);*/
-                    this.dia = this.sesiones[0].fecha;
-                    this.horaTarget = this.sesiones[0].sala_id;
-                    let primeraFecha = this.sesiones[0].fecha;
-                    this.mostrarHoras(primeraFecha);
-/*                    this.salas = response.data;
-
-                    // Al obtener las salas tambien muestra por defecto las butacas de la primera sala
-                    this.mostrarAsientos(this.salas[0].id);*/
-                })
-                .catch(e => {
-                    console.log(e);
-                })
+        beforeRouteEnter (to, from, next) {
+            getEntrada(to.params.id,(err, data) => {
+                next(vm => vm.setData(err, data));
+            });
         },
+
         methods: {
+            showModal() {
+                this.isModalVisible = true;
+            },
+            closeModal() {
+                this.isModalVisible = false;
+            },
             prev() {
                 this.step--;
             },
@@ -157,9 +153,10 @@
                 if (validacion) {
                     this.butacas.total = this.$refs.butaca.getTotal();
                     this.butacas.num = this.$refs.butaca.getButacas();
+                    this.horaSeleccionada = this.horas.filter(hora => hora.sala_id === this.horaTarget)[0].hora;
                     this.step++;
                 } else {
-                    alert("Debes seleccionar al menos una butaca.");
+                    this.showModal();
                 }
 
 
@@ -178,6 +175,60 @@
 
             mostrarAsientos(id) {
                 this.$refs.butaca.getAllButacas(id);
+            },
+
+            setData(err, data) {
+                if (err) {
+                    this.error = err.toString();
+                } else {
+                    this.caratula = data.cartel;
+                    this.titulo = data.titulo;
+                    this.trailer = data.trailer;
+
+                    this.sesiones = data.sesiones;
+                    this.dia = this.sesiones[0].fecha;
+                    this.horaTarget = this.sesiones[0].sala_id;
+                    let primeraFecha = this.sesiones[0].fecha;
+                    this.mostrarHoras(primeraFecha);
+                }
+
+                console.log(data);
+            },
+            confirmarPago(){
+                // fecha -> dia
+                // hora -> horaSeleccionada
+                // sala -> horaTarget
+                // butacas -> butacas
+
+                const datosVisa = this.$refs.pago.getDatosVisa();
+
+                axios.post(`/api/pago?token=${store.getters.token}`, {
+                    nombre_pelicula: this.titulo,
+                    dia: this.dia,
+                    nombre_tarjeta: datosVisa.nombre,
+                })
+                    .then(response => {
+
+                        if (response.status === 200){
+                            console.log('reservado');
+                            this.$notify({
+                                group: 'auth',
+                                type: 'success',
+                                title: 'Pago confirmado',
+                                text: 'Tu entrada ha sido comprada con exito',
+                                duration: 3000,
+                            });
+                        }
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+
+
+
+                console.log(this.$refs.pago.getDatosVisa());
             }
         }
     }

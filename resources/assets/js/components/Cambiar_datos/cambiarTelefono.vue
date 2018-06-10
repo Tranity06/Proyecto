@@ -58,6 +58,8 @@
 
                             //TODO Actualizar el token.
 
+                            store.commit('changeTelefono',this.telefono);
+
                             this.$notify({
                                 group: 'auth',
                                 type: 'success',

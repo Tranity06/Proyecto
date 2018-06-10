@@ -203,7 +203,7 @@ return [
             'text' => 'Menús',
             'submenu' => [
                 [
-                    'text' => 'Crear nuevo',
+                    'text' => 'Crear',
                     'url' => 'menus/crear'
                 ],
                 [
@@ -211,10 +211,6 @@ return [
                     'url'  => 'menus/mostrar',
                 ],
             ],
-        ],
-        [
-            'text' => 'Sesiones',
-            'url'  => '#',
         ],
     ],
 

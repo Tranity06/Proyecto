@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import NProgress from 'nprogress';
 
 Vue.use(VueRouter);
 
@@ -59,8 +60,25 @@ const router = new VueRouter({
     scrollBehavior (to, from, savedPosition) {
         return { x: 0, y: 0 };
     },
-    routes
+    routes,
+    linkExactActiveClass: 'is-active',
 });
+
+router.beforeResolve((to, from, next) => {
+    // If this isn't an initial page load.
+    if (to.name) {
+        // Start the route progress bar.
+        NProgress.start()
+    }
+    next()
+})
+
+router.afterEach((to, from) => {
+    // Complete the animation of the route progress bar.
+    NProgress.done()
+})
+
+
 /*
 router.beforeEach((to, from, next) => {
 

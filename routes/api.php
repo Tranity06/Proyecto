@@ -59,6 +59,12 @@ Route::get('pelicula/{idPelicula}/resenas','PeliculaController@getResenas')->nam
 Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('pelicula.getSesiones');
 
 /**
+ * Pago
+ */
+
+Route::post('/pago','PagoController@confirmarPago')->name('pago.confirmarPago');
+
+/**
  * Reseñas
  */
 
@@ -125,3 +131,4 @@ Route::delete('/producto/{idProducto}', 'ProductoController@deleteProducto')->na
 Route::post('/datos/email','PerfilController@cambiarEmail')->name('cambiar.email');
 Route::post('/datos/telefono','PerfilController@cambiarTelefono')->name('cambiar.telefono');
 Route::post('/datos/avatar','PerfilController@cambiarAvatar')->name('cambiar.avatar');
+Route::post('/datos/clave','PerfilController@cambiarClave')->name('cambiar.clave');

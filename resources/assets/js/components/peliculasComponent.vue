@@ -2,7 +2,7 @@
     <section class="section-peliculas">
         <div class="container">
 
-            <div class="columns is-multiline is-centered" v-if="this.tab === 1">
+            <div class="columns is-multiline is-centered nomarginright" v-if="this.tab === 1">
                 <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculas">
                     <div class="pelicula-card centrar-imagen">
                         <img :src="peliculas[key].cartel">
@@ -24,6 +24,62 @@
 <!--                                <div class="tags">
                                     <sesion-component v-for="sesion in peliculas[key].sesiones" :key="sesion.id" :sesion="sesion"></sesion-component>
                                 </div>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns is-multiline is-centered" v-if="this.tab === 2">
+                <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculasEstreno">
+                    <div class="pelicula-card centrar-imagen">
+                        <img :src="peliculasTOP[key].cartel">
+                        <div class="pelicula-trailer grow">
+                            <a :href="peliculasTOP[key].trailer" data-lity><img src="icons/play-button.svg"></a>
+                        </div>
+                        <div class="pelicula-body">
+                            <div class="pelicula-opciones">
+                                <div class="buttons">
+                                    <router-link class="button is-rounded" :to="'/pelicula/'+peliculasTOP[key].id">
+                                        <img src="icons/arrow-pointing-to-right.svg">
+                                    </router-link>
+                                    <router-link class="button is-rounded" :to="'/entrada/'+peliculasTOP[key].id">
+                                        Comprar entrada
+                                    </router-link>
+                                </div>
+                            </div>
+                            <div class="pelicula-horario">
+                                <!--                                <div class="tags">
+                                                                    <sesion-component v-for="sesion in peliculas[key].sesiones" :key="sesion.id" :sesion="sesion"></sesion-component>
+                                                                </div>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns is-multiline is-centered" v-if="this.tab === 3">
+                <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculasProximo">
+                    <div class="pelicula-card centrar-imagen">
+                        <img :src="peliculasTOP[key].cartel">
+                        <div class="pelicula-trailer grow">
+                            <a :href="peliculasTOP[key].trailer" data-lity><img src="icons/play-button.svg"></a>
+                        </div>
+                        <div class="pelicula-body">
+                            <div class="pelicula-opciones">
+                                <div class="buttons">
+                                    <router-link class="button is-rounded" :to="'/pelicula/'+peliculasTOP[key].id">
+                                        <img src="icons/arrow-pointing-to-right.svg">
+                                    </router-link>
+                                    <router-link class="button is-rounded" :to="'/entrada/'+peliculasTOP[key].id">
+                                        Comprar entrada
+                                    </router-link>
+                                </div>
+                            </div>
+                            <div class="pelicula-horario">
+                                <!--                                <div class="tags">
+                                                                    <sesion-component v-for="sesion in peliculas[key].sesiones" :key="sesion.id" :sesion="sesion"></sesion-component>
+                                                                </div>-->
                             </div>
 
                         </div>
@@ -78,27 +134,37 @@
         data() {
             return {
                 peliculas: [],
-                peliculasTOP: []
+                peliculasTOP: [],
+                peliculasEstreno: [],
+                peliculasProximo: [],
             }
         },
         mounted() {
             axios.get('/api/peliculas')
                 .then(response => {
-                    this.peliculas = response.data;
-                    this.peliculasTOP = this.peliculas.slice(0).sort((min,max) => max.popularidad - min.popularidad)
+                    this.setPeliculas(response.data);
                 })
                 .catch(error => {
                     console.log(error);
                 })
         },
         methods: {
-
+            setPeliculas(peliculas){
+                this.peliculas = peliculas;
+                this.peliculasEstreno = peliculas.filter(pelicula => pelicula.is_estreno === true);
+                this.peliculasProximo = peliculas.filter(pelicula => pelicula.proximamente === true);
+                this.peliculasTOP = peliculas.slice(0).sort((min,max) => max.popularidad - min.popularidad)
+            }
         }
     }
 </script>
 
 <style scoped>
     /* Pelicula Card */
+
+    .nomarginright{
+         margin-right: 0 !important;
+    }
 
     .section-peliculas{
         margin-bottom: 1.5rem;

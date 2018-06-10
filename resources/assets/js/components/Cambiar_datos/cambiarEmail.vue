@@ -57,7 +57,7 @@
                         if (response.status === 200){
 
                             //TODO Actualizar el token.
-                            console.log('email');
+                            store.commit('changeEmail',this.email);
 
                             this.$notify({
                                 group: 'auth',

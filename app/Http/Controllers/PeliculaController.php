@@ -160,6 +160,8 @@ class PeliculaController extends Controller
         $pelis = [];
         $peli = [];
         foreach ( $peliculas as $pelicula ){
+            $peli['id'] = $pelicula->id;
+            $peli['popularidad'] = $pelicula->popularidad;
             $peli['titulo'] = $pelicula->titulo;
             $peli['is_estreno'] = false;
             $peli['proximamente'] = false;

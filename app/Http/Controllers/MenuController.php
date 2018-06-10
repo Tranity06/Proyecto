@@ -9,12 +9,11 @@ use Auth;
 class MenuController extends Controller {
 
     public function crear(){
-        // Comprobar autenticación
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
         }
         $admin = Auth::guard('admin')->user()->name;
-        return view('menu.crear', compact('admin'));
+        return view('menus.crear', compact('admin'));
     }
 
     public function getAll() {
@@ -34,14 +33,11 @@ class MenuController extends Controller {
         $menu->nombre = $request['nombre'];
         $menu->save();
 
+        if ( $menu == null ){
+            return response()->json('El menu indicado no existe.', 403);
+        }
+
         return response()->json($menu, 200);
-    }
-
-    public function deleteMenu($idMenu) {
-        $menu = Menu::find($idMenu);
-        $menu->delete();
-
-        return 204;
     }
 
     public function mostrar(){
@@ -52,6 +48,31 @@ class MenuController extends Controller {
         
         $menus = Menu::all();
         return view('menus.mostrar', compact('admin', 'menus'));
+    }
+
+    public function deleteMenu(Request $request){
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+
+        $menu = menu::find($request->idMenu);
+
+        if ( $menu == null ){
+            return response()->json('El menu indicado no existe.', 403);
+        }
+        
+        $menu->delete();
+        return response()->json('Menu borrado.', 204);
+    }
+
+    public function mostrarMenu( $idMenu ){
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+
+        $menu = Menu::find($idMenu);
+        return view('menus.editar', compact('admin', 'menu'));
     }
 
 }

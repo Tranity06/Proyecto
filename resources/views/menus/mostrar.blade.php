@@ -35,9 +35,25 @@
                 });
             });
 
+            $('.table').on('click', '.editar', function(){
+                var $boton = $(this);
+                var $idMenu= $boton.next().val();
+
+                var getUrl = window.location;
+                var destino = getUrl .protocol + "//" + getUrl.host + "/menus/" + $idMenu;
+                $( location ).attr("href", destino);
+            });
+
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
-                var $id= $boton.next().val();
+                var $idMenu= $boton.next().val();
+
+                var $callout = $('.callout').first();
+                $boton.attr('disabled', 'disabled');
+                $callout.slideUp();
+                $callout.text('');
+                $callout.removeClass('callout-danger');
+
                 if (confirm("¿Seguro que quieres eliminar este menu?")){
                     $.ajaxSetup({
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
@@ -45,7 +61,7 @@
                     $.ajax({
                         url: '/menus/borrar',
                         type: 'POST',
-                        data: 'id='+$id,
+                        data: 'idMenu='+$idMenu,
                         statusCode:{
                             204: function (){
                                 $boton.closest('tr')
@@ -58,8 +74,9 @@
                                     $(this).closest('tr').remove();
                                 });
                             },
-                            400: function() {
-                                console.log("Error");
+                            403: function (){
+                                $callout.text(e.responseJSON);
+                                $callout.addClass('callout-danger').slideDown();
                             }
                         },
                         async: true,
@@ -89,6 +106,7 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Detalles</th>
                         <th>Borrar</th>
                     </tr>
                 </thead>
@@ -97,6 +115,10 @@
                         <div class="fila">
                             <tr>
                                 <td> {{ $menu->nombre}} </td>
+                                <td>
+                                    <button class="editar"><i class="glyphicon glyphicon-pencil"></i></button>
+                                    <input type="hidden" name="id" value="{{ $menu->id }}"/>
+                                </td>
                                 <td>
                                     <button class="borrar"><i class="fa fa-fw fa-trash-o"></i></button>
                                     <input type="hidden" name="id" value="{{ $menu->id }}"/>

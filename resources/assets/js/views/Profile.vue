@@ -6,10 +6,16 @@
                     <div class="perfil-header">
                         <img :src="'uploads/avatars/'+getAvatar">
                         <div class="perfil-info">
-                            <p class="title">
+                            <p class="is-size-2 has-text-weight-bold">
                                 {{ getName }}
                             </p>
-                            <p class="subtitle">
+                            <p class="is-size-6 has-text-grey-light">
+                                {{ getEmail }}
+                            </p>
+                            <p class="is-size-6 has-text-grey-light">
+                                {{ getTelefono }}
+                            </p>
+                            <p class="is-size-6 has-text-grey-light">
                                 1250 puntos
                             </p>
                         </div>
@@ -28,7 +34,7 @@
                             </li>
                             <li :class="{'is-active': this.tab===2}">
                                 <a @click="selectTab(2)">
-                                    <span class="icon is-small"><i class="fas fa-ticket-alt" aria-hidden="true"></i></span>
+                                    <img src="/icons/ticket.svg" alt="Entrada">
                                     <span class="is-hidden-mobile">Entradas</span>
                                 </a>
                             </li >
@@ -65,11 +71,11 @@
                     <cambiar-email class="tarjeta"></cambiar-email>
                     <cambiar-telefono class="tarjeta"></cambiar-telefono>
                     <cambiar-clave class="tarjeta"></cambiar-clave>
+                    <eliminar-cuenta class="tarjeta"></eliminar-cuenta>
                 </div>
                 <pelicula-ticket v-if="this.tab === 2"></pelicula-ticket>
                 <div v-if="this.tab === 3">
-                    <ver-resenias></ver-resenias>
-                    <ver-resenias></ver-resenias>
+                    <ver-resenias v-for="resenia in resenias" :key="resenia.id" :tituloPelicula="resenia.pelicula_id" :fecha="resenia.created_at" :texto="resenia.comentario"></ver-resenias>
                 </div>
                 <div v-if="this.tab === 4">
                     Ofertas
@@ -86,9 +92,11 @@
     import CambiarAvatar from "../components/Cambiar_datos/cambiarAvatar";
     import PeliculaTicket from "../components/PeliculaTicket";
     import VerResenias from "../components/Resenias/verResenias";
+    import EliminarCuenta from "../components/Cambiar_datos/eliminarCuenta";
 
     export default {
         components: {
+            EliminarCuenta,
             VerResenias,
             PeliculaTicket,
             CambiarAvatar,
@@ -99,6 +107,7 @@
             return {
                 image: '',
                 tab: 1,
+                resenias: [],
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
@@ -106,10 +115,24 @@
             getAvatar(){
                 return store.getters.avatar;
             },
-
             getName(){
                 return store.getters.name;
+            },
+            getEmail(){
+                return store.getters.email;
+            },
+            getTelefono(){
+                return store.getters.telefono;
             }
+        },
+        mounted() {
+            axios.get(`/api/resena?token=${store.getters.token}`)
+            .then(response => {
+                this.resenias = response.data
+            })
+            .catch(error => {
+                console.log(error);
+            })
         },
         methods: {
             onFileChange(e) {

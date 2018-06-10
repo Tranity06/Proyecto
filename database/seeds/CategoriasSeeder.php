@@ -27,5 +27,9 @@ class CategoriasSeeder extends Seeder
         Categoria::create([
             'nombre' => 'Chocolates y lácteos'
         ]);
+
+        Categoria::create([
+            'nombre' => 'Todos'
+        ]);
     }
 }

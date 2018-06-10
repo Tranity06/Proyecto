@@ -14,52 +14,9 @@ use App\Http\Controllers\Admin\Home;  //Posible quitar parte Home?
 |
 */
 
-/**
- * HOME
- */
-Route::get('/',function (){
-    return view('vuehome');
-})->name('home');
-
 Route::get('user/verify/{verification_code}', 'APIAuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
-
-/*Route::get('/signup','AuthController@getSignup')->name('auth.signup');
-
-Route::post('/signup','AuthController@postSignup');
-
-
-Route::get('/login','AuthController@getLogin')->name('auth.login');
-
-Route::post('/login','AuthController@postLogin');
-
-Route::get('/logout','AuthController@getLogout')->name('auth.logout');
-
-Route::get('/profile', 'AuthController@profile')->name('auth.profile');
-
-Route::post('/profile', 'AuthController@update_avatar');*/
-
-/**
- * Verificar cuenta
- */
-
-Route::get('/verify/{token}','VerifyController@verify')->name('verify');
-
-
-/**
- * Comprar entrada
- */
-
-Route::get('/entrada','EntradaController@index')->name('comprarentrada');
-
-/**
- * SPA
- */
-
-Route::get('/spa',function (){
-    return view('spa');
-});
 
 /**
  * Authentication ADMIN
@@ -153,16 +110,22 @@ Route::get('/admin', 'Admin\Home@index');
    * Gestión MENÚS
    */
   Route::get('menus/crear', 'MenuController@crear');
-  Route::post('menus/crear', 'MenuController@crearPost')->name('menu.crear');
+  Route::post('menus/crear', 'MenuController@addMenu')->name('menus.crear');
   Route::get('menus/mostrar', 'MenuController@mostrar');
-  Route::post('menus/borrar', 'MenuController@borrar');
+  ROUTE::get('menus/{idMenu}', 'MenuController@mostrarMenu');
+  Route::post('menus/{idMenu}', 'MenuController@updateMenu');
+  Route::post('menus/borrar', 'MenuController@deleteMenu');
 
   /**
    * Gestión PRODUCTOS
    */
   Route::get('productos/crear', 'ProductoController@crear');
-  Route::post('productos/crear', 'ProductoController@crearPost')->name('producto.crear');
+  Route::post('productos/crear', 'ProductoController@addProducto')->name('producto.crear');
   Route::get('productos/mostrar', 'ProductoController@mostrar');
   Route::post('productos/borrar', 'ProductoController@borrar');
 
   
+/**
+ * HOME -> NO TOCAR tiene que ser SIEMPRE la ultima ruta.
+ */
+Route::get('/{any}', 'SpaController@index')->where('any', '.*')->name('home');

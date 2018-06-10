@@ -17,26 +17,26 @@
                         <ul>
                             <li class="is-active">
                                 <a>
-                                    <span class="icon is-small"><i class="fas fa-cog" aria-hidden="true"></i></span>
-                                    <span class="is-hidden-mobile">CATEGORIA</span>
+                                    <img src="/icons/bebida.svg" alt="Bebidas">
+                                    <span class="is-hidden-mobile">{{this.categorias[0].nombre}}</span>
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    <span class="icon is-small"><i class="fas fa-ticket-alt" aria-hidden="true"></i></span>
-                                    <span class="is-hidden-mobile">CATEGORIA</span>
+                                    <img src="/icons/patatas.svg" alt="Patatas">
+                                    <span class="is-hidden-mobile">{{this.categorias[1].nombre}}</span>
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    <span class="icon is-small"><i class="far fa-comment" aria-hidden="true"></i></span>
-                                    <span class="is-hidden-mobile">CATEGORIA</span>
+                                    <img src="/icons/popcorn.svg" alt="Comida">
+                                    <span class="is-hidden-mobile">{{this.categorias[2].nombre}}</span>
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    <span class="icon is-small"><i class="far fa-star" aria-hidden="true"></i></span>
-                                    <span class="is-hidden-mobile">CATEGORIA</span>
+                                    <img src="/icons/chocolate.svg" alt="Chocolate">
+                                    <span class="is-hidden-mobile">{{this.categorias[3].nombre}}</span>
                                 </a>
                             </li>
                         </ul>
@@ -47,81 +47,85 @@
         <div class="section">
             <div class="container">
                 <div class="flexcontainer">
-                    <div class="tarjeta">
+                    <div class="tarjeta" v-for="producto in productos">
                         <div class="titulo is-size-5">
-                            Nombre
+                            {{producto.nombre}}
                         </div>
-                        <div class="imagen">
-                        </div>
+                        <img :src="producto.imagen" alt="" width="200px" height="200px">
                         <div class="botones-debajo">
                             <div class="alergenos">
-                                iconos al..
+                              {{producto.precio}}€
                             </div>
-                            <button class="button is-warning is-rounded is-small">Comprar</button>
+                            <button class="button is-warning is-rounded is-small">Añadir</button>
+                            <div class="select is-rounded is-small">
+                                <select>
+                                    <option>1</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="tarjeta">
-                        <div class="titulo is-size-5">
-                            Nombre
-                        </div>
-                        <div class="imagen">
-                        </div>
-                        <div class="botones-debajo">
-                            <div class="alergenos">
-                                iconos al..
-                            </div>
-                            <button class="button is-warning is-rounded is-small">Comprar</button>
-                        </div>
-                    </div>
-                    <div class="tarjeta">
-                        <div class="titulo is-size-5">
-                            Nombre
-                        </div>
-                        <div class="imagen">
-                        </div>
-                        <div class="botones-debajo">
-                            <div class="alergenos">
-                                iconos al..
-                            </div>
-                            <button class="button is-warning is-rounded is-small">Comprar</button>
-                        </div>
-                    </div>
-                    <div class="tarjeta">
-                        <div class="titulo is-size-5">
-                            Nombre
-                        </div>
-                        <div class="imagen">
-                        </div>
-                        <div class="botones-debajo">
-                            <div class="alergenos">
-                                iconos al..
-                            </div>
-                            <button class="button is-warning is-rounded is-small">Comprar</button>
-                        </div>
-                    </div>
-                    <div class="tarjeta">
-                        <div class="titulo is-size-5">
-                            Nombre
-                        </div>
-                        <div class="imagen">
-                        </div>
-                        <div class="botones-debajo">
-                            <div class="alergenos">
-                                iconos al..
-                            </div>
-                            <button class="button is-warning is-rounded is-small">Comprar</button>
-                    </div>
+
                 </div>
 
                 </div>
-            </div>
         </div>
     </div>
 </template>
 
 <script>
+
+    const getProductos = (callback) => {
+
+        axios
+            .get('/api/producto/')
+            .then(response => {
+                callback(null, response.data);
+            }).catch(error => {
+            callback(error, error.response.data);
+        });
+    };
+
     export default {
-        name: "restaurante"
+        name: "restaurante",
+        data() {
+            return {
+                categorias: [],
+                productos: [],
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        },
+        mounted(){
+            axios.get('/api/categoria')
+                .then(response => {
+                    this.categorias = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+/*            axios.get('/api/producto')
+                .then(response => {
+                    this.productos = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                })*/
+        },
+        beforeRouteEnter (to, from, next) {
+            getProductos((err, data) => {
+                next(vm => vm.setData(err, data));
+            });
+        },
+        methods: {
+            setData(err, productos) {
+                if (err) {
+                    this.error = err.toString();
+                } else {
+                    this.productos = productos;
+                }
+            },
+        }
     }
 </script>
 
@@ -173,7 +177,6 @@
     }
 
     .tarjeta > .imagen{
-        background: url("https://galicine.es/images/iconos-premios/Premio02.png");
         width: 200px;
         height: 200px;
     }

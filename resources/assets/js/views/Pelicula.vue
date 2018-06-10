@@ -36,7 +36,7 @@
 
                     </div>
                     <div class="is-hidden-tablet has-text-centered">
-                        <a :href="info.trailer" data-lity><img src="icons/play-button.svg"></a>
+                        <a :href="info.trailer" data-lity><img src="/icons/play-button.svg"></a>
                         <h1 class="title has-text-white">
                             {{ info.titulo }}
                             <span class="tag is-danger">PE-7</span>
@@ -90,6 +90,20 @@
 <script>
     import ReseniaComponent from "../components/Resenias/ReseniaComponent";
 
+    const getPelicula = (id,callback) => {
+
+        console.log(id);
+
+        axios
+            .get('/api/pelicula/'+id)
+            .then(response => {
+                console.log(response);
+                callback(null, response.data);
+            }).catch(error => {
+            callback(error, error.response.data);
+        });
+    };
+
     export default {
         components: {ReseniaComponent},
         name: 'pelicula',
@@ -100,14 +114,31 @@
             }
         },
         mounted(){
-            axios.get(`/api/pelicula/${this.id}`)
+/*            axios.get(`/api/pelicula/${this.id}`)
                  .then(response => {
                     this.info = response.data;
 
                  })
                  .catch(error => {
                     console.log(error);
-                 })
+                 })*/
+        },
+        beforeRouteEnter (to, from, next) {
+            getPelicula(to.params.id,(err, data) => {
+                next(vm => vm.setData(err, data));
+            });
+        },
+        methods: {
+            setData(err, info) {
+                if (err) {
+                    this.error = err.toString();
+                    console.log(this.error);
+                } else {
+                    this.info = info;
+                }
+
+                console.log(this.info);
+            },
         }
     }
 </script>

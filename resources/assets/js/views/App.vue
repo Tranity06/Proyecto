@@ -1,7 +1,6 @@
 <template>
     <div>
         <navbar-component></navbar-component>
-
         <router-view :key="$route.fullPath"></router-view>
         <notifications group="auth" />
     </div>

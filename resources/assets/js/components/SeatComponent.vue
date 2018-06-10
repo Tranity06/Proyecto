@@ -47,11 +47,20 @@
             </div>
         </div>
         <span class="has-text-centered is-size-3" v-if="total > 0">TOTAL: {{ total }}€</span>
+        <modal
+                v-show="isModalVisible"
+                @close="closeModal"
+        >
+            <span slot="header">Las butacas tienen que ser contiguas</span>
+            <span slot="body">¿Os habéis enfadado?</span>
+        </modal>
     </div>
 
 </template>
 
 <script>
+    import modal from './modal.vue';
+
     export default {
         data() {
             return {
@@ -66,10 +75,20 @@
                 },
                 selected:[],
                 numerosPosibles: [],
-                firstSeat: undefined
+                firstSeat: undefined,
+                isModalVisible: false,
             }
         },
+        components: {
+            modal
+        },
         methods: {
+            showModal() {
+                this.isModalVisible = true;
+            },
+            closeModal() {
+                this.isModalVisible = false;
+            },
             getAllButacas: function (id) {
                 axios.get(`/api/butaca/${id}`)
                     .then(response => {
@@ -99,7 +118,7 @@
 
                 if (!this.esContiguo(id)) {
                     event.preventDefault();
-                    alert('es otra fila o numero');
+                    this.showModal();
                     return;
                 }
 
