@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="columns is-multiline is-centered" v-if="this.tab === 2">
+            <div class="columns is-multiline is-centered nomarginright" v-if="this.tab === 2">
                 <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculasEstreno">
                     <div class="pelicula-card centrar-imagen">
                         <img :src="peliculasTOP[key].cartel">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="columns is-multiline is-centered" v-if="this.tab === 3">
+            <div class="columns is-multiline is-centered nomarginright" v-if="this.tab === 3">
                 <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculasProximo">
                     <div class="pelicula-card centrar-imagen">
                         <img :src="peliculasTOP[key].cartel">
@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class="columns is-multiline is-centered" v-if="this.tab === 4">
+            <div class="columns is-multiline is-centered nomarginright" v-if="this.tab === 4">
                 <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculasTOP">
                     <div class="pelicula-card centrar-imagen">
                         <img :src="peliculasTOP[key].cartel">
@@ -163,6 +163,7 @@
     /* Pelicula Card */
 
     .nomarginright{
+        margin-left: 0 !important;
          margin-right: 0 !important;
     }
 
