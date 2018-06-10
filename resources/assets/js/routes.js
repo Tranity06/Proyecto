@@ -11,6 +11,7 @@ import Register from './views/Register';
 import Profile from './views/Profile';
 import Restaurante from './views/Restaurante';
 import Entrada  from './components/EntradaComponent';
+import store from './store';
 
 const routes = [
         {
@@ -79,23 +80,16 @@ router.afterEach((to, from) => {
 })
 
 
-/*
 router.beforeEach((to, from, next) => {
 
     // check if the route requires authentication and user is not logged in
-    if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
+    if (to.matched.some(route => route.meta.requiresAuth) && !store.getters.isLoggedIn) {
         // redirect to login page
         next({ name: 'login' })
         return
     }
 
-    // if logged in redirect to dashboard
-    if(to.path === '/login' && store.state.isLoggedIn) {
-        next({ name: 'profile' })
-        return
-    }
-
     next()
-});*/
+});
 
 export default router;
