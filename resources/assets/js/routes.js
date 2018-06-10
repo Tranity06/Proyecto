@@ -61,7 +61,7 @@ const router = new VueRouter({
         return { x: 0, y: 0 };
     },
     routes,
-    linkExactActiveClass: "is-active",
+    linkExactActiveClass: 'is-active',
 });
 
 router.beforeResolve((to, from, next) => {

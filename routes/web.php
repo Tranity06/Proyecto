@@ -18,21 +18,6 @@ Route::get('user/verify/{verification_code}', 'APIAuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
-/*Route::get('/signup','AuthController@getSignup')->name('auth.signup');
-
-Route::post('/signup','AuthController@postSignup');
-
-
-Route::get('/login','AuthController@getLogin')->name('auth.login');
-
-Route::post('/login','AuthController@postLogin');
-
-Route::get('/logout','AuthController@getLogout')->name('auth.logout');
-
-Route::get('/profile', 'AuthController@profile')->name('auth.profile');
-
-Route::post('/profile', 'AuthController@update_avatar');*/
-
 /**
  * Authentication ADMIN
  */

@@ -3,10 +3,10 @@
         <div class="opciones" style="max-width:550px;">
             <div class="tabs is-centered">
                 <ul>
-                    <li class="is-active is-size-7-mobile"><a @click="changeTab(1)">Cartelera</a></li>
-                    <li class="is-size-7-mobile"><a @click="changeTab(2)">Estrenos</a></li>
-                    <li class="is-size-7-mobile"><a @click="changeTab(3)">Proximos</a></li>
-                    <li class="is-size-7-mobile"><a @click="changeTab(4)">Top</a></li>
+                    <li class="is-size-7-mobile" :class="{'is-active': tab === 1}"><a @click="changeTab(1)">Cartelera</a></li>
+                    <li class="is-size-7-mobile" :class="{'is-active': tab === 2}"><a @click="changeTab(2)">Estrenos</a></li>
+                    <li class="is-size-7-mobile" :class="{'is-active': tab === 3}"><a @click="changeTab(3)">Próximos</a></li>
+                    <li class="is-size-7-mobile" :class="{'is-active': tab === 4}"><a @click="changeTab(4)">Top</a></li>
                 </ul>
             </div>
         </div>
@@ -15,6 +15,7 @@
 
 <script>
     export default {
+        props: ['tab'],
         name: "menupelicula-component",
         methods: {
             changeTab: function (num) {
