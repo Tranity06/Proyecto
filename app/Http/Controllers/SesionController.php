@@ -60,4 +60,13 @@ class SesionController extends Controller
     $sesionesvacias = json_encode($sesionesvacias);
     return view('sesiones.mostrar', compact('admin', 'sesiones', 'peliculas', 'plantillas', 'sesionesvacias'));
     }
+
+    public function crearPost(Request $request){
+        // Comprobar autenticación
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin');
+        }
+        $admin = Auth::guard('admin')->user()->name;
+        return response()->json($request->sesiones, 200);
+    }
 }

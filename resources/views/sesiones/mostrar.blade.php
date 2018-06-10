@@ -50,25 +50,30 @@
                     plantilla = $('#plantilla').val();
                     if ( typeof sesiones !== "undefined" && sesiones[sala]!=null){
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            horas+= '<td id="'+sala+pase+'"><input type="time"';
-                            pelis+= '<td><select name="idPelicula" id="idPelicula">';
+                            horas+= '<td class="'+sala+pase+'" id="hora"><input type="time"';
+                            pelis+= '<td class="'+sala+pase+'" id="peli"><select name="idPelicula" id="idPelicula">';
                             pelis+= '<option value="-1">- Seleccionar película -</option>';
                             for ( var i=0; i<peliculas.length ; i++ ){
                                 pelis+='<option value="'+peliculas[i]['id']+'" ';
                                 if ( sesiones[sala][pase]['pelicula']['titulo'] != null ){
                                     horas+= 'id="'+sesiones[sala][pase]['id']+'" value="'+sesiones[sala][pase]['hora']+'"/></td>';
                                     pelis+='selected';
-                                } else {
-                                    horas+= 'value="'+plantillas[plantilla][sala][pase][0]['hora']+'"/></td>';
+                                } else if ( typeof plantillas[plantilla][sala][pase][0] !== "undefined") {
+                                    horas+= 'value="'+plantillas[plantilla][sala][pase][0]['hora']+'"';
                                 }
+                                horas+= '/></td>';
                                 pelis+= '>'+peliculas[i]['titulo']+'</option>';
                             }
                             pelis+='</select></td>';
                         }
                     } else {
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            horas+= '<td id="'+sala+pase+'"><input type="time" value="'+plantillas[plantilla][sala][pase][0]['hora']+'"/></td>';
-                            pelis+= '<td>'+selectPeliculas+'</td>';
+                            horas+= '<td class="'+sala+pase+'" id="hora"><input type="time"';
+                            if ( typeof plantillas[plantilla][sala][pase][0] !== "undefined"){
+                                horas+= 'value="'+plantillas[plantilla][sala][pase][0]['hora']+'"';
+                            }
+                            horas+= '/></td>';
+                            pelis+= '<td class="'+sala+pase+'" id="peli">'+selectPeliculas+'</td>';
                         }
                     }
                     cuerpo+= horas+'</tr>'+pelis+'</tr>'
@@ -82,14 +87,59 @@
                     var plantilla = $(this).val();
                     for ( var sala=1 ; sala<=5 ; sala++ ) {
                         for (var pase=1; pase<=4 ; pase++ ){
-                            var id='#'+sala+pase;
-                            $(id).children().first().val('');
+                            var clase='.'+sala+pase;
+                            $(clase).children().first().val('');
                             if ( typeof plantillas[plantilla][sala][pase][0] !== "undefined" ){
-                                $(id).children().first().val(plantillas[plantilla][sala][pase][0]['hora']);
+                                $(clase).children().first().val(plantillas[plantilla][sala][pase][0]['hora']);
                             }
                         }
                     }
                 }
+            });
+
+            $('#guardar').on('click', function(){
+                $fecha = $('#fecha').val();
+                var sesiones = [];
+                if ($fecha != ''){
+                    for ( var sala=1 ; sala<=5 ; sala++ ){
+                        for (var pase=1; pase<4 ; pase++ ){
+                            var clase='.'+sala+pase;
+                            var $hora = $(clase).children().first().val();
+                            var $idPelicula = $(clase).children().eq(1).val();
+                            if ( $hora != '' && $idPelicula>0){
+                                var sesion = {
+                                    'fecha': $fecha,
+                                    'pase': pase,
+                                    'hora': $hora,
+                                    'estado': 1,
+                                    'pelicula_id': $idPelicula,
+                                    'sala': sala
+                                }
+                                sesiones.push(sesion);
+                            }
+                        }
+                    }
+                }
+                var datos = {
+                    'sesiones' : sesiones
+                };
+                $.ajax({
+                    url: '/sesion',
+                    type: 'POST',
+                    data: datos,
+                    dataType: "json",
+                    statusCode:{
+                        200: function(e){
+                            console.log(e);
+                        },
+                        204: function(){ 
+                            $boton.attr('disabled', 'disabled');
+                        },
+                        403: function(e){
+                            error('La plantilla no existe.');
+                        }
+                    }
+                });
             });
                     
         });
