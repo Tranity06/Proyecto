@@ -36,7 +36,7 @@
         </div>
         <div class="container" v-if="searchDisparado === false">
             <div class="navbar-brand">
-                <router-link class="navbar-item" :to="{ name: 'home' }">
+                <router-link class="navbar-item no-activar" :to="{ name: 'home' }">
                     <div class="logo-container">
                         <img src="/48px.png" alt="Logo" class="is-hidden-mobile">
                         <span :class="{'has-text-black': textblack && textblackLogo}" @click="closeMenu" >Palomitas time</span>
@@ -50,7 +50,7 @@
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu" :class="{'is-active': isActive,'has-text-black': textblack}">
                 <div class="navbar-start">
-                    <router-link class="navbar-item has-text-white is-active" :to="{ name: 'home' }" :class="{'has-text-black': textblack}">
+                    <router-link class="navbar-item has-text-white" :to="{ name: 'home' }" :class="{'has-text-black': textblack}">
                         <span  @click="closeMenu">Películas</span>
                     </router-link>
                     <router-link class="navbar-item has-text-white" :to="{ name: 'restaurante' }" :class="{'has-text-black': textblack}" >
@@ -237,6 +237,10 @@
 </script>
 
 <style scoped>
+
+    .no-activar{
+        background-color: transparent !important;
+    }
 
     .situarIzquierda{
         color: white;
