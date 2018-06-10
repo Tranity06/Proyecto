@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             'butacas_reservadas',*/
             'categorias',
             'productos',
-            /*'lineas_ventas',
-            'ingredientes',*/
+            //'lineas_ventas',
+            'ingredientes',
             /*'ingrediente_producto',
             'menus',
             'administradores',
@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             ButacaSeeder::class,
             PeliculasSeeder::class,
             SesionesSeeder::class,
+            IngredientesSeeder::class,
             CategoriasSeeder::class,
             ProductosSeeder::class
         ]);
