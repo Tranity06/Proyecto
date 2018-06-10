@@ -81,7 +81,17 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('butaca/desbloquear', 'ButacaController@desbloquear');
 
   /**
-   * Gestión plantillas de sesiones
+   * Gestión SESIONES
+   */
+  Route::get('sesiones', 'SesionController@mostrarTodas')->name('sesiones.mostrar');
+  Route::get('sesion/{idSesion}', 'SesionController@mostrarSesion');
+  Route::get('sesion', 'SesionController@crear');
+  Route::post('sesion', 'SesionController@crearPost'); //AJAX
+  Route::post('sesion/borrar', 'SesionController@borrar'); //AJAX
+  Route::post('sesion/modificar', 'SesionController@mostrarTodas'); //AJAX
+
+  /**
+   * Gestión PLANTILLAS_SESIONES
    */
   Route::get('plantillas', 'PlantillaSesionController@mostrarTodas')->name('plantillas.mostrar');
   Route::get('plantilla/{idPlantilla}', 'PlantillaSesionController@mostrarPlantilla')->name('plantilla.mostrar');
@@ -91,7 +101,7 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('plantilla/borrar', 'PlantillaSesionController@borrar'); //AJAX
 
   /**
-   * Gestión sesiones vacías
+   * Gestión SESIONES_VACIAS
    */
   Route::post('sesionvacia/borrar', 'SesionVaciaController@borrar'); //AJAX
   Route::post('sesionvacia/crear', 'SesionVaciaController@crear'); //AJAX
@@ -102,16 +112,19 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('menus/crear', 'MenuController@crear');
   Route::post('menus/crear', 'MenuController@addMenu')->name('menus.crear');
   Route::get('menus/mostrar', 'MenuController@mostrar');
+  ROUTE::get('menus/{idMenu}', 'MenuController@mostrarMenu');
+  Route::post('menus/{idMenu}', 'MenuController@updateMenu');
   Route::post('menus/borrar', 'MenuController@deleteMenu');
 
   /**
    * Gestión PRODUCTOS
    */
   Route::get('productos/crear', 'ProductoController@crear');
-  Route::post('productos/crear', 'ProductoController@crearPost')->name('producto.crear');
+  Route::post('productos/crear', 'ProductoController@addProducto')->name('producto.crear');
   Route::get('productos/mostrar', 'ProductoController@mostrar');
   Route::post('productos/borrar', 'ProductoController@borrar');
 
+  
 /**
  * HOME -> NO TOCAR tiene que ser SIEMPRE la ultima ruta.
  */

@@ -16,6 +16,7 @@ class CreateSesionesTable extends Migration
         Schema::create('sesiones', function (Blueprint $table) {
             $table->increments('id');
             $table->date('fecha');
+            $table->integer('pase', false, true);
             $table->time('hora');
             $table->integer('estado', false, true); //0=Inactiva, 1=Activa
 

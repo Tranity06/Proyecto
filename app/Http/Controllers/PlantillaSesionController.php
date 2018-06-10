@@ -37,8 +37,18 @@ class PlantillaSesionController extends Controller
 
         $admin = Auth::guard('admin')->user()->name;
         $plantilla = PlantillaSesion::find($idPlantilla);
-        $sesiones = $plantilla->sesiones()->get();
-        return view('plantillas.detalle', compact('admin', 'plantilla', 'sesiones'));
+        $salas = Sala::get();
+
+        $sesiones = [];
+        foreach($salas as $sala){
+            for ( $i=1 ; $i<5 ; $i++ ){
+                $sesiones[$sala->id][$i] = $plantilla->sesiones()->where([
+                    ['sala_id','=', $sala->id],
+                    ['pase','=', $i]
+                ])->get(['hora']);
+            }
+        }
+        return view('plantillas.detalle', compact('admin', 'plantilla', 'sesiones', 'salas'));
     }
 
     /**

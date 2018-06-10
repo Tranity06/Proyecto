@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use App\Models\ProductoIngrediente;
 use App\Models\ProductoMenu;
-//use App\Models\Categoria;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
@@ -17,8 +17,9 @@ class ProductoController extends Controller {
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
         }
+        $categorias = Categoria::all();
         $admin = Auth::guard('admin')->user()->name;
-        return view('producto.crear', compact('admin'));
+        return view('productos.crear', compact('admin', 'categorias'));
     }
 
     public function getAll() {
@@ -27,11 +28,10 @@ class ProductoController extends Controller {
 
     public function addProducto(Request $request) {
         //Validacion de los datos
-    $credentials = $request->only('nombre', 'precio', 'stock', 'imagen', 'categoria_id');
+    $credentials = $request->only('nombre', 'precio', 'imagen', 'categoria_id');
         $rules = [
             'nombre' => 'required|string|min:1',
             'precio' => 'required|min:1',
-            'stock' => 'required|int|min:1',
             'imagen' => 'required|string|min:1',
             'categoria_id' => 'required|min:1'
         ];
@@ -43,7 +43,6 @@ class ProductoController extends Controller {
         $producto = Producto::create([
             'nombre' => $request['nombre'],
             'precio' => $request['precio'],
-            'stock' => $request['stock'],
             'imagen' => $request['imagen'],
             'categoria_id' => $request['categoria_id']
         ]);
