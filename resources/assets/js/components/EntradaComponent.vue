@@ -82,6 +82,7 @@
 
 <script>
 
+    import store from '../store';
     import PaymentComponent from './PaymentComponent';
 
     const getEntrada = (id,callback) => {
@@ -183,7 +184,33 @@
                 // sala -> horaTarget
                 // butacas -> butacas
 
-                // Faltan los datos de la tarjeta de credito :D
+                const datosVisa = this.$refs.pago.getDatosVisa();
+
+                axios.post(`/api/pago?token=${store.getters.token}`, {
+                    nombre_pelicula: this.titulo,
+                    dia: this.dia,
+                    nombre_tarjeta: datosVisa.nombre,
+                })
+                    .then(response => {
+
+                        if (response.status === 200){
+                            console.log('reservado');
+                            this.$notify({
+                                group: 'auth',
+                                type: 'success',
+                                title: 'Pago confirmado',
+                                text: 'Tu entrada ha sido comprada con exito',
+                                duration: 3000,
+                            });
+                        }
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+
+
 
                 console.log(this.$refs.pago.getDatosVisa());
             }

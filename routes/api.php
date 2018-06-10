@@ -59,6 +59,12 @@ Route::get('pelicula/{idPelicula}/resenas','PeliculaController@getResenas')->nam
 Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('pelicula.getSesiones');
 
 /**
+ * Pago
+ */
+
+Route::post('/pago','PagoController@confirmarPago')->name('pago.confirmarPago');
+
+/**
  * Reseñas
  */
 
