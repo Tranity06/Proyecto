@@ -8,6 +8,8 @@ use App\Models\Sesion;
 use App\Models\Sala;
 use App\Models\Pelicula;
 use App\Models\PlantillaSesion;
+use App\Models\Butaca;
+use App\Models\ButacaReservada;
 
 class SesionController extends Controller
 {
@@ -67,6 +69,38 @@ class SesionController extends Controller
             return redirect('/admin');
         }
         $admin = Auth::guard('admin')->user()->name;
-        return response()->json($request->sesiones, 200);
+        
+        $sesiones_registradas = Sesion::where([
+            ['fecha', '=', $request->sesiones[0]['fecha']]
+        ]);
+
+        foreach($sesiones_registradas->get() as $sesion_regis){
+            $sesion_regis->butacasReservadas()->delete();
+        };
+
+        $sesiones_registradas->delete();
+
+        foreach($request->sesiones as $sesion){
+            $sala = Sala::where('numero', (int)$sesion['sala'])->first();
+
+            $sesion_registrada = Sesion::create([
+                'fecha' => $sesion['fecha'],
+                'pase' => (int)$sesion['pase'],
+                'hora' => $sesion['hora'],
+                'estado' => (int)$sesion['estado'],
+                'pelicula_id' => (int)$sesion['pelicula_id'],
+                'sala_id' => $sala->id
+            ]);
+
+            $butacas_reservadas = Butaca::where('sala_id', $sala->id)->get();
+            foreach($butacas_reservadas as $butaca_reservada){
+                ButacaReservada::create([
+                    'estado' => $butaca_reservada->estado,
+                    'sesion_id' => $sesion_registrada->id,
+                    'butaca_id' => $butaca_reservada->id,
+                ]);
+            }
+        }
+        return response()->json("Exito", 200);
     }
 }

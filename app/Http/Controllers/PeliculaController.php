@@ -9,6 +9,8 @@ use App\Models\Sesion;
 use App\Models\User;
 use Auth;
 use Validator;
+use App\Models\ButacaReservada;
+use App\Models\Butaca;
 
 class PeliculaController extends Controller
 {
@@ -195,9 +197,19 @@ class PeliculaController extends Controller
             if ( sizeof($horas) > 0){
                 $sesion['horas'] = [];
                 foreach( $horas as $hora ){
-                    $ses['id'] = $hora['id'];
+                    $butacas_reservadas = $hora->butacasReservadas()->get();
+                    $butacas = [];
+                    foreach ( $butacas_reservadas as $butaca_reservada ){
+                        $butaca['id'] = $butaca_reservada->id;
+                        $butaca_reservada['estado'] = $butaca_reservada->estado;
+                        $butaca['fila'] = Butaca::find($butaca_reservada->butaca_id)->fila;
+                        $butaca['numero'] = Butaca::find($butaca_reservada->butaca_id)->numero;
+                        array_push($butacas, $butaca);
+                    }
+                    $ses['sesion_id'] = $hora['id'];
                     $ses['hora'] = $hora['hora'];
                     $ses['sala_id'] = $hora['sala_id'];
+                    $ses['butacas'] = $butacas;
                     array_push($sesion['horas'], $ses);
                 }
                     array_push($sesiones, $sesion);

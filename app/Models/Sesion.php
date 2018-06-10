@@ -17,7 +17,7 @@ class Sesion extends Model
      * @var array
      */
     protected $fillable = [
-        'fecha', 'hora', 'estado', 'pelicula_id', 'sala_id',
+        'fecha', 'hora', 'estado', 'pelicula_id', 'sala_id', 'pase'
     ];
 
     /**
@@ -32,5 +32,12 @@ class Sesion extends Model
      */
     public function sala(){
         return $this->belongsTo(Sala::class)->get();
+    }
+
+    /**
+     * Devuelve las butacas reservadas de la sesion
+     */
+    public function butacasReservadas(){
+        return $this->hasMany(ButacaReservada::class);
     }
 }
