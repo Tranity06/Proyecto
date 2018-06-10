@@ -7,6 +7,7 @@ use Auth;
 use App\Models\Sesion;
 use App\Models\Sala;
 use App\Models\Pelicula;
+use App\Models\PlantillaSesion;
 
 class SesionController extends Controller
 {
@@ -44,6 +45,19 @@ class SesionController extends Controller
             }
         }
     $sesiones = json_encode($sesiones);
-    return view('sesiones.mostrar', compact('admin', 'sesiones', 'peliculas'));
+    $plantillas = PlantillaSesion::get();
+    $sesionesvacias = [];
+    foreach($plantillas as $plantilla){
+        foreach($salas as $sala){
+            for ( $pase=1 ; $pase<5 ; $pase++ ){
+                $sesionesvacias[$plantilla->id][$sala->id][$pase] = $plantilla->sesiones()->where([
+                    ['sala_id','=', $sala->id],
+                    ['pase','=', $pase]
+                ])->get(['hora']);
+            }
+        }
+    }
+    $sesionesvacias = json_encode($sesionesvacias);
+    return view('sesiones.mostrar', compact('admin', 'sesiones', 'peliculas', 'plantillas', 'sesionesvacias'));
     }
 }

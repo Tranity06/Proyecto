@@ -18,11 +18,14 @@
             var peliculas = $('.table').first().data('peliculas');
             
             var selectPeliculas = '<select name="idPelicula" id="idPelicula">';
-            selectPeliculas+= '<option value="-1">Seleccionar película</option>';
+            selectPeliculas+= '<option value="-1">- Seleccionar película -</option>';
             for ( var i=0; i<peliculas.length ; i++ ){
                 selectPeliculas+='<option value="'+peliculas[i]['id']+'">'+peliculas[i]['titulo']+'</option>';
             }
             selectPeliculas+='</select>';
+
+            var plantillas = $('#plantilla').data('plantillas');
+            console.log(plantillas);
 
             $(function() {
                 $(".table").tablesorter({
@@ -38,8 +41,6 @@
             $('#fecha').change(function(){
                 var fecha = $(this).val();
                 var sesiones = sesiones_all[fecha];
-                console.log('asd'+Object.keys(sesiones).length);
-                console.log(sesiones);
                 var $body = $('tbody').first();
                 var cuerpo = '';
 
@@ -47,24 +48,27 @@
                     cuerpo+= '<tr><td rowspan="2">'+sala+'</td>';
                     horas='';
                     pelis='<tr>';
-                    if ( sesiones[sala]!=null){
+                    plantilla = $('#plantilla').val();
+                    if ( typeof sesiones !== "undefined" && sesiones[sala]!=null){
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            console.log('sala?'+sesiones[sala][pase]['pelicula']['titulo']);
-                            horas+= '<td><input type="time" id="'+sesiones[sala][pase]['id']+'" value="'+sesiones[sala][pase]['hora']+'"/></td>';
+                            horas+= '<td><input type="time"';
                             pelis+= '<td><select name="idPelicula" id="idPelicula">';
-                            pelis+= '<option value="-1">Seleccionar película</option>';
+                            pelis+= '<option value="-1">- Seleccionar película -</option>';
                             for ( var i=0; i<peliculas.length ; i++ ){
                                 pelis+='<option value="'+peliculas[i]['id']+'" ';
                                 if ( sesiones[sala][pase]['pelicula']['titulo'] != null ){
+                                    horas+= 'id="'+sesiones[sala][pase]['id']+'" value="'+sesiones[sala][pase]['hora']+'"/></td>';
                                     pelis+='selected';
+                                } else {
+                                    horas+= 'value="'+plantillas[plantilla][sala][pase][0]['hora']+'"/></td>';
                                 }
                                 pelis+= '>'+peliculas[i]['titulo']+'</option>';
                             }
-                            pelis+='</select></td>'; console.log('pelis'+pelis);
+                            pelis+='</select></td>';
                         }
                     } else {
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            horas+= '<td>'+'<input type="time"/>'+'</td>';
+                            horas+= '<td><input type="time" value="'+plantillas[plantilla][sala][pase][0]['hora']+'"/></td>';
                             pelis+= '<td>'+selectPeliculas+'</td>';
                         }
                     }
@@ -95,6 +99,13 @@
         <div class="box-body">
             <label>Fecha:
                 <input type="date" id="fecha" name="fecha"/>
+            </label>
+            <label>Plantillas:
+                <select id="plantilla" name="plantilla" data-plantillas="{{$sesionesvacias}}">
+                    @foreach($plantillas as $plantilla)
+                        <option value="{{$plantilla->id}}">{{$plantilla->nombre}}</option>
+                    @endforeach
+                </select>
             </label>
             <div id="tabla-sesiones">
                 <table class="table table-bordered table-hover tablesorter" id="sesiones" data-cosas="{{$sesiones}}" data-peliculas="{{$peliculas}}">
