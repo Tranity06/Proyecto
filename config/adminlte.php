@@ -177,11 +177,11 @@ return [
                 ],
                 [
                     'text' => 'Mostrar',
-                    'url'  => '/sala',
+                    'url'  => '/sesiones',
                 ],
                 [
                     'text' => 'Crear',
-                    'url'  => '/sala',
+                    'url'  => '/sesion',
                 ],
             ]
         ],

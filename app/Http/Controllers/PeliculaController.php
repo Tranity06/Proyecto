@@ -9,6 +9,8 @@ use App\Models\Sesion;
 use App\Models\User;
 use Auth;
 use Validator;
+use App\Models\ButacaReservada;
+use App\Models\Butaca;
 
 class PeliculaController extends Controller
 {
@@ -159,6 +161,7 @@ class PeliculaController extends Controller
         $peli = [];
         foreach ( $peliculas as $pelicula ){
             $peli['id'] = $pelicula->id;
+            $peli['popularidad'] = $pelicula->popularidad;
             $peli['titulo'] = $pelicula->titulo;
             $peli['is_estreno'] = false;
             $peli['proximamente'] = false;
@@ -182,7 +185,12 @@ class PeliculaController extends Controller
      * Sólo las sesiones activas.
      */
     public function getOne($idPelicula){
-        $pelicula = Pelicula::find($idPelicula);
+        $pelicula = Pelicula::where('id', $idPelicula)->get(['id','titulo','generos','sinopsis','duracion','cartel','trailer','slider_image'])->first();
+        return response()->json($pelicula, 200);
+    }
+
+    public function getEntrada($idPelicula){
+        $pelicula = Pelicula::where('id', $idPelicula)->get(['titulo', 'cartel', 'trailer'])->first();
         $fechas = Sesion::distinct()->where('pelicula_id',$idPelicula)->orderBy('fecha')->get(['fecha']);
         $sesiones = [];
         foreach ( $fechas as $fecha ){
@@ -196,9 +204,19 @@ class PeliculaController extends Controller
             if ( sizeof($horas) > 0){
                 $sesion['horas'] = [];
                 foreach( $horas as $hora ){
-                    $ses['id'] = $hora['id'];
+                    $butacas_reservadas = $hora->butacasReservadas()->get();
+                    $butacas = [];
+                    foreach ( $butacas_reservadas as $butaca_reservada ){
+                        $butaca['id'] = $butaca_reservada->id;
+                        $butaca['estado'] = $butaca_reservada->estado;
+                        $butaca['fila'] = Butaca::find($butaca_reservada->butaca_id)->fila;
+                        $butaca['numero'] = Butaca::find($butaca_reservada->butaca_id)->numero;
+                        array_push($butacas, $butaca);
+                    }
+                    $ses['sesion_id'] = $hora['id'];
                     $ses['hora'] = $hora['hora'];
                     $ses['sala_id'] = $hora['sala_id'];
+                    $ses['butacas'] = $butacas;
                     array_push($sesion['horas'], $ses);
                 }
                     array_push($sesiones, $sesion);

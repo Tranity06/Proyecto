@@ -1,14 +1,15 @@
 <template>
-    <nav class="navbar is-fixed-top is-transparent animate-search" v-click-outside="hide" :class="{'fondoblanco': fondoBlanco}">
-        <div class="main-search" :class="{'puedo-ver': searchDisparado === true }">
+    <nav class="navbar is-fixed-top is-transparent" v-click-outside="hide" :class="{'fondoblanco': fondoBlanco}" aria-label="dropdown navigation">
+        <div class="main-search" :class="{'puedo-ver': searchDisparado === true }" v-if="searchDisparado">
             <div class="container">
 
                 <ais-index :app-id="'0TZV0R68WE'"
                            :api-key="'40ed7ce0a36dde51997fb88645263243'"
                            :index-name="'peliculas'"
                            :query="query"
+                           :auto-search="false"
                           >
-                    <input v-model="query" class="ais-input" placeholder="Busca ..." autofocus>
+                    <input v-model.trim="query" v-focus class="ais-input" placeholder="Busca ..." autofocus>
                     <ais-results>
                         <template slot-scope="{ result }">
                             <div class="pelicula-item">
@@ -35,21 +36,21 @@
         </div>
         <div class="container" v-if="searchDisparado === false">
             <div class="navbar-brand">
-                <router-link class="navbar-item" :to="{ name: 'home' }">
+                <router-link class="navbar-item no-activar" :to="{ name: 'home' }">
                     <div class="logo-container">
                         <img src="/48px.png" alt="Logo" class="is-hidden-mobile">
                         <span :class="{'has-text-black': textblack && textblackLogo}" @click="closeMenu" >Palomitas time</span>
                     </div>
                 </router-link>
-                <span class="navbar-burger burger" :class="{'is-active': isActive,'has-text-black': textblack && textblackLogo}" data-target="navbarMenuHeroA" @click="menu">
-                <span></span>
-                <span></span>
-                <span></span>
-                </span>
+                <a role="button" class="navbar-burger" :class="{'is-active': isActive,'has-text-black': textblack && textblackLogo}" aria-label="menu" aria-expanded="false" @click="menu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu" :class="{'is-active': isActive,'has-text-black': textblack}">
                 <div class="navbar-start">
-                    <router-link class="navbar-item has-text-white is-active" :to="{ name: 'home' }" :class="{'has-text-black': textblack}">
+                    <router-link class="navbar-item has-text-white" :to="{ name: 'home' }" :class="{'has-text-black': textblack}">
                         <span  @click="closeMenu">Películas</span>
                     </router-link>
                     <router-link class="navbar-item has-text-white" :to="{ name: 'restaurante' }" :class="{'has-text-black': textblack}" >
@@ -60,45 +61,39 @@
                     </a>
                 </div>
                 <div class="navbar-end">
-                    <span class="navbar-item"  :class="{'has-text-black': textblack,'has-text-white': !textblack}" @click="dispararSearch"><i class="fas fa-search fa-lg"></i></span>
+                    <span class="navbar-item"  :class="{'has-text-black': textblack,'has-text-white': !textblack}" @click="dispararSearch"><i class="fas fa-search fa-sm"></i></span>
                     <span class="navbar-item navbar-item-end">
-                        <div class="user-login" v-show="StoreStateEnabled">
-                          <i class="fas fa-shopping-cart fa-sm carta"></i>
-                          <div class="dropdown is-hoverable">
-                              <div class="dropdown-trigger">
-                                  <img class="avatar"
-                                       :src="'/uploads/avatars/'+getAvatar"
-                                       aria-haspopup="true" aria-controls="dropdown-menu">
-                              </div>
-                              <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content">
-                                    <router-link class="dropdown-item" :to="{ name: 'profile' }">
-                                        Perfil
-                                    </router-link>
-                                  <hr class="dropdown-divider">
-                                  <a class="dropdown-item is-link" @click="Logout">
-                                     Salir
-                                  </a>
-                                </div>
-                              </div>
+                        <div class="navbar-item has-dropdown" :class="{'is-active': isDropdownActive}" v-show="StoreStateEnabled">
+                            <a class="navbar-link" @click="dropdown">
+                                <img class="avatar"
+                                     :src="'/uploads/avatars/'+getAvatar">
+                            </a>
+                            <div class="navbar-dropdown is-boxed">
+                               <a class="navbar-item" @click="irPerfil">
+                                   Perfil
+                               </a>
+                               <hr class="navbar-divider">
+                               <a class="navbar-item" @click="Logout">
+                                   Salir
+                               </a>
                             </div>
                         </div>
                         <div v-show="!StoreStateEnabled" style="display: flex; justify-content: center">
-                            <router-link class="button is-primary entrar" :to="{ name: 'login' }">
+                            <router-link class="button is-danger entrar" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span @click="closeMenu">Entrar</span>
                                 </div>
                             </router-link>
 <!--                            <a href="http://www.facebook.com" class="centeredIcon">
                                 <i class="fab fa-google"></i>
-                            </a>-->
+                            </a>--><!--
                               <g-signin-button
                                       class="centeredIcon"
                                       :params="googleSignInParams"
                                       @success="onSignInSuccess"
                                       @error="onSignInError">
                                 <i class="fab fa-google"></i>
-                              </g-signin-button>
+                              </g-signin-button>-->
                         </div>
                 </span>
                 </div>
@@ -110,6 +105,12 @@
 <script>
     import store from '../store';
     import ClickOutside from 'vue-click-outside';
+
+    const focus = {
+        inserted(el) {
+            el.focus()
+        },
+    }
 
     export default {
         name: "navbar-component",
@@ -123,7 +124,8 @@
                 textblack: false,
                 textblackLogo: true,
                 fondoBlanco: false,
-                query: ''
+                query: '',
+                isDropdownActive: false
             }
         },
         computed: {
@@ -136,6 +138,8 @@
         },
         methods: {
             Logout() {
+                this.isDropdownActive = false;
+                this.closeMenu();
                 store.commit('logoutUser');
                 this.$notify({
                     group: 'auth',
@@ -160,17 +164,23 @@
             },
             irEntrada(id){
                 this.searchDisparado = false;
+                this.query = '';
                 this.$router.replace({ path: `/pelicula/${id}` })
             },
             verTrailer(){
+                this.query = '';
                 this.searchDisparado = false;
+            },
+            irPerfil(){
+                this.isDropdownActive = false;
+                this.closeMenu();
+                this.$router.push({ name: 'profile' });
             },
             hide(event) {
                 this.searchDisparado = false;
                 this.query = '';
             },
             menu() {
-
 
                 //Hago click en el menu y
                 //si esta a menos de 100px del top :: ABRO EL MENU
@@ -209,22 +219,40 @@
                 this.isActive = false;
                 this.textblack = false;
                 this.fondoBlanco = false;
+                this.isDropdownActive = false;
+            },
+            dropdown(){
+                if (this.isDropdownActive === false){
+                    this.isDropdownActive = true;
+                } else {
+                    this.isDropdownActive = false;
+                }
             }
         },
         // do not forget this section
         directives: {
-            ClickOutside
+            ClickOutside,
+            focus
         }
     }
 </script>
 
 <style scoped>
 
+    .no-activar{
+        background-color: transparent !important;
+    }
+
     .situarIzquierda{
         color: white;
         position: absolute;
         top: 15px;
         left: 70%;
+    }
+
+    .situarIzquierda:hover{
+        color: darkgrey;
+        transition: color linear .25s;
     }
 
     .pelicula-item{
@@ -265,7 +293,7 @@
             padding: 2em;
             /*display: none;*/
             width: calc(90% - 286px);
-            margin: 0 calc(5% + 116px) 0 calc(5% + 170px);
+            margin: 0 calc(5%) 0 calc(5%);
             box-shadow: 0 4px 40px rgba(0,0,0,.39);
 
             background-color: #fff;
@@ -273,13 +301,22 @@
             overflow-y: auto;
             border-radius: 3px;
         }
+
+        .ais-index{
+            margin: 10px 26%;
+        }
+    }
+
+    @media only screen and (max-width: 768px){
+        .ais-results{
+            margin-top: 15px;
+        }
     }
 
 
     .ais-results{
         padding: 1em;
         background-color: #fff;
-        margin-top: 15px;
         max-height: calc(100vh - 60px);
         overflow-y: auto;
     }
@@ -304,7 +341,7 @@
 
     <!-->
 
-    .animate-search .main-search.puedo-ver {
+    .main-search.puedo-ver {
         animation: slide-in .3s;
     }
 
@@ -322,6 +359,7 @@
     .main-search.puedo-ver {
         opacity: 1;
         visibility: visible;
+        animation: slide-in .3s;
     }
 
     .main-search {
@@ -330,7 +368,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 2;
+        z-index: 10;
         background: #191c1e;
         opacity: 0;
         visibility: hidden;
@@ -378,7 +416,6 @@
         display: block;
         width: 32px;
         height: 32px;
-        margin-right: 9px;
         margin-left: 5px;
     }
 </style>

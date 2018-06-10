@@ -1,7 +1,7 @@
 <template>
     <div>
         <slider-component></slider-component>
-        <menupelicula-component @changeTab="updateTab($event)"></menupelicula-component>
+        <menupelicula-component @changeTab="updateTab($event)" :tab="tab"></menupelicula-component>
         <peliculas-component :tab="tab"></peliculas-component>
     </div>
 </template>

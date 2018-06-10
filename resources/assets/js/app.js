@@ -37,7 +37,6 @@ moment.locale('es');
 window.axios = axios;
 axios.defaults.baseURL = 'https://palomitastime.online';
 
-/*
 // before a request is made start the nprogress
 axios.interceptors.request.use(config => {
     NProgress.start();
@@ -49,7 +48,6 @@ axios.interceptors.response.use(response => {
     NProgress.done();
     return response
 })
-*/
 
 
 

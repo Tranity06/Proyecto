@@ -55,7 +55,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link" type="submit" :disabled='errors.any()>0 || !isComplete'>Login</button>
+                                <button class="button is-warning" type="submit" :disabled='errors.any()>0 || !isComplete'>Login</button>
                             </div>
                         </div>
                         <a href="recuperar">¿Has olvidado tu contraseña?</a>
@@ -79,7 +79,7 @@
                     <p><i class="fas fa-check" style="color: green;"></i> Crea y guarda tus menus preferidos, menus
                         lleva tilde verdad?. Si veis esto modificarlo ;D no estoy inspirado ahora ;D no estoy inspirado
                         ahora </p>
-                    <router-link class="button is-info is-medium" :to="{ name: 'register' }">
+                    <router-link class="button is-warning is-medium" :to="{ name: 'register' }">
                             Registrarse
                     </router-link>
                 </div>
@@ -166,7 +166,7 @@
     .relleno{
         position: absolute;
         top: 0;
-        background-color: black;
+        background-color: #363636;
         width: 100%;
         height: 56px;
 

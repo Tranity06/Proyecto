@@ -166,7 +166,7 @@
                 <input type="button" id="crear" value="Crear"/>
             </span>
             <div id=error></div>
-            <div id="tabla-sesiones" hidden/>
+            <div id="tabla-sesiones" hidden>
                 <table id="sesiones">
                     <thead>
                         <tr>

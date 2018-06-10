@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="control">
-                            <button class="button is-primary" type="submit" :disabled='errors.any() || !isComplete'>Registrarme</button>
+                            <button class="button is-warning" type="submit" :disabled='errors.any() || !isComplete'>Registrarme</button>
                         </div>
                     </form>
                 </div>
@@ -164,7 +164,7 @@
     .relleno{
         position: absolute;
         top: 0;
-        background-color: black;
+        background-color: #363636;
         width: 100%;
         height: 56px;
 

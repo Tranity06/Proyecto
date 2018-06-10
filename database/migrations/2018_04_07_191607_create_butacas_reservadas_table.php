@@ -26,7 +26,7 @@ class CreateButacasReservadasTable extends Migration
             $table->foreign('butaca_id')->references('id')->on('butacas');
 
             //Clave foránea FACTURA.
-            $table->unsignedInteger('factura_id');
+            $table->unsignedInteger('factura_id')->nullable();
             $table->foreign('factura_id')->references('id')->on('facturas');
 
             $table->timestamps();

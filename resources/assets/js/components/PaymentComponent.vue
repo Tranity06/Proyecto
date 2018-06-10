@@ -8,19 +8,19 @@
                 </button>
             </p>
             <p class="control">
-                <button class="button is-large" @click.prevent="prev()">
+                <button class="button is-large">
                     <img src="/icons/PayPal.svg" alt="Paypal">
                 </button>
             </p>
         </div>
         <div v-if="visa">
             <label for="name">Nombre: </label>
-            <input class="input" type="text" placeholder="Emanuel Suca" id="name" size="5">
+            <input class="input" type="text" placeholder="Tu nombre" id="name" size="5" v-model="nombre">
             <label for="numero">Número: </label>
-            <input class="input" type="text" id="numero" pattern="[0-9]{16,19}" maxlength="19" placeholder="8888-8888-8888-8888" size="5">
+            <input class="input" type="text" id="numero" pattern="[0-9]{16,19}" maxlength="19" placeholder="0000-0000-0000-0000" size="5" v-model="numero">
             <div class="details">
                     <div class="select">
-                        <select>
+                        <select v-model="mes">
                             <option>MM</option>
                             <option value="1">01</option>
                             <option value="2">02</option>
@@ -37,7 +37,7 @@
                     </div>
                     <span style="font-size: x-large">/</span>
                     <div class="select">
-                        <select>
+                        <select v-model="anio">
                             <option>YYYY</option>
                             <option value="2016">2016</option>
                             <option value="2017">2017</option>
@@ -58,7 +58,7 @@
                     </div>
             </div>
             <label for="secreto">CVC/CVV: </label>
-            <input class="input" type="text" id="secreto" placeholder="123" maxlength="4" width="48">
+            <input class="input" type="text" id="secreto" placeholder="123" maxlength="4" width="48" v-model="cvc">
         </div>
     </div>
 </template>
@@ -68,12 +68,26 @@
         name: "payment-component",
         data() {
             return {
-                visa: false
+                visa: false,
+                nombre: '',
+                numero: '',
+                mes:'MM',
+                anio: 'YYYY',
+                cvc: ''
             }
         },
         methods: {
             isVisa() {
                this.visa = this.visa === false;
+            },
+            getDatosVisa(){
+                return {
+                    nombre: this.nombre,
+                    numero: this.numero,
+                    mes: this.mes,
+                    anio: this.anio,
+                    cvc: this.cvc
+                }
             }
         }
     }

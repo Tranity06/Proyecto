@@ -30,19 +30,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Devuelve todas las salas.
-Route::get("/sala", function (){
-    return App\Models\Sala::all();
-});
-
 // Devuelve todas las butacas de una sala.
 Route::get("/butaca/{id}", function ($id){
-    return App\Models\Butaca::all()->where('sala_id',$id)->values();
+    return App\Models\ButacaReservada::all()->where('sesion_id',$id)->values();
 });
 
 Route::post("/butaca/{id}", function (Request $request, $id){
 
-    $butaca = App\Models\Butaca::findOrFail($id);
+    $butaca = App\Models\ButacaReservada::findOrFail($id);
     $butaca->update($request->all());
     // Real-time
     broadcast(new ButacaEvent($id,$request->all()))->toOthers();
@@ -54,9 +49,16 @@ Route::post("/butaca/{id}", function (Request $request, $id){
  * PELICULAS
  */
 Route::get('peliculas', 'PeliculaController@getAll')->name('pelicula.getAll');
-Route::get('pelicula/{idPelicula}','PeliculaController@getOne')->name('pelicula.getOne');
+Route::get('pelicula/{idPelicula}','PeliculaController@getOne')->name('pelicula.getOne'); // este es para la informacion de la pelicula
 Route::get('pelicula/{idPelicula}/resenas','PeliculaController@getResenas')->name('pelicula.getResenas');
+Route::get('pelicula/{idPelicula}/entrada','PeliculaController@getEntrada')->name('pelicula.getEntrada');
 Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('pelicula.getSesiones');
+
+/**
+ * Pago
+ */
+
+Route::post('/pago','PagoController@confirmarPago')->name('pago.confirmarPago');
 
 /**
  * Reseñas

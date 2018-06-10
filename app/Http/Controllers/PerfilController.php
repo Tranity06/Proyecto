@@ -95,8 +95,6 @@ class PerfilController extends Controller {
     public function getUser(){
         $user = JWTAuth::toUser(JWTAuth::getToken());
 
-        dd($user);
-
         if ( $user == null ) {
             return response()->json('Permiso denegado', 403);
         }
