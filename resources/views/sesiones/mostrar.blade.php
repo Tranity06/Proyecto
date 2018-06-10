@@ -16,6 +16,7 @@
         $(document).ready(function(){
             var sesiones_all = $('.table').first().data('cosas');
             var peliculas = $('.table').first().data('peliculas');
+            console.log(sesiones_all)
             
             var selectPeliculas = '<select name="idPelicula" id="idPelicula">';
             selectPeliculas+= '<option value="-1">- Seleccionar película -</option>';

@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="select">
                                     <select @change="mostrarAsientos(horaTarget)" v-model="horaTarget">
-                                        <option v-for="horaa in horas" :value="horaa.sala_id">{{ horaa.hora }}</option>
+                                        <option v-for="horaa in horas" :value="horaa.sesion_id">{{ horaa.hora }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@
                 this.horas = diaSeleccionado[0].horas;
                 console.log(this.horas);
                 console.log('HORAS:: '+this.horas[0][0])
-                this.horaTarget = this.horas[0].sala_id;
+                this.horaTarget = this.horas[0].sesion_id;
                 this.mostrarAsientos(this.horaTarget);
             },
 
@@ -184,10 +184,11 @@
                     this.caratula = data.cartel;
                     this.titulo = data.titulo;
                     this.trailer = data.trailer;
+                   // this.sesionTarget = data.
 
                     this.sesiones = data.sesiones;
                     this.dia = this.sesiones[0].fecha;
-                    this.horaTarget = this.sesiones[0].sala_id;
+                    this.horaTarget = this.sesiones[0].sesion_id;
                     let primeraFecha = this.sesiones[0].fecha;
                     this.mostrarHoras(primeraFecha);
                 }
