@@ -54,8 +54,8 @@
                                     <img :src="caratula" alt="" width="55" height="74">
                                     <div class="informacion">
                                         <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
-                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaTarget + " Sala " + salaTarget}}</span>
-                                        <span class="has-text-grey-light is-size-7"> {{ butacas.num }} entradas</span>
+                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + salaTarget}}</span>
+                                        <span class="has-text-grey-light is-size-7"> {{ butacas.num }} {{butacas.num > 1 ? 'entradas': 'entrada'}}</span>
                                     </div>
                                     <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
                                 </div>
@@ -89,7 +89,6 @@
         axios
             .get('/api/pelicula/'+id)
             .then(response => {
-
                 callback(null, response.data);
             }).catch(error => {
             callback(error, error.response.data);
@@ -102,7 +101,8 @@
                 salas: 0,
                 salaTarget: 1,
                 dia: '',
-                horaTarget: '',
+                horaTarget: null,
+                horaSeleccionada: '1',
                 horas: [],
                 step: 1,
                 pelicula: [],
@@ -119,45 +119,7 @@
         components: {
             PaymentComponent
         },
-/*        mounted() {
-            axios.get(`/api/pelicula/${this.$route.params.id}`)
-                .then(response => {
-                    this.caratula = response.data.cartel;
-                    this.titulo = response.data.titulo;
-                    this.trailer = response.data.trailer;
 
-                    this.sesiones = response.data.sesiones;
-
-/!*                    let sesionesSinDiasDuplicados = response.data.sesiones.filter((sesion, index, self) =>
-                        index === self.findIndex((t) => (
-                            t.fecha === sesion.fecha
-                        ))
-                    );
-
-                    // los inserta ordenados por fecha.
-                     this.sesiones =sesionesSinDiasDuplicados.sort((a, b) => {
-                            return new Date(a.fecha) - new Date(b.fecha);
-                     });
-
-                    this.dia = this.sesiones[0].fecha;
-                    this.horaTarget = this.sesiones[0].sala_id;
-                    console.log('1:: '+this.sesiones[5].fecha);
-                    this.sesiones.forEach(sesion => console.log(sesion.fecha));
-
-                    console.log('2:: '+this.sesiones[5].fecha);*!/
-                    this.dia = this.sesiones[0].fecha;
-                    this.horaTarget = this.sesiones[0].sala_id;
-                    let primeraFecha = this.sesiones[0].fecha;
-                    this.mostrarHoras(primeraFecha);
-/!*                    this.salas = response.data;
-
-                    // Al obtener las salas tambien muestra por defecto las butacas de la primera sala
-                    this.mostrarAsientos(this.salas[0].id);*!/
-                })
-                .catch(e => {
-                    console.log(e);
-                })
-        },*/
         beforeRouteEnter (to, from, next) {
             getEntrada(to.params.id,(err, data) => {
                 next(vm => vm.setData(err, data));
@@ -174,6 +136,7 @@
                 if (validacion) {
                     this.butacas.total = this.$refs.butaca.getTotal();
                     this.butacas.num = this.$refs.butaca.getButacas();
+                    this.horaSeleccionada = this.horas.filter(hora => hora.sala_id === this.horaTarget)[0].hora;
                     this.step++;
                 } else {
                     alert("Debes seleccionar al menos una butaca.");
@@ -214,6 +177,9 @@
 
                 console.log(data);
             },
+            confirmarPago(){
+                console.log('confirmar pago');
+            }
         }
     }
 </script>
