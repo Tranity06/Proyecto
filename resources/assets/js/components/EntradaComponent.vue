@@ -76,6 +76,12 @@
                     </div>
 
                 </div>
+            <modal
+                    v-show="isModalVisible"
+                    @close="closeModal"
+            >
+                <span slot="body">Elige al menos una butaca</span>
+            </modal>
         </div>
     </div>
 </template>
@@ -84,6 +90,7 @@
 
     import store from '../store';
     import PaymentComponent from './PaymentComponent';
+    import modal from './modal.vue';
 
     const getEntrada = (id,callback) => {
 
@@ -114,11 +121,13 @@
                 butacas: {
                     total: 0,
                     num: 0
-                }
+                },
+                isModalVisible: false,
             }
         },
         components: {
-            PaymentComponent
+            PaymentComponent,
+            modal
         },
 
         beforeRouteEnter (to, from, next) {
@@ -128,6 +137,12 @@
         },
 
         methods: {
+            showModal() {
+                this.isModalVisible = true;
+            },
+            closeModal() {
+                this.isModalVisible = false;
+            },
             prev() {
                 this.step--;
             },
@@ -140,7 +155,7 @@
                     this.horaSeleccionada = this.horas.filter(hora => hora.sala_id === this.horaTarget)[0].hora;
                     this.step++;
                 } else {
-                    alert("Debes seleccionar al menos una butaca.");
+                    this.showModal();
                 }
 
 
