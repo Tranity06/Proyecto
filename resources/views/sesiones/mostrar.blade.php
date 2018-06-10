@@ -16,7 +16,8 @@
         $(document).ready(function(){
             var sesiones_all = $('.table').first().data('cosas');
             var peliculas = $('.table').first().data('peliculas');
-            console.log(sesiones_all)
+            console.log(sesiones_all);
+            console.log(peliculas);
             
             var selectPeliculas = '<select name="idPelicula" id="idPelicula">';
             selectPeliculas+= '<option value="-1">- Seleccionar película -</option>';
@@ -40,7 +41,7 @@
 
             $('#fecha').change(function(){
                 var fecha = $(this).val();
-                var sesiones = sesiones_all[fecha];
+                var sesiones = sesiones_all[fecha]; 
                 var $body = $('tbody').first();
                 var cuerpo = '';
 
@@ -51,16 +52,16 @@
                     plantilla = $('#plantilla').val();
                     if ( typeof sesiones !== "undefined" && sesiones[sala]!=null){
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            horas+= '<td class="'+sala+pase+'" id="hora"><input type="time"';
+                            horas+= '<td class="'+sala+pase+'" id="hora"><input type="time" ';
                             pelis+= '<td class="'+sala+pase+'" id="peli"><select name="idPelicula" id="idPelicula">';
                             pelis+= '<option value="-1">- Seleccionar película -</option>';
                             for ( var i=0; i<peliculas.length ; i++ ){
                                 pelis+='<option value="'+peliculas[i]['id']+'" ';
-                                if ( sesiones[sala][pase]['pelicula']['titulo'] != null ){
-                                    horas+= 'id="'+sesiones[sala][pase]['id']+'" value="'+sesiones[sala][pase]['hora']+'"/></td>';
+                                if ( sesiones[sala][pase]['pelicula']['id'] == peliculas[i]['id'] ){ console.log(sesiones[sala][pase]['hora']);
+                                    horas+= 'id="'+sesiones[sala][pase]['id']+'" value="'+sesiones[sala][pase]['hora']+'"/></td>'; console.log('XX: '+horas);
                                     pelis+='selected';
                                 } else if ( typeof plantillas[plantilla][sala][pase][0] !== "undefined") {
-                                    horas+= 'value="'+plantillas[plantilla][sala][pase][0]['hora']+'"';
+                                    //horas+= 'value="'+plantillas[plantilla][sala][pase][0]['hora']+'"';
                                 }
                                 horas+= '/></td>';
                                 pelis+= '>'+peliculas[i]['titulo']+'</option>';
@@ -123,7 +124,7 @@
                 }
                 var datos = {
                     'sesiones' : sesiones
-                };
+                }; console.log(datos);
                 $.ajax({
                     url: '/sesion',
                     type: 'POST',

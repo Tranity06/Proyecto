@@ -31,18 +31,15 @@ class SesionController extends Controller
                     ['sala_id', '=', $sala->id]
                 ])->get();
                 foreach ($ses as $sion){
-                    for ($pase=1 ; $pase<=4 ; $pase++){
-                        $datosSes = $sion->where('pase',$pase)->first();
-                        $sesiones[$fecha->fecha][$sala->id][$pase] = [
-                            'id'=> $datosSes['id'],
-                            'estado' => $datosSes['estado'],
-                            'hora' => $datosSes['hora'],
-                            'pelicula' => [
-                                'id' => Pelicula::find($datosSes['pelicula_id'])['id'],
-                                'titulo' => Pelicula::find($datosSes['pelicula_id'])['titulo']
-                            ]
-                        ];
-                    }
+                    $sesiones[$fecha->fecha][$sala->id][$sion['pase']] = [
+                        'id'=> $sion['id'],
+                        'estado' => $sion['estado'],
+                        'hora' => $sion['hora'],
+                        'pelicula' => [
+                            'id' => Pelicula::find($sion['pelicula_id'])['id'],
+                            'titulo' => Pelicula::find($sion['pelicula_id'])['titulo']
+                        ]
+                    ];
                 }
             }
         }
