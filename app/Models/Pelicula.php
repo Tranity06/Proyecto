@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Resena;
 use App\Models\Sesion;
-use Laravel\Scout\Searchable;
+//use Laravel\Scout\Searchable;
 
 class Pelicula extends Model
 {
 
-    use Searchable;
+    //use Searchable;
 
     /**
      * The attributes that are mass assignable.
