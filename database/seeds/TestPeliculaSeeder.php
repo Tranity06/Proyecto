@@ -92,6 +92,7 @@ class TestPeliculaSeeder extends Seeder
                         'estado' => rand(0, 1),
                         'pelicula_id' => $peliculas[rand(0,(sizeof($peliculas)-1))]->id,
                         'sala_id' => $sala->id,
+                        'pase' => rand(1, 4),
                     ]);
                 }
             }
