@@ -153,7 +153,7 @@
                 if (validacion) {
                     this.butacas.total = this.$refs.butaca.getTotal();
                     this.butacas.num = this.$refs.butaca.getButacas();
-                    this.horaSeleccionada = this.horas.filter(hora => hora.sala_id === this.horaTarget)[0].hora;
+                    this.horaSeleccionada = this.horas.filter(hora => hora.sesion_id === this.horaTarget)[0].hora;
                     this.step++;
                 } else {
                     this.showModal();
