@@ -63,8 +63,6 @@
         mounted(){
             Echo.channel('resena')
                 .listen('ResenaEvent', (e) => {
-                    console.log(e);
-                    console.log('he llegado');
                     this.resenas.push(e.datos);
                 });
         }
