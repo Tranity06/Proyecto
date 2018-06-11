@@ -65,6 +65,7 @@ class ResenaController extends Controller
             'pelicula_id' => $request['pelicula_id']
         ]);
         $resenaJson = [
+            'tipo' => 'write',
             'id' => $res->id,
             'comentario' => $res->comentario,
             'imagen_usuario' => $user->avatar,
@@ -115,8 +116,19 @@ class ResenaController extends Controller
         //Adjuntar información a la respuesta
         $resena['valoracion'] = $request['valoracion'];
         $resena['comentario'] = $request['comentario'];
+
+        $resenaJson = [
+            'tipo' => 'update',
+            'id' => $resena->id,
+            'comentario' => $resena->comentario,
+            'imagen_usuario' => $user->avatar,
+            'nombre_usuario' => $user->name
+        ];
+
+        broadcast(new ResenaEvent($resenaJson))->toOthers();
+
         $resena->save();
-        return response()->json($resena, 201);
+        return response()->json($resenaJson, 201);
     }
 
     /**
