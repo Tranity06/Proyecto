@@ -242,11 +242,11 @@ class PeliculaController extends Controller
     /**
      * Devuelve las sesiones activas programadas para el día indicado.
      */
-    public function getSesiones($fecha){
+    /* public function getSesiones($fecha){
         $sesiones = Sesion::where([
             ['fecha', $fecha],
             ['estado', 1]
         ])->get();
         return response()->json($sesiones, 200);
-    }
+    } */
 }
