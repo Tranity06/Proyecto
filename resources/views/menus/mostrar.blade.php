@@ -44,6 +44,15 @@
                 $( location ).attr("href", destino);
             });
 
+            $('.table').on('click', '.productos', function(){
+                var $boton = $(this);
+                var $idMenu= $boton.next().val();
+
+                var getUrl = window.location;
+                var destino = getUrl .protocol + "//" + getUrl.host + "/productomenu/" + $idMenu;
+                $( location ).attr("href", destino);
+            });
+
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
                 var $idMenu= $boton.next().val();
@@ -106,7 +115,8 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Detalles</th>
+                        <th>Productos</th>
+                        <th>Editar</th>
                         <th>Borrar</th>
                     </tr>
                 </thead>
@@ -114,7 +124,11 @@
                     @foreach($menus as $menu)
                         <div class="fila">
                             <tr>
-                                <td> {{ $menu->nombre}} </td>
+                                <td> {{ $menu->nombre }} </td>
+                                <td>
+                                    <button class="productos"><i class="glyphicon glyphicon-pencil"></i></button>
+                                    <input type="hidden" name="id" value="{{ $menu->id }}"/>
+                                </td>
                                 <td>
                                     <button class="editar"><i class="glyphicon glyphicon-pencil"></i></button>
                                     <input type="hidden" name="id" value="{{ $menu->id }}"/>

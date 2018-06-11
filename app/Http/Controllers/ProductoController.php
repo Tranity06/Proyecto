@@ -28,7 +28,7 @@ class ProductoController extends Controller {
 
     public function addProducto(Request $request) {
         //Validacion de los datos
-    $credentials = $request->only('nombre', 'precio', 'imagen', 'categoria_id');
+        $credentials = $request->only('nombre', 'precio', 'imagen', 'categoria_id');
         $rules = [
             'nombre' => 'required|string|min:1',
             'precio' => 'required|min:1',
@@ -46,16 +46,12 @@ class ProductoController extends Controller {
             'imagen' => $request['imagen'],
             'categoria_id' => $request['categoria_id']
         ]);
-
+        /*
         ProductoIngrediente::create([
             'producto_id' => $producto->id,
             'ingrediente_id' => $request['ingrediente_id']
         ]);
-
-        MenuIngrediente::create([
-            'producto_id' => $producto->id,
-            'menu_id' => $request['menu_id']
-        ]);
+        */
 
         return response()->json($producto, 201);
     }

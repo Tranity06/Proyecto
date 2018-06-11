@@ -3,8 +3,8 @@
         <div class="main-search" :class="{'puedo-ver': searchDisparado === true }" v-if="searchDisparado">
             <div class="container">
 
-                <ais-index :app-id="'0TZV0R68WE'"
-                           :api-key="'40ed7ce0a36dde51997fb88645263243'"
+                <ais-index :app-id="'Z6VIFIHM1C'"
+                           :api-key="'48e3d951455bb00f67cbe7a409376887'"
                            :index-name="'peliculas'"
                            :query="query"
                            :auto-search="false"
@@ -339,7 +339,6 @@
         outline:none;
     }
 
-    <!-->
 
     .main-search.puedo-ver {
         animation: slide-in .3s;
