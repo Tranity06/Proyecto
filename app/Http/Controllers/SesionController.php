@@ -65,7 +65,6 @@ class SesionController extends Controller
         if (!Auth::guard('admin')->check()){
             return redirect('/admin');
         }
-        $admin = Auth::guard('admin')->user()->name;
         
         $sesiones_registradas = Sesion::where([
             ['fecha', '=', $request->sesiones[0]['fecha']]
