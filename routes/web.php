@@ -111,10 +111,17 @@ Route::get('/admin', 'Admin\Home@index');
    */
   Route::get('menus/crear', 'MenuController@crear');
   Route::post('menus/crear', 'MenuController@addMenu')->name('menus.crear');
-  Route::get('menus/mostrar', 'MenuController@mostrar');
-  ROUTE::get('menus/{idMenu}', 'MenuController@mostrarMenu');
+  Route::get('menus/mostrar', 'MenuController@mostrar')->name('menus.mostrar');
+  Route::get('menus/{idMenu}', 'MenuController@mostrarMenu');
   Route::post('menus/{idMenu}', 'MenuController@updateMenu');
   Route::post('menus/borrar', 'MenuController@deleteMenu');
+
+  /**
+   * Gestion de productos de menus
+   */
+  Route::get('productomenu/{idMenu}', 'MenuController@menuProductos');
+  Route::post('productomenu/{idMenu}', 'MenuController@anadirProductos');
+ //////// Route::post('productomenu/{idMenu}', 'MenuController@borrarProductos');
 
   /**
    * Gestión PRODUCTOS
