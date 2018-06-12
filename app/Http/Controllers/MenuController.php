@@ -85,9 +85,7 @@ class MenuController extends Controller {
 
         $menu = Menu::find($idMenu);
         $productos = Producto::all();
-        /*foreach($productos as $producto) {
-            if(true){}
-        }*/
+
         return view('menus.productos', compact('admin', 'menu', 'productos'));
     }
 
