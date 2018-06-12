@@ -16,7 +16,8 @@
         $(document).ready(function(){
             var sesiones_all = $('.table').first().data('cosas');
             var peliculas = $('.table').first().data('peliculas');
-            console.log(sesiones_all)
+            console.log(sesiones_all);
+            console.log(peliculas);
             
             var selectPeliculas = '<select name="idPelicula" id="idPelicula">';
             selectPeliculas+= '<option value="-1">- Seleccionar película -</option>';
@@ -26,6 +27,7 @@
             selectPeliculas+='</select>';
 
             var plantillas = $('#plantilla').data('plantillas');
+            console.log(plantillas);
 
             $(function() {
                 $(".table").tablesorter({
@@ -40,7 +42,7 @@
 
             $('#fecha').change(function(){
                 var fecha = $(this).val();
-                var sesiones = sesiones_all[fecha];
+                var sesiones = sesiones_all[fecha]; 
                 var $body = $('tbody').first();
                 var cuerpo = '';
 
@@ -51,21 +53,24 @@
                     plantilla = $('#plantilla').val();
                     if ( typeof sesiones !== "undefined" && sesiones[sala]!=null){
                         for (var pase=1 ; pase<5 ; pase++ ) {
-                            horas+= '<td class="'+sala+pase+'" id="hora"><input type="time"';
+                            horas+= '<td class="'+sala+pase+'" id="hora"><input type="time" ';
                             pelis+= '<td class="'+sala+pase+'" id="peli"><select name="idPelicula" id="idPelicula">';
                             pelis+= '<option value="-1">- Seleccionar película -</option>';
                             for ( var i=0; i<peliculas.length ; i++ ){
                                 pelis+='<option value="'+peliculas[i]['id']+'" ';
-                                if ( sesiones[sala][pase]['pelicula']['titulo'] != null ){
-                                    horas+= 'id="'+sesiones[sala][pase]['id']+'" value="'+sesiones[sala][pase]['hora']+'"/></td>';
-                                    pelis+='selected';
-                                } else if ( typeof plantillas[plantilla][sala][pase][0] !== "undefined") {
+                                if ( typeof sesiones[sala][pase] !== "undefined" ){
+                                    horas+= 'id="'+sesiones[sala][pase]['id']+'" value="'+sesiones[sala][pase]['hora']+'" ';
+                                    if ( sesiones[sala][pase]['pelicula']['id'] == peliculas[i]['id'] ){
+                                        pelis+='selected';
+                                    }
+                                } else if ( typeof plantillas[plantilla][sala][pase][0]['hora'] !== "undefined") {
                                     horas+= 'value="'+plantillas[plantilla][sala][pase][0]['hora']+'"';
+                                    
                                 }
-                                horas+= '/></td>';
                                 pelis+= '>'+peliculas[i]['titulo']+'</option>';
                             }
                             pelis+='</select></td>';
+                            horas+= '/></td>';
                         }
                     } else {
                         for (var pase=1 ; pase<5 ; pase++ ) {
@@ -77,7 +82,7 @@
                             pelis+= '<td class="'+sala+pase+'" id="peli">'+selectPeliculas+'</td>';
                         }
                     }
-                    cuerpo+= horas+'</tr>'+pelis+'</tr>'
+                    cuerpo+= horas+'</tr>'+pelis+'</tr>';  console.log('XX: '+cuerpo);
                     
                 }
                 $body.html(cuerpo);
@@ -123,7 +128,7 @@
                 }
                 var datos = {
                     'sesiones' : sesiones
-                };
+                }; console.log(datos);
                 $.ajax({
                     url: '/sesion',
                     type: 'POST',

@@ -64,6 +64,7 @@ class TestSalaSeeder extends Seeder
             'estado' => 1,
             'pelicula_id' => $pelicula->id,
             'sala_id' => $sala->id,
+            'pase' => 1
         ]);
     }
 }

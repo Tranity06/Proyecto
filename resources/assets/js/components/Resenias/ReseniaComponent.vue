@@ -63,9 +63,14 @@
         mounted(){
             Echo.channel('resena')
                 .listen('ResenaEvent', (e) => {
-                    console.log(e);
-                    console.log('he llegado');
-                    this.resenas.push(e.datos);
+
+                    if (e.datos.tipo === 'write'){
+                        this.resenas.push(e.datos);
+                    } else if (e.datos.tipo === 'update') {
+                        let targetResena = this.resenas.find(resena => resena.id == e.datos.id);
+                        targetResena.comentario = e.datos.comentario;
+                    }
+
                 });
         }
 

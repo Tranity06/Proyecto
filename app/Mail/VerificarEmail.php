@@ -23,6 +23,7 @@ class VerificarEmail extends Mailable
     {
         $this->user = $user;
         $this->verification_code = $verification_code;
+        $this->subject('Verifica tu cuenta || PalomitasTime :D');
     }
 
     /**

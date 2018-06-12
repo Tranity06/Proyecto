@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Producto;
+use App\Models\ProductoMenu;
 
 class MenuController extends Controller {
 
@@ -73,6 +75,50 @@ class MenuController extends Controller {
 
         $menu = Menu::find($idMenu);
         return view('menus.editar', compact('admin', 'menu'));
+    }
+
+    public function menuProductos($idMenu) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+
+        $menu = Menu::find($idMenu);
+        $productos = Producto::all();
+
+        return view('menus.productos', compact('admin', 'menu', 'productos'));
+    }
+
+    public function anadirProductos(Request $request, $idMenu) {
+        $productos = $request->productos;
+        $productos = explode(',', $productos);
+
+        $menu = Menu::find($idMenu);
+        $menu->productos()->attach($productos);
+
+        return response()->json($menu, 200);
+    }
+
+    public function getProductosMenu($idMenu) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+
+        $menu = Menu::find($idMenu);
+        $productos = $menu->productos()->get();
+
+        return view('menus.productosexistentes', compact('admin', 'menu', 'productos'));
+    }
+
+    public function borrarProductos(Request $request, $idMenu) {
+        $productos = $request->productos;
+        $productos = explode(',', $productos);
+
+        $menu = Menu::find($idMenu);
+        $menu->productos()->detach($productos);
+
+        return response()->json($menu, 204);
     }
 
 }

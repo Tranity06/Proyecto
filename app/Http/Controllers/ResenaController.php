@@ -25,7 +25,7 @@ class ResenaController extends Controller
     }
 
     /**
-     * Si el uusario está logueado registra la reseña.
+     * Si el usuario está logueado registra la reseña.
      * El usuario no puede escribir dos reseñas sobre la misma pelicula.
      */
     public function crearResenia(Request $request){
@@ -58,18 +58,24 @@ class ResenaController extends Controller
         }
 
         //Crear la reseña
-        $resena = Resena::create([
+        $res = Resena::create([
             'valoracion' => $request['valoracion'], 
             'comentario' => $request['comentario'], 
             'user_id' => $user->id,
             'pelicula_id' => $request['pelicula_id']
         ]);
-        $resena['imagen_usuario'] = $user->avatar;
-        $resena['nombre_usuario'] = $user->name;
+        $resenaJson = [
+            'tipo' => 'write',
+            'id' => $res->id,
+            'comentario' => $res->comentario,
+            'imagen_usuario' => $user->avatar,
+            'nombre_usuario' => $user->name
+        ];
 
-        broadcast(new ResenaEvent($resena))->toOthers();
 
-        return response()->json($resena, 201);
+        broadcast(new ResenaEvent($resenaJson))->toOthers();
+
+        return response()->json($resenaJson, 201);
     }
 
     /**
@@ -110,8 +116,19 @@ class ResenaController extends Controller
         //Adjuntar información a la respuesta
         $resena['valoracion'] = $request['valoracion'];
         $resena['comentario'] = $request['comentario'];
+
+        $resenaJson = [
+            'tipo' => 'update',
+            'id' => $resena->id,
+            'comentario' => $resena->comentario,
+            'imagen_usuario' => $user->avatar,
+            'nombre_usuario' => $user->name
+        ];
+
+        broadcast(new ResenaEvent($resenaJson))->toOthers();
+
         $resena->save();
-        return response()->json($resena, 201);
+        return response()->json($resenaJson, 201);
     }
 
     /**

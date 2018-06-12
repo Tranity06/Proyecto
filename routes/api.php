@@ -52,7 +52,7 @@ Route::get('peliculas', 'PeliculaController@getAll')->name('pelicula.getAll');
 Route::get('pelicula/{idPelicula}','PeliculaController@getOne')->name('pelicula.getOne'); // este es para la informacion de la pelicula
 Route::get('pelicula/{idPelicula}/resenas','PeliculaController@getResenas')->name('pelicula.getResenas');
 Route::get('pelicula/{idPelicula}/entrada','PeliculaController@getEntrada')->name('pelicula.getEntrada');
-Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('pelicula.getSesiones');
+//Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('pelicula.getSesiones');
 
 /**
  * Pago

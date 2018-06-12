@@ -12,6 +12,19 @@ class ProductosMenusSeeder extends Seeder
      */
     public function run()
     {
-        factory(ProductoMenu::class,80)->create();
+        ProductoMenu::create([
+            'producto_id' => '1',
+            'menu_id' => '1'
+        ]);
+
+        ProductoMenu::create([
+            'producto_id' => '2',
+            'menu_id' => '1'
+        ]);
+
+        ProductoMenu::create([
+            'producto_id' => '3',
+            'menu_id' => '1'
+        ]);
     }
 }
