@@ -106,7 +106,7 @@ class MenuController extends Controller {
             return redirect('/admin'); 
         }
         $admin = Auth::guard('admin')->user()->name;
-        
+
         $menu = Menu::find($idMenu);
         $productos = $menu->productos()->get();
 
@@ -114,7 +114,11 @@ class MenuController extends Controller {
     }
 
     public function borrarProductos(Request $request, $idMenu) {
+        $productos = $request->productos;
+        $productos = explode(',', $productos);
+
         $menu = Menu::find($idMenu);
+        $menu->productos()->detach($productos);
 
         return response()->json($menu, 204);
     }
