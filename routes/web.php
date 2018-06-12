@@ -121,6 +121,7 @@ Route::get('/admin', 'Admin\Home@index');
    */
   Route::get('productomenu/{idMenu}', 'MenuController@menuProductos');
   Route::post('productomenu/{idMenu}', 'MenuController@anadirProductos');
+  Route::get('productomenu/getproductos/{idMenu}', 'MenuController@getProductosMenu');
  //////// Route::post('productomenu/{idMenu}', 'MenuController@borrarProductos');
 
   /**
