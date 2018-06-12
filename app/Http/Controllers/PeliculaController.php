@@ -72,6 +72,7 @@ class PeliculaController extends Controller
         }
 
         $poster = str_replace('w500', self::TAM_CARTEL, $request['poster']);
+        $slider_image = str_replace('w500', 'rotiginal', $request['slider_image']);
 
         $pelicula = Pelicula::create([
             'idtmdb' => $request['idtmdb'],
@@ -85,7 +86,7 @@ class PeliculaController extends Controller
             'duracion' => $request['duracion'],
             'cartel' => $poster,
             'trailer' => $request['trailer'],
-            'slider_image' => $request['slider_image'],
+            'slider_image' => $slider_image,
             'popularidad' => $request['popularidad']
         ]);
 
