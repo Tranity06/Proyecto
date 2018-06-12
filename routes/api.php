@@ -49,10 +49,16 @@ Route::post("/butaca/{id}", function (Request $request, $id){
  * PELICULAS
  */
 Route::get('peliculas', 'PeliculaController@getAll')->name('pelicula.getAll');
-Route::get('pelicula/{idPelicula}','PeliculaController@getOne')->name('pelicula.getOne'); // este es para la informacion de la pelicula
+Route::get('pelicula/{idPelicula}','PeliculaController@getOne')->name('pelicula.getOne'); // sesiones de la pelicula agrupadas por fecha ACTUALIZACIÓN
 Route::get('pelicula/{idPelicula}/resenas','PeliculaController@getResenas')->name('pelicula.getResenas');
-Route::get('pelicula/{idPelicula}/entrada','PeliculaController@getEntrada')->name('pelicula.getEntrada');
-//Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('pelicula.getSesiones');
+//Route::get('pelicula/{idPelicula}/entrada','PeliculaController@getEntrada')->name('pelicula.getEntrada'); ACTUALIZACIÓN TIEMPO SESIONES
+//Route::get('pelicula/sesiones/{fecha}','PeliculaController@getSesiones')->name('pelicula.getSesiones'); NO SE USA
+
+/**
+ * SESIONES
+ */
+Route::get('sesion/{idSesion}', 'SesionController@butacas'); //Butacas reservadas de la sesión ACTUALIZACIÓN
+
 
 /**
  * Pago

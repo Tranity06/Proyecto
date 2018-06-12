@@ -184,10 +184,10 @@ class PeliculaController extends Controller
      * las sesiones agrupadas por fechas y ordenadas por hora.
      * Sólo las sesiones activas.
      */
-    public function getOne($idPelicula){
+    /* public function getOne($idPelicula){
         $pelicula = Pelicula::where('id', $idPelicula)->get(['id','titulo','generos','sinopsis','duracion','cartel','trailer','slider_image'])->first();
         return response()->json($pelicula, 200);
-    }
+    } */
 
     public function getEntrada($idPelicula){
         $pelicula = Pelicula::where('id', $idPelicula)->get(['titulo', 'cartel', 'trailer'])->first();

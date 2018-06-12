@@ -99,4 +99,12 @@ class SesionController extends Controller
         }
         return response()->json("Exito", 200);
     }
+
+
+    /**
+     * API
+     */
+    public function butacas($idSesion){
+
+    }
 }
