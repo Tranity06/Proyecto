@@ -102,11 +102,21 @@ class MenuController extends Controller {
     }
 
     public function getProductosMenu($idMenu) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+        
         $menu = Menu::find($idMenu);
         $productos = $menu->productos()->get();
 
-        //return view('menus.productosexistentes', compact('admin', 'menu', 'productos'));
-        return response()->json($productos, 200);
+        return view('menus.productosexistentes', compact('admin', 'menu', 'productos'));
+    }
+
+    public function borrarProductos(Request $request, $idMenu) {
+        $menu = Menu::find($idMenu);
+
+        return response()->json($menu, 204);
     }
 
 }
