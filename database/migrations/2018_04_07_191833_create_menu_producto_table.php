@@ -23,6 +23,8 @@ class CreateMenuProductoTable extends Migration
             //Clave foránea MENU.
             $table->unsignedInteger('menu_id');
             $table->foreign('menu_id')->references('id')->on('menus');
+
+            $table->timestamps();
         });
     }
 
