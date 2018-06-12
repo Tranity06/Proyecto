@@ -184,12 +184,19 @@ class PeliculaController extends Controller
      * las sesiones agrupadas por fechas y ordenadas por hora.
      * Sólo las sesiones activas.
      */
-    /* public function getOne($idPelicula){
+    public function getOne($idPelicula){
         $pelicula = Pelicula::where('id', $idPelicula)->get(['id','titulo','generos','sinopsis','duracion','cartel','trailer','slider_image'])->first();
         return response()->json($pelicula, 200);
-    } */
+    }
 
     public function getEntrada($idPelicula){
+        $pelicula = Pelicula::where('id', $idPelicula)->get(['titulo', 'cartel', 'trailer'])->first();
+        $sesiones = $pelicula->sesiones()->get(['id', 'sala_id', 'hora']);
+        $pelicula['sesiones'] = 'TODO';
+        return response()->json($pelicula, 200);
+    }
+
+    /* public function getEntrada($idPelicula){
         $pelicula = Pelicula::where('id', $idPelicula)->get(['titulo', 'cartel', 'trailer'])->first();
         $fechas = Sesion::distinct()->where('pelicula_id',$idPelicula)->orderBy('fecha')->get(['fecha']);
         $sesiones = [];
@@ -224,7 +231,7 @@ class PeliculaController extends Controller
         }
         $pelicula['sesiones'] = $sesiones;
         return response()->json($pelicula, 200);
-    }
+    } */
 
     /**
      * Devuelve todas las reseñas de la película indicada

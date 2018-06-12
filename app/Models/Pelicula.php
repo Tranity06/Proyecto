@@ -50,6 +50,6 @@ class Pelicula extends Model
      * Devuelve todas las sesiones de la película.
      */
     public function sesiones(){
-        return $this->hasMany(Sesion::class)->get();
+        return $this->hasMany(Sesion::class)/* ->get() */;
     }
 }
