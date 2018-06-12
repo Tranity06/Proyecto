@@ -12,6 +12,20 @@ class MenusSeeder extends Seeder
      */
     public function run()
     {
-        factory(Menu::class,15)->create();
+        Menu::create([
+            'nombre' => 'Menú 1'
+        ]);
+
+        Menu::create([
+            'nombre' => 'Menú 2'
+        ]);
+
+        Menu::create([
+            'nombre' => 'Menú 3'
+        ]);
+
+        Menu::create([
+            'nombre' => 'Menú 4'
+        ]);
     }
 }
