@@ -1,16 +1,20 @@
 <template>
-    <div class="navbar-item" style="margin-right: 45px;">
-        <img :src="item.producto.imagen" alt="" width="200px" height="200px">
-        <div class="infoproducto">
-            <span class="tituloproducto">{{ item.producto.nombre }}</span>
-            <div class="cantidad">
-                <button @click="increment(item.producto.id)">+</button>
-                <span>{{item.cantidad}}</span>
-                <button @click="decrement(item.producto.id)">-</button>
+    <div class="navbar-item">
+        <div class="parteuno">
+            <img :src="item.producto.imagen" alt="" width="60px" height="40px">
+            <div class="infoproducto">
+                <span class="tituloproducto">{{ item.producto.nombre }}</span>
+                <div class="cantidad">
+                    <button @click="increment(item.producto.id)">+</button>
+                    <span>{{item.cantidad}}</span>
+                    <button @click="decrement(item.producto.id)">-</button>
+                </div>
             </div>
         </div>
-        <span class="precioproducto">{{ item.producto.precio * item.cantidad }}€</span>
-        <a class="delete" @click="eliminarItem(item)"></a>
+        <div>
+            <span class="precioproducto">{{ item.producto.precio * item.cantidad }}€</span>
+            <a class="delete" @click="eliminarItem(item)"></a>
+        </div>
     </div>
 </template>
 
@@ -40,10 +44,19 @@
     .infoproducto{
         flex-direction: column;
         margin-right: 25px;
+        min-width: 175px;
     }
 
     .precioproducto{
         margin-right: 15px;
+    }
+
+    .parteuno{
+        display: flex;
+    }
+
+    .parteuno > img {
+        margin-right: 5px;
     }
 
     .navbar-item img {
