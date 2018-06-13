@@ -35,6 +35,15 @@
                 });
             });
 
+            $('.table').on('click', '.editar', function(){
+                var $boton = $(this);
+                var $idProducto= $boton.next().val();
+
+                var getUrl = window.location;
+                var destino = getUrl .protocol + "//" + getUrl.host + "/productos/" + $idProducto;
+                $( location ).attr("href", destino);
+            });
+
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
                 var $id= $boton.next().val();
@@ -91,6 +100,7 @@
                         <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Precio</th>
+                        <th>Editar</th>
                         <th>Borrar</th>
                     </tr>
                 </thead>
@@ -101,6 +111,10 @@
                                 <td> {{ $producto->imagen}} </td>
                                 <td> {{ $producto->nombre}} </td>
                                 <td> {{ $producto->precio}} </td>
+                                <td>
+                                    <button class="editar"><i class="glyphicon glyphicon-pencil"></i></button>
+                                    <input type="hidden" name="id" value="{{ $producto->id }}"/>
+                                </td>
                                 <td>
                                     <button class="borrar"><i class="fa fa-fw fa-trash-o"></i></button>
                                     <input type="hidden" name="id" value="{{ $producto->id }}"/>

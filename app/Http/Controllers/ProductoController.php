@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\ProductoIngrediente;
-use App\Models\ProductoMenu;
+use App\Models\Productoproducto;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Auth;
@@ -46,12 +46,6 @@ class ProductoController extends Controller {
             'imagen' => $request['imagen'],
             'categoria_id' => $request['categoria_id']
         ]);
-        /*
-        ProductoIngrediente::create([
-            'producto_id' => $producto->id,
-            'ingrediente_id' => $request['ingrediente_id']
-        ]);
-        */
 
         return response()->json($producto, 201);
     }
@@ -59,10 +53,21 @@ class ProductoController extends Controller {
     public function updateProducto(Request $request, $idProducto) {
         $producto = Producto::find($idProducto);
 
+        if ( $producto == null ){
+            return response()->json('El producto indicado no existe.', 403);
+        }
+
+        $credentials = $request->only('nombre', 'precio', 'categoria_id');
+        $rules = [
+            'nombre' => 'required|string|min:1'
+        ];
+        $validator = Validator::make($credentials, $rules);
+        if ($validator->fails()) {
+            return response()->json('Debes rellenar todos los campos.', 403);
+        }
+
         $producto->nombre = $request['nombre'];
         $producto->precio = $request['precio'];
-        $producto->stock = $request['stock'];
-        $producto->imagen = $request['imagen'];
         $producto->categoria_id = $request['categoria_id'];
 
         $producto->save();
@@ -85,6 +90,18 @@ class ProductoController extends Controller {
         
         $productos = Producto::all();
         return view('productos.mostrar', compact('admin', 'productos'));
+    }
+
+    public function mostrarProducto( $idProducto ){
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+
+        $categorias = Categoria::all();
+
+        $producto = Producto::find($idProducto);
+        return view('productos.editar', compact('admin', 'producto', 'categorias'));
     }
 
 }

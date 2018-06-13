@@ -141,7 +141,8 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('productos/crear', 'ProductoController@crear');
   Route::post('productos/crear', 'ProductoController@addProducto')->name('producto.crear');
   Route::get('productos/mostrar', 'ProductoController@mostrar');
-  Route::post('productos/borrar', 'ProductoController@borrar');
+  Route::get('productos/{idProducto}', 'ProductoController@mostrarProducto');
+  Route::post('productos/{idProducto}', 'ProductoController@updateProducto');
 
   
 /**
