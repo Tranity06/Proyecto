@@ -4,9 +4,9 @@
         <div class="infoproducto">
             <span class="tituloproducto">{{ item.producto.nombre }}</span>
             <div class="cantidad">
-                <button>+</button>
+                <button @click="increment(item.producto.id)">+</button>
                 <span>{{item.cantidad}}</span>
-                <button>-</button>
+                <button @click="decrement(item.producto.id)">-</button>
             </div>
         </div>
         <span class="precioproducto">{{ item.producto.precio * item.cantidad }}€</span>
@@ -15,9 +15,20 @@
 </template>
 
 <script>
+
+    import store from '../store';
+
     export default {
         props: ['item'],
-        name: "CartItem"
+        name: "CartItem",
+        methods: {
+            increment(productoId){
+                store.commit('incrementCantidad',productoId);
+            },
+            decrement(productoId){
+                store.commit('decrementCantidad',productoId);
+            }
+        }
     }
 </script>
 

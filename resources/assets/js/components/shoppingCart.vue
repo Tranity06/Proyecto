@@ -2,8 +2,8 @@
     <div class="navbar-item has-dropdown" :class="{'is-active': active}">
         <a class="navbar-link sinDown has-text-white" @click="cartDropdown">
             <i class="fas fa-shopping-cart"></i>
-            <ul class="count">
-                <li>1</li>
+            <ul class="count" v-show="countItems > 0">
+                <li>{{countItems}}</li>
                 <li>2</li>
             </ul>
         </a>
@@ -30,7 +30,11 @@
         computed: {
           allCartItems(){
               return store.getters.cartItems;
+          },
+          countItems(){
+              return store.getters.countItems;
           }
+
         },
         methods: {
             cartDropdown(){

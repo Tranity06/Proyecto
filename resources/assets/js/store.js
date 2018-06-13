@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         cartItems: [],
+        countItems: 0,
         isLoggedIn: !!localStorage.getItem('token') || !!sessionStorage.getItem('token'),
         avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
                 || JSON.parse(sessionStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(sessionStorage.getItem('user')).avatar,
@@ -24,6 +25,7 @@ export default new Vuex.Store({
         email: (state) => state.email,
         telefono: (state) => state.telefono,
         cartItems: (state) => state.cartItems,
+        countItems: (state) => state.countItems
     },
     mutations: {
         loginUser (state) {
@@ -64,10 +66,23 @@ export default new Vuex.Store({
                     cantidad: 1
                 })
             }
+
+            state.countItems += 1;
+
         },
-        updateCartItem(state,cartItem){
-            let targetCartItem = state.cartItems.find(item => item.producto.id === cartItem.id);
-            targetCartItem.cantidad = e.cantidad;
+        incrementCantidad(state,id){
+            let targetCartItem = state.cartItems.find(item => item.producto.id === id);
+            if (targetCartItem.cantidad <= 9){
+                targetCartItem.cantidad += 1;
+                state.countItems += 1;
+            }
+        },
+        decrementCantidad(state,id){
+            let targetCartItem = state.cartItems.find(item => item.producto.id === id);
+            if(targetCartItem.cantidad > 1){
+                targetCartItem.cantidad -= 1;
+                state.countItems -= 1;
+            }
         },
         removeCartItem(state,cartItem){
             let items = state.todos
