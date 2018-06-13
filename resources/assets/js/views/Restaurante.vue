@@ -56,7 +56,7 @@
                             <div class="alergenos">
                               {{producto.precio }}€
                             </div>
-                            <button class="button is-warning is-rounded is-small">Añadir</button>
+                            <button class="button is-warning is-rounded is-small" @click="addProductToCart(producto)">Añadir</button>
                             <div class="select is-rounded is-small">
                                 <select>
                                     <option>1</option>
@@ -74,6 +74,8 @@
 </template>
 
 <script>
+
+    import store from '../store';
 
     const getProductos = (callback) => {
 
@@ -125,6 +127,10 @@
                     this.productos = productos;
                 }
             },
+            addProductToCart(producto){
+                console.log(producto);
+                store.commit('addCartItem',producto);
+            }
         }
     }
 </script>

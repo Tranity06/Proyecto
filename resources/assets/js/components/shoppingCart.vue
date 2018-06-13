@@ -8,8 +8,7 @@
             </ul>
         </a>
         <div class="navbar-dropdown is-boxed is-right">
-            <cart-item></cart-item>
-            <cart-item></cart-item>
+            <cart-item v-for="(item,index) in allCartItems"  :key="item.index" :item="item"></cart-item>
             <hr class="navbar-divider">
             <a class="navbar-item espacioBetween">
                 <span>SUB-TOTAL:  </span>
@@ -20,11 +19,19 @@
 </template>
 
 <script>
+
+    import store from '../store';
+
     import CartItem from "./CartItem";
     export default {
         components: {CartItem},
         props: ['active'],
         name: "shoppingCart",
+        computed: {
+          allCartItems(){
+              return store.getters.cartItems;
+          }
+        },
         methods: {
             cartDropdown(){
                 this.$parent.cartDropdown();

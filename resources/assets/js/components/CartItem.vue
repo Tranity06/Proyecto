@@ -1,21 +1,22 @@
 <template>
     <div class="navbar-item" style="margin-right: 45px;">
-        <img src="/uploads/productos/fanta.png" alt="" width="200px" height="200px">
+        <img :src="item.imagen" alt="" width="200px" height="200px">
         <div class="infoproducto">
-            <span class="tituloproducto">Perrito Caliente</span>
+            <span class="tituloproducto">{{ item.nombre }}</span>
             <div class="cantidad">
                 <button>+</button>
                 <span>2</span>
                 <button>-</button>
             </div>
         </div>
-        <span class="precioproducto">1.00€</span>
+        <span class="precioproducto">{{ item.precio }}</span>
         <a class="delete"></a>
     </div>
 </template>
 
 <script>
     export default {
+        props: ['item'],
         name: "CartItem"
     }
 </script>
