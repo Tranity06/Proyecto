@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        cartItems: [],
         isLoggedIn: !!localStorage.getItem('token') || !!sessionStorage.getItem('token'),
         avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
                 || JSON.parse(sessionStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(sessionStorage.getItem('user')).avatar,
@@ -22,6 +23,7 @@ export default new Vuex.Store({
         name: (state) => state.name,
         email: (state) => state.email,
         telefono: (state) => state.telefono,
+        cartItems: (state) => state.cartItems,
     },
     mutations: {
         loginUser (state) {
@@ -51,6 +53,17 @@ export default new Vuex.Store({
         },
         changeTelefono(state, telefono){
             state.telefono = telefono;
+        },
+        addCartItem(state,cartItem){
+            state.cartItems.push(cartItem)
+        },
+        updateCartItem(state,cartItem){
+            let targetCartItem = state.cartItems.find(item => item.id === cartItem.id);
+            targetCartItem.cantidad = e.cantidad;
+        },
+        removeCartItem(state,cartItem){
+            let items = state.todos
+            items.splice(items.indexOf(cartItem), 1)
         }
     }
 });
