@@ -179,6 +179,7 @@
             },
             hide(event) {
                 this.searchDisparado = false;
+                this.isCartActive = false;
                 this.query = '';
             },
             menu() {
@@ -221,6 +222,7 @@
                 this.textblack = false;
                 this.fondoBlanco = false;
                 this.isDropdownActive = false;
+                this.isCartActive = false;
             },
             dropdown(){
                 if (this.isDropdownActive === false){

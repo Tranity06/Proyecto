@@ -31,7 +31,7 @@
 
     import CartItem from "./CartItem";
     export default {
-        components: {CartItem},
+        components: { CartItem },
         props: ['active'],
         name: "shoppingCart",
         computed: {
@@ -44,7 +44,6 @@
           countItems(){
               return store.getters.countItems;
           }
-
         },
         methods: {
             cartDropdown(){
