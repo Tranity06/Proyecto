@@ -8,11 +8,18 @@
             </ul>
         </a>
         <div class="navbar-dropdown is-boxed is-right">
-            <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
-            <hr class="navbar-divider">
-            <div class="navbar-item espacioBetween" v-if="precioTotal > 0">
-                <span>SUB-TOTAL:  </span>
-                <span>{{precioTotal}}€</span>
+            <div v-if="allCartItems.length > 0">
+                <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
+                <hr class="navbar-divider">
+                <div class="navbar-item espacioBetween" v-if="precioTotal > 0">
+                    <span>SUB-TOTAL:  </span>
+                    <span>{{precioTotal}}€</span>
+                </div>
+            </div>
+            <div v-else>
+                <div class="navbar-item">
+                    Tu carrito está vacío.
+                </div>
             </div>
         </div>
     </div>

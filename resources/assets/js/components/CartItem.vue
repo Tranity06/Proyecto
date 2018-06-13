@@ -10,7 +10,7 @@
             </div>
         </div>
         <span class="precioproducto">{{ item.producto.precio * item.cantidad }}€</span>
-        <a class="delete"></a>
+        <a class="delete" @click="eliminarItem(item)"></a>
     </div>
 </template>
 
@@ -27,6 +27,9 @@
             },
             decrement(productoId){
                 store.commit('decrementCantidad',productoId);
+            },
+            eliminarItem(productoId){
+                store.commit('removeCartItem',productoId);
             }
         }
     }

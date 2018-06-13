@@ -25,7 +25,7 @@ export default new Vuex.Store({
         email: (state) => state.email,
         telefono: (state) => state.telefono,
         cartItems: (state) => state.cartItems,
-        countItems: (state) => state.countItems
+        countItems: (state) => state.cartItems.reduce((prev,next) => prev + next.cantidad,0)
     },
     mutations: {
         loginUser (state) {
@@ -67,26 +67,25 @@ export default new Vuex.Store({
                 })
             }
 
-            state.countItems += 1;
-
         },
         incrementCantidad(state,id){
             let targetCartItem = state.cartItems.find(item => item.producto.id === id);
             if (targetCartItem.cantidad <= 9){
                 targetCartItem.cantidad += 1;
-                state.countItems += 1;
             }
         },
         decrementCantidad(state,id){
             let targetCartItem = state.cartItems.find(item => item.producto.id === id);
             if(targetCartItem.cantidad > 1){
                 targetCartItem.cantidad -= 1;
-                state.countItems -= 1;
             }
         },
         removeCartItem(state,cartItem){
-            let items = state.todos
-            items.splice(items.indexOf(cartItem), 1)
+            let items = state.cartItems;
+            let index = items.indexOf(cartItem);
+            if (index > -1) {
+                items.splice(index, 1);
+            }
         }
     }
 });
