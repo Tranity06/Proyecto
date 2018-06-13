@@ -63,7 +63,7 @@
                 </router-link>
                 <a class="nav-item is-hidden-desktop nearburguer" @click="mostrarCartMobile">
                     <i class="fas fa-shopping-cart" style="color: white"></i>
-                    <ul class="count" v-show="countItems > 0">
+                    <ul class="count" :class="{'activo': countItems > 0 && !isActive}">
                         <li>{{countItems}}</li>
                         <li>2</li>
                     </ul>
@@ -521,8 +521,8 @@
     }
 
     .count {
-        background: #e94b35;
-        color: #fff;
+        background: transparent;
+        color: transparent;
         font-size: .6rem;
         font-weight: 700;
         border-radius: 50%;
@@ -550,6 +550,12 @@
 
     .count li:last-of-type {
         visibility: hidden;
+    }
+
+    .count.activo {
+        background: #e94b35;
+        color: #fff;
+        transition: background .25s ease-in, color .25s ease-in;
     }
 
     .navbar-item-flexible .navbar-item{
