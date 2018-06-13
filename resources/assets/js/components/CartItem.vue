@@ -1,15 +1,15 @@
 <template>
     <div class="navbar-item" style="margin-right: 45px;">
-        <img :src="item.imagen" alt="" width="200px" height="200px">
+        <img :src="item.producto.imagen" alt="" width="200px" height="200px">
         <div class="infoproducto">
-            <span class="tituloproducto">{{ item.nombre }}</span>
+            <span class="tituloproducto">{{ item.producto.nombre }}</span>
             <div class="cantidad">
                 <button>+</button>
-                <span>2</span>
+                <span>{{item.cantidad}}</span>
                 <button>-</button>
             </div>
         </div>
-        <span class="precioproducto">{{ item.precio }}</span>
+        <span class="precioproducto">{{ item.producto.precio * item.cantidad }}€</span>
         <a class="delete"></a>
     </div>
 </template>

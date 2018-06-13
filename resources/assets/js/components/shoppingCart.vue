@@ -8,7 +8,7 @@
             </ul>
         </a>
         <div class="navbar-dropdown is-boxed is-right">
-            <cart-item v-for="(item,index) in allCartItems"  :key="item.index" :item="item"></cart-item>
+            <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
             <hr class="navbar-divider">
             <a class="navbar-item espacioBetween">
                 <span>SUB-TOTAL:  </span>

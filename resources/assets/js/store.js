@@ -55,10 +55,18 @@ export default new Vuex.Store({
             state.telefono = telefono;
         },
         addCartItem(state,cartItem){
-            state.cartItems.push(cartItem)
+            if (state.cartItems.some(item => item.producto === cartItem)) {
+                let targetCartItem = state.cartItems.find(item => item.producto.id === cartItem.id);
+                targetCartItem.cantidad += 1;
+            } else{
+                state.cartItems.push({
+                    producto: cartItem,
+                    cantidad: 1
+                })
+            }
         },
         updateCartItem(state,cartItem){
-            let targetCartItem = state.cartItems.find(item => item.id === cartItem.id);
+            let targetCartItem = state.cartItems.find(item => item.producto.id === cartItem.id);
             targetCartItem.cantidad = e.cantidad;
         },
         removeCartItem(state,cartItem){
