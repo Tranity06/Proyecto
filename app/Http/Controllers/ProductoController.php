@@ -6,9 +6,11 @@ use App\Models\Producto;
 use App\Models\ProductoIngrediente;
 use App\Models\Productoproducto;
 use App\Models\Categoria;
+//use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
+//use Intervention\Image\Facades\Image;
 
 class ProductoController extends Controller {
 
@@ -27,6 +29,16 @@ class ProductoController extends Controller {
     }
 
     public function addProducto(Request $request) {
+        /*$validator = Validator::make($request->imagen, [
+            'imagen' => 'required|image64:jpg,png'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        } else {
+            $imageData = $request->get('image');
+            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            Image::make($imageData)->resize(300, 300)->save( public_path('/uploads/productos/' . $fileName));
+        }*/
         //Validacion de los datos
         $credentials = $request->only('nombre', 'precio', 'imagen', 'categoria_id');
         $rules = [
@@ -43,7 +55,7 @@ class ProductoController extends Controller {
         $producto = Producto::create([
             'nombre' => $request['nombre'],
             'precio' => $request['precio'],
-            'imagen' => $request['imagen'],
+           // 'imagen' => $fileName,
             'categoria_id' => $request['categoria_id']
         ]);
 
@@ -103,6 +115,25 @@ class ProductoController extends Controller {
         $producto = Producto::find($idProducto);
         return view('productos.editar', compact('admin', 'producto', 'categorias'));
     }
+
+    /*public function cambiarAvatar(Request $request){
+        $validator = Validator::make($request->imagen, [
+            'imagen' => 'required|image64:png'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()]);
+        } else {
+            $imageData = $request->get('image');
+            $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            Image::make($imageData)->resize(300, 300)->save( public_path('/uploads/avatars/' . $fileName));
+
+            $user = User::find($this->getUser()->id);
+            $user->avatar = $fileName;
+            $user->saveOrFail();
+
+            return response()->json(['success'=>true,'avatar_name'=>$fileName],200);
+        }
+    }*/
 
 }
 

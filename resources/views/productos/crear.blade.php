@@ -26,6 +26,7 @@
             $('.crear').on('click', function(){
                 var nombre = $('#nombre').val();
                 var precio = $('#precio').val();
+                var imagen = $('#imagen').val();
                 var categoria_id = $('#categoria_id').val();
                 var $callout = $('.callout').first();
                 var $boton = $(this)
@@ -41,7 +42,7 @@
                 $.ajax({
                     url: '/productos/crear',
                     type: 'POST',
-                    data: 'nombre='+nombre+'&precio='+precio+'&categoria_id='+categoria_id,
+                    data: 'nombre='+nombre+'&precio='+precio+'&imagen='+imagen+'&categoria_id='+categoria_id,
                     statusCode:{
                         201: function (e){
                             $callout.text("Producto creada.");
@@ -84,10 +85,12 @@
             <input type="text" class="form-control input-sm" id="nombre" name="nombre"/>
             <p><label for="precio">Precio del producto:</label></p>
             <input type="number" class="form-control input-sm" id="precio" name="precio"/>
+            <p><label for="iamgen">Imagen del producto:</label></p>
+            <input type="file" class="form-control input-sm" id="imagen" name="imagen"/>
             <p><label for="categoria_id">Categoría a la que pertenece:</lable></p>
             <select type="text" class="form-control input-sm" id="categoria_id" name="categoria_id">
                 @foreach ($categorias as $categoria)
-                    <option value="$categoria->id">{{$categoria->nombre}}</option>
+                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                 @endforeach
             </select>
             <p><input type="button" class="crear sub btn btn-primary" value="Crear"/></p>
