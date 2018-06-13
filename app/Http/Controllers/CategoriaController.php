@@ -21,22 +21,18 @@ class CategoriaController extends Controller {
             return redirect('/admin'); 
         }
         $admin = Auth::guard('admin')->user()->name;
-        return view('categoria.crear', compact('admin'));
+        return view('categorias.crear', compact('admin'));
     }
 
-    //me comenta Lorena que crear categoria va en la parte de administrador y no va por api[Que es solamente para el front].
     public function addCategoria(Request $request) {
         $categoria = Categoria::create([
             'nombre' => $request['nombre'],
         ]);
 
-        //devuelvo un 201 que indica que se ha creado, realmente ningun estado hace falta que se devuelva
-        //Laravel lo hace automaticamente, pero me gusta verlo claro.
         return response()->json($categoria, 201);
     }
 
-    //va en la parte de administrador y no va por api[Que es solamente para el front].
-    public function update(Request $request,$idCategoria) {
+    public function updateCategoria(Request $request,$idCategoria) {
         $categoria = Categoria::find($idCategoria);
         $categoria->nombre = $request['nombre'];
         $categoria->save();
@@ -44,11 +40,16 @@ class CategoriaController extends Controller {
         return response()->json($categoria,200);
     }
 
-    //va en la parte de administrador y no va por api[Que es solamente para el front].
     public function deleteCategoria($idCategoria) {
         $categoria = Categoria::find($idCategoria);
         $categoria->delete();
-        return 204;
+        
+        if ( $categoria == null ){
+            return response()->json('La categoría indicada no existe.', 403);
+        }
+        
+        $categoria->delete();
+        return response()->json('Categoría borrada.', 204);
     }
 
     public function mostrar(){
