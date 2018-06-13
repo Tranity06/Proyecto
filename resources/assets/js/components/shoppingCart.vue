@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar-item has-dropdown" :class="{'is-active': active}">
+    <div class="navbar-item has-dropdown carrito" :class="{'is-active': active}">
         <a class="navbar-link sinDown has-text-white" @click="cartDropdown">
             <i class="fas fa-shopping-cart"></i>
             <ul class="count" v-show="countItems > 0">

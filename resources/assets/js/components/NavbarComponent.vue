@@ -61,7 +61,7 @@
                     <span class="navbar-item"  :class="{'has-text-black': textblack,'has-text-white': !textblack}" @click="dispararSearch"><i class="fas fa-search fa-sm"></i></span>
                     <span class="navbar-item navbar-item-end">
                         <shopping-cart :active="isCartActive"></shopping-cart>
-                        <div class="navbar-item has-dropdown" :class="{'is-active': isDropdownActive}" v-show="StoreStateEnabled">
+                        <div class="navbar-item has-dropdown perfilActivo" :class="{'is-active': isDropdownActive}" v-show="StoreStateEnabled">
                             <a class="navbar-link" @click="dropdown">
                                 <img class="avatar"
                                      :src="'/uploads/avatars/'+getAvatar">

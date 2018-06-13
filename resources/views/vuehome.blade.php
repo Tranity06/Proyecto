@@ -134,6 +134,8 @@
                 if (st > lastScrollTop && st > navbarHeight){
                     // Scroll Down
                     $('.navbar').removeClass('nav-down').addClass('nav-up');
+                    $('.carrito').removeClass('is-active');
+                    $('.perfilActivo').removeClass('is-active');
                 } else {
                     if (st < 100){
                         $('.navbar').removeClass('nav-up').removeClass('nav-down');
