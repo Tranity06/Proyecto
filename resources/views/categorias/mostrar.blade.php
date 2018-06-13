@@ -40,13 +40,13 @@
                 var $idCategoria= $boton.next().val();
 
                 var getUrl = window.location;
-                var destino = getUrl .protocol + "//" + getUrl.host + "/categorias/" + $idcategoria;
+                var destino = getUrl .protocol + "//" + getUrl.host + "/categorias/" + $idCategoria;
                 $( location ).attr("href", destino);
             });
 
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
-                var $idcategoria= $boton.next().val();
+                var idCategoria= $('#id').val();
 
                 var $callout = $('.callout').first();
                 $boton.attr('disabled', 'disabled');
@@ -61,7 +61,7 @@
                     $.ajax({
                         url: '/categorias/borrar',
                         type: 'POST',
-                        data: 'idCategoria='+$idCategoria,
+                        data: 'idCategoria='+idCategoria,
                         statusCode:{
                             204: function (){
                                 $boton.closest('tr')
@@ -121,7 +121,7 @@
                                 </td>
                                 <td>
                                     <button class="borrar"><i class="fa fa-fw fa-trash-o"></i></button>
-                                    <input type="hidden" name="id" value="{{ $categoria->id }}"/>
+                                    <input type="hidden" id="id" name="id" value="{{ $categoria->id }}"/>
                                 </td>
                             </tr>
                         </div>
