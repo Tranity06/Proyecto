@@ -5,9 +5,9 @@
             <div class="infoproducto">
                 <span class="tituloproducto">{{ item.producto.nombre }}</span>
                 <div class="cantidad">
-                    <button @click="increment(item.producto.id)">+</button>
+                    <button class="cart-button" @click="increment(item.producto.id)">+</button>
                     <span>{{item.cantidad}}</span>
-                    <button @click="decrement(item.producto.id)">-</button>
+                    <button class="cart-button" @click="decrement(item.producto.id)">-</button>
                 </div>
             </div>
         </div>
@@ -40,6 +40,17 @@
 </script>
 
 <style scoped>
+
+    .cart-button{
+        background-color: lightgrey;
+        border: none;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+    }
 
     .infoproducto{
         flex-direction: column;

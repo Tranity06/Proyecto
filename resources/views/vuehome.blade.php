@@ -73,6 +73,35 @@
         .fondoblanco{
             background-color: white !important;
         }
+
+
+
+        .nearburguer{
+            position: absolute;
+            top: 25.5%;
+            right: 15%;
+        }
+
+        @media screen and (min-device-width: 420px) and (max-device-width: 600px) {
+            .nearburguer{
+                right: 11%;
+            }
+        }
+
+
+        @media screen and (min-device-width: 600px) and (max-device-width: 800px) {
+            .nearburguer{
+                right: 7%;
+            }
+        }
+
+        @media screen and (min-device-width: 800px) and (max-device-width: 1085px) {
+            .nearburguer{
+                right: 5%;
+            }
+        }
+
+
     </style>
 </head>
 <body>
