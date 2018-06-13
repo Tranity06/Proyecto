@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Auth;
 
 class CategoriaController extends Controller {
 
@@ -24,7 +25,7 @@ class CategoriaController extends Controller {
     }
 
     //me comenta Lorena que crear categoria va en la parte de administrador y no va por api[Que es solamente para el front].
-    public function crearCategoria(Request $request) {
+    public function addCategoria(Request $request) {
         $categoria = Categoria::create([
             'nombre' => $request['nombre'],
         ]);
@@ -44,10 +45,20 @@ class CategoriaController extends Controller {
     }
 
     //va en la parte de administrador y no va por api[Que es solamente para el front].
-    public function delete($idCategoria) {
+    public function deleteCategoria($idCategoria) {
         $categoria = Categoria::find($idCategoria);
         $categoria->delete();
         return 204;
+    }
+
+    public function mostrar(){
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+        
+        $categorias = Categoria::all();
+        return view('categorias.mostrar', compact('admin', 'categorias'));
     }
 
 }
