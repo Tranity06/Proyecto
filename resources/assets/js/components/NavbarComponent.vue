@@ -34,23 +34,25 @@
 
             </div>
         </div>
-        <div class="cartcontainer" v-if="cartDisparado">
-            <div class="cartcontainer__header">
-                <span class="has-text-weight-bold is-size-5">PRECIO TOTAL</span>
-                <span class="is-size-5">{{precioTotal.toFixed(2)}}€</span>
-            </div>
-            <div v-if="allCartItems.length > 0">
-                <div class="navbar-item-flexible">
-                    <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
+        <transition name="cartcontainer-fade">
+            <div class="cartcontainer" v-if="cartDisparado">
+                <div class="cartcontainer__header">
+                    <span class="has-text-weight-bold is-size-5">PRECIO TOTAL</span>
+                    <span class="is-size-5">{{precioTotal.toFixed(2)}}€</span>
+                </div>
+                <div v-if="allCartItems.length > 0">
+                    <div class="navbar-item-flexible">
+                        <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
+                    </div>
+                </div>
+                <div v-else style="margin-bottom: 30px; display: flex; justify-content: center;">
+                    <span class="has-text-weight-bold is-size-6">Tu carrito está vacío.</span>
+                </div>
+                <div style="display: flex; justify-content: center">
+                    <a   class="button is-rounded is-danger" @click="cerrarCartMobile">Cerrar</a>
                 </div>
             </div>
-            <div v-else style="margin-bottom: 30px; display: flex; justify-content: center;">
-                <span class="has-text-weight-bold is-size-6">Tu carrito está vacío.</span>
-            </div>
-            <div style="display: flex; justify-content: center">
-                <a   class="button is-rounded is-danger" @click="cerrarCartMobile">Cerrar</a>
-            </div>
-        </div>
+        </transition>
         <div class="container" v-if="searchDisparado === false">
             <div class="navbar-brand">
                 <router-link class="navbar-item no-activar" :to="{ name: 'home' }">
@@ -308,7 +310,16 @@
         height: 100vh;
         z-index: 60;
         background-color: white;
-        transition: opacity .3s,visibility .3s;
+    }
+
+    .cartcontainer-fade-enter,
+    .cartcontainer-fade-leave-active {
+        opacity: 0;
+    }
+
+    .cartcontainer-fade-enter-active,
+    .cartcontainer-fade-leave-active {
+        transition: opacity .25s ease-out
     }
 
     .no-activar{
