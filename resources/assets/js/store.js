@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        cartItems: [],
+        cartItems: JSON.parse(sessionStorage.getItem('cartItems'))==null ? [] : JSON.parse(sessionStorage.getItem('cartItems')),
         countItems: 0,
         modalActive: false,
         contenidoModal: {
@@ -83,15 +83,16 @@ export default new Vuex.Store({
 
                     state.modalActive = true;
 
-                    console.log('llegue aqui');
+                    sessionStorage.setItem('cartItems',JSON.stringify(state.cartItems));
 
                 } else{
                     targetCartItem.cantidad = suma;
+                    sessionStorage.setItem('cartItems',JSON.stringify(state.cartItems));
                 }
 
             } else {
-                console.log('asd');
-                state.cartItems.push(cartItem)
+                state.cartItems.push(cartItem);
+                sessionStorage.setItem('cartItems',JSON.stringify(state.cartItems));
             }
 
         },
@@ -100,12 +101,14 @@ export default new Vuex.Store({
             if (targetCartItem.cantidad <= 9){
                 targetCartItem.cantidad += 1;
             }
+            sessionStorage.setItem('cartItems',JSON.stringify(state.cartItems));
         },
         decrementCantidad(state,id){
             let targetCartItem = state.cartItems.find(item => item.producto.id === id);
             if(targetCartItem.cantidad > 1){
                 targetCartItem.cantidad -= 1;
             }
+            sessionStorage.setItem('cartItems',JSON.stringify(state.cartItems));
         },
         removeCartItem(state,cartItem){
             let items = state.cartItems;
@@ -113,6 +116,7 @@ export default new Vuex.Store({
             if (index > -1) {
                 items.splice(index, 1);
             }
+            sessionStorage.setItem('cartItems',JSON.stringify(state.cartItems));
         }
     }
 });
