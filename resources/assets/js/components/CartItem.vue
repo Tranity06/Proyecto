@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="partedos">
             <span class="precioproducto">{{(item.producto.precio * item.cantidad).toFixed(2) }}€</span>
             <a class="delete" @click="eliminarItem(item)"></a>
         </div>
@@ -57,6 +57,12 @@
 
     .parteuno > img {
         margin-right: 5px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .partedos {
+            display: flex;
+        }
     }
 
     .navbar-item img {

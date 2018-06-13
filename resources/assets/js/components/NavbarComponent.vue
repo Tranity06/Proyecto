@@ -34,6 +34,23 @@
 
             </div>
         </div>
+        <div class="cartcontainer" v-if="cartDisparado">
+            <div class="cartcontainer__header">
+                <span class="has-text-weight-bold is-size-5">PRECIO TOTAL</span>
+                <span class="is-size-5">{{precioTotal.toFixed(2)}}€</span>
+            </div>
+            <div v-if="allCartItems.length > 0">
+                <div class="navbar-item-flexible">
+                    <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
+                </div>
+            </div>
+            <div v-else style="margin-bottom: 30px; display: flex; justify-content: center;">
+                <span class="has-text-weight-bold is-size-6">Tu carrito está vacío.</span>
+            </div>
+            <div style="display: flex; justify-content: center">
+                <a   class="button is-rounded is-danger" @click="cerrarCartMobile">Cerrar</a>
+            </div>
+        </div>
         <div class="container" v-if="searchDisparado === false">
             <div class="navbar-brand">
                 <router-link class="navbar-item no-activar" :to="{ name: 'home' }">
@@ -42,6 +59,13 @@
                         <span :class="{'has-text-black': textblack && textblackLogo}" @click="closeMenu" >Palomitas time</span>
                     </div>
                 </router-link>
+                <a class="nav-item is-hidden-desktop nearburguer" @click="mostrarCartMobile">
+                    <i class="fas fa-shopping-cart" style="color: white"></i>
+                    <ul class="count" v-show="countItems > 0">
+                        <li>{{countItems}}</li>
+                        <li>2</li>
+                    </ul>
+                </a>
                 <a role="button" class="navbar-burger" :class="{'is-active': isActive,'has-text-black': textblack && textblackLogo}" aria-label="menu" aria-expanded="false" @click="menu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -60,7 +84,7 @@
                 <div class="navbar-end">
                     <span class="navbar-item"  :class="{'has-text-black': textblack,'has-text-white': !textblack}" @click="dispararSearch"><i class="fas fa-search fa-sm"></i></span>
                     <span class="navbar-item navbar-item-end">
-                        <shopping-cart :active="isCartActive"></shopping-cart>
+                        <shopping-cart class="is-hidden-touch" :active="isCartActive"></shopping-cart>
                         <div class="navbar-item has-dropdown perfilActivo" :class="{'is-active': isDropdownActive}" v-show="StoreStateEnabled">
                             <a class="navbar-link" @click="dropdown">
                                 <img class="avatar"
@@ -104,6 +128,7 @@
     import store from '../store';
     import ClickOutside from 'vue-click-outside';
     import ShoppingCart from "./shoppingCart";
+    import CartItem from "./CartItem";
 
     const focus = {
         inserted(el) {
@@ -113,7 +138,7 @@
 
     export default {
         name: "navbar-component",
-        components: {ShoppingCart},
+        components: {CartItem, ShoppingCart},
         data () {
             return {
                 googleSignInParams: {
@@ -127,6 +152,7 @@
                 query: '',
                 isDropdownActive: false,
                 isCartActive: false,
+                cartDisparado: false,
             }
         },
         computed: {
@@ -135,9 +161,23 @@
             },
             getAvatar(){
                 return store.getters.avatar;
-             }
+             },
+
+            allCartItems(){
+                return store.getters.cartItems;
+            },
+            precioTotal(){
+                return store.getters.cartItems.reduce((prev,next) => prev + parseFloat(next.producto.precio)*next.cantidad,0);
+            },
+            countItems(){
+                return store.getters.countItems;
+            }
         },
         methods: {
+
+            mostrarCartMobile(){
+                this.cartDisparado = true;
+            },
             Logout() {
                 this.isDropdownActive = false;
                 this.closeMenu();
@@ -237,7 +277,12 @@
                 } else {
                     this.isCartActive = false;
                 }
+            },
+            cerrarCartMobile(){
+                this.cartDisparado = false;
             }
+
+
         },
         // do not forget this section
         directives: {
@@ -248,6 +293,23 @@
 </script>
 
 <style scoped>
+
+    .nearburguer{
+        position: absolute;
+        top: 25.5%;
+        right: 15%;
+    }
+
+    .cartcontainer{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 60;
+        background-color: white;
+        transition: opacity .3s,visibility .3s;
+    }
 
     .no-activar{
         background-color: transparent !important;
@@ -427,4 +489,49 @@
         height: 32px;
         margin-left: 5px;
     }
+
+    .count {
+        background: #e94b35;
+        color: #fff;
+        font-size: .6rem;
+        font-weight: 700;
+        border-radius: 50%;
+        text-indent: 0;
+        transition: transform .2s .5s,-webkit-transform .2s .5s;
+        position: relative;
+        top: -25px;
+        right: -12px;
+        height: 15px;
+        width: 15px;
+    }
+
+    .count li {
+        position: absolute;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        left: 45%;
+        top: 50%;
+        bottom: auto;
+        right: auto;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .count li:last-of-type {
+        visibility: hidden;
+    }
+
+    .navbar-item-flexible .navbar-item{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .cartcontainer__header{
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem;
+    }
+
 </style>
