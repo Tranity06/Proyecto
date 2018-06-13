@@ -7,6 +7,11 @@ export default new Vuex.Store({
     state: {
         cartItems: [],
         countItems: 0,
+        modalActive: false,
+        contenidoModal: {
+          titulo: '',
+          cuerpo: ''
+        },
         isLoggedIn: !!localStorage.getItem('token') || !!sessionStorage.getItem('token'),
         avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
                 || JSON.parse(sessionStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(sessionStorage.getItem('user')).avatar,
@@ -25,7 +30,9 @@ export default new Vuex.Store({
         email: (state) => state.email,
         telefono: (state) => state.telefono,
         cartItems: (state) => state.cartItems,
-        countItems: (state) => state.cartItems.reduce((prev,next) => prev + next.cantidad,0)
+        countItems: (state) => state.cartItems.reduce((prev,next) => prev + next.cantidad,0),
+        modalActive: (state) => state.modalActive,
+        contenidoModal: (state) => state.contenidoModal,
     },
     mutations: {
         loginUser (state) {
@@ -56,15 +63,35 @@ export default new Vuex.Store({
         changeTelefono(state, telefono){
             state.telefono = telefono;
         },
+        closeModal(state){
+            state.modalActive = false;
+        },
         addCartItem(state,cartItem){
-            if (state.cartItems.some(item => item.producto === cartItem)) {
-                let targetCartItem = state.cartItems.find(item => item.producto.id === cartItem.id);
-                targetCartItem.cantidad += 1;
-            } else{
-                state.cartItems.push({
-                    producto: cartItem,
-                    cantidad: 1
-                })
+            if (state.cartItems.some(item => item.producto === cartItem.producto)) {
+                let targetCartItem = state.cartItems.find(item => item.producto.id === cartItem.producto.id);
+
+                let suma = targetCartItem.cantidad + cartItem.cantidad;
+
+                if (suma > 10){
+                    let resto = suma - 10;
+                    targetCartItem.cantidad = suma - resto;
+
+                    state.contenidoModal = {
+                        titulo: '¿Vas a poder con todo eso?',
+                        cuerpo: 'Si vas a asistir con un grupo grande de amigos te recomendamos que te pongas en contacto con nosotros, ¡Podemos ofrecerte grandes descuentos!'
+                    };
+
+                    state.modalActive = true;
+
+                    console.log('llegue aqui');
+
+                } else{
+                    targetCartItem.cantidad = suma;
+                }
+
+            } else {
+                console.log('asd');
+                state.cartItems.push(cartItem)
             }
 
         },

@@ -12,7 +12,7 @@
                 Añadir
             </button>
             <div class="select is-rounded is-small">
-                <select v-model="cantidad">
+                <select v-model.number="cantidad">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -44,7 +44,12 @@
         },
         methods: {
             addProductToCart(producto) {
-                store.commit('addCartItem', producto);
+                const productoManipulado = {
+                    producto: producto,
+                    cantidad: this.cantidad
+                };
+                store.commit('addCartItem', productoManipulado);
+                this.cantidad = 1;
             },
         }
     }

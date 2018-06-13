@@ -61,10 +61,20 @@
 
             </div>
         </div>
+        <modal
+                v-show="isModalActive"
+                @close="closeModal"
+        >
+            <span slot="header">{{contentModal.titulo}}</span>
+            <span slot="body">{{contentModal.cuerpo}}</span>
+        </modal>
     </div>
 </template>
 
 <script>
+
+    import store from '../store';
+    import modal from '../components/modal'
 
     import ProductoComponent from "../components/ProductoComponent";
 
@@ -81,7 +91,7 @@
 
     export default {
         name: "restaurante",
-        components: {ProductoComponent},
+        components: {ProductoComponent,modal},
         data() {
             return {
                 categorias: [],
@@ -102,19 +112,19 @@
                 .catch(error => {
                     console.log(error);
                 });
-
-            /*            axios.get('/api/producto')
-                            .then(response => {
-                                this.productos = response.data;
-                            })
-                            .catch(error => {
-                                console.log(error);
-                            })*/
         },
         beforeRouteEnter(to, from, next) {
             getProductos((err, data) => {
                 next(vm => vm.setData(err, data));
             });
+        },
+        computed: {
+          isModalActive(){
+             return store.getters.modalActive;
+          },
+          contentModal(){
+                return store.getters.contenidoModal;
+            },
         },
         methods: {
             setData(err, productos) {
@@ -144,6 +154,9 @@
                         this.tab = 4;
                         break;
                 }
+            },
+            closeModal(){
+                store.commit('closeModal');
             }
         }
     }
