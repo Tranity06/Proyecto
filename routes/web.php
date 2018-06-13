@@ -117,6 +117,16 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('menus/borrar', 'MenuController@deleteMenu');
 
   /**
+   * Gestión CATEGORÍAS
+   */
+  Route::get('categorias/crear', 'CategoriaController@crear');
+  Route::post('categorias/crear', 'CategoriaController@addCategoria')->name('categorias.crear');
+  Route::get('categorias/mostrar', 'CategoriaController@mostrar')->name('categorias.mostrar');
+  Route::get('categorias/{idMenu}', 'CategoriaController@mostrarCategoria');
+  Route::post('categorias/{idMenu}', 'CategoriaController@updateCategoria');
+  Route::post('categorias/borrar', 'CategoriaController@deleteCategoria');
+
+  /**
    * Gestion de productos de menus
    */
   Route::get('productomenu/{idMenu}', 'MenuController@menuProductos');
