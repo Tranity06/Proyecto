@@ -12,7 +12,7 @@
             </div>
         </div>
         <div>
-            <span class="precioproducto">{{ item.producto.precio * item.cantidad }}€</span>
+            <span class="precioproducto">{{(item.producto.precio * item.cantidad).toFixed(2) }}€</span>
             <a class="delete" @click="eliminarItem(item)"></a>
         </div>
     </div>

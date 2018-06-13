@@ -13,7 +13,7 @@
                 <hr class="navbar-divider">
                 <div class="navbar-item espacioBetween" v-if="precioTotal > 0">
                     <span>SUB-TOTAL:  </span>
-                    <span>{{precioTotal}}€</span>
+                    <span>{{precioTotal.toFixed(2)}}€</span>
                 </div>
             </div>
             <div v-else>

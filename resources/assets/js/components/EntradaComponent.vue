@@ -57,7 +57,7 @@
                                         <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + horaTarget}}</span>
                                         <span class="has-text-grey-light is-size-7"> {{ butacas.num }} {{butacas.num > 1 ? 'entradas': 'entrada'}}</span>
                                     </div>
-                                    <span class="precio has-text-weight-bold">{{ butacas.total }}€</span>
+                                    <span class="precio has-text-weight-bold">{{ butacas.total.toFixed(2) }}€</span>
                                 </div>
                                 <div class="cuerpo" v-for="item in allCartItems">
                                     <img :src="item.producto.imagen" alt="" width="55" height="74">
@@ -65,10 +65,10 @@
                                         <span class="has-text-weight-bold is-size-6">{{ item.producto.nombre }}</span>
                                         <span class="has-text-grey-light is-size-7">Cantidad: {{ item.cantidad }}</span>
                                     </div>
-                                    <span class="precio has-text-weight-bold">{{ item.producto.precio * item.cantidad }}€</span>
+                                    <span class="precio has-text-weight-bold">{{ (item.producto.precio * item.cantidad).toFixed(2) }}€</span>
                                 </div>
                                 <div class="abajo has-text-weight-bold">
-                                    Total: {{ butacas.total + precioTotal }}€
+                                    Total: {{ (butacas.total + precioTotal).toFixed(2) }}€
                                 </div>
                             </section>
                         </div>
