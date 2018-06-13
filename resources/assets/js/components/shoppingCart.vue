@@ -10,10 +10,10 @@
         <div class="navbar-dropdown is-boxed is-right">
             <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
             <hr class="navbar-divider">
-            <a class="navbar-item espacioBetween">
+            <div class="navbar-item espacioBetween" v-if="precioTotal > 0">
                 <span>SUB-TOTAL:  </span>
-                <span>45€</span>
-            </a>
+                <span>{{precioTotal}}€</span>
+            </div>
         </div>
     </div>
 </template>
@@ -30,6 +30,9 @@
         computed: {
           allCartItems(){
               return store.getters.cartItems;
+          },
+          precioTotal(){
+              return store.getters.cartItems.reduce((prev,next) => prev + parseFloat(next.producto.precio)*next.cantidad,0);
           },
           countItems(){
               return store.getters.countItems;
