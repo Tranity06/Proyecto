@@ -15,26 +15,26 @@
                 <nav class="tabs is-boxed is-fullwidth">
                     <div class="container">
                         <ul>
-                            <li class="is-active">
-                                <a>
+                            <li  :class="{'is-active': this.tab===1}">
+                                <a @click="selectTab(1)">
                                     <img src="/icons/bebida.svg" alt="Bebidas">
                                     <span class="is-hidden-mobile">{{this.categorias[0].nombre}}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===2}">
+                                <a @click="selectTab(2)">
                                     <img src="/icons/patatas.svg" alt="Patatas">
                                     <span class="is-hidden-mobile">{{this.categorias[1].nombre}}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===3}">
+                                <a @click="selectTab(3)">
                                     <img src="/icons/popcorn.svg" alt="Comida">
                                     <span class="is-hidden-mobile">{{this.categorias[2].nombre}}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===4}">
+                                <a @click="selectTab(4)">
                                     <img src="/icons/chocolate.svg" alt="Chocolate">
                                     <span class="is-hidden-mobile">{{this.categorias[3].nombre}}</span>
                                 </a>
@@ -46,8 +46,8 @@
         </section>
         <div class="section">
             <div class="container">
-                <div class="flexcontainer">
-                    <div class="tarjeta" v-for="producto in productos">
+                <div class="flexcontainer" v-if="this.tab === 1">
+                    <div class="tarjeta" v-for="producto in bebidas">
                         <div class="titulo is-size-5">
                             {{producto.nombre}}
                         </div>
@@ -61,6 +61,101 @@
                                 <select>
                                     <option>1</option>
                                     <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flexcontainer" v-if="this.tab === 2">
+                    <div class="tarjeta" v-for="producto in derivados">
+                        <div class="titulo is-size-5">
+                            {{producto.nombre}}
+                        </div>
+                        <img :src="producto.imagen" alt="" width="200px" height="200px">
+                        <div class="botones-debajo">
+                            <div class="alergenos">
+                                {{producto.precio }}€
+                            </div>
+                            <button class="button is-warning is-rounded is-small" @click="addProductToCart(producto)">Añadir</button>
+                            <div class="select is-rounded is-small">
+                                <select>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flexcontainer" v-if="this.tab === 4">
+                    <div class="tarjeta" v-for="producto in comidaCaliente">
+                        <div class="titulo is-size-5">
+                            {{producto.nombre}}
+                        </div>
+                        <img :src="producto.imagen" alt="" width="200px" height="200px">
+                        <div class="botones-debajo">
+                            <div class="alergenos">
+                                {{producto.precio }}€
+                            </div>
+                            <button class="button is-warning is-rounded is-small" @click="addProductToCart(producto)">Añadir</button>
+                            <div class="select is-rounded is-small">
+                                <select>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flexcontainer" v-if="this.tab === 3">
+                    <div class="tarjeta" v-for="producto in lacteos">
+                        <div class="titulo is-size-5">
+                            {{producto.nombre}}
+                        </div>
+                        <img :src="producto.imagen" alt="" width="200px" height="200px">
+                        <div class="botones-debajo">
+                            <div class="alergenos">
+                                {{producto.precio }}€
+                            </div>
+                            <button class="button is-warning is-rounded is-small" @click="addProductToCart(producto)">Añadir</button>
+                            <div class="select is-rounded is-small">
+                                <select>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
                                 </select>
                             </div>
                         </div>
@@ -94,6 +189,12 @@
             return {
                 categorias: [],
                 productos: [],
+                bebidas: [],
+                derivados: [],
+                comidaCaliente: [],
+                lacteos: [],
+                cantidad: 1,
+                tab: 1,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
@@ -124,12 +225,33 @@
                 if (err) {
                     this.error = err.toString();
                 } else {
-                    this.productos = productos;
+                    this.bebidas = productos.filter(producto => producto.categoria_id === 1);
+                    this.derivados = productos.filter(producto => producto.categoria_id === 2);
+                    this.comidaCaliente = productos.filter(producto => producto.categoria_id === 3);
+                    this.lacteos = productos.filter(producto => producto.categoria_id === 4);
                 }
             },
             addProductToCart(producto){
                 console.log(producto);
                 store.commit('addCartItem',producto);
+            },
+            selectTab(selectedTab) {
+                switch (selectedTab){
+                    case 1:
+                        this.tab = 1;
+                        console.log(this.tab);
+                        break;
+                    case 2:
+                        this.tab = 2;
+                        console.log(this.tab);
+                        break;
+                    case 3:
+                        this.tab = 3;
+                        break;
+                    case 4:
+                        this.tab = 4;
+                        break;
+                }
             }
         }
     }
