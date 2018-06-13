@@ -54,7 +54,7 @@
                         <img :src="producto.imagen" alt="" width="200px" height="200px">
                         <div class="botones-debajo">
                             <div class="alergenos">
-                              {{producto.precio}}€
+                              {{producto.precio }}€
                             </div>
                             <button class="button is-warning is-rounded is-small">Añadir</button>
                             <div class="select is-rounded is-small">

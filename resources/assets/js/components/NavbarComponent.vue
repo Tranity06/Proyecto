@@ -61,20 +61,44 @@
                     <span class="navbar-item"  :class="{'has-text-black': textblack,'has-text-white': !textblack}" @click="dispararSearch"><i class="fas fa-search fa-sm"></i></span>
                     <span class="navbar-item navbar-item-end">
                        <div class="navbar-item has-dropdown" :class="{'is-active': isCartActive}">
-                            <a class="navbar-link sinDown has-text-white" @click="dropdown">
+                            <a class="navbar-link sinDown has-text-white" @click="cartDropdown">
                                 <i class="fas fa-shopping-cart"></i>
                                 <ul class="count">
-                                    <li>18</li>
-                                    <li>19</li>
+                                    <li>1</li>
+                                    <li>2</li>
                                 </ul>
                             </a>
-                            <div class="navbar-dropdown is-boxed">
-                               <a class="navbar-item" @click="irPerfil">
-                                   Perfil
-                               </a>
+                            <div class="navbar-dropdown is-boxed is-right">
+                               <div class="navbar-item" style="margin-right: 45px;">
+                                  <img src="/uploads/productos/fanta.png" alt="" width="200px" height="200px">
+                                  <div class="infoproducto">
+                                      <span class="tituloproducto">Perrito Caliente</span>
+                                      <div class="cantidad">
+                                          <button>+</button>
+                                          <span>2</span>
+                                          <button>-</button>
+                                      </div>
+                                  </div>
+                                  <span class="precioproducto">1.00€</span>
+                                  <a class="delete"></a>
+                               </div>
+                               <div class="navbar-item" style="margin-right: 45px;">
+                                  <img src="/uploads/productos/fanta.png" alt="" width="200px" height="200px">
+                                  <div class="infoproducto">
+                                      <span class="tituloproducto">Fanta</span>
+                                      <div class="cantidad">
+                                          <button>+</button>
+                                          <span>2</span>
+                                          <button>-</button>
+                                      </div>
+                                  </div>
+                                  <span class="precioproducto">1.00€</span>
+                                  <a class="delete"></a>
+                               </div>
                                <hr class="navbar-divider">
-                               <a class="navbar-item" @click="Logout">
-                                   Salir
+                               <a class="navbar-item espacioBetween">
+                                   <span>SUB-TOTAL:  </span>
+                                   <span>45€</span>
                                </a>
                             </div>
                         </div>
@@ -243,6 +267,13 @@
                 } else {
                     this.isDropdownActive = false;
                 }
+            },
+            cartDropdown(){
+                if (this.isCartActive === false){
+                    this.isCartActive = true;
+                } else {
+                    this.isCartActive = false;
+                }
             }
         },
         // do not forget this section
@@ -289,6 +320,23 @@
 
     .count li:last-of-type {
         visibility: hidden;
+    }
+
+    .infoproducto{
+        flex-direction: column;
+        margin-right: 25px;
+    }
+
+    .navbar-item img {
+        max-height: 2.5rem;
+    }
+
+    .precioproducto{
+        margin-right: 15px;
+    }
+
+    .espacioBetween{
+        justify-content: space-between;
     }
 
     .no-activar{
