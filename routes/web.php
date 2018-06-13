@@ -122,8 +122,8 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('categorias/crear', 'CategoriaController@crear');
   Route::post('categorias/crear', 'CategoriaController@addCategoria')->name('categorias.crear');
   Route::get('categorias/mostrar', 'CategoriaController@mostrar')->name('categorias.mostrar');
-  Route::get('categorias/{idMenu}', 'CategoriaController@mostrarCategoria');
-  Route::post('categorias/{idMenu}', 'CategoriaController@updateCategoria');
+  Route::get('categorias/{idCategoria}', 'CategoriaController@mostrarCategoria');
+  Route::post('categorias/{idCategoria}', 'CategoriaController@updateCategoria');
   Route::post('categorias/borrar', 'CategoriaController@deleteCategoria');
 
   /**

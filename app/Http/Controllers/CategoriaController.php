@@ -40,16 +40,19 @@ class CategoriaController extends Controller {
         return response()->json($categoria,200);
     }
 
-    public function deleteCategoria($idCategoria) {
-        $categoria = Categoria::find($idCategoria);
-        $categoria->delete();
-        
+    public function deleteCategoria(Request $request) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+
+        $categoria = Categoria::find($request->idCategoria);
+
         if ( $categoria == null ){
             return response()->json('La categoría indicada no existe.', 403);
         }
         
         $categoria->delete();
-        return response()->json('Categoría borrada.', 204);
+        return response()->json('Categoria borrada.', 204);
     }
 
     public function mostrar(){
@@ -60,6 +63,16 @@ class CategoriaController extends Controller {
         
         $categorias = Categoria::all();
         return view('categorias.mostrar', compact('admin', 'categorias'));
+    }
+
+    public function mostrarCategoria( $idCategoria ){
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
+
+        $categoria = Categoria::find($idCategoria);
+        return view('categorias.editar', compact('admin', 'categoria'));
     }
 
 }
