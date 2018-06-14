@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ResenaEvent;
+use DateTime;
 use Illuminate\Http\Request;
 use App\Models\Resena;
 use JWTAuth;
@@ -67,11 +68,11 @@ class ResenaController extends Controller
         $resenaJson = [
             'tipo' => 'write',
             'id' => $res->id,
+            'tiempo' => $this->time_elapsed_string($res->created_at),
             'comentario' => $res->comentario,
             'imagen_usuario' => $user->avatar,
-            'nombre_usuario' => $user->name
+            'nombre_usuario' => $user->name,
         ];
-
 
         broadcast(new ResenaEvent($resenaJson))->toOthers();
 
@@ -159,5 +160,34 @@ class ResenaController extends Controller
         $resena = Resena::find($idResena);
         $resena->delete();
         return response()->json('Reseña eliminada.', 204);
+    }
+
+    private function time_elapsed_string($datetime, $full = false) {
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'año',
+            'm' => 'mes',
+            'w' => 'semana',
+            'd' => 'dia',
+            'h' => 'hora',
+            'i' => 'minuto',
+            's' => 'segundo',
+        );
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full) $string = array_slice($string, 0, 1);
+        return $string ?  'Hace '. implode(', ', $string)  : 'Justo ahora';
     }
 }
