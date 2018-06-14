@@ -172,7 +172,7 @@
     </div>
     <footer class="footer">
         <div class="container">
-            <div class="content has-text-centered">
+            <div class="content-marcas has-text-centered">
                 <span class="marca">Palomitas Time</span>
                 <div class="redes">
                     <a href="http://www.twitter.com" class="centeredIcon twitter">
