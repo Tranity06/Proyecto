@@ -18,9 +18,46 @@
             MenupeliculaComponent},
         data() {
             return {
-                tab: 1
+                tab: 1,
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
+
+        mounted() {
+            if (this.$route.query.verification){
+                axios.post(`/api/verification`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    verification: this.$route.query.verification,
+                })
+                    .then(response => {
+                        console.log(response.data.success)
+                        if (response.status === 200){
+                            this.$notify({
+                                group: 'auth',
+                                text: response.data.message,
+                                duration: 5000,
+                            });
+                        }else{
+                            this.$notify({
+                                group: 'group',
+                                type: 'error',
+                                text: response.data.message,
+                                duration: 5000,
+                            });
+                            console.log('auqi llegeu2112')
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+                this.$router.push({ name: 'home' });
+            }
+            console.log(this.$route.query)
+        },
+
         methods: {
             updateTab: function (updatedTab) {
                 this.tab = updatedTab;

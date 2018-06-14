@@ -64,25 +64,25 @@ class APIAuthController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function verifyUser($verification_code)
+    public function verifyUser(Request $request)
     {
-        $check = DB::table('user_verifications')->where('token', $verification_code)->first();
+        $check = DB::table('user_verifications')->where('token', $request->verification)->first();
         if (!is_null($check)) {
             $user = User::find($check->user_id);
             if ($user->is_verified == 1) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Account already verified...'
+                    'message' => 'Cuenta ya verificada...'
                 ],200);
             }
             $user->update(['is_verified' => 1]);
-            DB::table('user_verifications')->where('token', $verification_code)->delete();
+            DB::table('user_verifications')->where('token', $request->verification)->delete();
             return response()->json([
                 'success' => true,
-                'message' => 'You have successfully verified your email address.'
+                'message' => 'Ha verificado correctamente su dirección de correo electrónico.'
             ],200);
         }
-        return response()->json(['success' => false, 'error' => "Verification code is invalid."],400);
+        return response()->json(['success' => false, 'message' => "El código de verificación no es válido."],400);
     }
 
     /**

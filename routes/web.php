@@ -14,7 +14,6 @@ use App\Http\Controllers\Admin\Home;  //Posible quitar parte Home?
 |
 */
 
-Route::get('user/verify/{verification_code}', 'APIAuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
@@ -148,4 +147,5 @@ Route::get('/admin', 'Admin\Home@index');
 /**
  * HOME -> NO TOCAR tiene que ser SIEMPRE la ultima ruta.
  */
+//Route::post('/', 'APIAuthController@verifyUser');
 Route::get('/{any}', 'SpaController@index')->where('any', '.*')->name('home');
