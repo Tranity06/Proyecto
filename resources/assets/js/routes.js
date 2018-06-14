@@ -50,6 +50,10 @@ const routes = [
             name: 'entrada',
             component: Entrada
         },
+        {
+            path: '*',
+            component: Home
+        },
 
     ];
 

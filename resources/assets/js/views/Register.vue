@@ -17,7 +17,7 @@
                         <div class="field">
                             <label class="label">Introduce tu nombre</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Escribe tu nombre" name="nombre" v-validate="'required|alpha'"
+                                <input class="input" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Escribe tu nombre" name="nombre" v-validate="'required|alpha|min:3'"
                                        v-model.trim="nombre">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
