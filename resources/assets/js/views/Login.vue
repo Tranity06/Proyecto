@@ -168,7 +168,7 @@
         top: 0;
         background-color: #363636;
         width: 100%;
-        height: 56px;
+        height: 53px;
 
         transition: background-color .2s ease-in-out;
     }

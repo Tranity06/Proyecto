@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div v-show="!StoreStateEnabled" style="display: flex; justify-content: center">
-                            <router-link class="button is-danger entrar" :to="{ name: 'login' }">
+                            <router-link class="button is-danger is-rounded entrar" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span @click="closeMenu">Entrar</span>
                                 </div>

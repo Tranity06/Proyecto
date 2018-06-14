@@ -68,20 +68,6 @@
         </section>
         <!-- Sinopsis -->
 
-        <div class="section">
-            <div class="container">
-                <div class="actores-list">
-                    <div class="actor-item">
-                        <img class="actor-foto" src="https://image.tmdb.org/t/p/w138_and_h175_face/9nhqKVGA09DLeZqsvWVoNeTRlRQ.jpg" alt="Imagen del actor." width="138px" height="175px">
-                        <div class="actor-detalles">
-                            <span class="actor-nombre">Viola Davis</span>
-                            <span class="papel-nombre">Amanda Waller</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <resenia-component></resenia-component>
 
     </div>
