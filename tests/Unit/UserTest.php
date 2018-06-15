@@ -62,16 +62,20 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_verify()
     {
+        $num_random = str_random(30);
         $user = factory(User::class)->create();
         $user_verification = UserVerification::create([
             "user_id" => $user->id,
-            "token" => str_random(30)
+            "token" => $num_random
             ]);
 
-        $this->get('user/verify/'.$user_verification->token)
-             ->assertStatus(200)
-             ->assertJson([ 'success' => true, 'message' => 'You have successfully verified your email address.']);
+        $verification_code = [
+            'verification' => $num_random,
+        ];
 
+        $this->post(route('auth.verification'), $verification_code)
+            ->assertStatus(200)
+            ->assertJson([ 'success' => true, 'message' => 'Has verificado correctamente tu cuenta.']);
     }
 
     /** @test */
@@ -79,15 +83,19 @@ class UserTest extends TestCase
     {
         $user = factory(User::class)->create();
         $user->update(['is_verified' => 1]);
-
+        $num_random = str_random(30);
         $user_verification = UserVerification::create([
             "user_id" => $user->id,
-            "token" => str_random(30)
+            "token" => $num_random
         ]);
 
-        $this->get('user/verify/'.$user_verification->token)
+        $verification_code = [
+            'verification' => $num_random,
+        ];
+
+        $this->post(route('auth.verification'), $verification_code)
             ->assertStatus(200)
-            ->assertJson([ 'success' => true, 'message' => 'Account already verified...']);
+            ->assertJson([ 'success' => true, 'message' => 'Cuenta ya verificada...']);
 
     }
 
@@ -95,11 +103,16 @@ class UserTest extends TestCase
     public function verification_code_is_invalid()
     {
 
-        $token = str_random(30);
+        $token_random = str_random(30);
 
-        $this->get('user/verify/'.$token)
+
+        $verification_code = [
+            'verification' => $token_random,
+        ];
+
+        $this->post(route('auth.verification'), $verification_code)
             ->assertStatus(400)
-            ->assertJson([ 'success' => false, 'error' => 'Verification code is invalid.']);
+            ->assertJson([ 'success' => false, 'message' => 'El código de verificación no es válido.']);
 
     }
 
