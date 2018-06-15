@@ -79,7 +79,7 @@ class APIAuthController extends Controller
             DB::table('user_verifications')->where('token', $request->verification)->delete();
             return response()->json([
                 'success' => true,
-                'message' => 'Ha verificado correctamente su dirección de correo electrónico.'
+                'message' => 'Ha verificado correctamente su cuenta.'
             ],200);
         }
         return response()->json(['success' => false, 'message' => "El código de verificación no es válido."],400);

@@ -36,26 +36,23 @@
                         if (response.status === 200){
                             this.$notify({
                                 group: 'auth',
+                                title: 'Activar cuenta',
                                 text: response.data.message,
                                 duration: 5000,
                             });
-                        }else{
-                            this.$notify({
-                                group: 'group',
-                                type: 'error',
-                                text: response.data.message,
-                                duration: 5000,
-                            });
-                            console.log('auqi llegeu2112')
                         }
                     })
                     .catch(error => {
+                        this.$notify({
+                            group: 'auth',
+                            type: 'error',
+                            title: 'Activar cuenta',
+                            text: error.response.data.message,
+                            duration: 5000,
+                        });
                         console.log(error);
                     });
-
-                this.$router.push({ name: 'home' });
             }
-            console.log(this.$route.query)
         },
 
         methods: {
