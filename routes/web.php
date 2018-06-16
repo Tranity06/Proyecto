@@ -142,6 +142,7 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('productos/mostrar', 'ProductoController@mostrar');
   Route::get('productos/{idProducto}', 'ProductoController@mostrarProducto');
   Route::post('productos/{idProducto}', 'ProductoController@updateProducto');
+  Route::delete('productos/{idProducto}', 'ProductoController@deleteProducto');
 
   
 /**
