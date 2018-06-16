@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use Illuminate\Http\Request;
 use App\Models\Pelicula;
 use App\Models\Resena;
@@ -72,6 +73,7 @@ class PeliculaController extends Controller
         }
 
         $poster = str_replace('w500', self::TAM_CARTEL, $request['poster']);
+        $slider_image = str_replace('w500', 'rotiginal', $request['slider_image']);
 
         $pelicula = Pelicula::create([
             'idtmdb' => $request['idtmdb'],
@@ -85,7 +87,7 @@ class PeliculaController extends Controller
             'duracion' => $request['duracion'],
             'cartel' => $poster,
             'trailer' => $request['trailer'],
-            'slider_image' => $request['slider_image'],
+            'slider_image' => $slider_image,
             'popularidad' => $request['popularidad']
         ]);
 
@@ -242,9 +244,41 @@ class PeliculaController extends Controller
             $user = $resena->user();
             $resena['nombre_usuario'] = $user->name;
             $resena['imagen_usuario'] = $user->avatar;
+            $resena['tiempo'] = $this->time_elapsed_string($resena->created_at);
         }
         return response()->json($resenas, 200);
     }
+
+
+    private function time_elapsed_string($datetime, $full = false) {
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'año',
+            'm' => 'mes',
+            'w' => 'semana',
+            'd' => 'dia',
+            'h' => 'hora',
+            'i' => 'minuto',
+            's' => 'segundo',
+        );
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full) $string = array_slice($string, 0, 1);
+        return $string ?  'Hace '. implode(', ', $string)  : 'Justo ahora';
+    }
+
 
     /**
      * Devuelve las sesiones activas programadas para el día indicado.

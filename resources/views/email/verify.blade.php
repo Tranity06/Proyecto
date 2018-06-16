@@ -13,7 +13,8 @@
             <p class="subtitle">Gracias por crear una cuenta con nosotros. No olvides completar tu registro!</p>
             <p>Haz click en <code>Confirmar mi dirección de correo electrónico</code> para confirmar tu dirección de correo electrónico:</p>
             <br>
-            <a class="button is-warning is-rounded" href="{{ url('user/verify', $verification_code)}}">Confirmar mi dirección de correo electrónico</a>
+
+            <a class="button is-warning is-rounded" href="{{ url('/').'?verification='.$verification_code }}">Confirmar mi dirección de correo electrónico</a>
         </div>
     </div>
 

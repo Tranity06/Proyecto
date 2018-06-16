@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/register', 'APIAuthController@register')->name('auth.register');
+Route::post('/verification','APIAuthController@verifyUser')->name('auth.verification');
 Route::post('/login', 'APIAuthController@login')->name('auth.login');
 Route::post('/google', 'APIAuthController@loginWithGoogle')->name('auth.google');
 Route::post('/recover', 'APIAuthController@recover')->name('auth.recover');

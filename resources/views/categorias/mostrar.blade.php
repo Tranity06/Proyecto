@@ -37,16 +37,16 @@
 
             $('.table').on('click', '.editar', function(){
                 var $boton = $(this);
-                var $idProducto= $boton.next().val();
+                var $idCategoria= $boton.next().val();
 
                 var getUrl = window.location;
-                var destino = getUrl .protocol + "//" + getUrl.host + "/productos/" + $idProducto;
+                var destino = getUrl .protocol + "//" + getUrl.host + "/categorias/" + $idCategoria;
                 $( location ).attr("href", destino);
             });
 
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
-                var $idProducto= $boton.next().val();
+                var idCategoria= $('#id').val();
 
                 var $callout = $('.callout').first();
                 $boton.attr('disabled', 'disabled');
@@ -54,14 +54,14 @@
                 $callout.text('');
                 $callout.removeClass('callout-danger');
 
-                if (confirm("¿Seguro que quieres eliminar este producto?")){
+                if (confirm("¿Seguro que quieres eliminar esta categoría?")){
                     $.ajaxSetup({
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                     });
                     $.ajax({
-                        url: '/productos/'+$idProducto,
-                        type: 'DELETE',
-                        data: 'idProducto='+$idProducto,
+                        url: '/categorias/borrar',
+                        type: 'POST',
+                        data: 'idCategoria='+idCategoria,
                         statusCode:{
                             204: function (){
                                 $boton.closest('tr')
@@ -73,7 +73,6 @@
                                 .children().slideUp(function () {
                                     $(this).closest('tr').remove();
                                 });
-                                console.log(e);
                             },
                             403: function (){
                                 $callout.text(e.responseJSON);
@@ -93,40 +92,36 @@
 @section('migas')
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.dashboard') }}"></i> Home</a></li>
-        <li class="active">Lista de productos</li>
+        <li class="active">Lista de categorías</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Productos existentes</h3>
+            <h3 class="box-title">Categorías existentes</h3>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-hover tablesorter">
                 <thead>
                     <tr>
-                        <th>Imagen</th>
                         <th>Nombre</th>
-                        <th>Precio</th>
                         <th>Editar</th>
                         <th>Borrar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($productos as $producto)
+                    @foreach($categorias as $categoria)
                         <div class="fila">
                             <tr>
-                                <td> {{ $producto->imagen}} </td>
-                                <td> {{ $producto->nombre}} </td>
-                                <td> {{ $producto->precio}} </td>
+                                <td> {{ $categoria->nombre }} </td>
                                 <td>
                                     <button class="editar"><i class="glyphicon glyphicon-pencil"></i></button>
-                                    <input type="hidden" name="id" value="{{ $producto->id }}"/>
+                                    <input type="hidden" name="id" value="{{ $categoria->id }}"/>
                                 </td>
                                 <td>
                                     <button class="borrar"><i class="fa fa-fw fa-trash-o"></i></button>
-                                    <input type="hidden" name="id" value="{{ $producto->id }}"/>
+                                    <input type="hidden" id="id" name="id" value="{{ $categoria->id }}"/>
                                 </td>
                             </tr>
                         </div>

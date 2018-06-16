@@ -44,12 +44,21 @@
                 $( location ).attr("href", destino);
             });
 
-            $('.table').on('click', '.productos', function(){
+            $('.table').on('click', '.editarproductos', function(){
                 var $boton = $(this);
                 var $idMenu= $boton.next().val();
 
                 var getUrl = window.location;
                 var destino = getUrl .protocol + "//" + getUrl.host + "/productomenu/" + $idMenu;
+                $( location ).attr("href", destino);
+            });
+
+            $('.table').on('click', '.borrarproductos', function(){
+                var $boton = $(this);
+                var $idMenu= $boton.next().val();
+
+                var getUrl = window.location;
+                var destino = getUrl .protocol + "//" + getUrl.host + "/productomenu/getproductos/" + $idMenu;
                 $( location ).attr("href", destino);
             });
 
@@ -115,7 +124,8 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Productos</th>
+                        <th>Añadir Productos</th>
+                        <th>Borrar Productos</th>
                         <th>Editar</th>
                         <th>Borrar</th>
                     </tr>
@@ -126,7 +136,11 @@
                             <tr>
                                 <td> {{ $menu->nombre }} </td>
                                 <td>
-                                    <button class="productos"><i class="glyphicon glyphicon-pencil"></i></button>
+                                    <button class="editarproductos"><i class="glyphicon glyphicon-pencil"></i></button>
+                                    <input type="hidden" name="id" value="{{ $menu->id }}"/>
+                                </td>
+                                <td>
+                                    <button class="borrarproductos"><i class="glyphicon glyphicon-pencil"></i></button>
                                     <input type="hidden" name="id" value="{{ $menu->id }}"/>
                                 </td>
                                 <td>

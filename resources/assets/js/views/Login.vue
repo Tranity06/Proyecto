@@ -66,19 +66,10 @@
                 <div class="column is-half">
                     <h1 class="title has-text-weight-bold">CREAR UNA CUENTA</h1>
                     <p>Crea tu cuenta de Palomitas time:</p>
-                    <p><i class="fas fa-check" style="color: green;"></i> Acumula puntos y consigue promociones, Si veis
-                        esto modificarlo ;D no estoy inspirado ahora</p>
-                    <p><i class="fas fa-check" style="color: green;"></i> Escribir reseñas y puntuar peliculas, Si veis
-                        esto modificarlo ;D no estoy inspirado ahora</p>
-                    <p><i class="fas fa-check" style="color: green;"></i> Recibir ofertas, Si veis esto modificarlo ;D
-                        no estoy inspirado ahora </p>
-                    <p><i class="fas fa-check" style="color: green;"></i> Realiza tu pedido más rápido guardando tus
-                        datos de envío y tu forma de pago, Si veis esto modificarlo ;D no estoy inspirado ahora </p>
-                    <p><i class="fas fa-check" style="color: green;"></i> Accede a tu historial de pedidos, Si veis esto
-                        modificarlo ;D no estoy inspirado ahora </p>
-                    <p><i class="fas fa-check" style="color: green;"></i> Crea y guarda tus menus preferidos, menus
-                        lleva tilde verdad?. Si veis esto modificarlo ;D no estoy inspirado ahora ;D no estoy inspirado
-                        ahora </p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Escribir reseñas sobre tus películas favoritas.</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Compra tus entradas online y no hagas cola.</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Realiza la compra de tu menú de comida favorito.</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Accede a tu historial de pedidos.</p>
                     <router-link class="button is-warning is-medium" :to="{ name: 'register' }">
                             Registrarse
                     </router-link>
@@ -168,7 +159,7 @@
         top: 0;
         background-color: #363636;
         width: 100%;
-        height: 56px;
+        height: 53px;
 
         transition: background-color .2s ease-in-out;
     }

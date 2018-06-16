@@ -17,7 +17,7 @@
                         <div class="field">
                             <label class="label">Introduce tu nombre</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Escribe tu nombre" name="nombre" v-validate="'required|alpha'"
+                                <input class="input" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Escribe tu nombre" name="nombre" v-validate="'required|alpha|min:3'"
                                        v-model.trim="nombre">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
@@ -90,7 +90,11 @@
                 </div>
                 <div class="column is-half">
                     <h1 class="is-size-3">No tienes Cuenta?</h1>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia nostrum dignissimos obcaecati iusto! Ex quasi alias id, error nesciunt accusantium eum ipsum ut reprehenderit, voluptatibus exercitationem dolorem doloremque aperiam.
+                    <p>Crea tu cuenta de PalomitasTime y disfruta de:</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Escribir reseñas sobre tus películas favoritas.</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Compra tus entradas online y no hagas cola.</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Realiza la compra de tu menú de comida favorito.</p>
+                    <p><i class="fas fa-check" style="color: green;"></i> Accede a tu historial de pedidos.</p>
                 </div>
             </div>
         </div>
@@ -166,7 +170,7 @@
         top: 0;
         background-color: #363636;
         width: 100%;
-        height: 56px;
+        height: 53px;
 
         transition: all .2s ease-in-out;
     }

@@ -2,39 +2,31 @@
     <div>
         <section class="hero is-dark">
             <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        Hero title
-                    </h1>
-                    <h2 class="subtitle">
-                        Hero subtitle
-                    </h2>
-                </div>
             </div>
             <div class="hero-foot">
                 <nav class="tabs is-boxed is-fullwidth">
                     <div class="container">
                         <ul>
-                            <li class="is-active">
-                                <a>
+                            <li :class="{'is-active': this.tab===1}">
+                                <a @click="selectTab(1)">
                                     <img src="/icons/bebida.svg" alt="Bebidas">
                                     <span class="is-hidden-mobile">{{this.categorias[0].nombre}}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===2}">
+                                <a @click="selectTab(2)">
                                     <img src="/icons/patatas.svg" alt="Patatas">
                                     <span class="is-hidden-mobile">{{this.categorias[1].nombre}}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===3}">
+                                <a @click="selectTab(3)">
                                     <img src="/icons/popcorn.svg" alt="Comida">
                                     <span class="is-hidden-mobile">{{this.categorias[2].nombre}}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a>
+                            <li :class="{'is-active': this.tab===4}">
+                                <a @click="selectTab(4)">
                                     <img src="/icons/chocolate.svg" alt="Chocolate">
                                     <span class="is-hidden-mobile">{{this.categorias[3].nombre}}</span>
                                 </a>
@@ -46,34 +38,37 @@
         </section>
         <div class="section">
             <div class="container">
-                <div class="flexcontainer">
-                    <div class="tarjeta" v-for="producto in productos">
-                        <div class="titulo is-size-5">
-                            {{producto.nombre}}
-                        </div>
-                        <img :src="producto.imagen" alt="" width="200px" height="200px">
-                        <div class="botones-debajo">
-                            <div class="alergenos">
-                              {{producto.precio}}€
-                            </div>
-                            <button class="button is-warning is-rounded is-small">Añadir</button>
-                            <div class="select is-rounded is-small">
-                                <select>
-                                    <option>1</option>
-                                    <option>2</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="flexcontainer" v-if="this.tab === 1">
+                    <producto-component v-for="(producto,index) in bebidas" :key="index" :producto="producto"></producto-component>
+                </div>
+                <div class="flexcontainer" v-if="this.tab === 2">
+                    <producto-component v-for="(producto,index) in derivados" :key="index" :producto="producto"></producto-component>
+                </div>
+                <div class="flexcontainer" v-if="this.tab === 4">
+                    <producto-component v-for="(producto,index) in comidaCaliente" :key="index" :producto="producto"></producto-component>
+                </div>
+                <div class="flexcontainer" v-if="this.tab === 3">
+                    <producto-component v-for="(producto,index) in lacteos" :key="index" :producto="producto"></producto-component>
                 </div>
 
-                </div>
+            </div>
         </div>
+        <modal
+                v-show="isModalActive"
+                @close="closeModal"
+        >
+            <span slot="header">{{contentModal.titulo}}</span>
+            <span slot="body">{{contentModal.cuerpo}}</span>
+        </modal>
     </div>
 </template>
 
 <script>
+
+    import store from '../store';
+    import modal from '../components/modal'
+
+    import ProductoComponent from "../components/ProductoComponent";
 
     const getProductos = (callback) => {
 
@@ -88,14 +83,20 @@
 
     export default {
         name: "restaurante",
+        components: {ProductoComponent,modal},
         data() {
             return {
                 categorias: [],
                 productos: [],
+                bebidas: [],
+                derivados: [],
+                comidaCaliente: [],
+                lacteos: [],
+                tab: 1,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
-        mounted(){
+        mounted() {
             axios.get('/api/categoria')
                 .then(response => {
                     this.categorias = response.data;
@@ -103,28 +104,52 @@
                 .catch(error => {
                     console.log(error);
                 });
-
-/*            axios.get('/api/producto')
-                .then(response => {
-                    this.productos = response.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                })*/
         },
-        beforeRouteEnter (to, from, next) {
+        beforeRouteEnter(to, from, next) {
             getProductos((err, data) => {
                 next(vm => vm.setData(err, data));
             });
+        },
+        computed: {
+          isModalActive(){
+             return store.getters.modalActive;
+          },
+          contentModal(){
+                return store.getters.contenidoModal;
+            },
         },
         methods: {
             setData(err, productos) {
                 if (err) {
                     this.error = err.toString();
                 } else {
-                    this.productos = productos;
+                    this.bebidas = productos.filter(producto => producto.categoria_id === 1);
+                    this.derivados = productos.filter(producto => producto.categoria_id === 2);
+                    this.comidaCaliente = productos.filter(producto => producto.categoria_id === 3);
+                    this.lacteos = productos.filter(producto => producto.categoria_id === 4);
                 }
             },
+            selectTab(selectedTab) {
+                switch (selectedTab) {
+                    case 1:
+                        this.tab = 1;
+                        console.log(this.tab);
+                        break;
+                    case 2:
+                        this.tab = 2;
+                        console.log(this.tab);
+                        break;
+                    case 3:
+                        this.tab = 3;
+                        break;
+                    case 4:
+                        this.tab = 4;
+                        break;
+                }
+            },
+            closeModal(){
+                store.commit('closeModal');
+            }
         }
     }
 </script>
@@ -149,48 +174,6 @@
            flex-end, space-between,
            space-around, stretch */
         align-content: flex-end;
-    }
-
-    .tarjeta{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        width: 250px;
-        height: auto;
-        margin: .5rem .5rem;
-
-        box-shadow: 0 0 25px rgba(0,0,0,0.08);
-        background-color: #fff;
-        border-radius: 8px;
-        transition: box-shadow 0.5s;
-    }
-
-    .tarjeta:hover {
-        box-shadow: 0 0 25px rgba(0,0,0,0.18);
-        transition: box-shadow 0.5s;
-    }
-
-    .tarjeta > .titulo{
-        color: grey;
-        padding: .2rem;
-    }
-
-    .tarjeta > .imagen{
-        width: 200px;
-        height: 200px;
-    }
-
-    .tarjeta > .botones-debajo{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        padding: 1rem;
-    }
-
-    .botones-debajo > .comprar {
-
     }
 
 </style>
