@@ -88,8 +88,8 @@
                     v-show="isModalVisible"
                     @close="closeModal"
             >
-                <span slot="header">Elige al menos una butaca</span>
-                <span slot="body">No está permitido ver la pelicula de pie :(</span>
+                <span slot="header">{{modal.titulo}}</span>
+                <span slot="body">{{modal.body}}</span>
             </modal>
         </div>
     </div>
@@ -131,7 +131,11 @@
                     total: 0,
                     num: 0
                 },
-                isModalVisible: false,
+                modal: {
+                    visible: true,
+                    titulo: '',
+                    body: ''
+                }
             }
         },
         computed: {
@@ -154,11 +158,15 @@
         },
 
         methods: {
-            showModal() {
-                this.isModalVisible = true;
+            showModal(titulo,body) {
+                this.modal = {
+                    visible: true,
+                    titulo: titulo,
+                    body: body
+                };
             },
             closeModal() {
-                this.isModalVisible = false;
+                this.modal.visible = false;
             },
             prev() {
                 this.step--;
@@ -172,25 +180,35 @@
                     this.horaSeleccionada = this.horas.filter(hora => hora.sesion_id === this.horaTarget)[0].hora;
                     this.step++;
                 } else {
-                    this.showModal();
+                    this.showModal('Elige al menos una butaca','No está permitido ver la pelicula de pie :(');
+
                 }
 
 
             },
             mostrarHoras(day) {
+                console.log('mostrarHoras');
 
-                let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === day);
+                if (this.butacas.total > 0) {
+                    this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
+                } else {
+                    let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === day);
+                    this.horas = diaSeleccionado[0].horas;
+                    this.horaTarget = this.horas[0].sesion_id;
+                    this.mostrarAsientos(this.horaTarget);
+                }
 
-                console.log(diaSeleccionado[0].horas);
-                this.horas = diaSeleccionado[0].horas;
-                console.log(this.horas);
-                console.log('HORAS:: '+this.horas[0][0])
-                this.horaTarget = this.horas[0].sesion_id;
-                this.mostrarAsientos(this.horaTarget);
             },
 
-            mostrarAsientos(id) {
-                this.$refs.butaca.getAllButacas(id);
+            mostrarAvisoSelect(){
+
+            },
+            mostrarAsientos(sesionId) {
+                if (this.butacas.total > 0){
+                    this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
+                } else {
+                    this.$refs.butaca.getAllButacas(sesionId);
+                }
             },
 
             setData(err, data) {
