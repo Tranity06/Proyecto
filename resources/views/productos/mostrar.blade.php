@@ -46,15 +46,22 @@
 
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
-                var $id= $boton.next().val();
+                var $idProducto= $boton.next().val();
+
+                var $callout = $('.callout').first();
+                $boton.attr('disabled', 'disabled');
+                $callout.slideUp();
+                $callout.text('');
+                $callout.removeClass('callout-danger');
+
                 if (confirm("¿Seguro que quieres eliminar este producto?")){
                     $.ajaxSetup({
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                     });
                     $.ajax({
-                        url: '/productos/borrar',
-                        type: 'POST',
-                        data: 'id='+$id,
+                        url: '/productos/'+$idProducto,
+                        type: 'DELETE',
+                        data: 'idProducto='+$idProducto,
                         statusCode:{
                             204: function (){
                                 $boton.closest('tr')
@@ -66,9 +73,11 @@
                                 .children().slideUp(function () {
                                     $(this).closest('tr').remove();
                                 });
+                                console.log(e);
                             },
-                            400: function() {
-                                console.log("Error");
+                            403: function (){
+                                $callout.text(e.responseJSON);
+                                $callout.addClass('callout-danger').slideDown();
                             }
                         },
                         async: true,

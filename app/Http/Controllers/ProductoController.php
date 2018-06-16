@@ -29,7 +29,7 @@ class ProductoController extends Controller {
     }
 
     public function addProducto(Request $request) {
-        /*$validator = Validator::make($request->imagen, [
+       /* $validator = Validator::make($request->imagen, [
             'imagen' => 'required|image64:jpg,png'
         ]);
         if ($validator->fails()) {
@@ -55,7 +55,7 @@ class ProductoController extends Controller {
         $producto = Producto::create([
             'nombre' => $request['nombre'],
             'precio' => $request['precio'],
-           // 'imagen' => $fileName,
+            'imagen' => $request['imagen'],
             'categoria_id' => $request['categoria_id']
         ]);
 
@@ -88,10 +88,18 @@ class ProductoController extends Controller {
     }
 
     public function deleteProducto($idProducto) {
-        $producto = Producto::find($idProducto);
-        $producto->delete();
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
 
-        return 204;
+        $producto = Producto::find($idProducto);
+
+        if ( $producto == null ){
+            return response()->json('El producto indicado no existe.', 403);
+        }
+        
+        $producto->delete();
+        return response()->json('Producto borrado.', 204);
     }
 
     public function mostrar(){
