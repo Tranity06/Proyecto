@@ -12,6 +12,7 @@ use Auth;
 use Validator;
 use App\Models\ButacaReservada;
 use App\Models\Butaca;
+use App\Models\Sala;
 
 class PeliculaController extends Controller
 {
@@ -193,8 +194,31 @@ class PeliculaController extends Controller
 
     public function getEntrada($idPelicula){
         $pelicula = Pelicula::where('id', $idPelicula)->get(['titulo', 'cartel', 'trailer'])->first();
-        $sesiones = $pelicula->sesiones()->get(['id', 'sala_id', 'hora']);
-        $pelicula['sesiones'] = 'TODO';
+        $sesiones = [];
+        $fechas = Sesion::distinct()->where('pelicula_id',$idPelicula)->orderBy('fecha')->get(['fecha']);
+
+        foreach ( $fechas as $fecha ){
+            $sesion['fecha'] = $fecha['fecha'];
+            $horas =  Sesion::where([
+                ['pelicula_id', $idPelicula],
+                ['estado', 1],
+                ['fecha', $fecha['fecha']]
+            ])->orderBy('hora')->get();
+
+            if ( sizeof($horas) > 0){
+                $sesion['horas'] = [];
+                foreach( $horas as $hora ){
+                    
+                    $ses['sesion_id'] = $hora['id'];
+                    $ses['hora'] = $hora['hora'];
+                    $ses['sala'] = Sala::find($hora['sala_id'])->numero;
+                    array_push($sesion['horas'], $ses);
+                }
+                    array_push($sesiones, $sesion);
+            }
+        }
+        $pelicula['sesiones'] = $sesiones;
+
         return response()->json($pelicula, 200);
     }
 
