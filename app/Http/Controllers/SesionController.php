@@ -10,9 +10,12 @@ use App\Models\Pelicula;
 use App\Models\PlantillaSesion;
 use App\Models\Butaca;
 use App\Models\ButacaReservada;
+use Illuminate\Support\Carbon;
 
 class SesionController extends Controller
 {
+    const TOMEOUT = 60;
+
     public function mostrarTodas(){
         // Comprobar autenticación
         if (!Auth::guard('admin')->check()){
@@ -106,6 +109,14 @@ class SesionController extends Controller
      */
     public function butacas($idSesion){
         $butacas = Sesion::find($idSesion)->butacasReservadas()->get(['id', 'estado', 'updated_at']);
+        $now = Carbon::now();
+        foreach ($butacas as $butaca ){
+            $update = Carbon::createFromTimeString("$butaca->updated_at")->addSeconds(self::TOMEOUT);
+            if ( $butaca->estado == 2 && $now > $update){
+                $butaca->update(['estado' => 0]);
+            }
+        }
+        
         return response()->json($butacas, 200);
     }
 }
