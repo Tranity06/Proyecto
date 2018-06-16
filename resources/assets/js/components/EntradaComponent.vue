@@ -2,14 +2,14 @@
     <div>
         <section class="hero is-dark">
             <div class="hero-body">
-                <div class="container">
+<!--                 <div class="container">
                     <h1 class="title">
                         Primary title
                     </h1>
                     <h2 class="subtitle">
                         Primary subtitle
                     </h2>
-                </div>
+                </div> -->
             </div>
         </section>
         <div class="section">
@@ -38,7 +38,7 @@
                                 <img :src="caratula">
                             </div>
                             <p class="subtitle">{{ titulo }}</p>
-                            <a :href="trailer" data-lity class="button is-rounded is-danger">Ver trailer</a>
+                            <a :href="trailer" data-lity class="button is-rounded is-danger">Ver tráiler</a>
                         </div>
                     </div>
                 </div>

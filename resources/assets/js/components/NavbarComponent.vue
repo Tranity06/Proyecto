@@ -22,7 +22,7 @@
                                         ver pelicula
                                     </span>
                                     <a :href="result.trailer" class="button is-light is-small" data-lity @click="verTrailer()">
-                                        ver trailer
+                                        ver tráiler
                                     </a>
                                 </div>
                             </div>

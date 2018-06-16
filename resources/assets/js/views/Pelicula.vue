@@ -22,7 +22,7 @@
                                     {{ info.generos + ' '+info.duracion+'min' }}
                                 </h2>
 
-                                <a class="button is-warning is-rounded" :href="info.trailer" data-lity>Ver Trailer</a>
+                                <a class="button is-warning is-rounded" :href="info.trailer" data-lity>Ver Tráiler</a>
 
                                 <h1 class="is-size-4 has-text-white">
                                     Sinopsis

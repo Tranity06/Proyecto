@@ -181,7 +181,7 @@
                     <a href="http://www.facebook.com" class="centeredIcon facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="http://www.facebook.com" class="centeredIcon instagram">
+                    <a href="http://www.instagram.com" class="centeredIcon instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>
