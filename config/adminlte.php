@@ -187,6 +187,19 @@ return [
         ],
         'TIENDA',
         [
+            'text' => 'Categorías',
+            'submenu' => [
+                [
+                    'text' => 'Crear',
+                    'url' => 'categorias/crear'
+                ],
+                [
+                    'text' => 'Ver todas',
+                    'url'  => 'categorias/mostrar',
+                ],
+            ],
+        ],
+        [
             'text'    => 'Productos',
             'submenu' => [
                 [

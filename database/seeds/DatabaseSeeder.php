@@ -28,11 +28,10 @@ class DatabaseSeeder extends Seeder
             'productos',
             //'lineas_ventas',
             'ingredientes',
-            /*'ingrediente_producto',
+            //'ingrediente_producto',
             'menus',
-            'administradores',
             'menu_producto',
-            'clave_admin',*/
+            //'clave_admin',
             'administradores',
             'peliculas'
         ]);
@@ -51,7 +50,9 @@ class DatabaseSeeder extends Seeder
             SesionesSeeder::class,
             IngredientesSeeder::class,
             CategoriasSeeder::class,
-            ProductosSeeder::class
+            MenusSeeder::class,
+            ProductosSeeder::class,
+            ProductosMenusSeeder::class
         ]);
 //        $this->call(FacturasSeeder::class);
 //        $this->call(ButacasReservadasSeeder::class);

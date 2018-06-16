@@ -14,7 +14,6 @@ use App\Http\Controllers\Admin\Home;  //Posible quitar parte Home?
 |
 */
 
-Route::get('user/verify/{verification_code}', 'APIAuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
@@ -117,10 +116,22 @@ Route::get('/admin', 'Admin\Home@index');
   Route::post('menus/borrar', 'MenuController@deleteMenu');
 
   /**
+   * Gestión CATEGORÍAS
+   */
+  Route::get('categorias/crear', 'CategoriaController@crear');
+  Route::post('categorias/crear', 'CategoriaController@addCategoria')->name('categorias.crear');
+  Route::get('categorias/mostrar', 'CategoriaController@mostrar')->name('categorias.mostrar');
+  Route::get('categorias/{idCategoria}', 'CategoriaController@mostrarCategoria');
+  Route::post('categorias/{idCategoria}', 'CategoriaController@updateCategoria');
+  Route::post('categorias/borrar', 'CategoriaController@deleteCategoria');
+
+  /**
    * Gestion de productos de menus
    */
   Route::get('productomenu/{idMenu}', 'MenuController@menuProductos');
   Route::post('productomenu/{idMenu}', 'MenuController@anadirProductos');
+  Route::get('productomenu/getproductos/{idMenu}', 'MenuController@getProductosMenu');
+  Route::delete('productomenu/{idMenu}', 'MenuController@borrarProductos');
  //////// Route::post('productomenu/{idMenu}', 'MenuController@borrarProductos');
 
   /**
@@ -129,10 +140,13 @@ Route::get('/admin', 'Admin\Home@index');
   Route::get('productos/crear', 'ProductoController@crear');
   Route::post('productos/crear', 'ProductoController@addProducto')->name('producto.crear');
   Route::get('productos/mostrar', 'ProductoController@mostrar');
-  Route::post('productos/borrar', 'ProductoController@borrar');
+  Route::get('productos/{idProducto}', 'ProductoController@mostrarProducto');
+  Route::post('productos/{idProducto}', 'ProductoController@updateProducto');
+  Route::delete('productos/{idProducto}', 'ProductoController@deleteProducto');
 
   
 /**
  * HOME -> NO TOCAR tiene que ser SIEMPRE la ultima ruta.
  */
+//Route::post('/', 'APIAuthController@verifyUser');
 Route::get('/{any}', 'SpaController@index')->where('any', '.*')->name('home');

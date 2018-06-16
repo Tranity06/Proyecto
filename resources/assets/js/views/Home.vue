@@ -18,9 +18,43 @@
             MenupeliculaComponent},
         data() {
             return {
-                tab: 1
+                tab: 1,
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
+
+        mounted() {
+            if (this.$route.query.verification){
+                axios.post(`/api/verification`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    verification: this.$route.query.verification,
+                })
+                    .then(response => {
+                        console.log(response.data.success)
+                        if (response.status === 200){
+                            this.$notify({
+                                group: 'auth',
+                                title: 'Activar cuenta',
+                                text: response.data.message,
+                                duration: 5000,
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        this.$notify({
+                            group: 'auth',
+                            type: 'error',
+                            title: 'Activar cuenta',
+                            text: error.response.data.message,
+                            duration: 5000,
+                        });
+                        console.log(error);
+                    });
+            }
+        },
+
         methods: {
             updateTab: function (updatedTab) {
                 this.tab = updatedTab;

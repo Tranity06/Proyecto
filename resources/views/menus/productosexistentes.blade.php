@@ -13,8 +13,14 @@
         p {
             margin-bottom: 0em;
         }
-        option {
+        #productos {
+            height: 200px;
+            margin-bottom: .3em;
+        }
+        select option {
+            margin-bottom: .2em;
             font-size: 1.5em;
+            border-top: 1px solid lightgrey;
         }
     </style>
 @stop
@@ -23,11 +29,9 @@
     <script src={{ asset('js/jquery-3.3.1.js') }}></script>
     <script>
         $(document).ready(function(){
-            $('.crear').on('click', function(){
-                var nombre = $('#nombre').val();
-                var precio = $('#precio').val();
-                var imagen = $('#imagen').val();
-                var categoria_id = $('#categoria_id').val();
+            $('.borrar').on('click', function(){
+                var idMenu = $('#id').val();
+                var productos = $('#productos').val();
                 var $callout = $('.callout').first();
                 var $boton = $(this)
                 $boton.attr('disabled', 'disabled');
@@ -40,12 +44,13 @@
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                 });
                 $.ajax({
-                    url: '/productos/crear',
-                    type: 'POST',
-                    data: 'nombre='+nombre+'&precio='+precio+'&imagen='+imagen+'&categoria_id='+categoria_id,
+                    url: '/productomenu/'+idMenu,
+                    type: 'DELETE',
+                    data: 'productos='+productos,
                     statusCode:{
-                        201: function (e){
-                            $callout.text("Producto creada.");
+                        204: function (e){
+                            console.log(e);
+                            $callout.text("Productos borrados.");
                             $callout.addClass('callout-success').slideDown();
                             $boton.removeAttr('disabled');
                         },
@@ -68,32 +73,27 @@
 @section('migas')
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.dashboard') }}"></i> Home</a></li>
-        <li class="active">Crear producto nuevo.</li>
+        <li><a href="{{ route('menus.mostrar') }}"></i> Menus</a></li>
+        <li class="active">Borrar productos.</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Crear un nuevo producto</h3>
+            <h3 class="box-title">Borrar productos</h3>
         </div>
         <div class="box-body">
             <div class="callout" hidden>
             </div>
-            
-            <p><label for="nombre">Nombre del producto</label></p>
-            <input type="text" class="form-control input-sm" id="nombre" name="nombre"/>
-            <p><label for="precio">Precio del producto:</label></p>
-            <input type="number" class="form-control input-sm" id="precio" name="precio"/>
-            <p><label for="iamgen">Imagen del producto:</label></p>
-            <input type="file" class="form-control input-sm" id="imagen" name="imagen"/>
-            <p><label for="categoria_id">Categoría a la que pertenece:</lable></p>
-            <select type="text" class="form-control input-sm" id="categoria_id" name="categoria_id">
-                @foreach ($categorias as $categoria)
-                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+            <p><label for="nombre">Productos:</label></p>
+            <select multiple type="text" class="form-control input-sm" id="productos" name="productos[]">
+                @foreach($productos as $producto)
+                    <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
                 @endforeach
             </select>
-            <p><input type="button" class="crear sub btn btn-primary" value="Crear"/></p>
+            <input type="hidden" id="id" name="id" value="{{ $menu->id }}"/>
+            <p><input type="button" class="borrar sub btn btn-primary" value="Borrar"/></p>
         </div>
     </div>
 @stop

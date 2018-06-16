@@ -85,16 +85,13 @@ class MenuController extends Controller {
 
         $menu = Menu::find($idMenu);
         $productos = Producto::all();
-        /*foreach($productos as $producto) {
-            if(true){}
-        }*/
+
         return view('menus.productos', compact('admin', 'menu', 'productos'));
     }
 
     public function anadirProductos(Request $request, $idMenu) {
         $productos = $request->productos;
         $productos = explode(',', $productos);
-        
 
         $menu = Menu::find($idMenu);
         $menu->productos()->attach($productos);
@@ -102,20 +99,26 @@ class MenuController extends Controller {
         return response()->json($menu, 200);
     }
 
-    public function borrarProductos(Request $request, $idMenu) {
-        /*$productos = $request['productos'];
+    public function getProductosMenu($idMenu) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $admin = Auth::guard('admin')->user()->name;
 
         $menu = Menu::find($idMenu);
-        $menu->productos()->get();
+        $productos = $menu->productos()->get();
 
-        foreach ($productos as $producto){
-            ProductoMenu::create([
-                'producto_id' => $producto,
-                'menu_id' => $menu->id
-            ]);
-        }
+        return view('menus.productosexistentes', compact('admin', 'menu', 'productos'));
+    }
 
-        return response()->json($menu, 200);*/
+    public function borrarProductos(Request $request, $idMenu) {
+        $productos = $request->productos;
+        $productos = explode(',', $productos);
+
+        $menu = Menu::find($idMenu);
+        $menu->productos()->detach($productos);
+
+        return response()->json($menu, 204);
     }
 
 }

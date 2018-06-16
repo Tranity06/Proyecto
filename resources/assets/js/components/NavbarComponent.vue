@@ -34,6 +34,25 @@
 
             </div>
         </div>
+        <transition name="cartcontainer-fade">
+            <div class="cartcontainer" v-if="cartDisparado">
+                <div class="cartcontainer__header">
+                    <span class="has-text-weight-bold is-size-5">PRECIO TOTAL</span>
+                    <span class="is-size-5">{{precioTotal.toFixed(2)}}€</span>
+                </div>
+                <div v-if="allCartItems.length > 0">
+                    <div class="navbar-item-flexible">
+                        <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
+                    </div>
+                </div>
+                <div v-else style="margin-bottom: 30px; display: flex; justify-content: center;">
+                    <span class="has-text-weight-bold is-size-6">Tu carrito está vacío.</span>
+                </div>
+                <div style="display: flex; justify-content: center">
+                    <a   class="button is-rounded is-danger" @click="cerrarCartMobile">Cerrar</a>
+                </div>
+            </div>
+        </transition>
         <div class="container" v-if="searchDisparado === false">
             <div class="navbar-brand">
                 <router-link class="navbar-item no-activar" :to="{ name: 'home' }">
@@ -42,6 +61,13 @@
                         <span :class="{'has-text-black': textblack && textblackLogo}" @click="closeMenu" >Palomitas time</span>
                     </div>
                 </router-link>
+                <a class="nav-item is-hidden-desktop nearburguer" @click="mostrarCartMobile">
+                    <i class="fas fa-shopping-cart" style="color: white"></i>
+                    <ul class="count" :class="{'activo': countItems > 0 && !isActive}">
+                        <li>{{countItems}}</li>
+                        <li>2</li>
+                    </ul>
+                </a>
                 <a role="button" class="navbar-burger" :class="{'is-active': isActive,'has-text-black': textblack && textblackLogo}" aria-label="menu" aria-expanded="false" @click="menu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -56,14 +82,12 @@
                     <router-link class="navbar-item has-text-white" :to="{ name: 'restaurante' }" :class="{'has-text-black': textblack}" >
                         <span @click="closeMenu">Restaurante</span>
                     </router-link>
-                    <a class="navbar-item has-text-white" :class="{'has-text-black': textblack}" @click="closeMenu">
-                        Acerca de
-                    </a>
                 </div>
                 <div class="navbar-end">
                     <span class="navbar-item"  :class="{'has-text-black': textblack,'has-text-white': !textblack}" @click="dispararSearch"><i class="fas fa-search fa-sm"></i></span>
                     <span class="navbar-item navbar-item-end">
-                        <div class="navbar-item has-dropdown" :class="{'is-active': isDropdownActive}" v-show="StoreStateEnabled">
+                        <shopping-cart class="is-hidden-touch" :active="isCartActive"></shopping-cart>
+                        <div class="navbar-item has-dropdown perfilActivo" :class="{'is-active': isDropdownActive}" v-show="StoreStateEnabled">
                             <a class="navbar-link" @click="dropdown">
                                 <img class="avatar"
                                      :src="'/uploads/avatars/'+getAvatar">
@@ -79,7 +103,7 @@
                             </div>
                         </div>
                         <div v-show="!StoreStateEnabled" style="display: flex; justify-content: center">
-                            <router-link class="button is-danger entrar" :to="{ name: 'login' }">
+                            <router-link class="button is-danger is-rounded entrar" :to="{ name: 'login' }">
                                 <div class="logo-container">
                                     <span @click="closeMenu">Entrar</span>
                                 </div>
@@ -105,6 +129,8 @@
 <script>
     import store from '../store';
     import ClickOutside from 'vue-click-outside';
+    import ShoppingCart from "./shoppingCart";
+    import CartItem from "./CartItem";
 
     const focus = {
         inserted(el) {
@@ -114,6 +140,7 @@
 
     export default {
         name: "navbar-component",
+        components: {CartItem, ShoppingCart},
         data () {
             return {
                 googleSignInParams: {
@@ -125,7 +152,9 @@
                 textblackLogo: true,
                 fondoBlanco: false,
                 query: '',
-                isDropdownActive: false
+                isDropdownActive: false,
+                isCartActive: false,
+                cartDisparado: false,
             }
         },
         computed: {
@@ -134,9 +163,23 @@
             },
             getAvatar(){
                 return store.getters.avatar;
-             }
+             },
+
+            allCartItems(){
+                return store.getters.cartItems;
+            },
+            precioTotal(){
+                return store.getters.cartItems.reduce((prev,next) => prev + parseFloat(next.producto.precio)*next.cantidad,0);
+            },
+            countItems(){
+                return store.getters.countItems;
+            }
         },
         methods: {
+
+            mostrarCartMobile(){
+                this.cartDisparado = true;
+            },
             Logout() {
                 this.isDropdownActive = false;
                 this.closeMenu();
@@ -178,6 +221,7 @@
             },
             hide(event) {
                 this.searchDisparado = false;
+                this.isCartActive = false;
                 this.query = '';
             },
             menu() {
@@ -220,6 +264,7 @@
                 this.textblack = false;
                 this.fondoBlanco = false;
                 this.isDropdownActive = false;
+                this.isCartActive = false;
             },
             dropdown(){
                 if (this.isDropdownActive === false){
@@ -227,7 +272,19 @@
                 } else {
                     this.isDropdownActive = false;
                 }
+            },
+            cartDropdown(){
+                if (this.isCartActive === false){
+                    this.isCartActive = true;
+                } else {
+                    this.isCartActive = false;
+                }
+            },
+            cerrarCartMobile(){
+                this.cartDisparado = false;
             }
+
+
         },
         // do not forget this section
         directives: {
@@ -238,6 +295,25 @@
 </script>
 
 <style scoped>
+    .cartcontainer{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 60;
+        background-color: white;
+    }
+
+    .cartcontainer-fade-enter,
+    .cartcontainer-fade-leave-active {
+        opacity: 0;
+    }
+
+    .cartcontainer-fade-enter-active,
+    .cartcontainer-fade-leave-active {
+        transition: opacity .25s ease-out
+    }
 
     .no-activar{
         background-color: transparent !important;
@@ -417,4 +493,55 @@
         height: 32px;
         margin-left: 5px;
     }
+
+    .count {
+        background: transparent;
+        color: transparent;
+        font-size: .6rem;
+        font-weight: 700;
+        border-radius: 50%;
+        text-indent: 0;
+        transition: transform .2s .5s,-webkit-transform .2s .5s;
+        position: relative;
+        top: -25px;
+        right: -12px;
+        height: 15px;
+        width: 15px;
+    }
+
+    .count li {
+        position: absolute;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        left: 45%;
+        top: 50%;
+        bottom: auto;
+        right: auto;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .count li:last-of-type {
+        visibility: hidden;
+    }
+
+    .count.activo {
+        background: #e94b35;
+        color: #fff;
+        transition: background .25s ease-in, color .25s ease-in;
+    }
+
+    .navbar-item-flexible .navbar-item{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .cartcontainer__header{
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem;
+    }
+
 </style>
