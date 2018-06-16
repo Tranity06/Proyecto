@@ -105,6 +105,7 @@ class SesionController extends Controller
      * API
      */
     public function butacas($idSesion){
-
+        $butacas = Sesion::find($idSesion)->butacasReservadas()->get(['id', 'estado', 'updated_at']);
+        return response()->json($butacas, 200);
     }
 }
