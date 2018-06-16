@@ -89,8 +89,8 @@
             closeModal() {
                 this.isModalVisible = false;
             },
-            getAllButacas: function (id) {
-                axios.get(`/api/butaca/${id}`)
+            getAllButacas: function (sesionId) {
+                axios.get(`/api/sesion/${sesionId}`)
                     .then(response => {
                         this.butacas = response.data;
                     })
@@ -240,10 +240,14 @@
             }
         },
         mounted() {
+            // Desde navegador le llega el id de la butaca y el estado de esa butaca (reservado o libre);
+            // if esta butaca id no existe no hagas nada y si esta cambialo :D
             Echo.channel('butaca')
                 .listen('ButacaEvent', (e) => {
                     let targetButaca = this.butacas.find(butaca => butaca.id == e.butacaId);
-                    targetButaca.estado = e.estado.estado;
+                    if (targetButaca !== undefined){
+                        targetButaca.estado = e.estado.estado;
+                    }
                 });
         }
     }
