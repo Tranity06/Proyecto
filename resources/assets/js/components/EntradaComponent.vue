@@ -85,7 +85,7 @@
 
                 </div>
             <modal
-                    v-show="isModalVisible"
+                    v-show="modal.visible"
                     @close="closeModal"
             >
                 <span slot="header">{{modal.titulo}}</span>
@@ -132,7 +132,7 @@
                     num: 0
                 },
                 modal: {
-                    visible: true,
+                    visible: false,
                     titulo: '',
                     body: ''
                 }
@@ -171,6 +171,9 @@
             prev() {
                 this.step--;
             },
+            getNumButacas(){
+                return this.$refs.butaca.getButacas();
+            },
             next() {
                 let validacion = this.$refs.butaca.getTotal() > 0;
 
@@ -189,7 +192,7 @@
             mostrarHoras(day) {
                 console.log('mostrarHoras');
 
-                if (this.butacas.total > 0) {
+                if (this.$refs.butaca.getButacas() > 0) {
                     this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
                 } else {
                     let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === day);
@@ -204,7 +207,7 @@
 
             },
             mostrarAsientos(sesionId) {
-                if (this.butacas.total > 0){
+                if (this.$refs.butaca.getButacas() > 0){
                     this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
                 } else {
                     this.$refs.butaca.getAllButacas(sesionId);

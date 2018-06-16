@@ -101,7 +101,7 @@
             getTotal: function(){
               return this.total;
             },
-            getButacas: function(){
+            getButacas(){
                 return this.butacasNum;
             },
             sumTotal: function (estado) {
