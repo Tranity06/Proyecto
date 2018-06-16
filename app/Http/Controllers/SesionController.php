@@ -114,6 +114,7 @@ class SesionController extends Controller
             $update = Carbon::createFromTimeString("$butaca->updated_at")->addSeconds(self::TOMEOUT);
             if ( $butaca->estado == 2 && $now > $update){
                 $butaca->update(['estado' => 0]);
+                broadcast(new ButacaEvent($butaca->update,$butaca->estado))->toOthers();
             }
         }
         
