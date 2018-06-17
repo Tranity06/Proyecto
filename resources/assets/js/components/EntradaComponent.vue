@@ -23,8 +23,8 @@
                                     </select>
                                 </div>
                                 <div class="select">
-                                    <select @change="mostrarAsientos(sesionId,$event)">
-                                        <option v-for="horaa in horas" :value="horaa.sesion_id">{{ horaa.hora }}</option>
+                                    <select @change="mostrarAsientos(primeraSesion,$event)" :value="primeraSesion">
+                                        <option v-for="horaa in horas" :value="horaa.sesion_id" :selected="horaa.sesion_id === primeraSesion">{{ horaa.hora }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -118,6 +118,7 @@
                 salas: 0,
                 salaTarget: 1,
                 dia: '',
+                primeraSesion: null,
                 sesionId: null,
                 horaSeleccionada: '1',
                 horas: [],
@@ -195,22 +196,30 @@
                 if (this.$refs.butaca.getButacas() > 0) {
                     this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
                 } else {
+
                     this.dia = event === undefined ? day : event.target.value;
                     let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === this.dia);
                     this.horas = diaSeleccionado[0].horas;
-                    this.sesionId = this.horas[0].sesion_id;
-                    this.$refs.butaca.setSala(this.horas[0].sala);
-                    this.mostrarAsientos(this.sesionId,undefined);
+                   // this.sesionId = this.horas[0].sesion_id;
+                    this.primeraSesion  = this.horas[0].sesion_id;
+                    this.mostrarAsientosAutomaticamente(this.horas[0].sesion_id);
                 }
 
             },
+            mostrarAsientosAutomaticamente(sesion){
+                let sala = this.horas.filter(hora => hora.sesion_id === sesion)[0].sala;
+                this.$refs.butaca.setSala(sala);
+                this.$refs.butaca.getAllButacas(sesion);
+            },
             mostrarAsientos(sesionId,event) {
+                console.log('mostrarAsientos');
                 if (this.$refs.butaca.getButacas() > 0){
                     this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
                 } else {
-                    this.sesionId = event === undefined ? sesionId : event.target.value;
-                    console.log('sesion '+this.sesionId +' dia '+this.dia);
-                    this.$refs.butaca.getAllButacas(sesionId);
+                    this.primeraSesion = event === undefined ? sesionId : parseInt(event.target.value);
+                    let sala = this.horas.filter(hora => hora.sesion_id === this.primeraSesion)[0].sala;
+                    this.$refs.butaca.setSala(sala);
+                    this.$refs.butaca.getAllButacas(this.primeraSesion);
                 }
             },
 
