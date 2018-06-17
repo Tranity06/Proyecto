@@ -18,12 +18,12 @@
                         <div class="column is-8">
                             <div class="showtime-form">
                                 <div class="select">
-                                    <select @change="mostrarHoras(dia)" v-model="dia">
+                                    <select @change="mostrarHoras(dia,$event)" :value="dia">
                                         <option v-for="sesion in sesiones" :value="sesion.fecha">{{ moment(sesion.fecha).format('DD dddd') }}</option>
                                     </select>
                                 </div>
                                 <div class="select">
-                                    <select @change="mostrarAsientos(horaTarget)" v-model="horaTarget">
+                                    <select @change="mostrarAsientos(horaTarget,$event)" :value="horaTarget">
                                         <option v-for="horaa in horas" :value="horaa.sesion_id">{{ horaa.hora }}</option>
                                     </select>
                                 </div>
@@ -189,27 +189,26 @@
 
 
             },
-            mostrarHoras(day) {
+            mostrarHoras(day,event) {
                 console.log('mostrarHoras');
 
                 if (this.$refs.butaca.getButacas() > 0) {
                     this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
                 } else {
+                    this.dia = event === undefined ? day : event.target.value;
                     let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === day);
                     this.horas = diaSeleccionado[0].horas;
                     this.horaTarget = this.horas[0].sesion_id;
-                    this.mostrarAsientos(this.horaTarget);
+                    this.mostrarAsientos(this.horaTarget,undefined);
                 }
 
             },
-
-            mostrarAvisoSelect(){
-
-            },
-            mostrarAsientos(sesionId) {
+            mostrarAsientos(sesionId,event) {
                 if (this.$refs.butaca.getButacas() > 0){
                     this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
                 } else {
+                    this.horaTarget = event === undefined ? sesionId : event.target.value;
+                    console.log('sesion '+this.horaTarget +' dia '+this.dia);
                     this.$refs.butaca.getAllButacas(sesionId);
                 }
             },
