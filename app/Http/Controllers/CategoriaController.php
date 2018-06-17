@@ -37,6 +37,10 @@ class CategoriaController extends Controller {
         $categoria->nombre = $request['nombre'];
         $categoria->save();
 
+        if ( $categoria == null ){
+            return response()->json('La categoria indicada no existe.', 403);
+        }
+
         return response()->json($categoria,200);
     }
 

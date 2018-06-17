@@ -27,34 +27,39 @@ class MenuTest extends TestCase
             'password' => bcrypt('123456'),
         ]);
 
-        $this->menu = menu::create([
+        $this->menu = Menu::create([
             'nombre' => 'menu',
         ]);
     }
 
+    public function crear_menu_sin_admin() {
+        $this->get('menus/crear')
+            ->assertStatus(302)
+            ->assertRedirect('/admin');
+    }
+
+    public function crear_menu_con_admin() {
+        $this->actingAs($this->admin, 'admin')
+            ->get('/menus/crear')
+            ->assertStatus(200);
+    }
+
     /**********************************************************
-     *          RUTA - GET '/menu/'
+     *          RUTA - GET menus/mostrar
      **********************************************************/
-
     /** @test */
-    public function crear_menus_usuario_logueado()
-    {
-
-        menu::create([
-            'nombre' => 'menu'
-        ]);
-
-        $this->get('web/menus/crear',$headers)
-             ->assertStatus(201)
-             ->assertJsonStructure([
-                '*' => [
-                    'id', 'nombre'
-                ]
-            ])
-            ->assertJsonFragment(['nombre' => 'menu']);
+    public function mostrar_menus_sin_admin() {
+        $this->get('menus/mostrar')
+            ->assertStatus(302)
+            ->assertRedirect('/admin');
     }
 
     /** @test */
+    public function mostrar_menus_con_admin() {
+        $this->actingAs($this->admin, 'admin')
+            ->get('menus/mostrar')
+            ->assertStatus(200);
+    }
 
     /**********************************************************
      *          RUTA - POST '/menus/'
@@ -64,108 +69,68 @@ class MenuTest extends TestCase
     public function crear_menu_usuario_logueado()
     {
         $menu = [
-            'nombre' => 'menu'
+            'nombre' => 'rico'
         ];
-
-        $credentials = [
-            'email' => $this->admin->email,
-            'password' => '123456'
-        ];
-        $this->post('/web/login', $credentials);
-        $token = JWTAuth::fromadmin($this->admin);
-        $headers = ['X-CSRF-TOKEN' => csrf_token(),
-                    'Authorization' => 'Bearer '.$token];
-        $this->post(route('menus.crear'), $menu, $headers)
-             ->assertStatus(201)
-             ->assertJsonFragment(['nombre' => 'menu']);
-    }
-
-    /** @test */
-    public function crear_menu_usuario_no_logueado()
-    {
-        $menu = [
-            'nombre' => 'menu'
-        ];
-
-        $headers = ['X-CSRF-TOKEN' => csrf_token()];
-        $this->post(route('menus.crear'), $menu, $headers)
-             ->assertStatus(403);
+        
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($this->admin, 'admin')
+            ->post('/menus/crear', $menu, $headers)
+            ->assertStatus(201);
     }
 
     /**********************************************************
-     *          RUTA - PUT '/menu/'
+     *          RUTA - PUT menus/
      **********************************************************/
-
     /** @test */
-    public function update_menu_con_usuario_logueado()
-    {
-        $menu_modificado = [
-            'nombre' => 'nuevo'
-        ];
-        $token = JWTAuth::fromadmin($this->admin);
-        $headers = ['X-CSRF-TOKEN' => csrf_token(),
-                    'Authorization' => 'Bearer '.$token];
-        $this->post('web/menus/'.$this->menu->id, $menu_modificado, $headers)
-             ->assertStatus(201)
-             ->assertJsonFragment(['nombre' => 'nuevo']);
+    public function modificar_menu_sin_admin() {
+        $this->post('menus/'.$this->menu->id)
+            ->assertStatus(302)
+            ->assertRedirect('/admin');
     }
 
     /** @test */
-    public function update_menu_sin_usuario_logueado()
-    {
-        $menu_modificado = [
-            'nombre' => 'nuevo'
-        ];
-
-        $headers = ['X-CSRF-TOKEN' => csrf_token()];
-        $this->put('web/menu/'.$this->menu->id, $menu_modificado, $headers)
-             ->assertStatus(403);
+    public function modificar_menu_con_admin() {
+        $idmenu = ['id' => $this->menu->id];
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($this->admin, 'admin')
+            ->post('menus/'.$idmenu, $headers)
+            ->assertStatus(200);
     }
 
     /** @test */
-    public function update_menu_con_usuario_logueado_menu_no_existe()
-    {
-        $menu_modificado = [
-            'nombre' => 'nuevo'
-        ];
-        $token = JWTAuth::fromadmin($this->admin);
-        $headers = ['X-CSRF-TOKEN' => csrf_token(),
-                    'Authorization' => 'Bearer '.$token];
-        $this->put('web/menu/222'.$this->menu->id, $menu_modificado, $headers)
-             ->assertStatus(403);
+    public function modificar_menu_no_registrada() {
+        $idmenu = ['id' => 100];
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($this->admin, 'admin')
+            ->post('menus/'.$idmenu, $headers)
+            ->assertStatus(400);
     }
 
     /**********************************************************
-     *          RUTA - DELETE '/menu/'
+     *          RUTA - DELETE menus/borrar
      **********************************************************/
-
-     /** @test */
-    public function delete_menu_con_usuario_logueado()
-    {
-        $token = JWTAuth::fromadmin($this->admin);
-        $headers = ['X-CSRF-TOKEN' => csrf_token(),
-                    'Authorization' => 'Bearer '.$token];
-        $this->delete('web/menu/'.$this->menu->id, [], $headers)
-             ->assertStatus(204)
-             ->assertSee('Menu borrado.');
+    /** @test */
+    public function borrar_menu_sin_admin() {
+        $this->delete('menus/'.$this->menu->id)
+            ->assertStatus(302)
+            ->assertRedirect('/admin');
     }
 
     /** @test */
-    public function delete_menu_sin_usuario_logueado()
-    {
-        $headers = ['X-CSRF-TOKEN' => csrf_token()];
-        $this->delete('web/menu/'.$this->menu->id,[], $headers)
-             ->assertStatus(403);
+    public function borrar_menu_con_admin() {
+        $idmenu = ['id' => $this->menu->id];
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($this->admin, 'admin')
+            ->delete('menus/'.$idmenu, $headers)
+            ->assertStatus(204);
     }
 
     /** @test */
-    public function delete_menu_con_usuario_logueado_menu_no_existe()
-    {
-        $token = JWTAuth::fromadmin($this->admin);
-        $headers = ['X-CSRF-TOKEN' => csrf_token(),
-                    'Authorization' => 'Bearer '.$token];
-        $this->delete('web/menu/555',[], $headers)
-             ->assertStatus(400)
-             ->assertSee('El menu indicado no existe.');
+    public function borrar_menu_no_registrada() {
+        $idmenu = ['id' => 100];
+        $headers = ['X-CSRF-TOKEN' => csrf_token() ];
+        $this->actingAs($this->admin, 'admin')
+            ->delete('menus/'.$idmenu, $headers)
+            ->assertStatus(400);
     }
 }
