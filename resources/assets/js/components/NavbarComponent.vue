@@ -135,10 +135,18 @@
                 </div>
             </div>
         </div>
+        <modal
+                v-show="isModalVisible"
+                @close="closeModal"
+        >
+            <span slot="header">Tu sesión ha expirado</span>
+            <span slot="body">Qué dificil es decidir</span>
+        </modal>
     </nav>
 </template>
 
 <script>
+    import modal from './modal';
     import store from '../store';
     import ClickOutside from 'vue-click-outside';
     import ShoppingCart from "./shoppingCart";
@@ -156,7 +164,8 @@
         components: {
             CartItem,
             ShoppingCart,
-            'vue-countdown': VueCountdown},
+            'vue-countdown': VueCountdown,
+            modal},
         data () {
             return {
                 googleSignInParams: {
@@ -171,6 +180,7 @@
                 isDropdownActive: false,
                 isCartActive: false,
                 cartDisparado: false,
+                isModalVisible: false,
             }
         },
         computed: {
@@ -195,7 +205,12 @@
             }
         },
         methods: {
-
+            showModal(){
+                this.isModalVisible = true;
+            },
+            closeModal(){
+              this.isModalVisible = false;
+            },
             handleTimeExpire () {
                 for (let i = 0; i< store.getters.selectedSeats.length; i++){
                     axios.post(`/api/butaca/${store.getters.selectedSeats[0]}`, {
@@ -207,8 +222,14 @@
                             console.log(e);
                         });
                 }
+                this.showModal();
                 store.commit('clearSelectedSeats');
                 store.commit('changeTimerStart',false);
+                console.log(this.$router.currentRoute);
+                if (this.$router.currentRoute.name === 'entrada'){
+                    this.$router.push({ name: 'home' });
+                }
+
             },
 
             mostrarCartMobile(){
