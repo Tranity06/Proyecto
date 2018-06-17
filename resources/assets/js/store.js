@@ -13,6 +13,7 @@ export default new Vuex.Store({
           cuerpo: ''
         },
         timerStart: false,
+        selectedSeats: [],
         isLoggedIn: !!localStorage.getItem('token') || !!sessionStorage.getItem('token'),
         avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
                 || JSON.parse(sessionStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(sessionStorage.getItem('user')).avatar,
@@ -34,11 +35,18 @@ export default new Vuex.Store({
         countItems: (state) => state.cartItems.reduce((prev,next) => prev + next.cantidad,0),
         modalActive: (state) => state.modalActive,
         contenidoModal: (state) => state.contenidoModal,
-        timerStart: (state) => state.timerStart
+        timerStart: (state) => state.timerStart,
+        selectedSeats: (state) => state.selectedSeats
     },
     mutations: {
         changeTimerStart(state,condicion){
             state.timerStart = condicion;
+        },
+        removeSelectedSeat(state,idSeat){
+            state.selectedSeats.splice(state.selectedSeats.indexOf(idSeat),1);
+        },
+        addSelectedSeat(state,idSeat){
+            state.selectedSeats.push(idSeat);
         },
         loginUser (state) {
             state.isLoggedIn = true;

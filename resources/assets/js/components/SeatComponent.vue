@@ -88,6 +88,11 @@
         components: {
             modal
         },
+        computed: {
+          selectedSeats(){
+              return store.getters.selectedSeats;
+          }
+        },
         methods: {
             setSala(sala){
                 this.sala = sala;
@@ -145,22 +150,31 @@
                         console.log(e);
                     });
 
-                this.selected.includes(id) ? this.selected.splice(this.selected.indexOf(id), 1) : this.selected.push(id);
+                //this.selected.includes(id) ? this.selected.splice(this.selected.indexOf(id), 1) : this.selected.push(id);
 
-                if (this.selected.length > 0 && !store.getters.timerStart){
+                this.updateSelectedSeats(id);
+
+                if (store.getters.selectedSeats.length > 0 && !store.getters.timerStart){
                     store.commit('changeTimerStart',true);
-                }else if (this.selected.length === 0 && store.getters.timerStart){
+                }else if (store.getters.selectedSeats.length === 0 && store.getters.timerStart){
                     store.commit('changeTimerStart',false);
                 }
 
+            },
+            updateSelectedSeats(id){
+              if (store.getters.selectedSeats.includes(id)){
+                  store.commit('removeSelectedSeat',id);
+              }else {
+                  store.commit('addSelectedSeat',id);
+              }
             },
             getClass(estado,id) {
                 return {
                     'libre': (estado === 0),
                     'ocupado': (estado === 1),
-                    'reservado': (estado === 2) && !this.selected.includes(id),
+                    'reservado': (estado === 2) && !store.getters.selectedSeats.includes(id),
                     'indisponible': (estado === 3),
-                    'seleccionado': this.selected.includes(id)
+                    'seleccionado': store.getters.selectedSeats.includes(id)
                 }
             },
             esContiguo(id){
@@ -170,7 +184,7 @@
                     this.firstSeat = seatSeleccionado;
                     this.esNumeroContiguo(seatSeleccionado.id);
                     return true;
-                }else if(this.firstSeat !== undefined && this.selected.length === 0){
+                }else if(this.firstSeat !== undefined && store.getters.selectedSeats.length === 0){
                     this.firstSeat = seatSeleccionado;
                     return true;
                 }else{
@@ -185,8 +199,8 @@
             esNumeroContiguo(num){
                 let numeroActual = this.firstSeat.id;
 
-                if (this.selected.length === 1){
-                    if (num === this.selected[0]){
+                if (store.getters.selectedSeats.length === 1){
+                    if (num === store.getters.selectedSeats[0]){
                         this.numerosPosibles = [];
                         this.firstSeat = undefined;
                         return true;
@@ -206,15 +220,15 @@
                     let numeroAnteriorExiste = false;
                     let numeroPosteriorExiste = false;
 
-                    for (let i = 0; i<this.selected.length; i++){
-                        if (this.selected[i] === num - 1){
+                    for (let i = 0; i<store.getters.selectedSeats.length; i++){
+                        if (store.getters.selectedSeats[i] === num - 1){
                             numeroAnteriorExiste = true;
                             break;
                         }
                     }
 
-                    for (let i = 0; i<this.selected.length; i++){
-                        if (this.selected[i] === num + 1){
+                    for (let i = 0; i<store.getters.selectedSeats.length; i++){
+                        if (store.getters.selectedSeats[i] === num + 1){
                             numeroPosteriorExiste = true;
                             break;
                         }
