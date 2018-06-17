@@ -40,12 +40,12 @@ class CategoriaController extends Controller {
         return response()->json($categoria,200);
     }
 
-    public function deleteCategoria(Request $request) {
+    public function deleteCategoria($idCategoria) {
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
         }
 
-        $categoria = Categoria::find($request['id']);
+        $categoria = Categoria::find($idCategoria);
 
         if ( $categoria == null ){
             return response()->json('La categoría indicada no existe.', 400);

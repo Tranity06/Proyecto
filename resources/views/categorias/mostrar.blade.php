@@ -59,8 +59,8 @@
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                     });
                     $.ajax({
-                        url: '/categorias/borrar',
-                        type: 'POST',
+                        url: '/categorias/'+$id,
+                        type: 'DELETE',
                         data: 'id='+$id,
                         statusCode:{
                             204: function (){

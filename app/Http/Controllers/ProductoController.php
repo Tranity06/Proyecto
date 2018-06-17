@@ -95,7 +95,7 @@ class ProductoController extends Controller {
         $producto = Producto::find($idProducto);
 
         if ( $producto == null ){
-            return response()->json('El producto indicado no existe.', 403);
+            return response()->json('El producto indicado no existe.', 400);
         }
         
         $producto->delete();
