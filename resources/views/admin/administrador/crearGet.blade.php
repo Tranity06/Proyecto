@@ -147,7 +147,7 @@
                         <div>
                             <div class="col-xs-4">
                                 <input id="pw1" class="form-control input-sm" type="password" name="password" />
-                                <input id="pw2" class="form-control input-sm comprobar-pw" type="password"/>
+                                <input id="pw2" class="form-control input-sm comprobar-pw" type="password" placeholder="Repetir contraseña"/>
                                 <div class="callout callout-danger" id="errorpw" hidden></div>
                             </div>
                         </div>

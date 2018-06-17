@@ -14,34 +14,18 @@ class DatabaseSeeder extends Seeder
     {
         //Borrar datos de las tablas indicadas
         $this->truncateTables([
-            /*'usuarios',
-            'calificaciones_edades',
-            'generos',
-            'peliculas',
-            'resenas',*/
             'salas',
             'butacas',
             'sesiones',
-            /*'facturas',
-            'butacas_reservadas',*/
             'categorias',
             'productos',
-            //'lineas_ventas',
             'ingredientes',
-            //'ingrediente_producto',
             'menus',
             'menu_producto',
-            //'clave_admin',
             'administradores',
             'peliculas'
         ]);
 
-        //Ejecutar los siguientes Seeders
-//        $this->call(UsuariosSeeder::class);
-//        $this->call(CalificacionesEdadesSeeder::class);
-//        $this->call(GenerosSeeder::class);
-//        $this->call(PeliculasSeeder::class);
-//        $this->call(ResenasSeeder::class);
         $this->call([
             AdministradorSeeder::class,
             SalaSeeder::class,
@@ -54,17 +38,6 @@ class DatabaseSeeder extends Seeder
             ProductosSeeder::class,
             ProductosMenusSeeder::class
         ]);
-//        $this->call(FacturasSeeder::class);
-//        $this->call(ButacasReservadasSeeder::class);
-//        $this->call(CategoriasSeeder::class);
-//        $this->call(ProductosSeeder::class);
-//        $this->call(LineasVentasSeeder::class);
-//        $this->call(IngredientesSeeder::class);
-//        $this->call(ProductosIngredientesSeeder::class);
-//        $this->call(MenusSeeder::class);
-//        $this->call(AdministradoresSeeder::class);
-//        $this->call(ProductosMenusSeeder::class);
-//        $this->call(ClaveAdminSeeder::class);
     }
 
     /**
