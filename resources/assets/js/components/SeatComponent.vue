@@ -46,7 +46,11 @@
                  :class="getClass(butaca.estado,butaca.id)">
             </div>
         </div>
-        <span class="has-text-centered is-size-3" v-if="total > 0">TOTAL: {{ total }}€</span>
+        <div class="bloquetotalbutacas" v-if="total > 0">
+            <span class="has-text-centered is-size-5" style="margin-right: 80px"><b>TOTAL:</b> {{ total }}€</span>
+            <span class="is-size-5"><b>Sala:</b> {{sala}}</span>
+        </div>
+
         <modal
                 v-show="isModalVisible"
                 @close="closeModal"
@@ -77,12 +81,16 @@
                 numerosPosibles: [],
                 firstSeat: undefined,
                 isModalVisible: false,
+                sala: 0,
             }
         },
         components: {
             modal
         },
         methods: {
+            setSala(sala){
+                this.sala = sala;
+            },
             showModal() {
                 this.isModalVisible = true;
             },
@@ -255,6 +263,12 @@
 
 <style scoped>
 
+    .bloquetotalbutacas{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0 auto 20px auto;
+    }
 
     .seat-filas{
         width: 0;
@@ -262,6 +276,7 @@
         line-height: 25px;
         position: relative;
         left: -10px;
+        animation: fadein .5s;
     }
 
     .seat-filas > div:not(:first-child){
@@ -271,6 +286,12 @@
     .seat-columns{
         width: 280px;
         margin: 0 auto;
+        animation: fadein .5s;
+    }
+
+    @keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
     }
 
     .bookingseats-form {

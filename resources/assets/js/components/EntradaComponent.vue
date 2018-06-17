@@ -199,6 +199,7 @@
                     let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === this.dia);
                     this.horas = diaSeleccionado[0].horas;
                     this.sesionId = this.horas[0].sesion_id;
+                    this.$refs.butaca.setSala(this.horas[0].sala);
                     this.mostrarAsientos(this.sesionId,undefined);
                 }
 
