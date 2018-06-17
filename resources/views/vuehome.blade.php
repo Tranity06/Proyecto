@@ -17,6 +17,13 @@
     <script src="https://apis.google.com/js/api:client.js"></script>
     <style>
 
+
+        .vue-countdown--time{
+            background: gray;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
         html, body {
             height: 100%;
             background-color: #f5f5f5;

@@ -63,6 +63,7 @@
 </template>
 
 <script>
+    import store from '../store';
     import modal from './modal.vue';
 
     export default {
@@ -144,9 +145,10 @@
                         console.log(e);
                     });
 
-
-
                 this.selected.includes(id) ? this.selected.splice(this.selected.indexOf(id), 1) : this.selected.push(id);
+                if (this.selected > 0 && !store.getters.timerStart){
+                    store.commit('changeTimerStart',true);
+                }
 
             },
             getClass(estado,id) {

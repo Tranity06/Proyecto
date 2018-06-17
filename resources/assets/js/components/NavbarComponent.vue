@@ -1,5 +1,9 @@
 <template>
     <nav class="navbar is-fixed-top is-transparent" v-click-outside="hide" :class="{'fondoblanco': fondoBlanco}" aria-label="dropdown navigation">
+        <div class="timer">
+            <vue-countdown v-on:time-expire="handleTimeExpire" :seconds="10" :units="['minutes','seconds']" :start="start"></vue-countdown>
+        </div>
+
         <div class="main-search" :class="{'puedo-ver': searchDisparado === true }" v-if="searchDisparado">
             <div class="container">
 
@@ -91,6 +95,7 @@
                     </router-link>
                 </div>
                 <div class="navbar-end">
+
                     <span class="navbar-item"  :class="{'has-text-black': textblack,'has-text-white': !textblack}" @click="dispararSearch"><i class="fas fa-search fa-sm"></i></span>
                     <span class="navbar-item navbar-item-end">
                         <shopping-cart class="is-hidden-touch" :active="isCartActive"></shopping-cart>
@@ -138,6 +143,7 @@
     import ClickOutside from 'vue-click-outside';
     import ShoppingCart from "./shoppingCart";
     import CartItem from "./CartItem";
+    import VueCountdown from '@dmaksimovic/vue-countdown';
 
     const focus = {
         inserted(el) {
@@ -147,7 +153,10 @@
 
     export default {
         name: "navbar-component",
-        components: {CartItem, ShoppingCart},
+        components: {
+            CartItem,
+            ShoppingCart,
+            'vue-countdown': VueCountdown},
         data () {
             return {
                 googleSignInParams: {
@@ -180,9 +189,16 @@
             },
             countItems(){
                 return store.getters.countItems;
+            },
+            start(){
+                return store.getters.timerStart;
             }
         },
         methods: {
+
+            handleTimeExpire () {
+                alert('Time is up!');
+            },
 
             mostrarCartMobile(){
                 this.cartDisparado = true;
@@ -307,6 +323,19 @@
 </script>
 
 <style scoped>
+    .timer{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+    }
+
+
     .cartcontainer{
         position: absolute;
         top: 0;

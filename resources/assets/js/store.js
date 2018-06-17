@@ -12,6 +12,7 @@ export default new Vuex.Store({
           titulo: '',
           cuerpo: ''
         },
+        timerStart: false,
         isLoggedIn: !!localStorage.getItem('token') || !!sessionStorage.getItem('token'),
         avatar: JSON.parse(localStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(localStorage.getItem('user')).avatar
                 || JSON.parse(sessionStorage.getItem('user'))==null ? 'default.jpg' : JSON.parse(sessionStorage.getItem('user')).avatar,
@@ -33,8 +34,12 @@ export default new Vuex.Store({
         countItems: (state) => state.cartItems.reduce((prev,next) => prev + next.cantidad,0),
         modalActive: (state) => state.modalActive,
         contenidoModal: (state) => state.contenidoModal,
+        timerStart: (state) => state.timerStart
     },
     mutations: {
+        changeTimerStart(state,condicion){
+            state.timerStart = condicion;
+        },
         loginUser (state) {
             state.isLoggedIn = true;
         },
