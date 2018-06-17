@@ -98,7 +98,7 @@ class MenuTest extends TestCase
     }
 
     /** @test */
-    public function modificar_menu_no_registrada() {
+    public function modificar_menu_no_registrado() {
         $idmenu = ['id' => 100];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
@@ -126,7 +126,7 @@ class MenuTest extends TestCase
     }
 
     /** @test */
-    public function borrar_menu_no_registrada() {
+    public function borrar_menu_no_registrado() {
         $idmenu = ['id' => 100];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
