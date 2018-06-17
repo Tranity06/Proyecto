@@ -43,8 +43,14 @@
             </div>
             <div class="seat" v-for="butaca in butacas"
                  @click="postEstadoButaca(butaca.id,butaca.estado,$event)"
-                 :class="getClass(butaca.estado,butaca.id)">
+                 :class="{
+                 'ocupado': butaca.estado === 1,
+                 'indisponible': butaca.estado === 3,
+                 'seleccionado': selectedSeats.includes(butaca.id),
+                 'reservado': reservedSeats.includes(butaca.id)
+                 }">
             </div>
+            <!--<seat-individual v-for="butaca in butacas" :key="butaca.id" ></seat-individual>-->
         </div>
         <div class="bloquetotalbutacas" v-if="total > 0">
             <span class="has-text-centered is-size-5" style="margin-right: 80px"><b>TOTAL:</b> {{ total }}€</span>
@@ -65,6 +71,7 @@
 <script>
     import store from '../store';
     import modal from './modal.vue';
+    import SeatIndividual from "./seat-individual";
 
     export default {
         data() {
@@ -86,11 +93,15 @@
             }
         },
         components: {
+            SeatIndividual,
             modal
         },
         computed: {
           selectedSeats(){
               return store.getters.selectedSeats;
+          },
+          reservedSeats(){
+              return store.getters.reservedSeats;
           }
         },
         methods: {
@@ -150,8 +161,6 @@
                         console.log(e);
                     });
 
-                //this.selected.includes(id) ? this.selected.splice(this.selected.indexOf(id), 1) : this.selected.push(id);
-
                 this.updateSelectedSeats(id);
 
                 if (store.getters.selectedSeats.length > 0 && !store.getters.timerStart){
@@ -167,15 +176,6 @@
               }else {
                   store.commit('addSelectedSeat',id);
               }
-            },
-            getClass(estado,id) {
-                return {
-                    'libre': (estado === 0),
-                    'ocupado': (estado === 1),
-                    'reservado': (estado === 2) && !store.getters.selectedSeats.includes(id),
-                    'indisponible': (estado === 3),
-                    'seleccionado': store.getters.selectedSeats.includes(id)
-                }
             },
             esContiguo(id){
                 const seatSeleccionado = this.butacas.find((butaca) => butaca.id === id);
@@ -271,10 +271,16 @@
             // if esta butaca id no existe no hagas nada y si esta cambialo :D
             Echo.channel('butaca')
                 .listen('ButacaEvent', (e) => {
-                    let targetButaca = this.butacas.find(butaca => butaca.id == e.butacaId);
-                    if (targetButaca !== undefined){
-                        targetButaca.estado = e.estado.estado;
-                    }
+                    console.log(e);
+                        let targetButaca = this.butacas.find(butaca => butaca.id == e.butacaId);
+                        if (targetButaca !== undefined){
+                            targetButaca.estado = e.estado.estado;
+                            if (e.estado.estado == 2){
+                                store.commit('addReservedSeat',parseInt(e.butacaId));
+                            }else if (e.estado.estado == 0){
+                                store.commit('removeReservedSeats',parseInt(e.butacaId))
+                            }
+                        }
                 });
         }
     }
@@ -338,6 +344,7 @@
         width: 25px;
         border-radius: 20%;
         margin: 0 .3rem;
+        background-color: #E8E9EA;
     }
 
     .seat-column{
@@ -347,10 +354,6 @@
         border-radius: 20%;
         margin: 0 .17rem;
         text-align: center;
-    }
-
-    .libre {
-        background-color: #E8E9EA;
     }
 
     .ocupado {

@@ -168,7 +168,7 @@
                     this.validado = false;
                 }
                 else{
-                    this.validado = true;
+                    this.validado = true2;
                 }
             },
 

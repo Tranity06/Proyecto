@@ -197,7 +197,18 @@
         methods: {
 
             handleTimeExpire () {
-                alert('Time is up!');
+                for (let i = 0; i< store.getters.selectedSeats.length; i++){
+                    axios.post(`/api/butaca/${store.getters.selectedSeats[0]}`, {
+                        estado: 0
+                    })
+                        .then(response => {
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                }
+                store.commit('clearSelectedSeats');
+                store.commit('changeTimerStart',false);
             },
 
             mostrarCartMobile(){
