@@ -15,6 +15,15 @@
                     <span>SUB-TOTAL:  </span>
                     <span>{{precioTotal.toFixed(2)}}€</span>
                 </div>
+                <hr class="navbar-divider">
+                <div class="navbar-item espacioBetween"  style="    width: 170px;
+                     display: flex;
+                     flex-direction: column;
+                     margin-left: 20px;"
+                     v-if="precioTotal > 0">
+                    <div style="width: 175px;">Recuerda que debes comprar una entrada</div>
+                    <div style="width: 175px;">para completar tu pedido.</div>
+                </div>
             </div>
             <div v-else>
                 <div class="navbar-item">

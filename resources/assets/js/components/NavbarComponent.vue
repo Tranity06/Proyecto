@@ -19,11 +19,14 @@
                                 </div>
                                 <div>
                                     <span class="button is-light is-small" @click="irEntrada(result.id)">
-                                        ver pelicula
+                                        información
                                     </span>
                                     <a :href="result.trailer" class="button is-light is-small" data-lity @click="verTrailer()">
                                         ver tráiler
                                     </a>
+                                    <span class="button is-light is-small" @click="irComprarEntrada(result.id)">
+                                        comprar entrada
+                                    </span>
                                 </div>
                             </div>
                         </template>
@@ -36,19 +39,23 @@
         </div>
         <transition name="cartcontainer-fade">
             <div class="cartcontainer" v-if="cartDisparado">
-                <div class="cartcontainer__header">
+                <div class="cartcontainer__header" v-if="allCartItems.length > 0">
                     <span class="has-text-weight-bold is-size-5">PRECIO TOTAL</span>
                     <span class="is-size-5">{{precioTotal.toFixed(2)}}€</span>
+                </div>
+                <div style="width: 100%; text-align: center;" v-if="allCartItems.length > 0">
+                    <span>Recuerda que debes comprar una entrada</span>
+                    <span>para completar tu pedido.</span>
                 </div>
                 <div v-if="allCartItems.length > 0">
                     <div class="navbar-item-flexible">
                         <cart-item v-for="(item,index) in allCartItems"  :key="index" :item="item"></cart-item>
                     </div>
                 </div>
-                <div v-else style="margin-bottom: 30px; display: flex; justify-content: center;">
-                    <span class="has-text-weight-bold is-size-6">Tu carrito está vacío.</span>
+                <div v-else style="display: flex; justify-content: center;">
+                    <span class="has-text-weight-bold is-size-6" style="margin-top: 20px;">Tu carrito está vacío.</span>
                 </div>
-                <div style="display: flex; justify-content: center">
+                <div style="display: flex; justify-content: center; margin-top: 20px;" >
                     <a   class="button is-rounded is-danger" @click="cerrarCartMobile">Cerrar</a>
                 </div>
             </div>
@@ -209,6 +216,11 @@
                 this.searchDisparado = false;
                 this.query = '';
                 this.$router.replace({ path: `/pelicula/${id}` })
+            },
+            irComprarEntrada(id){
+                this.searchDisparado = false;
+                this.query = '';
+                this.$router.replace({ path: `/entrada/${id}` })
             },
             verTrailer(){
                 this.query = '';
