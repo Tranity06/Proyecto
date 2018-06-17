@@ -57,10 +57,10 @@ class MenuController extends Controller {
             return redirect('/admin'); 
         }
 
-        $menu = menu::find($request->idMenu);
+        $menu = menu::find($request['id']);
 
         if ( $menu == null ){
-            return response()->json('El menu indicado no existe.', 403);
+            return response()->json('El menu indicado no existe.', 400);
         }
         
         $menu->delete();

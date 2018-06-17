@@ -45,10 +45,10 @@ class CategoriaController extends Controller {
             return redirect('/admin'); 
         }
 
-        $categoria = Categoria::find($request->idCategoria);
+        $categoria = Categoria::find($request['id']);
 
         if ( $categoria == null ){
-            return response()->json('La categoría indicada no existe.', 403);
+            return response()->json('La categoría indicada no existe.', 400);
         }
         
         $categoria->delete();

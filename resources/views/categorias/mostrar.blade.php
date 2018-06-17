@@ -46,7 +46,7 @@
 
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
-                var idCategoria= $('#id').val();
+                var $id= $boton.next().val();
 
                 var $callout = $('.callout').first();
                 $boton.attr('disabled', 'disabled');
@@ -61,7 +61,7 @@
                     $.ajax({
                         url: '/categorias/borrar',
                         type: 'POST',
-                        data: 'idCategoria='+idCategoria,
+                        data: 'id='+$id,
                         statusCode:{
                             204: function (){
                                 $boton.closest('tr')
@@ -74,7 +74,7 @@
                                     $(this).closest('tr').remove();
                                 });
                             },
-                            403: function (){
+                            400: function (){
                                 $callout.text(e.responseJSON);
                                 $callout.addClass('callout-danger').slideDown();
                             }
