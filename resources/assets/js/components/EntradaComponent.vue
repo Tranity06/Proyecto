@@ -23,7 +23,7 @@
                                     </select>
                                 </div>
                                 <div class="select">
-                                    <select @change="mostrarAsientos(horaTarget,$event)" :value="horaTarget">
+                                    <select @change="mostrarAsientos(sesionId,$event)">
                                         <option v-for="horaa in horas" :value="horaa.sesion_id">{{ horaa.hora }}</option>
                                     </select>
                                 </div>
@@ -54,7 +54,7 @@
                                     <img :src="caratula" alt="" width="55" height="74">
                                     <div class="informacion">
                                         <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
-                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + horaTarget}}</span>
+                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + sesionId}}</span>
                                         <span class="has-text-grey-light is-size-7"> {{ butacas.num }} {{butacas.num > 1 ? 'entradas': 'entrada'}}</span>
                                     </div>
                                     <span class="precio has-text-weight-bold">{{ butacas.total.toFixed(2) }}€</span>
@@ -118,7 +118,7 @@
                 salas: 0,
                 salaTarget: 1,
                 dia: '',
-                horaTarget: null,
+                sesionId: null,
                 horaSeleccionada: '1',
                 horas: [],
                 step: 1,
@@ -180,7 +180,7 @@
                 if (validacion) {
                     this.butacas.total = this.$refs.butaca.getTotal();
                     this.butacas.num = this.$refs.butaca.getButacas();
-                    this.horaSeleccionada = this.horas.filter(hora => hora.sesion_id === this.horaTarget)[0].hora;
+                    this.horaSeleccionada = this.horas.filter(hora => hora.sesion_id === this.sesionId)[0].hora;
                     this.step++;
                 } else {
                     this.showModal('Elige al menos una butaca','No está permitido ver la pelicula de pie :(');
@@ -196,10 +196,10 @@
                     this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
                 } else {
                     this.dia = event === undefined ? day : event.target.value;
-                    let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === day);
+                    let diaSeleccionado = this.sesiones.filter((sesion) => sesion.fecha === this.dia);
                     this.horas = diaSeleccionado[0].horas;
-                    this.horaTarget = this.horas[0].sesion_id;
-                    this.mostrarAsientos(this.horaTarget,undefined);
+                    this.sesionId = this.horas[0].sesion_id;
+                    this.mostrarAsientos(this.sesionId,undefined);
                 }
 
             },
@@ -207,8 +207,8 @@
                 if (this.$refs.butaca.getButacas() > 0){
                     this.showModal('Tienes butacas reservadas','No puedes cambiar de sesión teniendo butacas seleccionadas.');
                 } else {
-                    this.horaTarget = event === undefined ? sesionId : event.target.value;
-                    console.log('sesion '+this.horaTarget +' dia '+this.dia);
+                    this.sesionId = event === undefined ? sesionId : event.target.value;
+                    console.log('sesion '+this.sesionId +' dia '+this.dia);
                     this.$refs.butaca.getAllButacas(sesionId);
                 }
             },
@@ -224,7 +224,7 @@
 
                     this.sesiones = data.sesiones;
                     this.dia = this.sesiones[0].fecha;
-                    this.horaTarget = this.sesiones[0].sesion_id;
+                    this.sesionId = this.sesiones[0].sesion_id;
                     let primeraFecha = this.sesiones[0].fecha;
                     this.mostrarHoras(primeraFecha);
                 }
@@ -234,7 +234,7 @@
             confirmarPago(){
                 // fecha -> dia
                 // hora -> horaSeleccionada
-                // sala -> horaTarget
+                // sala -> sesionId
                 // butacas -> butacas
 
                 const datosVisa = this.$refs.pago.getDatosVisa();

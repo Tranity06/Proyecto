@@ -94871,7 +94871,7 @@ var getEntrada = function getEntrada(id, callback) {
             salas: 0,
             salaTarget: 1,
             dia: '',
-            horaTarget: null,
+            sesionId: null,
             horaSeleccionada: '1',
             horas: [],
             step: 1,
@@ -94942,7 +94942,7 @@ var getEntrada = function getEntrada(id, callback) {
                 this.butacas.total = this.$refs.butaca.getTotal();
                 this.butacas.num = this.$refs.butaca.getButacas();
                 this.horaSeleccionada = this.horas.filter(function (hora) {
-                    return hora.sesion_id === _this.horaTarget;
+                    return hora.sesion_id === _this.sesionId;
                 })[0].hora;
                 this.step++;
             } else {
@@ -94950,6 +94950,8 @@ var getEntrada = function getEntrada(id, callback) {
             }
         },
         mostrarHoras: function mostrarHoras(day, event) {
+            var _this2 = this;
+
             console.log('mostrarHoras');
 
             if (this.$refs.butaca.getButacas() > 0) {
@@ -94957,19 +94959,19 @@ var getEntrada = function getEntrada(id, callback) {
             } else {
                 this.dia = event === undefined ? day : event.target.value;
                 var diaSeleccionado = this.sesiones.filter(function (sesion) {
-                    return sesion.fecha === day;
+                    return sesion.fecha === _this2.dia;
                 });
                 this.horas = diaSeleccionado[0].horas;
-                this.horaTarget = this.horas[0].sesion_id;
-                this.mostrarAsientos(this.horaTarget, undefined);
+                this.sesionId = this.horas[0].sesion_id;
+                this.mostrarAsientos(this.sesionId, undefined);
             }
         },
         mostrarAsientos: function mostrarAsientos(sesionId, event) {
             if (this.$refs.butaca.getButacas() > 0) {
                 this.showModal('Tienes butacas reservadas', 'No puedes cambiar de sesión teniendo butacas seleccionadas.');
             } else {
-                this.horaTarget = event === undefined ? sesionId : event.target.value;
-                console.log('sesion ' + this.horaTarget + ' dia ' + this.dia);
+                this.sesionId = event === undefined ? sesionId : event.target.value;
+                console.log('sesion ' + this.sesionId + ' dia ' + this.dia);
                 this.$refs.butaca.getAllButacas(sesionId);
             }
         },
@@ -94984,7 +94986,7 @@ var getEntrada = function getEntrada(id, callback) {
 
                 this.sesiones = data.sesiones;
                 this.dia = this.sesiones[0].fecha;
-                this.horaTarget = this.sesiones[0].sesion_id;
+                this.sesionId = this.sesiones[0].sesion_id;
                 var primeraFecha = this.sesiones[0].fecha;
                 this.mostrarHoras(primeraFecha);
             }
@@ -94992,11 +94994,11 @@ var getEntrada = function getEntrada(id, callback) {
             console.log(data);
         },
         confirmarPago: function confirmarPago() {
-            var _this2 = this;
+            var _this3 = this;
 
             // fecha -> dia
             // hora -> horaSeleccionada
-            // sala -> horaTarget
+            // sala -> sesionId
             // butacas -> butacas
 
             var datosVisa = this.$refs.pago.getDatosVisa();
@@ -95009,7 +95011,7 @@ var getEntrada = function getEntrada(id, callback) {
 
                 if (response.status === 200) {
                     console.log('reservado');
-                    _this2.$notify({
+                    _this3.$notify({
                         group: 'auth',
                         type: 'success',
                         title: 'Pago confirmado',
@@ -95556,10 +95558,9 @@ var render = function() {
                       _c(
                         "select",
                         {
-                          domProps: { value: _vm.horaTarget },
                           on: {
                             change: function($event) {
-                              _vm.mostrarAsientos(_vm.horaTarget, $event)
+                              _vm.mostrarAsientos(_vm.sesionId, $event)
                             }
                           }
                         },
@@ -95665,7 +95666,7 @@ var render = function() {
                                   "," +
                                   _vm.horaSeleccionada +
                                   " Sala " +
-                                  _vm.horaTarget
+                                  _vm.sesionId
                               )
                             )
                           ]
