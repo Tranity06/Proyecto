@@ -14,10 +14,23 @@
             </p>
         </div>
         <div v-if="visa">
-            <label for="name">Nombre: </label>
-            <input class="input" type="text" placeholder="Tu nombre" id="name" size="5" v-model="nombre">
-            <label for="numero">Número: </label>
-            <input class="input" type="text" id="numero" pattern="[0-9]{16,19}" maxlength="19" placeholder="0000-0000-0000-0000" size="5" v-model="numero">
+            <div class="field">
+                <label class="label">Nombre del titular</label>
+                <div class="control">
+                    <input class="input" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Como aparece en la tarjeta" name="nombre" v-validate="'required|alpha_spaces|min:3|max:30'"
+                           v-model.trim="nombre">
+                    <p v-if="errors.has('nombre')" class="help is-danger">{{ errors.first('nombre') }}</p>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Número de tarjeta</label>
+                <div class="control">
+                    <input class="input" :class="{'is-danger': errors.has('numero')}" type="text" name="numero" v-validate="'required|credit_card'"
+                           v-model.trim="numero">
+                    <p v-if="errors.has('numero')" class="help is-danger">{{ errors.first('numero') }}</p>
+                </div>
+            </div>
+            <!--<input class="input" type="text" id="numero" pattern="[0-9]{16,19}" maxlength="19" placeholder="0000-0000-0000-0000" size="5" v-model.trim="numero">-->
             <div class="details">
                     <div class="select">
                         <select v-model="mes">
@@ -57,8 +70,15 @@
                         </select>
                     </div>
             </div>
-            <label for="secreto">CVC/CVV: </label>
-            <input class="input" type="text" id="secreto" placeholder="123" maxlength="4" width="48" v-model="cvc">
+            <div class="field">
+                <label class="label">Código de seguridad</label>
+                <div class="control">
+                    <input class="input" :class="{'is-danger': errors.has('codigo')}" placeholder="3 dígitos" maxlength="3" width="48" type="password" name="codigo" v-validate="'required|digits:3'"
+                           v-model.trim="cvc">
+                    <p v-if="errors.has('codigo')" class="help is-danger">{{ errors.first('codigo') }}</p>
+                </div>
+            </div>
+            <!--<input class="input" type="text" id="secreto" placeholder="123" maxlength="4" width="48" v-model="cvc">-->
         </div>
     </div>
 </template>

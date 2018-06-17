@@ -17,7 +17,7 @@
                         <div class="field">
                             <label class="label">Introduce tu nombre</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Escribe tu nombre" name="nombre" v-validate="'required|alpha|min:3'"
+                                <input class="input" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Escribe tu nombre" name="nombre" v-validate="'required|alpha|min:3|max:30'"
                                        v-model.trim="nombre">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
@@ -53,7 +53,7 @@
                         <div class="field">
                             <label class="label">Contraseña</label>
                             <div class="control has-icons-left">
-                                <input class="input" :class="{'is-danger': errors.has('password')}" type="password" placeholder="Password" name="password" v-validate="'required|min:6'"
+                                <input class="input" :class="{'is-danger': errors.has('password')}" type="password" placeholder="Password" name="password" v-validate="'required|min:6|max:30'"
                                        v-model.trim="password">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
@@ -65,7 +65,7 @@
                         <div class="field">
                             <label class="label">Repite la contraseña</label>
                             <div class="control has-icons-left">
-                                <input class="input" :class="{'is-danger': errors.has('password_confirmation')}" type="password" placeholder="Password" name="password_confirmation" v-validate="'required|min:6|confirmed:password'"
+                                <input class="input" :class="{'is-danger': errors.has('password_confirmation')}" type="password" placeholder="Password" name="password_confirmation" v-validate="'required|min:6|max:30|confirmed:password'"
                                        v-model.trim="password_confirmation">
                                 <span class="icon is-small is-left">
                                      <i class="fas fa-lock"></i>
