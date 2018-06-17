@@ -176,12 +176,8 @@ return [
                     ]
                 ],
                 [
-                    'text' => 'Mostrar',
+                    'text' => 'Calendario',
                     'url'  => '/sesiones',
-                ],
-                [
-                    'text' => 'Crear',
-                    'url'  => '/sesion',
                 ],
             ]
         ],
