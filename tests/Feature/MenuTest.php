@@ -41,7 +41,7 @@ class MenuTest extends TestCase
     public function crear_menu_con_admin() {
         $this->actingAs($this->admin, 'admin')
             ->get('/menus/crear')
-            ->assertStatus(200);
+            ->assertStatus(201);
     }
 
     /**********************************************************

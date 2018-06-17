@@ -41,7 +41,7 @@ class CategoriaTest extends TestCase
     public function crear_categoria_con_admin() {
         $this->actingAs($this->admin, 'admin')
             ->get('/categorias/crear')
-            ->assertStatus(200);
+            ->assertStatus(201);
     }
 
     /**********************************************************
