@@ -59,22 +59,34 @@ const dict = {
         },
         nombre: {
             required: 'El nombre no puede estar vacío',
-            alpha: 'El nombre sólo puede contener caracteres alfabéticos',
-            min: 'El nombre debe tener mínimo 3 caracteres'
+            alpha: 'El nombre sólo puede contener caracteres alfabéticos y sin espacios',
+            alpha_spaces: 'El nombre sólo puede contener caracteres alfabéticos y espacios',
+            min: 'El nombre debe tener mínimo 3 caracteres',
+            max: 'El nombre debe tener máximo 30 caracteres'
         },
         telefono: {
            required: 'El teléfono no puede estar vacío',
-           digits: 'El teléfono debe empezar por 6 y tener 9 números'
+           digits: 'El teléfono debe empezar por 6 y contener exactamente 9 dígitos'
         },
         password: {
             required: 'La contraseña no puede estar vacía',
-            min: 'La contraseña debe tener mínimo 6 caracteres'
+            min: 'La contraseña debe tener mínimo 6 caracteres',
+            max: 'La contraseña debe tener máximo 30 caracteres'
         },
         password_confirmation: {
             required: 'La contraseña no puede estar vacía',
             min: 'La contraseña debe tener mínimo 6 caracteres',
+            max: 'La contraseña debe tener máximo 30 caracteres',
             confirmed: 'Las contraseñas no coinciden'
-        }
+        },
+        numero: {
+            required: 'El número no puede estar vacío',
+            credit_card: 'El número no es valido'
+        },
+        codigo: {
+            required: 'El código no puede estar vacío',
+            digits: 'El código debe ser numérico y contener exactamente 3 dígitos'
+        },
     }
 };
 
