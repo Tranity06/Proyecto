@@ -33,17 +33,17 @@
             <div class="columns is-multiline is-centered nomarginright" v-if="this.tab === 2">
                 <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculasEstreno">
                     <div class="pelicula-card centrar-imagen">
-                        <img :src="peliculasTOP[key].cartel">
+                        <img :src="peliculasEstreno[key].cartel">
                         <div class="pelicula-trailer grow">
-                            <a :href="peliculasTOP[key].trailer" data-lity><img src="icons/play-button.svg"></a>
+                            <a :href="peliculasEstreno[key].trailer" data-lity><img src="icons/play-button.svg"></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-opciones">
                                 <div class="buttons">
-                                    <router-link class="button is-rounded" :to="'/pelicula/'+peliculasTOP[key].id">
+                                    <router-link class="button is-rounded" :to="'/pelicula/'+peliculasEstreno[key].id">
                                         <img src="icons/arrow-pointing-to-right.svg">
                                     </router-link>
-                                    <router-link class="button is-rounded" :to="'/entrada/'+peliculasTOP[key].id">
+                                    <router-link class="button is-rounded" :to="'/entrada/'+peliculasEstreno[key].id">
                                         Comprar entrada
                                     </router-link>
                                 </div>
@@ -61,17 +61,17 @@
             <div class="columns is-multiline is-centered nomarginright" v-if="this.tab === 3">
                 <div class="column is-3-desktop-only is-narrow" v-for="(index,key,pelicula) in peliculasProximo">
                     <div class="pelicula-card centrar-imagen">
-                        <img :src="peliculasTOP[key].cartel">
+                        <img :src="peliculasProximo[key].cartel">
                         <div class="pelicula-trailer grow">
-                            <a :href="peliculasTOP[key].trailer" data-lity><img src="icons/play-button.svg"></a>
+                            <a :href="peliculasProximo[key].trailer" data-lity><img src="icons/play-button.svg"></a>
                         </div>
                         <div class="pelicula-body">
                             <div class="pelicula-opciones">
                                 <div class="buttons">
-                                    <router-link class="button is-rounded" :to="'/pelicula/'+peliculasTOP[key].id">
+                                    <router-link class="button is-rounded" :to="'/pelicula/'+peliculasProximo[key].id">
                                         <img src="icons/arrow-pointing-to-right.svg">
                                     </router-link>
-                                    <router-link class="button is-rounded" :to="'/entrada/'+peliculasTOP[key].id">
+                                    <router-link class="button is-rounded" :to="'/entrada/'+peliculasProximo[key].id">
                                         Comprar entrada
                                     </router-link>
                                 </div>

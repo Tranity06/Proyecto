@@ -59,7 +59,8 @@ const dict = {
         },
         nombre: {
             required: 'El nombre no puede estar vacío',
-            alpha: 'Solo tu primer nombre'
+            alpha: 'El nombre sólo puede contener caracteres alfabéticos',
+            min: 'El nombre debe tener mínimo 3 caracteres'
         },
         telefono: {
            required: 'El teléfono no puede estar vacío',
