@@ -73,12 +73,12 @@
                             </section>
                         </div>
                         <div class="column">
-                            <payment-component ref="pago"></payment-component>
+                            <payment-component ref="pago" @actualizarEstado="validar"></payment-component>
                         </div>
                     </div>
                     <div class="buttons-component">
                         <button @click.prevent="prev()" class="button is-rounded is-warning normal">Volver</button>
-                        <button @click.prevent="confirmarPago()" class="button is-rounded is-warning normal"><i
+                        <button @click.prevent="confirmarPago()" class="button is-rounded is-warning normal" :disabled="validado"><i
                                 class="fas fa-lock" style="margin-right: .5rem"></i> Confirmar y pagar
                         </button>
                     </div>
@@ -137,7 +137,8 @@
                     visible: false,
                     titulo: '',
                     body: ''
-                }
+                },
+                validado: true,
             }
         },
         computed: {
@@ -160,6 +161,17 @@
         },
 
         methods: {
+
+            validar(valor){
+                console.log('Valorrecibido::'+valor);
+                if (valor){
+                    this.validado = false;
+                }
+                else{
+                    this.validado = true;
+                }
+            },
+
             showModal(titulo,body) {
                 this.modal = {
                     visible: true,

@@ -17,7 +17,7 @@
             <div class="field">
                 <label class="label">Nombre del titular</label>
                 <div class="control">
-                    <input class="input" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Como aparece en la tarjeta" name="nombre" v-validate="'required|alpha_spaces|min:3|max:30'"
+                    <input class="input" @blur="actualizar" :class="{'is-danger': errors.has('nombre')}" type="text" placeholder="Como aparece en la tarjeta" name="nombre" v-validate="'required|alpha_spaces|min:3|max:30'"
                            v-model.trim="nombre">
                     <p v-if="errors.has('nombre')" class="help is-danger">{{ errors.first('nombre') }}</p>
                 </div>
@@ -25,7 +25,7 @@
             <div class="field">
                 <label class="label">Número de tarjeta</label>
                 <div class="control">
-                    <input class="input" :class="{'is-danger': errors.has('numero')}" type="text" name="numero" v-validate="'required|credit_card'"
+                    <input class="input"  @blur="actualizar" :class="{'is-danger': errors.has('numero')}" type="text" name="numero" v-validate="'required|credit_card'"
                            v-model.trim="numero">
                     <p v-if="errors.has('numero')" class="help is-danger">{{ errors.first('numero') }}</p>
                 </div>
@@ -33,7 +33,7 @@
             <!--<input class="input" type="text" id="numero" pattern="[0-9]{16,19}" maxlength="19" placeholder="0000-0000-0000-0000" size="5" v-model.trim="numero">-->
             <div class="details">
                     <div class="select">
-                        <select v-model="mes">
+                        <select v-model="mes" @change="actualizar">
                             <option>MM</option>
                             <option value="1">01</option>
                             <option value="2">02</option>
@@ -50,7 +50,7 @@
                     </div>
                     <span style="font-size: x-large">/</span>
                     <div class="select">
-                        <select v-model="anio">
+                        <select v-model="anio" @change="actualizar">
                             <option>YYYY</option>
                             <option value="2016">2016</option>
                             <option value="2017">2017</option>
@@ -73,7 +73,7 @@
             <div class="field">
                 <label class="label">Código de seguridad</label>
                 <div class="control">
-                    <input class="input" :class="{'is-danger': errors.has('codigo')}" placeholder="3 dígitos" maxlength="3" width="48" type="password" name="codigo" v-validate="'required|digits:3'"
+                    <input class="input" @blur="actualizar" :class="{'is-danger': errors.has('codigo')}" placeholder="3 dígitos" maxlength="3" width="48" type="password" name="codigo" v-validate="'required|digits:3'"
                            v-model.trim="cvc">
                     <p v-if="errors.has('codigo')" class="help is-danger">{{ errors.first('codigo') }}</p>
                 </div>
@@ -108,6 +108,16 @@
                     anio: this.anio,
                     cvc: this.cvc
                 }
+            },
+            actualizar(){
+                this.$validator.validateAll().then(() => {
+                    if (!this.errors.any()) {
+                        if (this.mes !== 'MM' && this.anio !== 'YYYY'){
+                            this.$emit('actualizarEstado', true);
+                        }
+                    }
+                });
+
             }
         }
     }
