@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar is-fixed-top is-transparent" v-click-outside="hide" :class="{'fondoblanco': fondoBlanco}" aria-label="dropdown navigation">
-        <div class="timer">
+        <div class="timer" v-if="start">
             <vue-countdown v-on:time-expire="handleTimeExpire" :seconds="10" :units="['minutes','seconds']" :start="start"></vue-countdown>
         </div>
 

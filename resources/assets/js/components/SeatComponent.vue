@@ -146,8 +146,11 @@
                     });
 
                 this.selected.includes(id) ? this.selected.splice(this.selected.indexOf(id), 1) : this.selected.push(id);
-                if (this.selected > 0 && !store.getters.timerStart){
+
+                if (this.selected.length > 0 && !store.getters.timerStart){
                     store.commit('changeTimerStart',true);
+                }else if (this.selected.length === 0 && store.getters.timerStart){
+                    store.commit('changeTimerStart',false);
                 }
 
             },
