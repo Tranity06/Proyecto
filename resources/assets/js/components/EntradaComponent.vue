@@ -54,7 +54,7 @@
                                     <img :src="caratula" alt="" width="55" height="74">
                                     <div class="informacion">
                                         <span class="has-text-weight-bold is-size-6">{{ titulo }}</span>
-                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + sesionId}}</span>
+                                        <span class="has-text-grey-light is-size-7">{{ moment(dia).format('DD dddd') + "," + horaSeleccionada + " Sala " + salanum}}</span>
                                         <span class="has-text-grey-light is-size-7"> {{ butacas.num }} {{butacas.num > 1 ? 'entradas': 'entrada'}}</span>
                                     </div>
                                     <span class="precio has-text-weight-bold">{{ butacas.total.toFixed(2) }}€</span>
@@ -120,6 +120,7 @@
                 dia: '',
                 primeraSesion: null,
                 sesionId: null,
+                salanum: 0,
                 horaSeleccionada: '1',
                 horas: [],
                 step: 1,
@@ -181,7 +182,7 @@
                 if (validacion) {
                     this.butacas.total = this.$refs.butaca.getTotal();
                     this.butacas.num = this.$refs.butaca.getButacas();
-                    this.horaSeleccionada = this.horas.filter(hora => hora.sesion_id === this.sesionId)[0].hora;
+                    this.horaSeleccionada = this.horas.filter(hora => hora.sesion_id === this.primeraSesion)[0].hora;
                     this.step++;
                 } else {
                     this.showModal('Elige al menos una butaca','No está permitido ver la pelicula de pie :(');
@@ -209,6 +210,7 @@
             mostrarAsientosAutomaticamente(sesion){
                 let sala = this.horas.filter(hora => hora.sesion_id === sesion)[0].sala;
                 this.$refs.butaca.setSala(sala);
+                this.salanum = sala;
                 this.$refs.butaca.getAllButacas(sesion);
             },
             mostrarAsientos(sesionId,event) {
@@ -219,6 +221,7 @@
                     this.primeraSesion = event === undefined ? sesionId : parseInt(event.target.value);
                     let sala = this.horas.filter(hora => hora.sesion_id === this.primeraSesion)[0].sala;
                     this.$refs.butaca.setSala(sala);
+                    this.salanum = sala;
                     this.$refs.butaca.getAllButacas(this.primeraSesion);
                 }
             },
