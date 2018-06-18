@@ -25,7 +25,7 @@ class PerfilController extends Controller {
 
         $user->saveOrFail();
 
-        return response()->json('Success',200);
+        return response()->json('Success',201);
     }
 
     public function cambiarTelefono(Request $request){
@@ -35,7 +35,7 @@ class PerfilController extends Controller {
 
         $user->saveOrFail();
 
-        return response()->json('Success',200);
+        return response()->json('Success',201);
     }
 
     public function cambiarAvatar(Request $request){
@@ -43,7 +43,7 @@ class PerfilController extends Controller {
             'image' => 'required|image64:jpeg,jpg,png'
         ]);
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()]);
+            return response()->json(['error'=>$validator->errors()],400);
         } else {
             $imageData = $request->get('image');
             $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
@@ -73,7 +73,7 @@ class PerfilController extends Controller {
             $credentials['password']=$request->password;
 
             if ( ! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(false, 401);
+                return response()->json(['success' => false], 401);
             }
             return response()->json(true,200);
         }
@@ -94,7 +94,6 @@ class PerfilController extends Controller {
 
     public function getUser(){
         $user = JWTAuth::toUser(JWTAuth::getToken());
-
         if ( $user == null ) {
             return response()->json('Permiso denegado', 403);
         }
