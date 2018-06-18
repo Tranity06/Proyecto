@@ -20,7 +20,7 @@ class SesionesSeeder extends Seeder
         $salas = Sala::all();
         $horas = ['16:00:00', '18:00:00', '20:00:00', '22:00:00'];
 
-        for ( $dia=0 ; $dia<7; $dia++ ){
+        for ( $dia=0 ; $dia<1; $dia++ ){
             $incremento = 0;
             foreach ( $salas as $sala ){
                 $pase = 0;

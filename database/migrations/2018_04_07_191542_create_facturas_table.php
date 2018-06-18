@@ -18,8 +18,8 @@ class CreateFacturasTable extends Migration
             $table->date('fecha');
 
             //Clave foránea USUARIO.
-            $table->unsignedInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

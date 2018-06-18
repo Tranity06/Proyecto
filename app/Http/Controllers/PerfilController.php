@@ -10,11 +10,15 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Models\Sesion;
+use App\Models\Pelicula;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Image;
 use Validator;
 use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class PerfilController extends Controller {
 
@@ -112,7 +116,6 @@ class PerfilController extends Controller {
             return response()->json(true,200);
         }
 
-
     }
 
     public function getUser(){
@@ -124,4 +127,43 @@ class PerfilController extends Controller {
         return $user;
     }
 
+    public function allTicketsFromUser(){
+        try{
+            $user = JWTAuth::toUser(JWTAuth::getToken());
+        } catch (JWTException $e){
+            return response()->json('Permiso denegado.', 403);
+        } 
+
+        $tickets = $user->facturas();
+
+        if ( sizeof($tickets)<=0 ) {
+            dd('null');
+        }
+        $userTickets = [];
+        foreach ($tickets as $ticket ){
+            $datos['fecha_factura'] = $ticket->fecha;
+            $butacas = $ticket->butacas_reservadas()->get();
+            $sesion = Sesion::find($butacas[0]['sesion_id']);
+            $datos['nombre_pelicula'] = Pelicula::find($sesion->pelicula_id)->titulo;
+            $datos['fecha_pelicula'] = $sesion->fecha;
+            $datos['hora'] = $sesion->hora;
+            $datos['sala_id'] = $sesion->sala_id;
+            for ($i=0 ; $i<sizeof($butacas) ; $i++ ){
+                $datos['butacas'][$i] = $butacas[$i]['id'];
+            }
+
+            $productos = $ticket->lineas_venta();
+            $datos['items_restaurante'] = [];
+            $datos['total'] = 0;
+            foreach ( $productos as $producto ){
+                $datosProducto['nombre'] = Producto::find($producto->producto_id)->nombre;
+                $datosProducto['cantidad'] = $producto->cantidad;
+                $datosProducto['precio'] = Producto::find($producto->producto_id)->precio;
+                array_push($datos['items_restaurante'], $datosProducto);
+                $datos['total']+=((int)($datosProducto['cantidad'])*(int)($datosProducto['precio']));
+            }
+
+        }
+        return response()->json($datos, 200);
+    }
 }

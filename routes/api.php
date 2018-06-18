@@ -136,3 +136,4 @@ Route::post('/datos/telefono','PerfilController@cambiarTelefono')->name('cambiar
 Route::post('/datos/avatar','PerfilController@cambiarAvatar')->name('cambiar.avatar');
 Route::post('/datos/clave','PerfilController@cambiarClave')->name('cambiar.clave');
 Route::post('/datos/eliminar','PerfilController@eliminarCuenta')->name('eliminar.cuenta');
+Route::get('/tickets', 'PerfilController@allTicketsFromUser')->name('user.tickets');
