@@ -244,6 +244,7 @@
                     text: '¡Has cerrado la sesión con exito!',
                     duration: 5000,
                 });
+                this.handleTimeExpire();
                 this.$router.push({ name: 'home' });
             },
             onSignInSuccess (googleUser) {

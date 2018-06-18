@@ -283,7 +283,6 @@
                     .then(response => {
 
                         if (response.status === 200){
-                            console.log('reservado');
                             this.$notify({
                                 group: 'auth',
                                 type: 'success',
@@ -291,8 +290,10 @@
                                 text: 'Tu entrada ha sido comprada con exito',
                                 duration: 3000,
                             });
-                        }
 
+                            store.commit('changeTimerStart',false);
+                            this.$router.push({ name: 'home' });
+                        }
                     })
                     .catch(error => {
                         console.log(error);
