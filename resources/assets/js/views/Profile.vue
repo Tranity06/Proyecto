@@ -73,7 +73,9 @@
                     <cambiar-clave class="tarjeta"></cambiar-clave>
                     <eliminar-cuenta class="tarjeta"></eliminar-cuenta>
                 </div>
-                <pelicula-ticket v-if="this.tab === 2"></pelicula-ticket>
+                <div v-if="this.tab === 2">
+                    <pelicula-ticket v-for="ticket in tickets" :key="ticket.id" :ticket="ticket"></pelicula-ticket>
+                </div>
                 <div v-if="this.tab === 3">
                     <ver-resenias v-for="resenia in resenias" :key="resenia.id" :tituloPelicula="resenia.pelicula_id" :fecha="resenia.created_at" :texto="resenia.comentario"></ver-resenias>
                 </div>
@@ -108,6 +110,7 @@
                 image: '',
                 tab: 1,
                 resenias: [],
+                tickets: [],
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
@@ -132,7 +135,14 @@
             })
             .catch(error => {
                 console.log(error);
-            })
+            });
+            axios.get(`/api/ticket=${store.getters.token}`)
+                .then(response => {
+                    this.tickets = response.data
+                })
+                .catch(error => {
+                    console.log(error);
+                })
         },
         methods: {
             onFileChange(e) {
