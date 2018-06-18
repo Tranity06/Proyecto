@@ -213,6 +213,15 @@
                 this.isModalVisible = false;
             },
             handleTimeExpire () {
+                this.desreservarSeats();
+                this.showModal();
+                console.log(this.$router.currentRoute);
+                if (this.$router.currentRoute.name === 'entrada'){
+                    this.$router.push({ name: 'home' });
+                }
+
+            },
+            desreservarSeats(){
                 for (let i = 0; i< store.getters.selectedSeats.length; i++){
                     axios.post(`/api/butaca/${store.getters.selectedSeats[0]}`, {
                         estado: 0
@@ -223,14 +232,8 @@
                             console.log(e);
                         });
                 }
-                this.showModal();
                 store.commit('clearSelectedSeats');
                 store.commit('changeTimerStart',false);
-                console.log(this.$router.currentRoute);
-                if (this.$router.currentRoute.name === 'entrada'){
-                    this.$router.push({ name: 'home' });
-                }
-
             },
             mostrarCartMobile(){
                 this.cartDisparado = true;
@@ -244,7 +247,9 @@
                     text: '¡Has cerrado la sesión con exito!',
                     duration: 5000,
                 });
-                this.handleTimeExpire();
+                if (store.getters.timerStart){
+                    this.desreservarSeats();
+                }
                 this.$router.push({ name: 'home' });
             },
             onSignInSuccess (googleUser) {

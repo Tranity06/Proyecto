@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ButacaEvent;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Sesion;
@@ -14,7 +15,7 @@ use Illuminate\Support\Carbon;
 
 class SesionController extends Controller
 {
-    const TOMEOUT = 60;
+    const TOMEOUT = 120;
 
     public function mostrarTodas(){
         // Comprobar autenticación
@@ -114,7 +115,7 @@ class SesionController extends Controller
             $update = Carbon::createFromTimeString("$butaca->updated_at")->addSeconds(self::TOMEOUT);
             if ( $butaca->estado == 2 && $now > $update){
                 $butaca->update(['estado' => 0]);
-                broadcast(new ButacaEvent($butaca->id,$butaca->estado))->toOthers();
+                broadcast(new ButacaEvent($butaca->id,['estado'=>$butaca->estado]))->toOthers();
             }
         }
         
