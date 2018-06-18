@@ -1,6 +1,6 @@
 <template>
     <form method="post" class="box-form" v-on:submit.prevent="cambiarTelefono">
-        <h1 class="subtitle has-text-weight-bold"><span>Cambiar Teléfono</span></h1>
+        <h1 class="subtitle has-text-weight-bold"><span>Cambiar teléfono</span></h1>
 
         <article class="message is-danger" v-if="telefonoRepetido">
             <div class="message-body">

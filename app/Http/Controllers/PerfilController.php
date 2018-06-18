@@ -92,6 +92,29 @@ class PerfilController extends Controller {
         }
     }
 
+    public function eliminarCuenta(Request $request){
+        $data = $request->only('password');
+        $rules = [
+            'password' => 'required|min:6|max:20'
+        ];
+
+        $validator = Validator::make($data, $rules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => 'Los datos introducidos no son correctos.'],400);
+        }else{
+
+            $credentials['email']=User::find($this->getUser()->id)->email;
+            $credentials['password']=$request->password;
+
+            if ( ! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(false, 401);
+            }
+            return response()->json(true,200);
+        }
+
+
+    }
+
     public function getUser(){
         $user = JWTAuth::toUser(JWTAuth::getToken());
 

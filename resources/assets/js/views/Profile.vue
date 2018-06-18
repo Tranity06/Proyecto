@@ -34,7 +34,7 @@
                             </li>
                             <li :class="{'is-active': this.tab===2}">
                                 <a @click="selectTab(2)">
-                                    <img src="/icons/ticket.svg" alt="Entrada">
+                                    <span class="icon is-small"><i class="fas fa-ticket-alt"></i></span>
                                     <span class="is-hidden-mobile">Entradas</span>
                                 </a>
                             </li >
