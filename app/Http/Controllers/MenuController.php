@@ -31,6 +31,9 @@ class MenuController extends Controller {
     }
 
     public function updateMenu(Request $request, $idMenu) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
         $menu = Menu::find($idMenu);
         $menu->nombre = $request['nombre'];
         $menu->save();

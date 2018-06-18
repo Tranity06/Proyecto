@@ -33,6 +33,9 @@ class CategoriaController extends Controller {
     }
 
     public function updateCategoria(Request $request,$idCategoria) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
         $categoria = Categoria::find($idCategoria);
         $categoria->nombre = $request['nombre'];
         $categoria->save();
