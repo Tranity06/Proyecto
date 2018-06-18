@@ -37,18 +37,29 @@ moment.locale('es');
 window.axios = axios;
 axios.defaults.baseURL = 'http://localhost:8000';
 
-// before a request is made start the nprogress
-axios.interceptors.request.use(config => {
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+    // Do something before request is sent
     NProgress.start();
-    return config
-})
-
-// before a response is returned stop nprogress
-axios.interceptors.response.use(response => {
+    return config;
+}, function (error) {
+    // Do something with request error
     NProgress.done();
-    return response
-})
+    console.error(error)
+    return Promise.reject(error);
+});
 
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+    // Do something with response data
+    NProgress.done();
+    return response;
+}, function (error) {
+    // Do something with response error
+    NProgress.done();
+    console.error(error)
+    return Promise.reject(error);
+});
 
 
 const dict = {
