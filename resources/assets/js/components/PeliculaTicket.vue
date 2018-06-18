@@ -34,17 +34,6 @@
 </script>
 
 <style scoped>
-
-    .box-form{
-        box-shadow: 0 0 25px rgba(0,0,0,0.08);
-        background-color: #fff;
-    }
-
-    .box-form:hover{
-        box-shadow: 0 0 25px rgba(0,0,0,0.20);
-        background-color: #fff;
-    }
-
     .flex-container {
         display: flex;
         align-items: center;
@@ -64,6 +53,16 @@
         align-content: flex-end;
     }
 
+    .box-form{
+        box-shadow: 0 0 25px rgba(0,0,0,0.08);
+        background-color: #fff;
+    }
+
+    .box-form:hover{
+        box-shadow: 0 0 25px rgba(0,0,0,0.20);
+        background-color: #fff;
+    }
+
     .ticket-block {
         display: flex;
         justify-content: space-between;
@@ -74,30 +73,26 @@
     .ticket-block > .codigo{
         width: 100px;
         height: 100px;
-        background-color: red;
+        background-color: gray;
         margin-right: 15px;
-    }
-
-    .ticket-block > .entrada{
-        background-color: greenyellow;
     }
 
     .restaurante-block {
         display: flex;
         justify-content: space-between;
+        flex-direction: column;
         align-items: center;
         margin-bottom: 15px;
     }
 
     .restaurante-block > .item{
         display: flex;
-        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
     }
 
     .precio-total{
         display: flex;
         justify-content: space-between;
     }
-
-
 </style>

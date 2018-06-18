@@ -23,7 +23,6 @@ class VerificarEmail extends Mailable
     {
         $this->user = $user;
         $this->verification_code = $verification_code;
-        $this->subject('Verifica tu cuenta || PalomitasTime :D');
     }
 
     /**
@@ -33,6 +32,7 @@ class VerificarEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('email.verify');
+        return $this->view('email.verify')
+                    ->subject('Verifica tu cuenta || PalomitasTime :D');
     }
 }

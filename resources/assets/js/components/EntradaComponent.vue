@@ -268,11 +268,17 @@
                 // butacas -> butacas
 
                 const datosVisa = this.$refs.pago.getDatosVisa();
+                const precioTotal = (this.butacas.total + store.getters.cartItems.reduce((prev,next) => prev + parseFloat(next.producto.precio)*next.cantidad,0)).toFixed(2)
 
                 axios.post(`/api/pago?token=${store.getters.token}`, {
                     nombre_pelicula: this.titulo,
-                    dia: this.dia,
+                    hora: this.horaSeleccionada,
+                    sala_id: this.salanum,
+                    butacas: store.getters.selectedSeats,
+                    items_restaurante: store.getters.cartItems,
+                    precio_total: precioTotal,
                     nombre_tarjeta: datosVisa.nombre,
+                    numero_tarjeta: datosVisa.numero
                 })
                     .then(response => {
 

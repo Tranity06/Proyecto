@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar is-fixed-top is-transparent" v-click-outside="hide" :class="{'fondoblanco': fondoBlanco}" aria-label="dropdown navigation">
         <div class="timer" v-if="start">
-            <vue-countdown v-on:time-expire="handleTimeExpire" :seconds="10" :units="['minutes','seconds']" :start="start"></vue-countdown>
+            <vue-countdown v-on:time-expire="handleTimeExpire" :seconds="600" :units="['minutes','seconds']" :start="start"></vue-countdown>
         </div>
 
         <div class="main-search" :class="{'puedo-ver': searchDisparado === true }" v-if="searchDisparado">
