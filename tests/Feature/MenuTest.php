@@ -103,7 +103,7 @@ class MenuTest extends TestCase
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
             ->post('menus/'.$idmenu['id'], $headers)
-            ->assertStatus(400);
+            ->assertStatus(403);
     }
 
     /**********************************************************

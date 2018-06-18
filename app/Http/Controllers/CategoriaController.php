@@ -37,13 +37,13 @@ class CategoriaController extends Controller {
             return redirect('/admin'); 
         }
         $categoria = Categoria::find($idCategoria);
-        $categoria->nombre = $request['nombre'];
-        $categoria->save();
 
         if ( $categoria == null ){
             return response()->json('La categoria indicada no existe.', 403);
         }
 
+        $categoria->nombre = $request['nombre'];
+        $categoria->save();
         return response()->json($categoria,200);
     }
 

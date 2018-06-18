@@ -28,7 +28,7 @@ class CategoriaTest extends TestCase
         ]);
 
         $this->categoria = Categoria::create([
-            'nombre' => 'rico',
+            'nombre' => 'categoria',
         ]);
     }
 
@@ -103,7 +103,7 @@ class CategoriaTest extends TestCase
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
             ->post('categorias/'.$idCategoria['id'], $headers)
-            ->assertStatus(400);
+            ->assertStatus(403);
     }
 
     /**********************************************************

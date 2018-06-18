@@ -35,12 +35,13 @@ class MenuController extends Controller {
             return redirect('/admin'); 
         }
         $menu = Menu::find($idMenu);
-        $menu->nombre = $request['nombre'];
-        $menu->save();
-
+        
         if ( $menu == null ){
             return response()->json('El menu indicado no existe.', 403);
         }
+        
+        $menu->nombre = $request['nombre'];
+        $menu->save();
 
         return response()->json($menu, 200);
     }
