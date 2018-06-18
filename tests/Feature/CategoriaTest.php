@@ -90,10 +90,14 @@ class CategoriaTest extends TestCase
 
     /** @test */
     public function modificar_categoria_con_admin() {
+        $categoria = [
+            'id' => Categoria::first()->id,
+            'nombre' => 'otronombre'
+        ];
         $idCategoria = ['id' => $this->categoria->id];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->post('categorias/'.$idCategoria['id'], $headers)
+            ->post('categorias/'.$idCategoria['id'], $categoria, $headers)
             ->assertStatus(200);
     }
 

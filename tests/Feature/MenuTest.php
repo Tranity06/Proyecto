@@ -90,10 +90,14 @@ class MenuTest extends TestCase
 
     /** @test */
     public function modificar_menu_con_admin() {
+        $menu = [
+            'id' => Menu::first()->id,
+            'nombre' => 'otronombre'
+        ];
         $idmenu = ['id' => $this->menu->id];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->post('menus/'.$idmenu['id'], $headers)
+            ->post('menus/'.$idmenu['id'], $menu, $headers)
             ->assertStatus(200);
     }
 
