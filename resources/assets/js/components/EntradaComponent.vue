@@ -191,14 +191,15 @@
             next() {
                 let validacion = this.$refs.butaca.getTotal() > 0;
 
-                if (validacion) {
+                if (!store.getters.isLoggedIn) {
+                    this.showModal('Tienes que estar logueado','No está permitido comprar entradas sin estar logueado');
+                } else if(validacion){
                     this.butacas.total = this.$refs.butaca.getTotal();
                     this.butacas.num = this.$refs.butaca.getButacas();
                     this.horaSeleccionada = this.horas.filter(hora => hora.sesion_id === this.primeraSesion)[0].hora;
                     this.step++;
                 } else {
                     this.showModal('Elige al menos una butaca','No está permitido ver la pelicula de pie :(');
-
                 }
 
 
