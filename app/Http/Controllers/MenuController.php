@@ -52,15 +52,15 @@ class MenuController extends Controller {
         return view('menus.mostrar', compact('admin', 'menus'));
     }
 
-    public function deleteMenu(Request $request){
+    public function deleteMenu($idMenu){
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
         }
 
-        $menu = menu::find($request->idMenu);
+        $menu = menu::find($idMenu);
 
         if ( $menu == null ){
-            return response()->json('El menu indicado no existe.', 403);
+            return response()->json('El menu indicado no existe.', 400);
         }
         
         $menu->delete();
