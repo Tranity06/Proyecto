@@ -69,7 +69,7 @@ class CategoriaTest extends TestCase
     public function crear_categoria_usuario_logueado()
     {
         $categoria = [
-            'nombre' => 'rico'
+            'nombre' => 'nueva'
         ];
         
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
