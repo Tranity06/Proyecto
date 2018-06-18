@@ -9,6 +9,7 @@ php:
   - 7.2
 
 install:
+  - composer dump-autoload
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - yarn
   - yarn run production
