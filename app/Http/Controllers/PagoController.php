@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ButacaEvent;
 use App\Mail\PagoEmail;
 use App\Models\User;
 use JWTAuth;
@@ -34,6 +35,11 @@ class PagoController extends Controller {
 
         $email_pago = new PagoEmail($user,$datos_pago);
         Mail::to($user->email)->send($email_pago);
+
+        foreach ($request->butacas as $butaca){
+            broadcast(new ButacaEvent($butaca,['estado'=>1]))->toOthers();
+        }
+
 
        // obtengo los datos.
        // si son correctos, envio el email
