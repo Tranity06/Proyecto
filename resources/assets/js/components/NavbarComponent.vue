@@ -231,6 +231,9 @@
                 }
 
             },
+            }
+        },
+        methods: {
 
             mostrarCartMobile(){
                 this.cartDisparado = true;
@@ -367,8 +370,6 @@
         color: white;
         font-weight: bold;
     }
-
-
     .cartcontainer{
         position: absolute;
         top: 0;

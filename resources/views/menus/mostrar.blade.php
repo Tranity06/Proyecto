@@ -77,9 +77,9 @@
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                     });
                     $.ajax({
-                        url: '/menus/borrar',
-                        type: 'POST',
-                        data: 'idMenu='+$idMenu,
+                        url: '/menus/'+$idMenu,
+                        type: 'DELETE',
+                        data: 'id='+$idMenu,
                         statusCode:{
                             204: function (){
                                 $boton.closest('tr')
@@ -92,7 +92,7 @@
                                     $(this).closest('tr').remove();
                                 });
                             },
-                            403: function (){
+                            400: function (){
                                 $callout.text(e.responseJSON);
                                 $callout.addClass('callout-danger').slideDown();
                             }

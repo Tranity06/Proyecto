@@ -87,7 +87,7 @@
         <div class="box-body">
             <form action="/slider/anadir" method="POST">{{ csrf_field() }}
                 <div class="form-group">
-                    <label>Añadir película:</label>
+                    <label>Añadir película (máximo 3):</label>
                     <select class="form-control" id="anadir" name="anadir">
                         @foreach($peliculas as $pelicula)
                             @if($pelicula->slider == false )

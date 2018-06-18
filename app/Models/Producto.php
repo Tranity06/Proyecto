@@ -33,6 +33,6 @@ class Producto extends Model
      * Devuelve los menús en los que se incluye este producto
      */
     public function menus(){
-        return $this->belongsToMany(Menu::class)->get();
+        return $this->belongsToMany(Menu::class)/* ->get() */;
     }
 }
