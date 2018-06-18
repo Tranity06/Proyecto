@@ -93,7 +93,7 @@ class MenuTest extends TestCase
         $idmenu = ['id' => $this->menu->id];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->post('menus/'.$idmenu, $headers)
+            ->post('menus/'.$idmenu['id'], $headers)
             ->assertStatus(200);
     }
 
@@ -102,7 +102,7 @@ class MenuTest extends TestCase
         $idmenu = ['id' => 100];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->post('menus/'.$idmenu, $headers)
+            ->post('menus/'.$idmenu['id'], $headers)
             ->assertStatus(400);
     }
 
@@ -121,7 +121,7 @@ class MenuTest extends TestCase
         $idmenu = ['id' => $this->menu->id];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->delete('menus/'.$idmenu, $headers)
+            ->delete('menus/'.$idmenu['id'], $headers)
             ->assertStatus(204);
     }
 
@@ -130,7 +130,7 @@ class MenuTest extends TestCase
         $idmenu = ['id' => 100];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->delete('menus/'.$idmenu, $headers)
+            ->delete('menus/'.$idmenu['id'], $headers)
             ->assertStatus(400);
     }
 }

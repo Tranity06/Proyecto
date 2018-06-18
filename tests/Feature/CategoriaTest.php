@@ -93,7 +93,7 @@ class CategoriaTest extends TestCase
         $idCategoria = ['id' => $this->categoria->id];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->post('categorias/'.$idCategoria, $headers)
+            ->post('categorias/'.$idCategoria['id'], $headers)
             ->assertStatus(200);
     }
 
@@ -102,7 +102,7 @@ class CategoriaTest extends TestCase
         $idCategoria = ['id' => 100];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->post('categorias/'.$idCategoria, $headers)
+            ->post('categorias/'.$idCategoria['id'], $headers)
             ->assertStatus(400);
     }
 
@@ -121,7 +121,7 @@ class CategoriaTest extends TestCase
         $idCategoria = ['id' => $this->categoria->id];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->delete('categorias/'.$idCategoria, $headers)
+            ->delete('categorias/'.$idCategoria['id'], $headers)
             ->assertStatus(204);
     }
 
@@ -130,7 +130,7 @@ class CategoriaTest extends TestCase
         $idCategoria = ['id' => 100];
         $headers = ['X-CSRF-TOKEN' => csrf_token() ];
         $this->actingAs($this->admin, 'admin')
-            ->delete('categorias/'.$idCategoria, $headers)
+            ->delete('categorias/'.$idCategoria['id'], $headers)
             ->assertStatus(400);
     }
 }
