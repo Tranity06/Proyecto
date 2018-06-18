@@ -12,14 +12,21 @@ class Factura extends Model
      * @var array
      */
     protected $fillable = [
-        'fecha', 'usuario_id',
+        'fecha', 'user_id',
     ];
 
     /**
      * Devuelve las butacas reservadas que pertenecen a la factura.
      */
     public function butacas_reservadas(){
-        return $this->belongsTo(Butaca_reservada::class)->get();
+        return $this->hasMany(ButacaReservada::class)/* ->get() */;
+    }
+
+    /**
+     * Devuelve las butacas reservadas que pertenecen a la factura.
+     */
+    public function user(){
+        return $this->belongsTo(User::class)->get();
     }
 
     /**
