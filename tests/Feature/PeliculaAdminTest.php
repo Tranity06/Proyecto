@@ -67,7 +67,7 @@ class PeliculaAdminTest extends TestCase
      *          RUTA - POST pelicula/crear
      **********************************************************/
 
-    /** @test */
+    /** @test  */
     public function post_crear_pelicula_sin_admin() {
         $this->post('pelicula/crear')
             ->assertStatus(302)
