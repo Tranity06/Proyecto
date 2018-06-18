@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar is-fixed-top is-transparent" v-click-outside="hide" :class="{'fondoblanco': fondoBlanco}" aria-label="dropdown navigation">
         <div class="timer" v-if="start">
-            <vue-countdown v-on:time-expire="handleTimeExpire" :seconds="10" :units="['minutes','seconds']" :start="start"></vue-countdown>
+            <vue-countdown v-on:time-expire="handleTimeExpire" :seconds="600" :units="['minutes','seconds']" :start="start"></vue-countdown>
         </div>
 
         <div class="main-search" :class="{'puedo-ver': searchDisparado === true }" v-if="searchDisparado">
@@ -231,6 +231,9 @@
                 }
 
             },
+            }
+        },
+        methods: {
 
             mostrarCartMobile(){
                 this.cartDisparado = true;
@@ -244,6 +247,7 @@
                     text: '¡Has cerrado la sesión con exito!',
                     duration: 5000,
                 });
+                this.handleTimeExpire();
                 this.$router.push({ name: 'home' });
             },
             onSignInSuccess (googleUser) {
@@ -366,8 +370,6 @@
         color: white;
         font-weight: bold;
     }
-
-
     .cartcontainer{
         position: absolute;
         top: 0;

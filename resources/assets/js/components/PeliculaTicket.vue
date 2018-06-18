@@ -1,32 +1,26 @@
 <template>
-    <div class="expandir">
-        <div class="bp-card">
-            <div class="bp-card_label">
-                <div class="bd-border_solid"></div>
-                <div class="bd-border_dotted"></div>
+    <div class="flex-container">
+        <div class="box-form" style="display: flex; flex-direction: column">
+            <div class="ticket-block">
+                <div class="codigo"></div>
+                <div class="entrada">
+                    <p class="has-text-weight-bold is-size-4">{{ticket.nombre_pelicula}}</p>
+                    <span><i class="far fa-clock"></i> {{ticket.hora}} </span>
+                    <span>Sala: {{ticket.sala_id}}</span>
+                    <div class="tags">
+                        <span class="tag is-rounded" v-for="butaca in ticket.butacas">{{butaca.id}}</span>
+                    </div>
+                </div>
             </div>
-            <div class="bp-card_content">
-                <p class="secondary">Medium ticket</p>
-                <h4>Ticket name</h4>
-
-
-                <ul>
-                    <span>Including:</span>
-                    <li>
-                        Minimal 1
-                    </li>
-                    <li>
-                        Minimal 1
-                    </li>
-                    <li>
-                        Minimal 1
-                    </li>
-                </ul>
-
-                <a href="" class="price">
-                    € 9,-
-                </a>
-
+            <div class="restaurante-block">
+                <div class="item" v-for="item in ticket.items_restaurante">
+                    <span class="has-text-weight-bold">{{item.nombre_item}}</span>
+                    <span>cantidad: {{item.cantidad}}</span>
+                </div>
+            </div>
+            <div class="precio-total">
+                <span class="has-text-weight-bold">TOTAL:</span>
+                <span>40€</span>
             </div>
         </div>
     </div>
@@ -34,205 +28,71 @@
 
 <script>
     export default {
-        name: "pelicula-ticket"
+        props: ['ticket'],
+        name: "pelicula-ticket",
     }
 </script>
 
 <style scoped>
-
-    .expandir {
-        max-width: 900px;
-        width: 92%;
-        margin: 50px auto 50px auto;
+    .flex-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* You can set flex-wrap and
+           flex-direction individually */
+        flex-direction: row;
+        flex-wrap: wrap;
+        /* Or do it all in one line
+          with flex flow */
+        flex-flow: row wrap;
+        /* tweak where items line
+           up on the row
+           valid values are: flex-start,
+           flex-end, space-between,
+           space-around, stretch */
+        align-content: flex-end;
     }
 
-    .bp-card {
-        position: relative;
+    .box-form{
+        box-shadow: 0 0 25px rgba(0,0,0,0.08);
+        background-color: #fff;
     }
-    .bp-card .bp-card_label {
-        position: absolute;
-        top: 30px;
-        left: 0;
-        bottom: 30px;
-        width: 130px;
-        background: white;
-        cursor: pointer;
+
+    .box-form:hover{
+        box-shadow: 0 0 25px rgba(0,0,0,0.20);
+        background-color: #fff;
     }
-    .bp-card .bp-card_label::before {
-        content: '';
-        background-color: transparent;
-        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/372262/ticket-top.svg");
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 130px;
+
+    .ticket-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .ticket-block > .codigo{
+        width: 100px;
         height: 100px;
-        position: absolute;
-        top: -30px;
-        left: 0;
-    }
-    .bp-card .bp-card_label::after {
-        content: '';
-        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/372262/ticket-bottom.svg");
-        background-size: contain;
-        background-position: bottom left;
-        background-repeat: no-repeat;
-        width: 130px;
-        height: 100px;
-        position: absolute;
-        bottom: -30px;
-        left: 0;
-    }
-    .bp-card .bp-card_label .bd-border_dotted {
-        content: '';
-        width: 0px;
-        border-right: 5px dashed #F0F0F0;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        right: 40px;
-    }
-    .bp-card .bp-card_label .bd-border_solid {
-        content: '';
-        width: 3px;
-        border-radius: 3px;
-        background: #FFAF96;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: calc(130px/3.1 );
-    }
-    .bp-card .bp-card_content {
-        position: relative;
-        background: white;
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-        width: calc(100% - 130px);
-        margin-left: calc(130px - 1px);
-        padding: 35px;
-    }
-    .bp-card .bp-card_content h4 {
-        font-size: 40px;
-        margin: 0 140px 0 0;
-    }
-    .bp-card .bp-card_content p.secondary {
-        color: #FFAF96;
-        margin: 0;
-        padding-top: 10px;
-    }
-    .bp-card .bp-card_content ul {
-        list-style: none;
-        margin: 50px 0 0 0;
-        padding: 0;
-    }
-    .bp-card .bp-card_content ul span {
-        display: block;
-        color: #A8A8A8;
-    }
-    .bp-card .bp-card_content ul li {
-        padding: 0;
-        display: inline-block;
-        padding-right: 30px;
-    }
-    .bp-card .bp-card_content a.price {
-        color: #FFAF96;
-        text-decoration: none;
-        position: absolute;
-        top: 35px;
-        right: 35px;
-        font-size: 36px;
-        background: rgba(255, 175, 150, 0.1);
-        padding: 10px;
-        border-radius: 3px;
+        background-color: gray;
+        margin-right: 15px;
     }
 
-    @media only screen and (max-width: 600px) {
-        .bp-card {
-            position: relative;
-        }
-        .bp-card .bp-card_label {
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: calc(100% - 40px);
-            margin-left: 20px;
-            height: 120px;
-            position: relative;
-        }
-        .bp-card .bp-card_label:after, .bp-card .bp-card_label:before {
-            -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
-            -webkit-transform-origin: top left;
-            transform-origin: top left;
-            width: 126px;
-            top: -2px;
-        }
-        .bp-card .bp-card_label:after {
-            left: 80px;
-            right: auto;
-        }
-        .bp-card .bp-card_label:before {
-            left: auto;
-            right: -146px;
-        }
-        .bp-card .bp-card_label .bd-border_dotted {
-            width: 100%;
-            border-top: 4px dashed #F0F0F0;
-            border-right: none;
-            height: 4px;
-            top: 92px;
-            left: 0;
-        }
-        .bp-card .bp-card_label .bd-border_solid {
-            width: 80%;
-            background: #FFAF96;
-            height: 3px;
-            top: 45px;
-            left: 10%;
-        }
-        .bp-card .bp-card_content {
-            margin-left: 0;
-            width: 100%;
-            padding: 3% 5% 5% 5%;
-        }
-        .bp-card .bp-card_content h4 {
-            font-size: 32px;
-            margin: 0;
-        }
-        .bp-card .bp-card_content ul {
-            list-style: none;
-            margin: 20px 0 0 0;
-            padding: 0;
-        }
-        .bp-card .bp-card_content ul span {
-            display: block;
-            color: #A8A8A8;
-        }
-        .bp-card .bp-card_content ul li {
-            padding: 0;
-            display: inline-block;
-            width: 100%;
-            padding-right: 30px;
-            margin-bottom: 5px;
-        }
-        .bp-card .bp-card_content a.price {
-            position: relative;
-            width: 100%;
-            display: block;
-            margin: 0 auto;
-            top: auto;
-            right: auto;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .bp-card .bp-card_content a.price:before {
-            content: '';
-            background: url("http://imgh.us/i-arrow.svg") center no-repeat;
-            background-size: contain;
-            position: absolute;
-            right: 22px;
-            top: 22px;
-            width: 20px;
-            height: 20px;
-        }
+    .restaurante-block {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .restaurante-block > .item{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .precio-total{
+        display: flex;
+        justify-content: space-between;
     }
 </style>

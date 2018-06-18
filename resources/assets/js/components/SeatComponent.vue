@@ -357,7 +357,7 @@
     }
 
     .ocupado {
-        background-color: #4B4B5B;
+        background-color: #4B4B5B !important;
         transition: background-color .25s ease-out;
         pointer-events: none;
     }

@@ -32,6 +32,7 @@ class PagoEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('email.pago');
+        return $this->view('email.pago')
+                    ->subject('Ticket || PalomitasTime :D');
     }
 }

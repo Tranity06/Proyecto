@@ -33,22 +33,28 @@ class CategoriaController extends Controller {
     }
 
     public function updateCategoria(Request $request,$idCategoria) {
-        $categoria = Categoria::find($idCategoria);
-        $categoria->nombre = $request['nombre'];
-        $categoria->save();
-
-        return response()->json($categoria,200);
-    }
-
-    public function deleteCategoria(Request $request) {
         if (!Auth::guard('admin')->check()){
             return redirect('/admin'); 
         }
-
-        $categoria = Categoria::find($request->idCategoria);
+        $categoria = Categoria::find($idCategoria);
 
         if ( $categoria == null ){
-            return response()->json('La categoría indicada no existe.', 403);
+            return response()->json('La categoria indicada no existe.', 403);
+        }
+
+        $categoria->nombre = $request['nombre'];
+        $categoria->save();
+        return response()->json($categoria,200);
+    }
+
+    public function deleteCategoria($idCategoria) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        $categoria = Categoria::find($idCategoria);
+
+        if ( $categoria == null ){
+            return response()->json('La categoría indicada no existe.', 400);
         }
         
         $categoria->delete();

@@ -176,16 +176,25 @@ return [
                     ]
                 ],
                 [
-                    'text' => 'Mostrar',
+                    'text' => 'Calendario',
                     'url'  => '/sesiones',
-                ],
-                [
-                    'text' => 'Crear',
-                    'url'  => '/sesion',
                 ],
             ]
         ],
         'TIENDA',
+        [
+            'text' => 'Categorías',
+            'submenu' => [
+                [
+                    'text' => 'Crear',
+                    'url' => 'categorias/crear'
+                ],
+                [
+                    'text' => 'Ver todas',
+                    'url'  => 'categorias/mostrar',
+                ],
+            ],
+        ],
         [
             'text' => 'Categorías',
             'submenu' => [

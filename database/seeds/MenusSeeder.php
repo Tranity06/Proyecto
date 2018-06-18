@@ -12,6 +12,7 @@ class MenusSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
         Menu::create([
             'nombre' => 'Menú 1'
         ]);
@@ -27,5 +28,12 @@ class MenusSeeder extends Seeder
         Menu::create([
             'nombre' => 'Menú 4'
         ]);
+=======
+        for ( $i=1 ; $i<5 ; $i++ ){
+            Menu::create([
+                'nombre' => 'Menú '.$i
+            ]);
+        }
+>>>>>>> desarrollo
     }
 }

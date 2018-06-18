@@ -50,14 +50,4 @@ class PeliculaApiTest extends TestCase
                 'pelicula_id' => $idPelicula
             ]);
     }
-
-    /** @test */
-    /* public function ver_sesiones_de_un_dia(){
-        $fecha = date('Y-m-d',mktime(0,0,0, date('m'), date('d'), date('Y')));
-        $this->get('api/pelicula/sesiones/{fecha}')
-            ->assertStatus(200)
-            ->assertJsonMissing([
-                'estado' => 0
-            ]);
-    } */
 }

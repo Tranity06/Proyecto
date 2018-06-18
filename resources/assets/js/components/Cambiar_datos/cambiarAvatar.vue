@@ -113,13 +113,5 @@
 </script>
 
 <style scoped>
-    .box-form{
-        box-shadow: 0 0 25px rgba(0,0,0,0.08);
-        background-color: #fff;
-    }
 
-    .box-form:hover{
-        box-shadow: 0 0 25px rgba(0,0,0,0.20);
-        background-color: #fff;
-    }
 </style>

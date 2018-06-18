@@ -63,6 +63,10 @@ class ProductoController extends Controller {
     }
 
     public function updateProducto(Request $request, $idProducto) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        
         $producto = Producto::find($idProducto);
 
         if ( $producto == null ){
@@ -95,7 +99,7 @@ class ProductoController extends Controller {
         $producto = Producto::find($idProducto);
 
         if ( $producto == null ){
-            return response()->json('El producto indicado no existe.', 403);
+            return response()->json('El producto indicado no existe.', 400);
         }
         
         $producto->delete();
