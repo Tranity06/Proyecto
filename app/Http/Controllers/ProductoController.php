@@ -63,6 +63,10 @@ class ProductoController extends Controller {
     }
 
     public function updateProducto(Request $request, $idProducto) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        
         $producto = Producto::find($idProducto);
 
         if ( $producto == null ){
