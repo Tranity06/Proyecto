@@ -33,10 +33,17 @@ class CategoriaController extends Controller {
     }
 
     public function updateCategoria(Request $request,$idCategoria) {
+        if (!Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
         $categoria = Categoria::find($idCategoria);
+
+        if ( $categoria == null ){
+            return response()->json('La categoria indicada no existe.', 403);
+        }
+
         $categoria->nombre = $request['nombre'];
         $categoria->save();
-
         return response()->json($categoria,200);
     }
 

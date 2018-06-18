@@ -6,7 +6,7 @@ use App\Models\PlantillaSesion;
 class TestPlantillaSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeds .
      *
      * @return void
      */
