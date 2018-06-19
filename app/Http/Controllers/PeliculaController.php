@@ -74,7 +74,7 @@ class PeliculaController extends Controller
         }
 
         $poster = str_replace('w500', self::TAM_CARTEL, $request['poster']);
-        $slider_image = str_replace('w500', 'rotiginal', $request['slider_image']);
+        $slider_image = str_replace('w500', 'original', $request['slider_image']);
 
         $pelicula = Pelicula::create([
             'idtmdb' => $request['idtmdb'],
