@@ -75,11 +75,7 @@
                                 });
                                 console.log(e);
                             },
-<<<<<<< HEAD
-                            403: function (){
-=======
                             400: function (){
->>>>>>> desarrollo
                                 $callout.text(e.responseJSON);
                                 $callout.addClass('callout-danger').slideDown();
                             }
