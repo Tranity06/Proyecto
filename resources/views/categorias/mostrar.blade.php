@@ -46,11 +46,7 @@
 
             $('.table').on('click', '.borrar', function(){
                 var $boton = $(this);
-<<<<<<< HEAD
-                var idCategoria= $('#id').val();
-=======
                 var $id= $boton.next().val();
->>>>>>> desarrollo
 
                 var $callout = $('.callout').first();
                 $boton.attr('disabled', 'disabled');
@@ -63,15 +59,9 @@
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                     });
                     $.ajax({
-<<<<<<< HEAD
-                        url: '/categorias/borrar',
-                        type: 'POST',
-                        data: 'idCategoria='+idCategoria,
-=======
                         url: '/categorias/'+$id,
                         type: 'DELETE',
                         data: 'id='+$id,
->>>>>>> desarrollo
                         statusCode:{
                             204: function (){
                                 $boton.closest('tr')
@@ -84,11 +74,7 @@
                                     $(this).closest('tr').remove();
                                 });
                             },
-<<<<<<< HEAD
-                            403: function (){
-=======
                             400: function (){
->>>>>>> desarrollo
                                 $callout.text(e.responseJSON);
                                 $callout.addClass('callout-danger').slideDown();
                             }
