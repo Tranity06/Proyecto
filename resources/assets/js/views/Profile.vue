@@ -136,7 +136,7 @@
             .catch(error => {
                 console.log(error);
             });
-            axios.get(`/api/ticket=${store.getters.token}`)
+            axios.get(`/api/tickets?token=${store.getters.token}`)
                 .then(response => {
                     this.tickets = response.data
                 })

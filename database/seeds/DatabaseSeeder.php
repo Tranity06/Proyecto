@@ -20,15 +20,10 @@ class DatabaseSeeder extends Seeder
             'categorias',
             'productos',
             'ingredientes',
-<<<<<<< HEAD
             //'ingrediente_producto',
             'menus',
             'menu_producto',
             //'clave_admin',
-=======
-            'menus',
-            'menu_producto',
->>>>>>> desarrollo
             'administradores',
             'peliculas'
         ]);
@@ -43,10 +38,7 @@ class DatabaseSeeder extends Seeder
             CategoriasSeeder::class,
             MenusSeeder::class,
             ProductosSeeder::class,
-<<<<<<< HEAD
             ProductosMenusSeeder::class
-=======
->>>>>>> desarrollo
         ]);
     }
 

@@ -137,9 +137,8 @@ class PerfilController extends Controller {
         $tickets = $user->facturas();
 
         if ( sizeof($tickets)<=0 ) {
-            dd('null');
+            return response()->json([], 200);
         }
-        $userTickets = [];
         foreach ($tickets as $ticket ){
             $datos['fecha_factura'] = $ticket->fecha;
             $butacas = $ticket->butacas_reservadas()->get();
