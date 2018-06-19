@@ -159,7 +159,15 @@ class ResenaController extends Controller
         //Eliminar la reseña
         $resena = Resena::find($idResena);
         $resena->delete();
-        return response()->json('Reseña eliminada.', 204);
+
+        $resenaJson = [
+            'tipo' => 'delete',
+            'id' => $idResena
+        ];
+
+        broadcast(new ResenaEvent($resenaJson))->toOthers();
+
+        return response()->json($resenaJson, 204);
     }
 
     private function time_elapsed_string($datetime, $full = false) {

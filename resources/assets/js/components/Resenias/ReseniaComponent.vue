@@ -69,6 +69,8 @@
                     } else if (e.datos.tipo === 'update') {
                         let targetResena = this.resenas.find(resena => resena.id == e.datos.id);
                         targetResena.comentario = e.datos.comentario;
+                    } else if (e.datos.tipo === 'delete') {
+                        this.resenas.splice(this.resenas.indexOf(e.datos.id),1);
                     }
 
                 });
