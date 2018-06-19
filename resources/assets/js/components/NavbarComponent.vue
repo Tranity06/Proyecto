@@ -204,7 +204,16 @@
                 return store.getters.timerStart;
             }
         },
+        mounted() {
+            Echo.channel('producto')
+                .listen('productoEvent', (e) => {
+                        store.commit('updateCartItem',{
+                            id: e.id,
+                            precio: e.precio
+                        })
+                });
 
+        },
         methods: {
             showModal(){
                 this.isModalVisible = true;

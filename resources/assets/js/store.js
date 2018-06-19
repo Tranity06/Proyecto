@@ -90,6 +90,10 @@ export default new Vuex.Store({
         closeModal(state){
             state.modalActive = false;
         },
+        updateCartItem(state,precioandid){
+            let targetCartItem = state.cartItems.find(item => item.producto.id === precioandid.id);
+            targetCartItem.precio = parseInt(precioandid.precio).toFixed(2);
+        },
         addCartItem(state,cartItem){
             if (state.cartItems.some(item => item.producto === cartItem.producto)) {
                 let targetCartItem = state.cartItems.find(item => item.producto.id === cartItem.producto.id);

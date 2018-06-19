@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProductoEvent;
 use App\Models\Producto;
 use App\Models\ProductoIngrediente;
 use App\Models\Productoproducto;
@@ -85,8 +86,9 @@ class ProductoController extends Controller {
         $producto->nombre = $request['nombre'];
         $producto->precio = $request['precio'];
         $producto->categoria_id = $request['categoria_id'];
-
         $producto->save();
+
+        broadcast(new ProductoEvent($idProducto,$request['precio']))->toOthers();
 
         return response()->json($producto, 200);
     }
